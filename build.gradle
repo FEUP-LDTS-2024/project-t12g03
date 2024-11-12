@@ -1,12 +1,17 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group = 'com.projectt12g03'
+group = 'projectt12g03'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClass.set("projectt12g03.Game")
 }
 
 dependencies {
