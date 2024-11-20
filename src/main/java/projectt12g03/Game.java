@@ -31,7 +31,7 @@ public class Game {
         int FPS = 30;
         long frameTime = 1000 / FPS;
 
-        while(running) {
+        while(state != null) {
             long startTime = System.currentTimeMillis();
 
             state.step(this, gui, startTime);
