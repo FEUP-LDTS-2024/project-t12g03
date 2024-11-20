@@ -1,13 +1,16 @@
 package projectt12g03.gui;
 
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
+import projectt12g03.model.Vector;
 import projectt12g03.model.elements.Player;
 
+import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -31,6 +34,7 @@ public class LanternaGui {
     private final KeyAdapter keyAdapter;
     private KeyEvent keyPressed;
     private KeyEvent priorityKey;
+    private boolean keySpam;
 
     //REMOVE LATER
     //private Player player;
@@ -38,7 +42,7 @@ public class LanternaGui {
     public LanternaGui(int terminalWidth, int terminalHeight, String WindowName) {
         this.keyAdapter = createKeyAdapter();
         try {
-            setTerminalSize(terminalWidth, terminalHeight);
+            setTerminalSize(terminalWidth, terminalHeight + 1);
             DefaultTerminalFactory dfTerminal = new DefaultTerminalFactory()
                     .setInitialTerminalSize(terminalSize)
                     .setForceAWTOverSwing(true);
@@ -58,6 +62,7 @@ public class LanternaGui {
         }
         this.keyPressed = null;
         this.priorityKey = null;
+        this.keySpam = false;
         //REMOVE PLAYER (ONLY HERE TEMPORARY)
         //this.player = new Player(5, 5);
     }
@@ -70,7 +75,7 @@ public class LanternaGui {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(font);
 
-            Font newfont = font.deriveFont(Font.PLAIN, 18);
+            Font newfont = font.deriveFont(Font.PLAIN, 25);
 
             return AWTTerminalFontConfiguration.newInstance(newfont);
     }
@@ -91,20 +96,22 @@ public class LanternaGui {
         terminalSize = new TerminalSize(width,height);
     }
 
-    public TextGraphics getNewTextGraphics(){
-        return screen.newTextGraphics();
-    }
-
     private KeyAdapter createKeyAdapter() {
         return new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                keyPressed = priorityKey = e;
+                if (keySpam)
+                    keyPressed = priorityKey = e;
+                else
+                    keyPressed = e;
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                keyPressed = priorityKey = null;
+                if (keySpam)
+                    keyPressed = priorityKey = null;
+                else
+                    keyPressed = priorityKey;
             }
         };
     }
@@ -127,11 +134,34 @@ public class LanternaGui {
         };
     }
 
-    //Temporary function just for testing
-    //public void drawPlayer() throws IOException {
-    //    screen.clear();
-    //    player.draw(getNewTextGraphics());
-    //    screen.refresh();
-    //}
+    public void setKeySpam(boolean keySpam) {
+        if (!keySpam)
+            priorityKey = null;
+        this.keySpam = keySpam;
+    }
+
+    public void drawText(Vector position, String text, TextColor color) {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setForegroundColor(color);
+        tg.putString((int) position.getX(), (int) position.getY(), text);
+    }
+
+    private void drawCharacter(Vector position, char c, TextColor color) {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setForegroundColor(color);
+        tg.putString((int) position.getX(), (int) position.getX() + 1, "" + c);
+    }
+
+    public void clear() {
+        screen.clear();
+    }
+
+    public void refresh() throws IOException {
+        screen.refresh();
+    }
+
+    public void close() throws IOException {
+        screen.close();
+    }
 
 }

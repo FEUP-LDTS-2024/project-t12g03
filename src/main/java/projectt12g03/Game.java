@@ -6,28 +6,29 @@ import projectt12g03.state.MenuState;
 import projectt12g03.state.State;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Game {
-    private boolean running = true;
-    public static final int terminalWidth = 100;
-    public static final int terminalHeight = 56;
+    public static final int terminalWidth = 40;
+    public static final int terminalHeight = 20;
     private static final String windowName = "GAME";
     private final LanternaGui gui;
-    private State state;
+    private State<?> state;
 
     public Game() throws IOException {
         this.gui = new LanternaGui(terminalWidth, terminalHeight, windowName);
         this.state = new MenuState(new Menu());
     }
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         new Game().start();
+    }
+
+    public void setKeySpam(boolean keySpam) {
+        gui.setKeySpam(keySpam);
     }
 
     public void setState(State<?> state) { this.state = state; }
 
-    private void start() throws InterruptedException, IOException {
+    private void start() throws IOException {
         int FPS = 30;
         long frameTime = 1000 / FPS;
 
@@ -43,6 +44,8 @@ public class Game {
             catch (InterruptedException e) { }
         }
 
-        System.exit(0);
+        gui.close();
     }
+
+
 }
