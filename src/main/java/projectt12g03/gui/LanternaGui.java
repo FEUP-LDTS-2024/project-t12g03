@@ -27,7 +27,6 @@ import static java.awt.event.KeyEvent.VK_X;
 public class LanternaGui {
 
     public enum userInput { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT}
-    private static final java.util.List<Integer> SPAM_KEYS = List.of(VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN);
 
     private AWTTerminalFrame terminal;
     private TerminalSize terminalSize;
@@ -77,7 +76,7 @@ public class LanternaGui {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(font);
 
-            Font newfont = font.deriveFont(Font.PLAIN, 4);
+            Font newfont = font.deriveFont(Font.PLAIN, 18);
 
             return AWTTerminalFontConfiguration.newInstance(newfont);
     }
@@ -106,18 +105,12 @@ public class LanternaGui {
         return new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (SPAM_KEYS.contains(e.getKeyCode()))
-                    keyPressed = priorityKey = e;
-                else
-                    keyPressed = e;
+                keyPressed = priorityKey = e;
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (SPAM_KEYS.contains(e.getKeyCode()))
-                    keyPressed = priorityKey = null;
-                else
-                    keyPressed = priorityKey;
+                keyPressed = priorityKey = null;
             }
         };
     }
@@ -130,10 +123,10 @@ public class LanternaGui {
         keyPressed = priorityKey;
 
         return switch (keyCode) {
-            case VK_LEFT -> userInput.LEFT;
-            case VK_RIGHT -> userInput.RIGHT;
-            case VK_UP -> userInput.UP;
-            case VK_DOWN -> userInput.DOWN;
+            case VK_A -> userInput.LEFT;
+            case VK_D -> userInput.RIGHT;
+            case VK_W -> userInput.UP;
+            case VK_S -> userInput.DOWN;
             case VK_ESCAPE -> userInput.QUIT;
             case VK_ENTER -> userInput.SELECT;
             default -> userInput.NONE;

@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 public class Game {
     private boolean running = true;
     //238
-    public static final int terminalWidth = 160;
+    public static final int terminalWidth = 100;
     //67
-    public static final int terminalHeight = 90;
+    public static final int terminalHeight = 56;
     private static final String windowName = "GAME";
     private final LanternaGui lanternaGui;
 
