@@ -1,5 +1,6 @@
 package projectt12g03.gui;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -8,9 +9,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import projectt12g03.model.Vector;
-import projectt12g03.model.elements.Player;
 
-import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,50 +20,55 @@ import java.net.URL;
 
 import static java.awt.event.KeyEvent.*;
 
-public class LanternaGui {
+public class LanternaGui implements GUI {
+    private String title;
 
-    public enum userInput { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT}
-
-    private AWTTerminalFrame terminal;
     private TerminalSize terminalSize;
-
     private TerminalScreen screen;
-    private TextGraphics textGraphics;
 
     private final KeyAdapter keyAdapter;
     private KeyEvent keyPressed;
     private KeyEvent priorityKey;
     private boolean keySpam;
 
-    //REMOVE LATER
-    //private Player player;
 
-    public LanternaGui(int terminalWidth, int terminalHeight, String WindowName) {
-        this.keyAdapter = createKeyAdapter();
-        try {
-            setTerminalSize(terminalWidth, terminalHeight + 1);
-            DefaultTerminalFactory dfTerminal = new DefaultTerminalFactory()
-                    .setInitialTerminalSize(terminalSize)
-                    .setForceAWTOverSwing(true);
-            AWTTerminalFontConfiguration fontConfig = loadFont();
-            dfTerminal.setTerminalEmulatorFontConfiguration(fontConfig);
-
-            screen = dfTerminal.createScreen();
-            terminal = (AWTTerminalFrame) screen.getTerminal();
-            terminal.getComponent(0).addKeyListener(getKeyAdapter());
-
-            screen.setCursorPosition(null); // we don't need a cursor
-            screen.startScreen(); // screens must be started
-            screen.doResizeIfNecessary(); // resize screen if necessary
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public LanternaGui(int terminalWidth, int terminalHeight, String title) throws IOException, URISyntaxException, FontFormatException {
+        this.terminalSize = new TerminalSize(terminalWidth, terminalHeight);
         this.keyPressed = null;
         this.priorityKey = null;
         this.keySpam = false;
-        //REMOVE PLAYER (ONLY HERE TEMPORARY)
-        //this.player = new Player(5, 5);
+        this.title = title;
+        this.keyAdapter = createKeyAdapter();
+        this.screen = createScreen();
+    }
+
+    private TerminalScreen createScreen() throws URISyntaxException, IOException, FontFormatException {
+        DefaultTerminalFactory terminal = createTerminal();
+        createFrame(terminal);
+
+        screen.setCursorPosition(null);
+        screen.startScreen();
+        screen.doResizeIfNecessary();
+
+        return screen;
+    }
+
+    private DefaultTerminalFactory createTerminal() throws URISyntaxException, IOException, FontFormatException {
+        AWTTerminalFontConfiguration fontConfig = loadFont();
+        DefaultTerminalFactory terminal = new DefaultTerminalFactory()
+                .setInitialTerminalSize(terminalSize)
+                .setForceAWTOverSwing(true)
+                .setTerminalEmulatorFontConfiguration(fontConfig);
+
+        return terminal;
+    }
+
+    private void createFrame(DefaultTerminalFactory terminal) throws IOException {
+        screen = terminal.createScreen();
+
+        AWTTerminalFrame terminalFrame = (AWTTerminalFrame) screen.getTerminal();
+        terminalFrame.getComponent(0).addKeyListener(keyAdapter);
+        terminalFrame.setTitle(title);
     }
 
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
@@ -80,20 +84,12 @@ public class LanternaGui {
             return AWTTerminalFontConfiguration.newInstance(newfont);
     }
 
-    public TerminalSize getTerminalSize(){
-        return terminalSize;
-    }
-
     public int getWidth() { return terminalSize.getColumns(); }
 
     public int getheight() { return terminalSize.getRows(); }
 
     public KeyAdapter getKeyAdapter() {
         return keyAdapter;
-    }
-
-    public void setTerminalSize(int width,int height){
-        terminalSize = new TerminalSize(width,height);
     }
 
     private KeyAdapter createKeyAdapter() {
@@ -116,6 +112,7 @@ public class LanternaGui {
         };
     }
 
+    @Override
     public userInput getNextUserInput() {
         if (keyPressed == null)
             return userInput.NONE;
@@ -140,26 +137,31 @@ public class LanternaGui {
         this.keySpam = keySpam;
     }
 
+    @Override
     public void drawText(Vector position, String text, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(color);
         tg.putString((int) position.getX(), (int) position.getY(), text);
     }
 
-    private void drawCharacter(Vector position, char c, TextColor color) {
+    @Override
+    public void drawCharacter(Vector position, char c, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(color);
         tg.putString((int) position.getX(), (int) position.getX() + 1, "" + c);
     }
 
+    @Override
     public void clear() {
         screen.clear();
     }
 
+    @Override
     public void refresh() throws IOException {
         screen.refresh();
     }
 
+    @Override
     public void close() throws IOException {
         screen.close();
     }

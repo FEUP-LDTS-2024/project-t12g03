@@ -5,7 +5,9 @@ import projectt12g03.model.Menu;
 import projectt12g03.state.MenuState;
 import projectt12g03.state.State;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class Game {
     public static final int terminalWidth = 40;
@@ -14,11 +16,11 @@ public class Game {
     private final LanternaGui gui;
     private State<?> state;
 
-    public Game() throws IOException {
+    public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGui(terminalWidth, terminalHeight, windowName);
         this.state = new MenuState(new Menu());
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
         new Game().start();
     }
 
