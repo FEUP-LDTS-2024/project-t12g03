@@ -1,7 +1,7 @@
-package projectt12g03.types.elements;
+package projectt12g03.model.elements;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
-import projectt12g03.types.Vector;
+import projectt12g03.model.Vector;
 
 public abstract class Element {
     private Vector position;

@@ -1,16 +1,12 @@
 package projectt12g03.gui;
 
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import projectt12g03.types.elements.Player;
+import projectt12g03.model.elements.Player;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -19,10 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.List;
 
 import static java.awt.event.KeyEvent.*;
-import static java.awt.event.KeyEvent.VK_X;
 
 public class LanternaGui {
 
@@ -39,7 +33,7 @@ public class LanternaGui {
     private KeyEvent priorityKey;
 
     //REMOVE LATER
-    private Player player;
+    //private Player player;
 
     public LanternaGui(int terminalWidth, int terminalHeight, String WindowName) {
         this.keyAdapter = createKeyAdapter();
@@ -65,7 +59,7 @@ public class LanternaGui {
         this.keyPressed = null;
         this.priorityKey = null;
         //REMOVE PLAYER (ONLY HERE TEMPORARY)
-        this.player = new Player(5, 5);
+        //this.player = new Player(5, 5);
     }
 
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
@@ -134,15 +128,10 @@ public class LanternaGui {
     }
 
     //Temporary function just for testing
-    public void drawPlayer() throws IOException {
-        screen.clear();
-        player.draw(getNewTextGraphics());
-        screen.refresh();
-    }
+    //public void drawPlayer() throws IOException {
+    //    screen.clear();
+    //    player.draw(getNewTextGraphics());
+    //    screen.refresh();
+    //}
 
-    public void update() throws IOException {
-        userInput action = getNextUserInput();
-        player.move(action);
-        drawPlayer();
-    }
 }

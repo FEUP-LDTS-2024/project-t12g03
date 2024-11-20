@@ -1,4 +1,4 @@
-package projectt12g03.types;
+package projectt12g03.model;
 
 public class Vector {
     private double x;

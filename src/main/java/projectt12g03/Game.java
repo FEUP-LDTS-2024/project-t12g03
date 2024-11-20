@@ -1,6 +1,9 @@
 package projectt12g03;
 
 import projectt12g03.gui.LanternaGui;
+import projectt12g03.model.Menu;
+import projectt12g03.state.MenuState;
+import projectt12g03.state.State;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -8,24 +11,21 @@ import java.util.logging.Logger;
 
 public class Game {
     private boolean running = true;
-    //238
     public static final int terminalWidth = 100;
-    //67
     public static final int terminalHeight = 56;
     private static final String windowName = "GAME";
-    private final LanternaGui lanternaGui;
+    private final LanternaGui gui;
+    private State state;
 
-    public Game() {
-        lanternaGui = new LanternaGui(terminalWidth, terminalHeight, windowName);
+    public Game() throws IOException {
+        this.gui = new LanternaGui(terminalWidth, terminalHeight, windowName);
+        this.state = new MenuState(new Menu());
     }
-    public static void main(String[] args) {
-        Logger logger = Logger.getLogger(Game.class.getName());
-        try {
-            new Game().start();
-        } catch (Exception e) {
-            logger.log(Level.INFO, "An error occurred", e);
-        }
+    public static void main(String[] args) throws IOException, InterruptedException {
+        new Game().start();
     }
+
+    public void setState(State<?> state) { this.state = state; }
 
     private void start() throws InterruptedException, IOException {
         int FPS = 30;
@@ -34,12 +34,13 @@ public class Game {
         while(running) {
             long startTime = System.currentTimeMillis();
 
-            lanternaGui.update();
+            state.step(this, gui, startTime);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;
 
-            if (sleepTime > 0) Thread.sleep(sleepTime);
+            try { if (sleepTime > 0) Thread.sleep(sleepTime); }
+            catch (InterruptedException e) { }
         }
 
         System.exit(0);
