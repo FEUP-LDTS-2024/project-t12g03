@@ -2,7 +2,7 @@ package projectt12g03.view;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.Menu;
+import projectt12g03.model.menu.Menu;
 import projectt12g03.model.Vector;
 
 import java.io.IOException;
@@ -15,7 +15,9 @@ public class MenuDisplayer extends ScreenDisplayer<Menu> {
     @Override
     public void draw(LanternaGui gui) throws IOException {
         gui.clear();
-        gui.drawText(new Vector(getModel().getxAlignment(), 5), "Menu", new TextColor.RGB(24, 112, 96));
+        gui.drawText(new Vector(18, 2),
+                "GAME",
+                new TextColor.RGB(24, 112, 96));
         drawEntries(gui, getModel().getEntries());
         gui.refresh();
     }

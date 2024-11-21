@@ -1,7 +1,7 @@
 package projectt12g03;
 
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.Menu;
+import projectt12g03.model.menu.Menu;
 import projectt12g03.state.MenuState;
 import projectt12g03.state.State;
 

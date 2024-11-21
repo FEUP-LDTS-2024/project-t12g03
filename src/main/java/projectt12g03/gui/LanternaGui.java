@@ -121,10 +121,10 @@ public class LanternaGui implements GUI {
         keyPressed = priorityKey;
 
         return switch (keyCode) {
-            case VK_A -> userInput.LEFT;
-            case VK_D -> userInput.RIGHT;
-            case VK_W -> userInput.UP;
-            case VK_S -> userInput.DOWN;
+            case VK_A, VK_LEFT -> userInput.LEFT;
+            case VK_D, VK_RIGHT -> userInput.RIGHT;
+            case VK_W, VK_UP -> userInput.UP;
+            case VK_S, VK_DOWN -> userInput.DOWN;
             case VK_ESCAPE -> userInput.QUIT;
             case VK_ENTER -> userInput.SELECT;
             default -> userInput.NONE;

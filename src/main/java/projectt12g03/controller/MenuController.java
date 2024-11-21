@@ -2,13 +2,14 @@ package projectt12g03.controller;
 
 import projectt12g03.Game;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.Menu;
+import projectt12g03.model.menu.Menu;
 
 import java.io.IOException;
 
 public class MenuController extends Controller<Menu> {
-    public final String startGame = "Start";
+    private final String startGame = "Start";
     public final String leaveGame = "Exit";
+
 
     public MenuController(Menu menu) {
         super(menu);
