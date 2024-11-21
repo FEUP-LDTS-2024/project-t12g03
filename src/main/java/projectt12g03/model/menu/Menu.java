@@ -11,10 +11,10 @@ public class Menu {
 
 
     public Menu() {
-        entries.put("Start", new Vector(18, 7));
-        entries.put("Tutorial", new Vector(18, 10));
-        entries.put("Credits", new Vector(18, 13));
-        entries.put("Exit", new Vector(18, 16));
+        entries.put("start", new Vector(18, 7));
+        entries.put("tutorial", new Vector(18, 10));
+        entries.put("credits", new Vector(18, 13));
+        entries.put("exit", new Vector(18, 16));
 
         entriesList.addAll(entries.keySet());
     }

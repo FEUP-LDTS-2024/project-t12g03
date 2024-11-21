@@ -17,6 +17,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -26,6 +30,8 @@ public class LanternaGui implements GUI {
     private TerminalSize terminalSize;
     private TerminalScreen screen;
 
+    //remove "//" after adding player
+    //private Set<Integer> pressedKeys;
     private final KeyAdapter keyAdapter;
     private KeyEvent keyPressed;
     private KeyEvent priorityKey;
@@ -37,9 +43,11 @@ public class LanternaGui implements GUI {
         this.keyPressed = null;
         this.priorityKey = null;
         this.keySpam = false;
-        this.title = title;
+        //remove "//" after adding player
+        //this.pressedKeys = new HashSet<>();
         this.keyAdapter = createKeyAdapter();
         this.screen = createScreen();
+        this.title = title;
     }
 
     private TerminalScreen createScreen() throws URISyntaxException, IOException, FontFormatException {
@@ -58,7 +66,8 @@ public class LanternaGui implements GUI {
         DefaultTerminalFactory terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(terminalSize)
                 .setForceAWTOverSwing(true)
-                .setTerminalEmulatorFontConfiguration(fontConfig);
+                .setTerminalEmulatorFontConfiguration(fontConfig)
+                .setTerminalEmulatorTitle(title);
 
         return terminal;
     }
@@ -92,20 +101,29 @@ public class LanternaGui implements GUI {
         return keyAdapter;
     }
 
+    //remove "//" after adding player
+    //public Set<Integer> getPressedKeys() { return pressedKeys; }
+
     private KeyAdapter createKeyAdapter() {
         return new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (keySpam)
+                if (keySpam) {
+                    //remove "//" after adding player
+                    //pressedKeys.add(e.getKeyCode());
                     keyPressed = priorityKey = e;
+                }
                 else
                     keyPressed = e;
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (keySpam)
+                if (keySpam) {
+                    //remove "//" after adding player
+                    //pressedKeys.remove(e.getKeyCode());
                     keyPressed = priorityKey = null;
+                }
                 else
                     keyPressed = priorityKey;
             }
@@ -114,21 +132,28 @@ public class LanternaGui implements GUI {
 
     @Override
     public userInput getNextUserInput() {
-        if (keyPressed == null)
+        //remove "//" after adding player
+        //List<userInput> inputs = new ArrayList<>();
+        //inputs.add(userInput.NONE);
+
+        //remove "/* */" after adding player
+        if (/*pressedKeys.isEmpty() && */keyPressed == null)
             return userInput.NONE;
 
         int keyCode = keyPressed.getKeyCode();
         keyPressed = priorityKey;
 
-        return switch (keyCode) {
-            case VK_A, VK_LEFT -> userInput.LEFT;
-            case VK_D, VK_RIGHT -> userInput.RIGHT;
-            case VK_W, VK_UP -> userInput.UP;
-            case VK_S, VK_DOWN -> userInput.DOWN;
-            case VK_ESCAPE -> userInput.QUIT;
-            case VK_ENTER -> userInput.SELECT;
-            default -> userInput.NONE;
-        };
+        //if(!keySpam) { remove "//" after adding player
+            return switch (keyCode) {
+                case VK_A, VK_LEFT -> userInput.LEFT;
+                case VK_D, VK_RIGHT -> userInput.RIGHT;
+                case VK_W, VK_UP -> userInput.UP;
+                case VK_S, VK_DOWN -> userInput.DOWN;
+                case VK_ESCAPE -> userInput.QUIT;
+                case VK_ENTER -> userInput.SELECT;
+                default -> userInput.NONE;
+            };
+        //} //remove "//" after adding player
     }
 
     public void setKeySpam(boolean keySpam) {

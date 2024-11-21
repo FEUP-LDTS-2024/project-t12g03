@@ -7,10 +7,6 @@ import projectt12g03.model.menu.Menu;
 import java.io.IOException;
 
 public class MenuController extends Controller<Menu> {
-    private final String startGame = "Start";
-    public final String leaveGame = "Exit";
-
-
     public MenuController(Menu menu) {
         super(menu);
     }
@@ -25,8 +21,8 @@ public class MenuController extends Controller<Menu> {
                 getModel().moveDown();
                 break;
             case SELECT:
-                if (getModel().getCurrentEntry().equals(leaveGame)) game.setState(null);
-                if (getModel().getCurrentEntry().equals(startGame)) /* add game.setState(some new Room Builder) */ ;
+                if (getModel().getCurrentEntry().equals("exit")) game.setState(null);
+                if (getModel().getCurrentEntry().equals("start")) /* add game.setState(some new Room Builder) */ ;
                 break;
         }
     }

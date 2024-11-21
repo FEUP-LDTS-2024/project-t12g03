@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 group = 'projectt12g03'
@@ -10,6 +11,10 @@ repositories {
     mavenCentral()
 }
 
+pitest {
+    pitestVersion = '1.15.0'
+}
+
 application {
     mainClass.set("projectt12g03.Game")
 }
@@ -17,7 +22,8 @@ application {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    // https://mvnrepository.com/artifact/com.googlecode.lanterna/lanterna
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+
     implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
 }
 
