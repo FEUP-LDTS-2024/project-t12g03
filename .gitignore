@@ -46,3 +46,4 @@ bin/
 out/
 build/
 *.iml
+.jqwik-database

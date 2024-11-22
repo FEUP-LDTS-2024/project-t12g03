@@ -26,6 +26,6 @@ public class GameState extends State<Room> {
 
     @Override
     protected boolean allowInputSpam() {
-        return true;
+        return false;
     }
 }

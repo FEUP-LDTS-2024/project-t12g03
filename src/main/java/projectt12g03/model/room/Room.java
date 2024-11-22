@@ -31,6 +31,12 @@ public class Room {
         return walls;
     }
 
+    public boolean checkWallCollision(Vector position) {
+        for (Wall wall : walls)
+            if (wall.getPosition().equals(position))
+                return false;
+        return true;
+    }
     public Player getPlayer() { return player; }
 
     public List<Wall> getWalls() { return walls; }

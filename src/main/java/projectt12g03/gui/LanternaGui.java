@@ -191,4 +191,7 @@ public class LanternaGui implements GUI {
         screen.close();
     }
 
+    public void setScreen(TerminalScreen screen) {
+        this.screen = screen;
+    }
 }
