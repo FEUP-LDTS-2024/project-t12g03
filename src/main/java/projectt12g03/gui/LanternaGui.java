@@ -173,7 +173,7 @@ public class LanternaGui implements GUI {
     public void drawCharacter(Vector position, char c, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(color);
-        tg.putString((int) position.getX(), (int) position.getX() + 1, "" + c);
+        tg.putString((int) position.getX(), (int) position.getY(), "" + c);
     }
 
     @Override
