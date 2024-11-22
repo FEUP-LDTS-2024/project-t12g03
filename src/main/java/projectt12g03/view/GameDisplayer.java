@@ -22,8 +22,8 @@ public class GameDisplayer extends ScreenDisplayer<Room> {
         gui.clear();
         playerview.draw(gui);
         for(Wall wall : getModel().getWalls()){
-            wallview = new WallDisplayer(wall);
-            wallview.draw(gui);
+        wallview = new WallDisplayer(wall);
+           wallview.draw(gui);
         }
         gui.refresh();
     }

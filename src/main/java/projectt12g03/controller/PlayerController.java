@@ -26,6 +26,8 @@ public class PlayerController extends Controller<Player> {
             case RIGHT:
                 getModel().moveRight();
                 break;
+            case QUIT:
+                game.setState(null); //temp while pause does not exist
         }
     }
 }
