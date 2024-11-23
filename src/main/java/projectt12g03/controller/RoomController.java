@@ -6,10 +6,10 @@ import projectt12g03.model.room.Room;
 
 import java.io.IOException;
 
-public class ArenaController extends Controller<Room> {
+public class RoomController extends Controller<Room> {
     private final PlayerController playerController;
 
-    public ArenaController(Room room) {
+    public RoomController(Room room) {
         super(room);
 
         this.playerController = new PlayerController(room);

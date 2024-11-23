@@ -1,6 +1,6 @@
 package projectt12g03.state;
 
-import projectt12g03.controller.ArenaController;
+import projectt12g03.controller.RoomController;
 import projectt12g03.controller.Controller;
 import projectt12g03.model.room.Room;
 import projectt12g03.view.GameDisplayer;
@@ -14,7 +14,7 @@ public class GameState extends State<Room> {
 
     @Override
     protected Controller<Room> getController() {
-        return new ArenaController(getModel());
+        return new RoomController(getModel());
     }
 
     @Override
