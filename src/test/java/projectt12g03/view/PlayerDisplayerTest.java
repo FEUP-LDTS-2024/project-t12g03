@@ -1,11 +1,13 @@
 package projectt12g03.view;
 
+import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.elements.Player;
+import projectt12g03.model.room.Room;
 
 import java.io.IOException;
 
@@ -16,7 +18,7 @@ public class PlayerDisplayerTest {
 
     @BeforeEach
     void setUp(){
-        player = new Player(10,10);
+        player = new Player(10,10,new Room(20,20,1));
         displayer = new PlayerDisplayer(player);
         gui = Mockito.mock(LanternaGui.class);
     }
@@ -24,6 +26,6 @@ public class PlayerDisplayerTest {
     @Test
     void drawPlayer() throws IOException {
         displayer.draw(gui);
-        Mockito.verify(gui,Mockito.times(1)).drawPlayer(player.getPosition(),player.getDesign(), player.getColor());
+        Mockito.verify(gui,Mockito.times(1)).drawPlayer(player.getPosition(),'P', new TextColor.RGB(85,201,81));
     }
 }

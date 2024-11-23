@@ -21,11 +21,11 @@ public class GameDisplayerTest {
 
     @BeforeEach
     void setUp() {
-        room = new Room();
+        room = new Room(20,20,123);
         gui = Mockito.mock(LanternaGui.class);
         displayer = new GameDisplayer(room);
 
-        room.setPlayer(new Player(5,5));
+        room.setPlayer(new Player(5,5,room));
         room.setWalls(Arrays.asList(new Wall(1,1),new Wall(2,2), new Wall(2,3)));
     }
 
