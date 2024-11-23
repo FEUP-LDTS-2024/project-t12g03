@@ -1,6 +1,7 @@
 package projectt12g03.view;
 
 import com.googlecode.lanterna.TextColor;
+import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.menu.Menu;
 import projectt12g03.model.Vector;
@@ -13,16 +14,16 @@ public class MenuDisplayer extends ScreenDisplayer<Menu> {
     public MenuDisplayer(Menu model) { super(model); }
 
     @Override
-    public void draw(LanternaGui gui) throws IOException {
+    public void draw(GUI gui) throws IOException {
         gui.clear();
         gui.drawText(new Vector(18, 2),
                 "GAME",
                 new TextColor.RGB(24, 112, 96));
-        drawEntries(gui, getModel().getEntries());
+        drawEntries( gui, getModel().getEntries());
         gui.refresh();
     }
 
-    private void drawEntries(LanternaGui gui, List<String> entries) {
+    private void drawEntries(GUI gui, List<String> entries) {
         for (String entry : entries) {
             Vector position = getModel().getEntryPosition(entry);
             gui.drawText(

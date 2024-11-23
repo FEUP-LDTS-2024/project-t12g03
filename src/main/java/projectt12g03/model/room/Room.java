@@ -18,7 +18,7 @@ public class Room {
         walls = createWalls();
     }
 
-    private List<Wall> createWalls() {
+    private List<Wall> createWalls() { //Refactor later, helper in developing collision
         List<Wall> walls = new ArrayList<>();
         for (int c = 0; c < Game.terminalWidth; c++) {
             walls.add(new Wall(c, 0));
@@ -37,7 +37,12 @@ public class Room {
                 return false;
         return true;
     }
+
     public Player getPlayer() { return player; }
 
     public List<Wall> getWalls() { return walls; }
+
+    public void setPlayer(Player player) { this.player = player; }
+
+    public void setWalls(List<Wall> walls) { this.walls = walls; }
 }

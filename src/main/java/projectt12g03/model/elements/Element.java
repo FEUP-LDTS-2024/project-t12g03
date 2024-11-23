@@ -1,5 +1,6 @@
 package projectt12g03.model.elements;
 
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import projectt12g03.model.Vector;
 
