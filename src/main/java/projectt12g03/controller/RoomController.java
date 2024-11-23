@@ -9,10 +9,10 @@ import java.io.IOException;
 public class RoomController extends Controller<Room> {
     private final PlayerController playerController;
 
-    public RoomController(Room room) {
+    public RoomController(Room room, PlayerController playerController) {
         super(room);
 
-        this.playerController = new PlayerController(room);
+        this.playerController = playerController;
     }
 
     @Override

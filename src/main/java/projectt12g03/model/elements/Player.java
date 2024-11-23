@@ -36,7 +36,7 @@ public class Player extends Element {
         return new Vector(getPosition().getX(), getPosition().getY());
     }
 
-    private boolean canMove(Vector position) {
+    public boolean canMove(Vector position) {
         return room.checkCollisions(position);
     }
 }
