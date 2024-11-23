@@ -12,7 +12,7 @@ public class Menu {
 
     public Menu() {
         entries.put("start", new Vector(18, 7));
-        entries.put("tutorial", new Vector(18, 10));
+        entries.put("controls", new Vector(18, 10));
         entries.put("credits", new Vector(18, 13));
         entries.put("exit", new Vector(18, 16));
 
