@@ -2,19 +2,17 @@ package projectt12g03.controller;
 
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.elements.Player;
 import projectt12g03.model.room.Room;
 
 import java.io.IOException;
-import java.math.RoundingMode;
 
-public class GameController extends Controller<Room> {
-    private PlayerController playerController;
+public class ArenaController extends Controller<Room> {
+    private final PlayerController playerController;
 
-    public GameController(Room model) {
-        super(model);
-        playerController = new PlayerController(getModel().getPlayer());
+    public ArenaController(Room room) {
+        super(room);
 
+        this.playerController = new PlayerController(room);
     }
 
     @Override
