@@ -15,4 +15,10 @@ public class Vector {
     public double getY() {
         return y;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Vector)){return false;}
+        return ((Vector) o).getX() == this.getX() && ((Vector) o).getY() == this.getY();
+    }
 }

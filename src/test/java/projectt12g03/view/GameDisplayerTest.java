@@ -10,6 +10,7 @@ import projectt12g03.model.Vector;
 import projectt12g03.model.elements.Player;
 import projectt12g03.model.elements.Wall;
 import projectt12g03.model.room.Room;
+import projectt12g03.model.room.RoomBuilder;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,10 +19,12 @@ public class GameDisplayerTest {
     private GUI gui;
     private GameDisplayer displayer;
     private Room room;
+    private RoomBuilder roomBuilder;
 
     @BeforeEach
     void setUp() {
-        room = new Room(20,20,123);
+        roomBuilder = new RoomBuilder(123);
+        room = roomBuilder.createRoom();
         gui = Mockito.mock(LanternaGui.class);
         displayer = new GameDisplayer(room);
 
