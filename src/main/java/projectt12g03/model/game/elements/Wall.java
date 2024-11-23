@@ -1,6 +1,4 @@
-package projectt12g03.model.elements;
-
-import com.googlecode.lanterna.TextColor;
+package projectt12g03.model.game.elements;
 
 public class Wall extends Element{
 

@@ -1,10 +1,8 @@
 package projectt12g03.view;
 
 import projectt12g03.gui.GUI;
-import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.elements.Player;
-import projectt12g03.model.elements.Wall;
-import projectt12g03.model.room.Room;
+import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.room.Room;
 
 import java.io.IOException;
 

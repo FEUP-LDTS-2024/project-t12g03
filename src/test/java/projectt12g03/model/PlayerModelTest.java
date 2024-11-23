@@ -3,13 +3,8 @@ package projectt12g03.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import projectt12g03.model.elements.Player;
-import net.jqwik.api.ForAll;
-import net.jqwik.api.Property;
-import projectt12g03.model.room.Room;
-
-import java.io.IOException;
+import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.room.Room;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

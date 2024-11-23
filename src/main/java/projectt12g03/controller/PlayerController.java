@@ -2,8 +2,8 @@ package projectt12g03.controller;
 
 import projectt12g03.Game;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.elements.Player;
-import projectt12g03.model.room.Room;
+import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.room.Room;
 
 import java.io.IOException;
 

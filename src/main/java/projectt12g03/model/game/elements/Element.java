@@ -1,7 +1,5 @@
-package projectt12g03.model.elements;
+package projectt12g03.model.game.elements;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import projectt12g03.model.Vector;
 
 public abstract class Element {
