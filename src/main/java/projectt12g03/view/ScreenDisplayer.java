@@ -1,5 +1,6 @@
 package projectt12g03.view;
 
+import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
 
 import java.io.IOException;
@@ -15,5 +16,5 @@ public abstract class ScreenDisplayer<T> {
         return model;
     }
 
-    public abstract void draw(LanternaGui gui) throws IOException;
+    public abstract void draw(GUI gui) throws IOException;
 }

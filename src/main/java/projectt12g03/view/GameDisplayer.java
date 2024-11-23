@@ -1,5 +1,6 @@
 package projectt12g03.view;
 
+import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.elements.Player;
 import projectt12g03.model.elements.Wall;
@@ -8,22 +9,22 @@ import projectt12g03.model.room.Room;
 import java.io.IOException;
 
 public class GameDisplayer extends ScreenDisplayer<Room> {
-    private  PlayerDisplayer playerview;
-    private  WallDisplayer wallview;
+    private  PlayerDisplayer playerDisplayer;
+    private  WallDisplayer wallDisplayer;
 
     public GameDisplayer(Room model) {
         super(model);
-        playerview = new PlayerDisplayer(getModel().getPlayer());
+        playerDisplayer = new PlayerDisplayer(getModel().getPlayer());
     }
 
     @Override
     // hard coded for testing
-    public void draw(LanternaGui gui) throws IOException {
+    public void draw(GUI gui) throws IOException {
         gui.clear();
-        playerview.draw(gui);
+        playerDisplayer.draw(gui);
         for(Wall wall : getModel().getWalls()){
-        wallview = new WallDisplayer(wall);
-           wallview.draw(gui);
+        wallDisplayer = new WallDisplayer(wall);
+           wallDisplayer.draw(gui);
         }
         gui.refresh();
     }

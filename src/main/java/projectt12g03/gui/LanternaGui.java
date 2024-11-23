@@ -169,11 +169,21 @@ public class LanternaGui implements GUI {
         tg.putString((int) position.getX(), (int) position.getY(), text);
     }
 
-    @Override
+
     public void drawCharacter(Vector position, char c, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(color);
         tg.putString((int) position.getX(), (int) position.getY(), "" + c);
+    }
+
+    @Override
+    public void drawWall(Vector position){ //may change
+        drawCharacter(position,'#',new TextColor.RGB(255,255,255));
+    }
+
+    @Override
+    public void drawPlayer(Vector position, char design, TextColor color){ //will change when player becomes complex
+        drawCharacter(position, design, color);
     }
 
     @Override
@@ -191,4 +201,7 @@ public class LanternaGui implements GUI {
         screen.close();
     }
 
+    public void setScreen(TerminalScreen screen) {
+        this.screen = screen;
+    }
 }

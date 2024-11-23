@@ -4,6 +4,7 @@ import projectt12g03.Game;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.menu.Menu;
 import projectt12g03.model.room.Room;
+import projectt12g03.model.room.RoomBuilder;
 import projectt12g03.state.GameState;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class MenuController extends Controller<Menu> {
                 break;
             case SELECT:
                 if (getModel().getCurrentEntry().equals("exit")) game.setState(null);
-                if (getModel().getCurrentEntry().equals("start")) game.setState(new GameState(new Room()));
+                if (getModel().getCurrentEntry().equals("start")) game.setState(new GameState(new RoomBuilder(0).createRoom()));
                 break;
         }
     }

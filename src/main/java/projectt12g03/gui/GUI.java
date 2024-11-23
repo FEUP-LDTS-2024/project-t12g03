@@ -12,7 +12,9 @@ public interface GUI {
 
     void drawText(Vector position, String text, TextColor color);
 
-    void drawCharacter(Vector position, char c, TextColor color);
+    void drawWall(Vector position);
+
+    void drawPlayer(Vector position, char design, TextColor color);
 
     void clear();
 

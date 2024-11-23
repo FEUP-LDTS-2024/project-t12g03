@@ -9,29 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
+    private final int width;
+    private final int height;
+    private final int roomCode;
+
     private Player player;
     private List<Wall> walls;
 
     //hard coded for now for testing and implementing
-    public Room(){
-        player = new Player(10,5);
-        walls = createWalls();
+    public Room(int width, int height, int roomCode) {
+        this.width = width;
+        this.height = height;
+        this.roomCode = roomCode;
     }
 
-    private List<Wall> createWalls() {
-        List<Wall> walls = new ArrayList<>();
-        for (int c = 0; c < Game.terminalWidth; c++) {
-            walls.add(new Wall(c, 0));
-            walls.add(new Wall(c, Game.terminalHeight - 1));
-        }
-        for (int r = 1; r < Game.terminalHeight - 1; r++) {
-            walls.add(new Wall(0, r));
-            walls.add(new Wall(Game.terminalWidth - 1, r));
-        }
-        return walls;
+    public boolean checkCollisions(Vector position) {
+        return checkWallCollision(position); //when we have more collisions it will look better
     }
 
+    public boolean checkWallCollision(Vector position) {
+        for (Wall wall : walls) {
+            if (wall.getPosition().getX() == position.getX() && wall.getPosition().getY() == position.getY())
+                return false;
+        }
+        return true;
+    }
     public Player getPlayer() { return player; }
 
     public List<Wall> getWalls() { return walls; }
+
+    public void setPlayer(Player player) { this.player = player; }
+
+    public void setWalls(List<Wall> walls) { this.walls = walls; }
 }
