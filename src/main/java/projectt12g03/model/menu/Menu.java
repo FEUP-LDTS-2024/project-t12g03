@@ -8,7 +8,7 @@ public abstract class Menu {
     protected final Map<String, Vector> entries = new LinkedHashMap<>();
     protected final List<String> entriesList = new ArrayList<>();
     protected int currentEntry = 0;
-
+    
     public void moveUp() {
         currentEntry--;
         if (currentEntry < 0)
