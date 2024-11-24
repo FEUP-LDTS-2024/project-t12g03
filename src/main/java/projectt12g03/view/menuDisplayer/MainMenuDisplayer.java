@@ -1,11 +1,10 @@
-package projectt12g03.view;
+package projectt12g03.view.menuDisplayer;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
-import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.menu.MainMenu;
-import projectt12g03.model.menu.Menu;
 import projectt12g03.model.Vector;
+import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 import java.util.List;

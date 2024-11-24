@@ -1,14 +1,15 @@
-package projectt12g03.view;
+package projectt12g03.view.menuDisplayer;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
 import projectt12g03.model.menu.ControlsMenu;
+import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 import java.util.List;
 
-public class ControlsMenuDisplayer extends ScreenDisplayer<ControlsMenu>{
+public class ControlsMenuDisplayer extends ScreenDisplayer<ControlsMenu> {
 
 
     public ControlsMenuDisplayer(ControlsMenu model) { super(model); }
