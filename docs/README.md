@@ -32,5 +32,17 @@ Code Smells:
     
  Images:   
 
-    Current menu state:
-![img.png](menu.png)
+    Current Main menu:
+![img.png](MainMenu.png)
+    
+    Current Constrols Menu:
+![img.png](ControlsMenu.png)
+    
+    Current Credits Menu:
+![img.png](CreditsMenu.png)
+
+    Current Pause Menu:
+![img.png](PauseMenu.png)
+
+    First Game preview:
+![img.png](FirstGamePreview.png)
