@@ -20,12 +20,10 @@ Features for future implementation :
 
 Design Patterns:
     
-    The project is separated into packages that all play a different part in the final result (controller, state, model, gui).
-    The screen updates smoothly and quickly seaming like all the drawing process is done simultaneously.
-    A game loop runs continuously during gameplay. Each turn of the loop, it processes user input without blocking, updates the game, and displays it.
-    Abstract base classes define general methods. Derived subclasses that represent different kinds of their parent class implement those methods.
-    Generic classes of type T are used to accomodate and connect similar classes that implement the same methods but for diferent objects.
-    
+    MVC architetural pattern: The project is separated into packages that all play a different part in the final result (controller, state, model, gui).
+    Game loop Pattern: A game loop runs continuously during gameplay. Each turn of the loop, it processes user input without blocking, updates the game, and displays it.
+    State pattern: The game is controlled by a state class that defines which displayers or controllers are in use.
+    Factory method Pattern: Current state sublcass is the one who calls both the controller and the displayer for that specific state.
 
 Code Smells:
 
