@@ -1,7 +1,8 @@
-package projectt12g03.view;
+package projectt12g03.view.game.elements;
 
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.Wall;
+import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 

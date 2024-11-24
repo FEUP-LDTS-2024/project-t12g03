@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.view.game.elements.PlayerDisplayer;
 
 import java.io.IOException;
 

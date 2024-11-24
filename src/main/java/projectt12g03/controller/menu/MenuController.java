@@ -1,6 +1,7 @@
-package projectt12g03.controller;
+package projectt12g03.controller.menu;
 
 import projectt12g03.Game;
+import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.menu.Menu;
 import projectt12g03.model.game.room.RoomBuilder;
@@ -23,7 +24,7 @@ public class MenuController extends Controller<Menu> {
                 getModel().moveDown();
                 break;
             case SELECT:
-                if (getModel().getCurrentEntry().equals("exit")) game.setState(null);
+                if (getModel().getCurrentEntry().equals("exit")) game.popState();
                 if (getModel().getCurrentEntry().equals("start")) game.setState(new GameState(new RoomBuilder(0).createRoom()));
                 break;
         }
