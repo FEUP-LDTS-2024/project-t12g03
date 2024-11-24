@@ -1,4 +1,4 @@
-package projectt12g03.view;
+package projectt12g03.view.gameDisplayer;
 
 import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;

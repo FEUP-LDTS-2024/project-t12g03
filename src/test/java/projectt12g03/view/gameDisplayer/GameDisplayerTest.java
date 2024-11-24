@@ -1,4 +1,4 @@
-package projectt12g03.view;
+package projectt12g03.view.gameDisplayer;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomBuilder;
 import projectt12g03.view.game.GameDisplayer;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 

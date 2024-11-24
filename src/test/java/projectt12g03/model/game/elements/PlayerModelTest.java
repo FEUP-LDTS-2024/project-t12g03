@@ -1,9 +1,9 @@
-package projectt12g03.model;
+package projectt12g03.model.game.elements;
 
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.Vector;
 import projectt12g03.model.game.room.Room;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

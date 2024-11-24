@@ -23,7 +23,7 @@ public class MainMenuDisplayer extends ScreenDisplayer<MainMenu> {
         gui.refresh();
     }
 
-    private void drawEntries(GUI gui, List<String> entries) {
+    public void drawEntries(GUI gui, List<String> entries) {
         for (String entry : entries) {
             Vector position = getModel().getEntryPosition(entry);
             gui.drawText(
