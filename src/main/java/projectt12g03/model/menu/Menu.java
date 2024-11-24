@@ -4,31 +4,21 @@ import projectt12g03.model.Vector;
 
 import java.util.*;
 
-public class Menu {
-    private final Map<String, Vector> entries = new LinkedHashMap<>();
-    private final List<String> entriesList = new ArrayList<>();
-    private int currentEntry = 0;
-
-
-    public Menu() {
-        entries.put("start", new Vector(18, 7));
-        entries.put("controls", new Vector(17, 10));
-        entries.put("credits", new Vector(17, 13));
-        entries.put("exit", new Vector(18, 16));
-
-        entriesList.addAll(entries.keySet());
-    }
-
+public abstract class Menu {
+    protected final Map<String, Vector> entries = new LinkedHashMap<>();
+    protected final List<String> entriesList = new ArrayList<>();
+    protected int currentEntry = 0;
+    
     public void moveUp() {
         currentEntry--;
         if (currentEntry < 0)
-            currentEntry = 0;
+            currentEntry = getNumberEntries() - 1;
     }
 
     public void moveDown() {
         currentEntry++;
         if (currentEntry > getNumberEntries() - 1)
-            currentEntry = getNumberEntries() - 1;
+            currentEntry = 0;
     }
 
     public String getCurrentEntry() {
@@ -40,4 +30,6 @@ public class Menu {
     public List<String> getEntries() { return entriesList; }
 
     public Vector getEntryPosition(String entryName) { return entries.get(entryName); }
+
+
 }

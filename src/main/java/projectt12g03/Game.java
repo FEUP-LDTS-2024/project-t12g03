@@ -1,8 +1,8 @@
 package projectt12g03;
 
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.menu.Menu;
-import projectt12g03.state.menu.MenuState;
+import projectt12g03.model.menu.MainMenu;
+import projectt12g03.state.menuSate.MainMenuState;
 import projectt12g03.state.State;
 
 import java.awt.*;
@@ -22,7 +22,6 @@ public class Game {
         this.gui = new LanternaGui(terminalWidth, terminalHeight, windowName);
         //this.state = new MenuState(new Menu()); probably gonna be permanent delete
         this.stateStack = new Stack<>();
-        stateStack.push(new MenuState(new Menu()));
     }
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
         new Game().start();
