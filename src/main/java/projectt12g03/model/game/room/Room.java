@@ -32,6 +32,7 @@ public class Room {
         }
         return true;
     }
+
     public Player getPlayer() { return player; }
 
     public List<Wall> getWalls() { return walls; }
