@@ -35,4 +35,4 @@ Code Smells:
  Images:   
 
     Current menu state:
-     ![img.png](menu.png)
+![img.png](menu.png)
