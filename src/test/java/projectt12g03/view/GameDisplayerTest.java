@@ -10,6 +10,7 @@ import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomBuilder;
+import projectt12g03.view.game.GameDisplayer;
 
 import java.io.IOException;
 import java.util.Arrays;

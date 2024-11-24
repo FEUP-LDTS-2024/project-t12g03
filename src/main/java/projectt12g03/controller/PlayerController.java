@@ -4,6 +4,8 @@ import projectt12g03.Game;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.menu.PauseMenu;
+import projectt12g03.state.menu.PauseMenuState;
 
 import java.io.IOException;
 
@@ -29,7 +31,8 @@ public class PlayerController extends Controller<Room> {
                 player.setPosition(player.moveRight());
                 break;
             case QUIT:
-                game.setState(null); //temp while pause does not exist
+                game.setState(new PauseMenuState(new PauseMenu(getModel()))); //temp while pause does not exist
+                break;
         }
     }
 }

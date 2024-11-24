@@ -1,10 +1,11 @@
-package projectt12g03.state;
+package projectt12g03.state.menu;
 
 
 import projectt12g03.controller.Controller;
-import projectt12g03.controller.MenuController;
+import projectt12g03.controller.menu.MenuController;
 import projectt12g03.model.menu.Menu;
-import projectt12g03.view.MenuDisplayer;
+import projectt12g03.state.State;
+import projectt12g03.view.menu.MenuDisplayer;
 import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
