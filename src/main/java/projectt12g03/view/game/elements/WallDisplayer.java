@@ -5,13 +5,14 @@ import projectt12g03.model.game.elements.Wall;
 import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
+import java.util.List;
 
-public class WallDisplayer extends ScreenDisplayer<Wall> {
-
-    public WallDisplayer(Wall model) { super(model); }
+public class WallDisplayer extends ElementDisplayer<Wall> {
 
     @Override
-    public void draw(GUI gui) throws IOException {
-        gui.drawWall(getModel().getPosition());
+    public void draw(List<Wall> walls, GUI gui) {
+        for(Wall wall : walls){
+            gui.drawWall(wall.getPosition());
+        }
     }
 }

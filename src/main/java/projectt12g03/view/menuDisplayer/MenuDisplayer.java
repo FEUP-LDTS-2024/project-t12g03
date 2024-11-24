@@ -9,6 +9,8 @@ import projectt12g03.view.ScreenDisplayer;
 import java.io.IOException;
 import java.util.List;
 
+//This class needs to be deleted or generalized to an abstract function
+//Only reason i am not making it an abstract function is sometimes we have different draws now (find solution later)
 public class MenuDisplayer extends ScreenDisplayer<Menu> {
 
     public MenuDisplayer(Menu model) { super(model); }

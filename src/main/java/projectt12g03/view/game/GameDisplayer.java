@@ -15,18 +15,15 @@ public class GameDisplayer extends ScreenDisplayer<Room> {
 
     public GameDisplayer(Room model) {
         super(model);
-        playerDisplayer = new PlayerDisplayer(getModel().getPlayer());
+        playerDisplayer = new PlayerDisplayer();
+        wallDisplayer = new WallDisplayer();
     }
 
     @Override
-    // hard coded for testing
     public void draw(GUI gui) throws IOException {
         gui.clear();
-        playerDisplayer.draw(gui);
-        for(Wall wall : getModel().getWalls()){
-        wallDisplayer = new WallDisplayer(wall);
-           wallDisplayer.draw(gui);
-        }
+        playerDisplayer.draw(getModel().getPlayer(), gui);
+        wallDisplayer.draw(getModel().getWalls(), gui);
         gui.refresh();
     }
 }

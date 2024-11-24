@@ -1,14 +1,16 @@
 package projectt12g03;
 
 import projectt12g03.gui.LanternaGui;
+import projectt12g03.model.game.room.Room;
 import projectt12g03.model.menu.MainMenu;
+import projectt12g03.state.GameState;
 import projectt12g03.state.menuSate.MainMenuState;
 import projectt12g03.state.State;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Stack;
+import java.util.*;
 
 public class Game {
     public static final int terminalWidth = 40;

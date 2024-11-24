@@ -7,12 +7,10 @@ import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 
-public class PlayerDisplayer extends ScreenDisplayer<Player> {
-
-    public PlayerDisplayer(Player model) { super(model); }
+public class PlayerDisplayer extends ElementDisplayer<Player> {
 
     @Override
-    public void draw(GUI gui) throws IOException {
-        gui.drawPlayer(getModel().getPosition(), 'P', new TextColor.RGB(85,201,81));
+    public void draw(Player player, GUI gui) {
+        gui.drawPlayer(player.getPosition(), 'P', new TextColor.RGB(85,201,81));
     }
 }
