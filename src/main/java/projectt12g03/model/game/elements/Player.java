@@ -12,6 +12,8 @@ public class Player extends Element {
         this.room = room;
     }
 
+    public void setRoom(Room room) { this.room = room; }
+
     public Vector moveUp() {
         Vector newPosition = new Vector(getPosition().getX(), getPosition().getY() - 1);
         if (canMove(newPosition)) return newPosition;

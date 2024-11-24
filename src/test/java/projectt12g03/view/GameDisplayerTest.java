@@ -12,6 +12,7 @@ import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomBuilder;
 import projectt12g03.view.game.GameDisplayer;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -20,15 +21,18 @@ public class GameDisplayerTest {
     private GameDisplayer displayer;
     private Room room;
     private RoomBuilder roomBuilder;
+    private Player player;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         roomBuilder = new RoomBuilder(123);
-        room = roomBuilder.createRoom();
+        player = new Player(0, 0, null);
+        room = roomBuilder.createRoom(player);
+        player.setRoom(room);
         gui = Mockito.mock(LanternaGui.class);
         displayer = new GameDisplayer(room);
 
-        room.setPlayer(new Player(5,5,room));
+        room.setPlayer(player);
         room.setWalls(Arrays.asList(new Wall(1,1),new Wall(2,2), new Wall(2,3)));
     }
 
