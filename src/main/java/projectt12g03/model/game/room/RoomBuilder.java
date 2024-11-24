@@ -1,44 +1,83 @@
 package projectt12g03.model.game.room;
 
 
-import projectt12g03.Game;
+import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class RoomBuilder {
-    //private final List<String> lines;
+    private final List<String> lines;
     private final int roomCode;
 
-    public Room createRoom() {
+    public Room createRoom(Player player) {
         Room room = new Room(getWidth(), getHeight(), roomCode);
 
         room.setWalls(createWalls());
-        room.setPlayer(new Player(10, 5, room)); //probably going to change in the future;
+        room.setPlayer(createPlayer(player, room)); //probably going to change in the future;
 
         return room;
     }
 
-    public RoomBuilder(int roomCode) {
+    public RoomBuilder(int roomCode) throws IOException {
         this.roomCode = roomCode;
+
+        URL resource = RoomBuilder.class.getResource("/rooms/room" + roomCode + ".lvl");
+        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+
+
+        this.lines = readLines(br);
     }
 
-    protected int getWidth() { return 40; } //temporary until we read maps
+    private List<String> readLines(BufferedReader br) throws IOException {
+        List<String> lines = new ArrayList<>();
+        for (String line; (line = br.readLine()) != null; )
+            lines.add(line);
+        return lines;
+    }
 
-    protected int getHeight() { return 20; } //temporary until we read maps
+    protected int getWidth() {
+        int width = 0;
+        for (String line : lines)
+            width = Math.max(width, line.length());
+        return width;
+    }
+
+    protected int getHeight() { return lines.size(); }
 
     protected List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
-        for (int c = 0; c < Game.terminalWidth; c++) {
-            walls.add(new Wall(c, 0));
-            walls.add(new Wall(c, Game.terminalHeight - 1));
+
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == '#') walls.add(new Wall(x, y));
         }
-        for (int r = 1; r < Game.terminalHeight - 1; r++) {
-            walls.add(new Wall(0, r));
-            walls.add(new Wall(Game.terminalWidth - 1, r));
-        }
+
         return walls;
+    }
+    protected Player createPlayer(Player player, Room room) {
+        for (int y = 0; y < lines.size() - 4; y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++){
+                if (line.charAt(x) == 'P'){
+                    player.setPosition(new Vector(x, y));
+                    player.setRoom(room);
+                    return player;
+                }
+            }
+        }
+        throw new IllegalStateException("Player not found within the level file!");
     }
 }

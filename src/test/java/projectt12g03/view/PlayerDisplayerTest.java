@@ -19,13 +19,13 @@ public class PlayerDisplayerTest {
     @BeforeEach
     void setUp(){
         player = new Player(10,10,new Room(20,20,1));
-        displayer = new PlayerDisplayer(player);
+        displayer = new PlayerDisplayer();
         gui = Mockito.mock(LanternaGui.class);
     }
 
     @Test
     void drawPlayer() throws IOException {
-        displayer.draw(gui);
+        displayer.draw(player, gui);
         Mockito.verify(gui,Mockito.times(1)).drawPlayer(player.getPosition(),'P', new TextColor.RGB(85,201,81));
     }
 }

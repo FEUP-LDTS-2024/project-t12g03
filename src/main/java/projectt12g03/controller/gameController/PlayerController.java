@@ -32,7 +32,7 @@ public class PlayerController extends Controller<Room> {
                 player.setPosition(player.moveRight());
                 break;
             case QUIT:
-                game.setState(new PauseMenuState(new PauseMenu(getModel()))); //temp while pause does not exist
+                game.setState(new PauseMenuState(new PauseMenu(getModel())));
                 break;
         }
     }
