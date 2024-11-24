@@ -24,11 +24,11 @@ public class CreditsMenuDisplayer extends ScreenDisplayer<CreditsMenu> {
 
     public void drawNames(GUI gui) {
         gui.drawText(new Vector(2, 7), "filipe lopes : ", new TextColor.RGB(255, 255, 255) );
-        gui.drawText(new Vector(20, 7), "COLOCA O TEU", new TextColor.RGB(9, 59, 96));
+        gui.drawText(new Vector(20, 7), "UP202306564", new TextColor.RGB(9, 59, 96));
         gui.drawText(new Vector(2, 10), "francisco tomaz : ", new TextColor.RGB(255, 255, 255));
         gui.drawText(new Vector(20, 10), "UP202309456", new TextColor.RGB(9, 59, 96));
         gui.drawText(new Vector(2, 13), "joao quental : ", new TextColor.RGB(255, 255, 255));
-        gui.drawText(new Vector(20, 13), "COLOCA O TEU", new TextColor.RGB(9, 59, 96));
+        gui.drawText(new Vector(20, 13), "UP202307755", new TextColor.RGB(9, 59, 96));
     }
 
     private void drawEntries(GUI gui, List<String> entries) {

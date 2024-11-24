@@ -32,6 +32,7 @@ Code Smells:
     Collision is suboptimal and requires a player to always be associated with a room and a room associated with a player, might cause confusion in later development.
     Rooms at the moment constain player and walls separately and are not based on element at all, this will get worse the more elements that are put in the game.
     
-    
+ Images:   
 
- ![img.png](menu.png)
+    Current menu state:
+![img.png](menu.png)
