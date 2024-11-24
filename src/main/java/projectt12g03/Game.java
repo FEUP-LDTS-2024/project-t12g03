@@ -1,9 +1,7 @@
 package projectt12g03;
 
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.game.room.Room;
 import projectt12g03.model.menu.MainMenu;
-import projectt12g03.state.GameState;
 import projectt12g03.state.menuSate.MainMenuState;
 import projectt12g03.state.State;
 

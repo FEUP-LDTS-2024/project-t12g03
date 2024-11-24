@@ -10,8 +10,6 @@ import projectt12g03.model.menu.PauseMenu;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PauseMenuControllerTest {
     private Game game;
     private PauseMenu pauseMenu;
