@@ -1,0 +1,40 @@
+package projectt12g03.view;
+
+import com.googlecode.lanterna.TextColor;
+import projectt12g03.gui.GUI;
+import projectt12g03.gui.LanternaGui;
+import projectt12g03.model.menu.MainMenu;
+import projectt12g03.model.menu.Menu;
+import projectt12g03.model.Vector;
+
+import java.io.IOException;
+import java.util.List;
+
+public class MainMenuDisplayer extends ScreenDisplayer<MainMenu> {
+
+    public MainMenuDisplayer(MainMenu model) { super(model); }
+
+    @Override
+    public void draw(GUI gui) throws IOException {
+        gui.clear();
+        gui.drawText(new Vector(18, 2),
+                "GAME",
+                new TextColor.RGB(24, 112, 96));
+        drawEntries( gui, getModel().getEntries());
+        gui.refresh();
+    }
+
+    private void drawEntries(GUI gui, List<String> entries) {
+        for (String entry : entries) {
+            Vector position = getModel().getEntryPosition(entry);
+            gui.drawText(
+                    position,
+                    entry,
+                    getModel().getCurrentEntry().equals(entry) ?
+                            new TextColor.RGB(24, 112, 96) :
+                            new TextColor.RGB(9, 59, 50)
+            );
+        }
+    }
+
+}

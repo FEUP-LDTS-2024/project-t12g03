@@ -1,8 +1,8 @@
 package projectt12g03;
 
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.menu.Menu;
-import projectt12g03.state.MenuState;
+import projectt12g03.model.menu.MainMenu;
+import projectt12g03.state.MainMenuState;
 import projectt12g03.state.State;
 
 import java.awt.*;
@@ -18,7 +18,7 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGui(terminalWidth, terminalHeight, windowName);
-        this.state = new MenuState(new Menu());
+        this.state = new MainMenuState(new MainMenu());
     }
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
         new Game().start();

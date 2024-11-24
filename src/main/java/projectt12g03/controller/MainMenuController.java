@@ -2,14 +2,16 @@ package projectt12g03.controller;
 
 import projectt12g03.Game;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.menu.Menu;
+import projectt12g03.model.menu.ControlsMenu;
+import projectt12g03.model.menu.MainMenu;
 import projectt12g03.model.game.room.RoomBuilder;
+import projectt12g03.state.ControlsMenuState;
 import projectt12g03.state.GameState;
 
 import java.io.IOException;
 
-public class MenuController extends Controller<Menu> {
-    public MenuController(Menu menu) {
+public class MainMenuController extends Controller<MainMenu> {
+    public MainMenuController(MainMenu menu) {
         super(menu);
     }
 
@@ -23,8 +25,9 @@ public class MenuController extends Controller<Menu> {
                 getModel().moveDown();
                 break;
             case SELECT:
-                if (getModel().getCurrentEntry().equals("exit")) game.setState(null);
                 if (getModel().getCurrentEntry().equals("start")) game.setState(new GameState(new RoomBuilder(0).createRoom()));
+                else if(getModel().getCurrentEntry().equals("controls")) game.setState(new ControlsMenuState(new ControlsMenu()));
+                else if (getModel().getCurrentEntry().equals("exit")) game.setState(null);
                 break;
         }
     }

@@ -2,22 +2,22 @@ package projectt12g03.view;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
-import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.menu.Menu;
 import projectt12g03.model.Vector;
+import projectt12g03.model.menu.ControlsMenu;
 
 import java.io.IOException;
 import java.util.List;
 
-public class MenuDisplayer extends ScreenDisplayer<Menu> {
+public class ControlsMenuDisplayer extends ScreenDisplayer<ControlsMenu>{
 
-    public MenuDisplayer(Menu model) { super(model); }
+
+    public ControlsMenuDisplayer(ControlsMenu model) { super(model); }
 
     @Override
     public void draw(GUI gui) throws IOException {
         gui.clear();
-        gui.drawText(new Vector(18, 2),
-                "GAME",
+        gui.drawText(new Vector(16.75, 2),
+                "CONTROLS",
                 new TextColor.RGB(24, 112, 96));
         drawEntries( gui, getModel().getEntries());
         gui.refresh();
@@ -35,5 +35,4 @@ public class MenuDisplayer extends ScreenDisplayer<Menu> {
             );
         }
     }
-
 }
