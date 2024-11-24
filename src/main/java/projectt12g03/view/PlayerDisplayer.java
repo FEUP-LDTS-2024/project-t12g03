@@ -2,8 +2,7 @@ package projectt12g03.view;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
-import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.elements.Player;
+import projectt12g03.model.game.elements.Player;
 
 import java.io.IOException;
 

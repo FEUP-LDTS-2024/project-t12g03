@@ -1,11 +1,9 @@
-package projectt12g03.model.room;
+package projectt12g03.model.game.room;
 
-import projectt12g03.Game;
 import projectt12g03.model.Vector;
-import projectt12g03.model.elements.Player;
-import projectt12g03.model.elements.Wall;
+import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.Wall;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Room {

@@ -1,7 +1,7 @@
-package projectt12g03.model.elements;
+package projectt12g03.model.game.elements;
 
 import projectt12g03.model.Vector;
-import projectt12g03.model.room.Room;
+import projectt12g03.model.game.room.Room;
 
 public class Player extends Element {
     private Room room;

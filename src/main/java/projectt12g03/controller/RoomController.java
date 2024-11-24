@@ -2,7 +2,7 @@ package projectt12g03.controller;
 
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.room.Room;
+import projectt12g03.model.game.room.Room;
 
 import java.io.IOException;
 
