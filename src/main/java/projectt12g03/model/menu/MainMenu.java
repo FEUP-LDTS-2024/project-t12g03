@@ -14,6 +14,7 @@ public class MainMenu extends Menu {
         entries.put("exit", new Vector(18, 16));
 
         entriesList.addAll(entries.keySet());
+
         currentEntry = 0;
     }
 }

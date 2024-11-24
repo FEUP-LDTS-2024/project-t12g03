@@ -95,11 +95,7 @@ public class LanternaGui implements GUI {
 
     public int getWidth() { return terminalSize.getColumns(); }
 
-    public int getheight() { return terminalSize.getRows(); }
-
-    public KeyAdapter getKeyAdapter() {
-        return keyAdapter;
-    }
+    public int getHeight() { return terminalSize.getRows(); }
 
     //remove "//" after adding player
     //public Set<Integer> getPressedKeys() { return pressedKeys; }

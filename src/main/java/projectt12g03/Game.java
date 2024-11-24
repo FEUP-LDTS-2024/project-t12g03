@@ -18,11 +18,9 @@ public class Game {
     private final Stack<State> stateStack;
     private static final String windowName = "GAME";
     private final LanternaGui gui;
-    //private State state;  probably gonna be permanent delete
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGui(terminalWidth, terminalHeight, windowName);
-        //this.state = new MenuState(new Menu()); probably gonna be permanent delete
         this.stateStack = new Stack<>();
         stateStack.push(new MainMenuState(new MainMenu()));
     }
@@ -50,8 +48,6 @@ public class Game {
     public void setKeySpam(boolean keySpam) {
         gui.setKeySpam(keySpam);
     }
-
-    //public void setState(State state) { this.state = state; } probably gonna be permanent delete
 
     private void start() throws IOException {
         int FPS = 30;
