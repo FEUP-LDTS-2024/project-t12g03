@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import projectt12g03.Game;
+import projectt12g03.controller.gameController.PlayerController;
+import projectt12g03.controller.gameController.RoomController;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;

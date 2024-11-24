@@ -1,13 +1,9 @@
-package projectt12g03.controller.menu;
+package projectt12g03.controller.menuController;
 
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.game.room.RoomBuilder;
-import projectt12g03.model.menu.Menu;
 import projectt12g03.model.menu.PauseMenu;
-import projectt12g03.state.GameState;
-import projectt12g03.state.menu.MenuState;
 
 import java.io.IOException;
 

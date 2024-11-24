@@ -1,4 +1,4 @@
-package projectt12g03.controller.menu;
+package projectt12g03.controller.menuController;
 
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
@@ -9,6 +9,8 @@ import projectt12g03.state.GameState;
 
 import java.io.IOException;
 
+//This class needs to be deleted or generalized to an abstract function
+//Only reason i am not making it an abstract function is sometimes "exit" makes different things
 public class MenuController extends Controller<Menu> {
     public MenuController(Menu menu) {
         super(menu);
@@ -24,8 +26,8 @@ public class MenuController extends Controller<Menu> {
                 getModel().moveDown();
                 break;
             case SELECT:
-                if (getModel().getCurrentEntry().equals("exit")) game.popState();
                 if (getModel().getCurrentEntry().equals("start")) game.setState(new GameState(new RoomBuilder(0).createRoom()));
+                if (getModel().getCurrentEntry().equals("exit")) game.popState();
                 break;
         }
     }

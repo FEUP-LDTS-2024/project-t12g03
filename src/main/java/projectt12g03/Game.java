@@ -22,6 +22,7 @@ public class Game {
         this.gui = new LanternaGui(terminalWidth, terminalHeight, windowName);
         //this.state = new MenuState(new Menu()); probably gonna be permanent delete
         this.stateStack = new Stack<>();
+        stateStack.push(new MainMenuState(new MainMenu()));
     }
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
         new Game().start();

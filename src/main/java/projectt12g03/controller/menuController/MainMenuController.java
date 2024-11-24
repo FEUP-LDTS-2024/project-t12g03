@@ -28,7 +28,7 @@ public class MainMenuController extends Controller<MainMenu> {
             case SELECT:
                 if (getModel().getCurrentEntry().equals("start")) game.setState(new GameState(new RoomBuilder(0).createRoom()));
                 else if(getModel().getCurrentEntry().equals("controls")) game.setState(new ControlsMenuState(new ControlsMenu()));
-                else if (getModel().getCurrentEntry().equals("exit")) game.setState(null);
+                else if (getModel().getCurrentEntry().equals("exit")) game.popState();
                 break;
         }
     }

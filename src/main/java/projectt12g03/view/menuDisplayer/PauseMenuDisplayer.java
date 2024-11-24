@@ -1,4 +1,4 @@
-package projectt12g03.view.menu;
+package projectt12g03.view.menuDisplayer;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
@@ -16,7 +16,7 @@ public class PauseMenuDisplayer extends ScreenDisplayer<PauseMenu> {
     @Override
     public void draw(GUI gui) throws IOException {
         gui.clear();
-        gui.drawText(new Vector(16, 3),
+        gui.drawText(new Vector(15, 3),
                 "PAUSE MENU",
                 new TextColor.RGB(24, 112, 96));
         drawEntries( gui, getModel().getEntries());

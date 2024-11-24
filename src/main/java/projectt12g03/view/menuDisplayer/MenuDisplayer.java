@@ -1,4 +1,4 @@
-package projectt12g03.view.menu;
+package projectt12g03.view.menuDisplayer;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;

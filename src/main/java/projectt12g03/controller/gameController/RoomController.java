@@ -1,6 +1,7 @@
-package projectt12g03.controller;
+package projectt12g03.controller.gameController;
 
 import projectt12g03.Game;
+import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.room.Room;
 

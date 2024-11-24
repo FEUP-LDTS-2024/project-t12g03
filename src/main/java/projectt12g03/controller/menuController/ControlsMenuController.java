@@ -16,7 +16,7 @@ public class ControlsMenuController extends Controller<ControlsMenu> {
     @Override
     public void step(Game game, GUI.userInput action, long time) throws IOException {
         if (Objects.requireNonNull(action) == GUI.userInput.SELECT) {
-            if (getModel().getCurrentEntry().equals("exit")) game.setState(new MainMenuState(new MainMenu()));
+            if (getModel().getCurrentEntry().equals("go back")) game.popState();
         }
     }
 }

@@ -1,7 +1,7 @@
 package projectt12g03.state;
 
-import projectt12g03.controller.PlayerController;
-import projectt12g03.controller.RoomController;
+import projectt12g03.controller.gameController.PlayerController;
+import projectt12g03.controller.gameController.RoomController;
 import projectt12g03.controller.Controller;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.view.game.GameDisplayer;

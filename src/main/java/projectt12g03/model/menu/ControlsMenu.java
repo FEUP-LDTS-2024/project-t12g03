@@ -6,7 +6,7 @@ public class ControlsMenu extends Menu{
 
     public ControlsMenu(){
         entries.clear();
-        entries.put("exit", new Vector(18, 16));
+        entries.put("go back", new Vector(18, 16));
 
         entriesList.addAll(entries.keySet());
         currentEntry = 0;
