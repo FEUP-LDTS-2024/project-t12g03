@@ -48,3 +48,8 @@ Code Smells:
 
     First Game preview:
 ![img.png](FirstGamePreview.png)
+
+UML:
+
+![img.png](img.png)
+
