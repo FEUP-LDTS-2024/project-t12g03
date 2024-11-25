@@ -51,5 +51,5 @@ Code Smells:
 
 UML:
 
-![img.png](img.png)
+![img.png](UML.png)
 
