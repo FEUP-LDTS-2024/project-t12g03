@@ -7,9 +7,8 @@ import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 
-public class PlayerDisplayer extends ElementDisplayer<Player> {
+public class PlayerDisplayer {
 
-    @Override
     public void draw(Player player, GUI gui) {
         gui.drawPlayer(player.getPosition(), 'P', new TextColor.RGB(85,201,81));
     }
