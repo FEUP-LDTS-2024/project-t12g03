@@ -24,28 +24,32 @@ public class Room {
     }
 
     public boolean checkCollisions(Vector position) {
-        return checkWallCollision(position) && checkMonsterCollision(position); //when we have more collisions it will look better
+        return checkWallCollision(position) || checkMonsterCollision(position);
 
     }
 
-    public boolean checkMonsterCollisions(Vector position) { // find a different way to check collisions
-        return checkWallCollision(position);
+    public boolean checkMonsterCollisions(Vector position) { // repetitive code, find a way to make it look better
+        return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position);
+    }
+
+    public boolean checkPlayerCollision(Vector position) {
+        return position.equals(player.getPosition());
     }
 
     public boolean checkMonsterCollision(Vector position) {
         for (Monster monster : monsters) {
-            if (monster.getPosition().getX() == position.getX() && monster.getPosition().getY() == position.getY())
-                return false;
+            if (monster.getPosition().equals(position))
+                return true;
         }
-        return true;
+        return false;
     }
 
     public boolean checkWallCollision(Vector position) {
         for (Wall wall : walls) {
-            if (wall.getPosition().getX() == position.getX() && wall.getPosition().getY() == position.getY())
-                return false;
+            if (wall.getPosition().equals(position))
+                return true;
         }
-        return true;
+        return false;
     }
 
     public Player getPlayer() { return player; }

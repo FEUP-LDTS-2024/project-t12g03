@@ -7,16 +7,11 @@ import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class RoomBuilder {
     private final List<String> lines;
@@ -27,7 +22,7 @@ public class RoomBuilder {
 
         room.setWalls(createWalls());
         room.setMonsters(createMonsters(room));
-        room.setPlayer(createPlayer(player, room)); //probably going to change in the future;
+        room.setPlayer(createPlayer(room)); //probably going to change in the future;
 
         return room;
     }
@@ -82,14 +77,12 @@ public class RoomBuilder {
         return monsters;
     }
 
-    protected Player createPlayer(Player player, Room room) {
+    protected Player createPlayer(Room room) {
         for (int y = 0; y < lines.size() - 4; y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++){
                 if (line.charAt(x) == 'P'){
-                    player.setPosition(new Vector(x, y));
-                    player.setRoom(room);
-                    return player;
+                    return new Player(x, y, room);
                 }
             }
         }
