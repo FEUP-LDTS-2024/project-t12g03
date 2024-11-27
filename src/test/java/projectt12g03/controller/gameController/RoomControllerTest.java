@@ -15,6 +15,7 @@ class RoomControllerTest {
     private RoomController roomController;
     private Room room;
     private PlayerController playerController;
+    private MonsterController monsterController;
 
     @BeforeEach
     public void setup() {
@@ -25,8 +26,9 @@ class RoomControllerTest {
         Mockito.when(room.getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);
+        this.monsterController = Mockito.mock(MonsterController.class);
 
-        this.roomController = new RoomController(room, playerController);
+        this.roomController = new RoomController(room, playerController, monsterController);
     }
 
     @Test
@@ -37,5 +39,6 @@ class RoomControllerTest {
         roomController.step(game, action, frameCount);
         Mockito.verify(playerController, Mockito.times(1))
                 .step(game, action, frameCount);
+        Mockito.verify(monsterController, Mockito.times(1)).step(game, action, frameCount);
     }
 }

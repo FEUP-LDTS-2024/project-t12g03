@@ -11,11 +11,13 @@ import java.io.IOException;
 
 public class RoomController extends Controller<Room> {
     private final PlayerController playerController;
+    private final MonsterController monsterController;
 
-    public RoomController(Room room, PlayerController playerController) {
+    public RoomController(Room room, PlayerController playerController, MonsterController monsterController) {
         super(room);
 
         this.playerController = playerController;
+        this.monsterController = monsterController;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class RoomController extends Controller<Room> {
                 game.setState(new PauseMenuState(new PauseMenu(getModel())));
                 break;
             default:
+                monsterController.step(game, action, time);
                 playerController.step(game, action, time);
                 break;
         }

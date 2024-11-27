@@ -26,7 +26,7 @@ public class RoomBuilder {
         Room room = new Room(getWidth(), getHeight(), roomCode);
 
         room.setWalls(createWalls());
-        room.setMonsters(createMonsters());
+        room.setMonsters(createMonsters(room));
         room.setPlayer(createPlayer(player, room)); //probably going to change in the future;
 
         return room;
@@ -70,13 +70,13 @@ public class RoomBuilder {
         return walls;
     }
 
-    protected List<Monster> createMonsters() {
+    protected List<Monster> createMonsters(Room room) {
         List<Monster> monsters = new ArrayList<>();
 
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'M') monsters.add(new Monster(x,y));
+                if (line.charAt(x) == 'M') monsters.add(new Monster(x,y, room));
         }
 
         return monsters;
