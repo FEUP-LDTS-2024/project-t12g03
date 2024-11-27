@@ -31,9 +31,6 @@ public class PlayerController extends Controller<Room> {
             case RIGHT:
                 player.setPosition(player.moveRight());
                 break;
-            case QUIT:
-                game.setState(new PauseMenuState(new PauseMenu(getModel())));
-                break;
         }
     }
 }
