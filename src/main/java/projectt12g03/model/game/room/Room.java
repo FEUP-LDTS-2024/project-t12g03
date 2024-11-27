@@ -24,7 +24,16 @@ public class Room {
     }
 
     public boolean checkCollisions(Vector position) {
-        return checkWallCollision(position); //when we have more collisions it will look better
+        return checkWallCollision(position) && checkMonsterCollision(position); //when we have more collisions it will look better
+
+    }
+
+    public boolean checkMonsterCollision(Vector position) {
+        for (Monster monster : monsters) {
+            if (monster.getPosition().getX() == position.getX() && monster.getPosition().getY() == position.getY())
+                return false;
+        }
+        return true;
     }
 
     public boolean checkWallCollision(Vector position) {
