@@ -5,20 +5,20 @@ import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.PauseMenu;
-import projectt12g03.state.GameState;
 import projectt12g03.state.menuSate.PauseMenuState;
 
 import java.io.IOException;
 
-public class PlayerController extends Controller<Room> {
+public class PlayerController extends Controller<RoomManager> {
 
 
-    public PlayerController(Room model) { super(model); }
+    public PlayerController(RoomManager model) { super(model); }
 
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
-        Player player = getModel().getPlayer();
+        Player player = getModel().getRoom().getPlayer();
         switch (action) {
             case UP:
                 player.setPosition(player.moveUp());
@@ -33,6 +33,6 @@ public class PlayerController extends Controller<Room> {
                 player.setPosition(player.moveRight());
                 break;
         }
-        if (getModel().isAtTransition(player.getPosition()) != 0) new GameState()
+        if (getModel().getRoom().isAtTransition(player.getPosition()) != 0);
     }
 }

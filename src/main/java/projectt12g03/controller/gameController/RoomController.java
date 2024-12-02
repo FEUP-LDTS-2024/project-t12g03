@@ -4,17 +4,18 @@ import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.menuSate.PauseMenuState;
 
 import java.io.IOException;
 
-public class RoomController extends Controller<Room> {
+public class RoomController extends Controller<RoomManager> {
     private final PlayerController playerController;
     private final MonsterController monsterController;
 
-    public RoomController(Room room, PlayerController playerController, MonsterController monsterController) {
-        super(room);
+    public RoomController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController) {
+        super(roomManager);
 
         this.playerController = playerController;
         this.monsterController = monsterController;
@@ -24,7 +25,7 @@ public class RoomController extends Controller<Room> {
     public void step(Game game, GUI.userInput action, long time) throws IOException {
         switch (action) {
             case QUIT:
-                game.setState(new PauseMenuState(new PauseMenu(getModel())));
+                game.setState(new PauseMenuState(new PauseMenu(getModel().getRoom())));
                 break;
             default:
                 monsterController.step(game, action, time);

@@ -7,6 +7,7 @@ import projectt12g03.Game;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
 
@@ -15,17 +16,17 @@ import static org.mockito.Mockito.verify;
 
 class PlayerControllerTest {
     private Game game;
-    private Room room;
+    private RoomManager roomManger;
     private Player player;
     private PlayerController playerController;
 
     @BeforeEach
     public void setup() {
-        this.room = Mockito.mock(Room.class);
+        this.roomManger = Mockito.mock(RoomManager.class);
         this.player = Mockito.mock(Player.class);
-        Mockito.when(room.getPlayer()).thenReturn(player);
+        Mockito.when(roomManger.getRoom().getPlayer()).thenReturn(player);
         this.game = Mockito.mock(Game.class);
-        this.playerController = new PlayerController(room);
+        this.playerController = new PlayerController(roomManger);
     }
 
     @Test

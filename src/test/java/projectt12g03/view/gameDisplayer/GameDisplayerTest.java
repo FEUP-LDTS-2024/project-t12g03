@@ -10,6 +10,7 @@ import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomBuilder;
+import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.game.GameDisplayer;
 
 import java.io.IOException;
@@ -18,18 +19,16 @@ import java.util.Arrays;
 public class GameDisplayerTest {
     private GUI gui;
     private GameDisplayer displayer;
+    private RoomManager roomManager;
     private Room room;
-    private RoomBuilder roomBuilder;
     private Player player;
 
     @BeforeEach
     void setUp() throws IOException {
-        roomBuilder = new RoomBuilder(123);
         player = new Player(0, 0, null);
-        room = roomBuilder.createRoom(player);
-        player.setRoom(room);
+        room = roomManager.roomBuilder(123);
         gui = Mockito.mock(LanternaGui.class);
-        displayer = new GameDisplayer(room);
+        displayer = new GameDisplayer(roomManager);
 
         room.setPlayer(player);
         room.setWalls(Arrays.asList(new Wall(1,1),new Wall(2,2), new Wall(2,3)));

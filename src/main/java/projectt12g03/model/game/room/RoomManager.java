@@ -27,6 +27,8 @@ public class RoomManager {
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         this.lines = readLines(br);
+
+        roomBuilder(roomCode); //change in the future
     }
 
     public Room roomBuilder(Integer roomCode) throws IOException {
@@ -75,7 +77,7 @@ public class RoomManager {
 
     protected int getHeight() { return lines.size(); }
 
-    protected Room getRoom() { return room; }
+    public Room getRoom() { return room; }
 
     protected List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();

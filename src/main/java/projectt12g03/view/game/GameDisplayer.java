@@ -4,6 +4,7 @@ import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.Monster;
 import projectt12g03.model.game.elements.Wall;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.game.elements.MonsterDisplayer;
 import projectt12g03.view.game.elements.PlayerDisplayer;
@@ -11,11 +12,11 @@ import projectt12g03.view.game.elements.WallDisplayer;
 
 import java.io.IOException;
 
-public class GameDisplayer extends ScreenDisplayer<Room> {
+public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     private PlayerDisplayer playerDisplayer;
     private WallDisplayer wallDisplayer;
     private MonsterDisplayer monsterDisplayer;
-    public GameDisplayer(Room model) {
+    public GameDisplayer(RoomManager model) {
         super(model);
         playerDisplayer = new PlayerDisplayer();
         wallDisplayer = new WallDisplayer();
@@ -25,9 +26,9 @@ public class GameDisplayer extends ScreenDisplayer<Room> {
     @Override
     public void draw(GUI gui) throws IOException {
         gui.clear();
-        playerDisplayer.draw(getModel().getPlayer(), gui);
-        wallDisplayer.draw(getModel().getWalls(), gui);
-        monsterDisplayer.draw(getModel().getMonsters(), gui);
+        playerDisplayer.draw(getModel().getRoom().getPlayer(), gui);
+        wallDisplayer.draw(getModel().getRoom().getWalls(), gui);
+        monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui);
         gui.refresh();
     }
 }
