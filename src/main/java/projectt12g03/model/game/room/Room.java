@@ -6,6 +6,7 @@ import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
 
 import java.util.List;
+import java.util.Map;
 
 public class Room {
     private final int width;
@@ -14,7 +15,9 @@ public class Room {
 
     private Player player;
     private List<Wall> walls;
+    private Map<Integer, Wall> doors;
     private List<Monster> monsters;
+    private RoomManager roomManager;
 
     //hard coded for now for testing and implementing
     public Room(int width, int height, int roomCode) {
@@ -25,7 +28,6 @@ public class Room {
 
     public boolean checkCollisions(Vector position) {
         return checkWallCollision(position) || checkMonsterCollision(position);
-
     }
 
     public boolean checkMonsterCollisions(Vector position) { // repetitive code, find a way to make it look better
@@ -52,15 +54,28 @@ public class Room {
         return false;
     }
 
+    public int isAtTransition(Vector position) {
+        for (Map.Entry<Integer, Wall> entry : doors.entrySet()) {
+            Integer num = entry.getKey();
+            Wall wall = entry.getValue();
+            if(position.equals(wall.getPosition())) return num;
+        }
+        return 0;
+    }
+
     public Player getPlayer() { return player; }
 
     public List<Wall> getWalls() { return walls; }
+
+    public Map<Integer, Wall> getDoors() { return doors; }
 
     public List<Monster> getMonsters() { return monsters; }
 
     public void setPlayer(Player player) { this.player = player; }
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
+
+    public void setDoors(Map<Integer, Wall> doors) { this.doors = doors; }
 
     public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
 }

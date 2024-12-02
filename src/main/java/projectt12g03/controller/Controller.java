@@ -6,7 +6,7 @@ import projectt12g03.gui.LanternaGui;
 import java.io.IOException;
 
 public abstract class Controller<T> {
-    private final T model;
+    private T model;
 
     public Controller(T model) {
         this.model = model;
@@ -15,6 +15,8 @@ public abstract class Controller<T> {
     public T getModel() {
         return model;
     }
+
+    //public void setModel(T model) { this.model = model; } maybe we will need it in the future
 
     public abstract void step(Game game, LanternaGui.userInput action, long time) throws IOException;
 }

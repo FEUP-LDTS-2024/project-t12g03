@@ -6,6 +6,7 @@ import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.menu.PauseMenu;
+import projectt12g03.state.GameState;
 import projectt12g03.state.menuSate.PauseMenuState;
 
 import java.io.IOException;
@@ -32,5 +33,6 @@ public class PlayerController extends Controller<Room> {
                 player.setPosition(player.moveRight());
                 break;
         }
+        if (getModel().isAtTransition(player.getPosition()) != 0) new GameState()
     }
 }

@@ -10,6 +10,6 @@ import java.io.IOException;
 public class PlayerDisplayer {
 
     public void draw(Player player, GUI gui) {
-        gui.drawPlayer(player.getPosition(), 'P', new TextColor.RGB(85,201,81));
+        gui.drawText(player.getPosition(), "P", new TextColor.RGB(85,201,81));
     }
 }
