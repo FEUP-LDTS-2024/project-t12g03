@@ -5,22 +5,23 @@ import projectt12g03.controller.gameController.PlayerController;
 import projectt12g03.controller.gameController.RoomController;
 import projectt12g03.controller.Controller;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.game.GameDisplayer;
 import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 
-public class GameState extends State<Room> {
+public class GameState extends State<RoomManager> {
 
-    public GameState(Room model) throws IOException { super(model); }
+    public GameState(RoomManager model) throws IOException { super(model); }
 
     @Override
-    protected Controller<Room> getController() {
+    protected Controller<RoomManager> getController() {
         return new RoomController(getModel(), new PlayerController(getModel()), new MonsterController(getModel()));
     }
 
     @Override
-    protected ScreenDisplayer<Room> getScreenDisplayer() {
+    protected ScreenDisplayer<RoomManager> getScreenDisplayer() {
         return new GameDisplayer(getModel());
     }
 

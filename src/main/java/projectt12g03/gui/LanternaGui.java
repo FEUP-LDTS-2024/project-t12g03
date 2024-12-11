@@ -172,12 +172,12 @@ public class LanternaGui implements GUI {
         tg.putString((int) position.getX(), (int) position.getY(), "" + c);
     }
 
-    @Override
+    @Override   //used for tests
     public void drawWall(Vector position){ //may change
         drawCharacter(position,'#',new TextColor.RGB(255,255,255));
     }
 
-    @Override
+    @Override   //used for tests
     public void drawPlayer(Vector position, char design, TextColor color){ //will change when player becomes complex
         drawCharacter(position, design, color);
     }

@@ -5,18 +5,19 @@ import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.game.elements.Monster;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
 import java.util.Random;
 
-public class MonsterController extends Controller<Room> {
-    public MonsterController(Room model) { super(model); }
+public class MonsterController extends Controller<RoomManager> {
+    public MonsterController(RoomManager model) { super(model); }
 
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
         Random rand = new Random();
         if(time % game.getFps() == 0) {
-            for (Monster monster : getModel().getMonsters()) {
+            for (Monster monster : getModel().getRoom().getMonsters()) {
                 int direction = rand.nextInt(4);
 
                 switch (direction) {

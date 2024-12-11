@@ -1,16 +1,25 @@
 package projectt12g03.model.menu;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.room.Room;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PauseMenuTest {
+    private PauseMenu pauseMenu;
+    private Room room;
+
+    @BeforeEach
+    public void setUp() {
+        this.room = Mockito.mock(Room.class);
+        this.pauseMenu = new PauseMenu(room);
+    }
+
     @Test
     public void testMenuCreation() {
-        PauseMenu pauseMenu = new PauseMenu(Mockito.any());
-
         assertNotNull(pauseMenu);
         assertEquals(2, pauseMenu.getNumberEntries());
         assertEquals("resume", pauseMenu.getCurrentEntry());
@@ -18,8 +27,6 @@ class PauseMenuTest {
 
     @Test
     public void moveUpTest() {
-        PauseMenu pauseMenu = new PauseMenu(Mockito.any());
-
         pauseMenu.moveUp();
         assertEquals("exit", pauseMenu.getCurrentEntry());
         pauseMenu.moveUp();
@@ -32,8 +39,6 @@ class PauseMenuTest {
 
     @Test
     public void moveDownTest() {
-        PauseMenu pauseMenu = new PauseMenu(Mockito.any());
-
         pauseMenu.moveDown();
         assertEquals("exit", pauseMenu.getCurrentEntry());
         pauseMenu.moveDown();
@@ -46,8 +51,6 @@ class PauseMenuTest {
 
     @Test
     public void getEntryPositionTest() {
-        PauseMenu pauseMenu = new PauseMenu(Mockito.any());
-
         Vector position1 = pauseMenu.getEntryPosition("resume");
         Vector position2 = pauseMenu.getEntryPosition("exit");
 

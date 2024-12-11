@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
+import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
 
@@ -16,16 +18,21 @@ import static org.mockito.Mockito.verify;
 class PlayerControllerTest {
     private Game game;
     private Room room;
+    private RoomManager roomManager;
     private Player player;
     private PlayerController playerController;
 
     @BeforeEach
     public void setup() {
         this.room = Mockito.mock(Room.class);
+        this.roomManager = Mockito.mock(RoomManager.class);
         this.player = Mockito.mock(Player.class);
-        Mockito.when(room.getPlayer()).thenReturn(player);
         this.game = Mockito.mock(Game.class);
-        this.playerController = new PlayerController(room);
+        this.playerController = new PlayerController(roomManager);
+
+        Mockito.when(player.getPosition()).thenReturn(new Vector(5, 5));
+        Mockito.when(roomManager.getRoom()).thenReturn(room);
+        Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
     }
 
     @Test
