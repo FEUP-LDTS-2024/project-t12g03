@@ -13,6 +13,7 @@ import java.io.IOException;
 
 class RoomControllerTest {
     private Game game;
+    private Room room;
     private RoomController roomController;
     private RoomManager roomManager;
     private PlayerController playerController;
@@ -21,9 +22,12 @@ class RoomControllerTest {
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
+        this.room = Mockito.mock((Room.class));
         this.roomManager = Mockito.mock(RoomManager.class);
 
         Player player = Mockito.mock(Player.class);
+
+        Mockito.when(roomManager.getRoom()).thenReturn(room);
         Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);

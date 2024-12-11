@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
+import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
@@ -16,17 +17,22 @@ import static org.mockito.Mockito.verify;
 
 class PlayerControllerTest {
     private Game game;
-    private RoomManager roomManger;
+    private Room room;
+    private RoomManager roomManager;
     private Player player;
     private PlayerController playerController;
 
     @BeforeEach
     public void setup() {
-        this.roomManger = Mockito.mock(RoomManager.class);
+        this.room = Mockito.mock(Room.class);
+        this.roomManager = Mockito.mock(RoomManager.class);
         this.player = Mockito.mock(Player.class);
-        Mockito.when(roomManger.getRoom().getPlayer()).thenReturn(player);
         this.game = Mockito.mock(Game.class);
-        this.playerController = new PlayerController(roomManger);
+        this.playerController = new PlayerController(roomManager);
+
+        Mockito.when(player.getPosition()).thenReturn(new Vector(5, 5));
+        Mockito.when(roomManager.getRoom()).thenReturn(room);
+        Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
     }
 
     @Test

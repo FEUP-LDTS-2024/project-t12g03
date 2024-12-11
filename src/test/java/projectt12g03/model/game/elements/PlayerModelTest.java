@@ -19,97 +19,108 @@ public class PlayerModelTest {
     @BeforeEach
     void setup() {
         room = mock(Room.class);
-        player = new Player(0, 0, room);
-        player.setPosition(new Vector(2, 1));
+        player = new Player(2, 1, room);
     }
 
     @Test
     void moveLeftCanMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(true);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(false);
 
         Vector position = player.moveLeft();
 
         assertEquals(1, position.getX());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void moveLeftCantMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(false);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(true);
 
         Vector position = player.moveLeft();
 
         assertEquals(2, position.getX());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void moveRightCanMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(true);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(false);
 
         Vector position = player.moveRight();
 
         assertEquals(3, position.getX());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void moveRightCantMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(false);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(true);
 
         Vector position = player.moveRight();
 
         assertEquals(2, position.getX());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void moveUpCanMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(true);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(false);
 
         Vector position = player.moveUp();
 
         assertEquals(0, position.getY());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void moveUpCantMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(false);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(true);
 
         Vector position = player.moveUp();
 
         assertEquals(1, position.getY());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void moveDownCanMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(true);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(false);
 
         Vector position = player.moveDown();
 
         assertEquals(2, position.getY());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void moveDownCantMove() {
-        when(player.canMove(any(Vector.class))).thenReturn(false);
+        when(room.checkCollisions(any(Vector.class))).thenReturn(true);
 
         Vector position = player.moveDown();
 
         assertEquals(1, position.getY());
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void canMoveHappen() {
-        when(room.checkCollisions(any(Vector.class))).thenReturn(false);
+        Vector testPosition = new Vector(2, 2);
+        when(room.checkCollisions(testPosition)).thenReturn(false);
 
-        Boolean fountObstacle = player.canMove(any(Vector.class));
+        Boolean canMove = player.canMove(testPosition);
 
-        assertEquals(false, fountObstacle);
+        assertEquals(true, canMove);
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 
     @Test
     void canMoveNotHappen() {
-        when(room.checkCollisions(any(Vector.class))).thenReturn(false);
+        Vector testPosition = new Vector(2, 2);
+        when(room.checkCollisions(testPosition)).thenReturn(true);
 
-        Boolean foundObstacle = player.canMove(any(Vector.class));
+        Boolean canMove = player.canMove(testPosition);
 
-        assertEquals(false, foundObstacle);
+        assertEquals(false, canMove);
+        verify(room, times(1)).checkCollisions(any(Vector.class));
     }
 }

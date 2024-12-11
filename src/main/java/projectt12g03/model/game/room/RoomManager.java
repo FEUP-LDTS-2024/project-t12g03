@@ -23,7 +23,7 @@ public class RoomManager {
 
     public RoomManager() throws IOException {
 
-        URL resource = RoomBuilder.class.getResource("/rooms/room" + roomCode + ".lvl");
+        URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         this.lines = readLines(br);
@@ -34,12 +34,12 @@ public class RoomManager {
     public Room roomBuilder(Integer roomCode) throws IOException {
         this.roomCode = roomCode;
         if(!roomsMap.containsKey(roomCode)) {
-            URL resource = RoomBuilder.class.getResource("/rooms/room" + roomCode + ".lvl");
+            URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
             this.lines = readLines(br);
 
-            this.room = createRoom(new Player(0, 0, null));
+            this.room = createRoom(new Player(0, 0, null)); // change (maybe keep track of the player after first creation)
         }
         else {
             this.room = roomsMap.get(roomCode);
@@ -132,6 +132,6 @@ public class RoomManager {
                 }
             }
         }
-        throw new IllegalStateException("Player not found within the level file!");
+        throw new IllegalStateException("Player not found within the room file!");
     }
 }

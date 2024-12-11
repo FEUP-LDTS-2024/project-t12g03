@@ -32,11 +32,12 @@ class GameStateTest {
         this.gameController = Mockito.mock(Controller.class);
         this.gameDisplayer = Mockito.mock(ScreenDisplayer.class);
 
-        this.state = new GameState(roomManager){
+        this.state = new GameState(roomManager) {
             @Override
             protected ScreenDisplayer<RoomManager> getScreenDisplayer() {
                 return gameDisplayer;
             }
+
             @Override
             protected Controller<RoomManager> getController() {
                 return gameController;
@@ -48,12 +49,13 @@ class GameStateTest {
     @Test
     public void stepTest() throws IOException {
         long time = 0;
+
+
         Mockito.when(gui.getNextUserInput()).thenReturn(GUI.userInput.NONE);
 
         state.step(game, gui, time);
 
-        Mockito.verify(game, Mockito.times(1))
-                .setKeySpam(true);
+        Mockito.verify(game, Mockito.times(1)).setKeySpam(true);
         Mockito.verify(gui, Mockito.times(1)).getNextUserInput();
         Mockito.verify(state.getController(), Mockito.times(1))
                 .step(game, GUI.userInput.NONE, time);

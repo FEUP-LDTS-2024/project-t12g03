@@ -7,10 +7,19 @@ import java.security.PublicKey;
 
 public abstract class Movable extends Element {
     public Room room;
+    public int velocity;
 
     public Movable(double x, double y, Room room) {
         super(x,y);
         this.room = room;
+    }
+
+    public int getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(int v) {
+        this.velocity = v;
     }
 
     public Vector moveUp() {

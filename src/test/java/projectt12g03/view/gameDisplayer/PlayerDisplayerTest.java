@@ -26,6 +26,6 @@ public class PlayerDisplayerTest {
     @Test
     void drawPlayer() throws IOException {
         displayer.draw(player, gui);
-        Mockito.verify(gui,Mockito.times(1)).drawPlayer(player.getPosition(),'P', new TextColor.RGB(85,201,81));
+        Mockito.verify(gui,Mockito.times(1)).drawText(player.getPosition(), "P", new TextColor.RGB(85,201,81));
     }
 }

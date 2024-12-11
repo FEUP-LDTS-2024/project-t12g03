@@ -79,7 +79,7 @@ public class Room {
 
     public List<Wall> getWalls() { return walls; }
 
-    public Map<Integer, List<Wall>> getDoors() { return doors; }
+    public Map<Integer, List<Wall>> getDoors() { return doors; }    //make a class for it
 
     public List<Monster> getMonsters() { return monsters; }
 
