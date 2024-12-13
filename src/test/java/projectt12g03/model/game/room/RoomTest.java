@@ -113,8 +113,8 @@ class RoomTest {
         List<Door> door = new ArrayList<>();
         door.add(new Door(7, 7, 1));
 
-        assertEquals(1, room.getDoor(new Vector(7, 7)));
-        assertEquals(0, room.getDoor(new Vector(8, 8)));
+        assertEquals(1, room.getDoorNumber(new Vector(7, 7)));
+        assertEquals(0, room.getDoorNumber(new Vector(8, 8)));
     }
 
     @Test

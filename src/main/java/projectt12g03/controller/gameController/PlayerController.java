@@ -58,7 +58,7 @@ public class PlayerController extends Controller<RoomManager> {
 
         if (checkPosition != null) {
             if (getModel().getRoom().isAtTransition(checkPosition)) {
-                getModel().roomBuilder(getModel().getRoom().getDoor(checkPosition));
+                getModel().roomBuilder(getModel().getRoom().getDoorNumber(checkPosition));
             }
         }
     }
