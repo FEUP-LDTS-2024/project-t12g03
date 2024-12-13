@@ -1,5 +1,6 @@
 package projectt12g03.model.game.room;
 
+import projectt12g03.model.game.elements.Door;
 import projectt12g03.model.game.elements.Monster;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
@@ -91,24 +92,19 @@ public class RoomManager {
         return walls;
     }
 
-    protected Map<Integer, List<Wall>> createDoors() {
-        Map<Integer, List<Wall>> doorsMap = new HashMap<>();
+    protected List<Door> createDoors() {
+        List<Door> doors = new ArrayList<>();
+
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            int n;
             for (int x = 0; x < line.length(); x++) {
                 if (isDigit(line.charAt(x))) {
-                    n = line.charAt(x) - '0';
-                    if(doorsMap.containsKey(n) && n != 0) doorsMap.get(n).add(new Wall(x,y));
-                    else if ((!doorsMap.containsKey(n)) && n != 0) {
-                        doorsMap.put(n, new ArrayList<>());
-                        doorsMap.get(n).add(new Wall(x,y));
-                    }
+                    int n = line.charAt(x) - '0';
+                    doors.add(new Door(x, y, n));
                 }
             }
         }
-
-        return doorsMap;
+        return doors;
     }
 
     protected List<Monster> createMonsters(Room room) {

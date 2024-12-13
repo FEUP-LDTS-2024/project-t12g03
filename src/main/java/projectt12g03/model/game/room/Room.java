@@ -1,12 +1,12 @@
 package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.Door;
 import projectt12g03.model.game.elements.Monster;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
 
 import java.util.List;
-import java.util.Map;
 
 public class Room {
     private final int width;
@@ -14,7 +14,7 @@ public class Room {
 
     private Player player;
     private List<Wall> walls;
-    private Map<Integer, List<Wall>> doors;
+    private List<Door> doors;
     private List<Monster> monsters;
 
     public Room(int width, int height) {
@@ -60,22 +60,17 @@ public class Room {
     }
 
     public boolean isAtTransition(Vector position) {
-        for (Map.Entry<Integer, List<Wall>> entry : doors.entrySet()) {
-            List<Wall> doors = entry.getValue();
-            for(Wall door : doors) {
-                if(position.equals(door.getPosition())) return true;
-            }
+        for (Door door : doors) {
+            if (door.getPosition().equals(position))
+                return true;
         }
         return false;
     }
 
     public int getDoor(Vector position) {
-        for (Map.Entry<Integer, List<Wall>> entry : doors.entrySet()) {
-            Integer num = entry.getKey();
-            List<Wall> doors = entry.getValue();
-            for(Wall door : doors) {
-                if(position.equals(door.getPosition())) return num;
-            }
+        for (Door door : doors) {
+            if (door.getPosition().equals(position))
+                return door.getNumber();
         }
         return 0;
     }
@@ -84,7 +79,7 @@ public class Room {
 
     public List<Wall> getWalls() { return walls; }
 
-    public Map<Integer, List<Wall>> getDoors() { return doors; }    //make a class for it
+    public List<Door> getDoors() { return doors; }
 
     public List<Monster> getMonsters() { return monsters; }
 
@@ -92,7 +87,7 @@ public class Room {
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
 
-    public void setDoors(Map<Integer, List<Wall>> doors) { this.doors = doors; }
+    public void setDoors(List<Door> doors) { this.doors = doors; }
 
     public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
 }
