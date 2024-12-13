@@ -11,23 +11,23 @@ import java.util.Map;
 public class Room {
     private final int width;
     private final int height;
-    private final int roomCode;
 
     private Player player;
     private List<Wall> walls;
     private Map<Integer, List<Wall>> doors;
     private List<Monster> monsters;
-    private RoomManager roomManager;
 
-    //hard coded for now for testing and implementing
-    public Room(int width, int height, int roomCode) {
+    public Room(int width, int height) {
         this.width = width;
         this.height = height;
-        this.roomCode = roomCode;
     }
 
     public boolean checkCollisionsForPlayer(Vector position) {
         return checkWallCollision(position) || checkDamage(position) || isAtTransition(position);
+    }
+
+    public boolean checkCollisionsForMonster(Vector position) {
+        return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position) || isAtTransition(position);
     }
 
     public boolean checkDamage(Vector position){
@@ -37,10 +37,6 @@ public class Room {
             player.setImmunity(15);
         }
         return monsterCollision;
-    }
-
-    public boolean checkCollisionsForMonster(Vector position) { // repetitive code, find a way to make it look better
-        return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position);
     }
 
     public boolean checkPlayerCollision(Vector position) {

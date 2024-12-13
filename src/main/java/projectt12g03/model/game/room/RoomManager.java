@@ -39,7 +39,7 @@ public class RoomManager {
 
             this.lines = readLines(br);
 
-            this.room = createRoom(new Player(0, 0, null)); // change (maybe keep track of the player after first creation)
+            this.room = createRoom();
         }
         else {
             this.room = roomsMap.get(roomCode);
@@ -48,8 +48,8 @@ public class RoomManager {
         return room;
     }
 
-    public Room createRoom(Player player) {
-        Room room = new Room(getWidth(), getHeight(), roomCode);
+    public Room createRoom() {
+        Room room = new Room(getWidth(), getHeight());
 
         room.setWalls(createWalls());
         room.setDoors(createDoors());

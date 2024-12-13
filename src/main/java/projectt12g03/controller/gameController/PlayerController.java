@@ -18,38 +18,48 @@ public class PlayerController extends Controller<RoomManager> {
 
     public PlayerController(RoomManager model) { super(model); }
 
-    //A LOT OF HARDCODE NEEDS TO BE REDONE
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
         Player player = getModel().getRoom().getPlayer();
+        Vector checkPosition = null;
 
         if (player.getImmunity() > 0) player.reduceImmunity();
 
         switch (action) {
             case UP:
-                player.setPosition(player.moveUp());
-                if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX(), player.getPosition().getY()-1))) {
-                    getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX(), player.getPosition().getY()-1)));
-                }
+                if(player.canMove(player.moveUp()))
+                    player.setPosition(player.moveUp());
+
+                else checkPosition = player.moveUp();
+
                 break;
             case DOWN:
-                player.setPosition(player.moveDown());
-                if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX(), player.getPosition().getY()+1))) {
-                    getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX(), player.getPosition().getY()+1)));
-                }
+                if(player.canMove(player.moveDown()))
+                    player.setPosition(player.moveDown());
+
+                else checkPosition = player.moveDown();
+
                 break;
             case LEFT:
-                player.setPosition(player.moveLeft());
-                if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX()-1, player.getPosition().getY()))) {
-                    getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX()-1, player.getPosition().getY())));
-                }
+                if(player.canMove(player.moveLeft()))
+                    player.setPosition(player.moveLeft());
+
+                else checkPosition = player.moveLeft();
+
                 break;
             case RIGHT:
-                player.setPosition(player.moveRight());
-                if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX()+1, player.getPosition().getY()))) {
-                    getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX()+1, player.getPosition().getY())));
-                }
+                if(player.canMove(player.moveRight()))
+                    player.setPosition(player.moveRight());
+
+                else checkPosition = player.moveRight();
+
                 break;
+        }
+
+        if (checkPosition != null) {
+            if (getModel().getRoom().isAtTransition(checkPosition)) {
+                getModel().roomBuilder(getModel().getRoom().getDoor(checkPosition));
+            }
         }
     }
 }
