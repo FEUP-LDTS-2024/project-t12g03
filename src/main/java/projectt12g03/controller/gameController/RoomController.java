@@ -6,6 +6,7 @@ import projectt12g03.gui.GUI;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.menuSate.PauseMenuState;
+import projectt12g03.model.game.elements.Player;
 
 import java.io.IOException;
 
@@ -22,6 +23,8 @@ public class RoomController extends Controller<RoomManager> {
 
     @Override
     public void step(Game game, GUI.userInput action, long time) throws IOException {
+        Player player = getModel().getRoom().getPlayer();
+
         switch (action) {
             case QUIT:
                 game.setState(new PauseMenuState(new PauseMenu(getModel().getRoom())));
@@ -31,5 +34,6 @@ public class RoomController extends Controller<RoomManager> {
                 playerController.step(game, action, time);
                 break;
         }
+        if (player.getHealth() == 0) game.popState();
     }
 }

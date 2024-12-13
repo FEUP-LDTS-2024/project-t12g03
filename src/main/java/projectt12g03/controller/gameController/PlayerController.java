@@ -22,6 +22,9 @@ public class PlayerController extends Controller<RoomManager> {
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
         Player player = getModel().getRoom().getPlayer();
+
+        if (player.getImmunity() > 0) player.reduceImmunity();
+
         switch (action) {
             case UP:
                 player.setPosition(player.moveUp());

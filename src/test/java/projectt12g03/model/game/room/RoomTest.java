@@ -34,7 +34,7 @@ class RoomTest {
     }
 
     @Test
-    void testCheckCollisionsNoCollisions() {
+    void testCheckCollisionsNoCollisionsForPlayer() {
 
         walls.add(new Wall(3, 3));
         monsters.add(new Monster(1, 2, room));
@@ -43,35 +43,35 @@ class RoomTest {
         doors.put(1, doorWalls);
 
 
-        assertFalse(room.checkCollisions(new Vector(5, 5)));
+        assertFalse(room.checkCollisionsForPlayer(new Vector(5, 5)));
     }
 
     @Test
-    void testCheckCollisionsWithWall() {
+    void testCheckCollisionsForPlayerWithWall() {
         walls.add(new Wall(3, 3));
-        assertTrue(room.checkCollisions(new Vector(3, 3)));
+        assertTrue(room.checkCollisionsForPlayer(new Vector(3, 3)));
     }
 
     @Test
-    void testCheckCollisionsWithMonster() {
+    void testCheckCollisionsForPlayerWithMonster() {
         Monster monster = mock(Monster.class);
         when(monster.getPosition()).thenReturn(new Vector(4, 4));
         monsters.add(monster);
 
-        assertTrue(room.checkCollisions(new Vector(4, 4)));
+        assertTrue(room.checkCollisionsForPlayer(new Vector(4, 4)));
     }
 
     @Test
-    void testCheckCollisionsWithTransition() {
+    void testCheckCollisionsForPlayerWithTransition() {
         List<Wall> doorWalls = new ArrayList<>();
         doorWalls.add(new Wall(8, 8));
         doors.put(1, doorWalls);
 
-        assertTrue(room.checkCollisions(new Vector(8, 8)));
+        assertTrue(room.checkCollisionsForPlayer(new Vector(8, 8)));
     }
 
     @Test
-    void testCheckMonsterCollisions() {
+    void testCheckCollisionsForMonster() {
         Monster monster1 = mock(Monster.class);
         Monster monster2 = mock(Monster.class);
         when(monster1.getPosition()).thenReturn(new Vector(3, 3));
@@ -79,9 +79,9 @@ class RoomTest {
         monsters.add(monster1);
         monsters.add(monster2);
 
-        assertTrue(room.checkMonsterCollisions(new Vector(3, 3)));
-        assertTrue(room.checkMonsterCollisions(new Vector(4, 4)));
-        assertFalse(room.checkMonsterCollisions(new Vector(5, 5)));
+        assertTrue(room.checkCollisionsForMonster(new Vector(3, 3)));
+        assertTrue(room.checkCollisionsForMonster(new Vector(4, 4)));
+        assertFalse(room.checkCollisionsForMonster(new Vector(5, 5)));
     }
 
     @Test

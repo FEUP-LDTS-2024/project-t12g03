@@ -26,11 +26,20 @@ public class Room {
         this.roomCode = roomCode;
     }
 
-    public boolean checkCollisions(Vector position) {
-        return checkWallCollision(position) || checkMonsterCollision(position) || isAtTransition(position);
+    public boolean checkCollisionsForPlayer(Vector position) {
+        return checkWallCollision(position) || checkDamage(position) || isAtTransition(position);
     }
 
-    public boolean checkMonsterCollisions(Vector position) { // repetitive code, find a way to make it look better
+    public boolean checkDamage(Vector position){
+        boolean monsterCollision =  checkMonsterCollision(position);
+        if (monsterCollision && player.getImmunity() == 0){
+            player.reducedHealth();
+            player.setImmunity(15);
+        }
+        return monsterCollision;
+    }
+
+    public boolean checkCollisionsForMonster(Vector position) { // repetitive code, find a way to make it look better
         return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position);
     }
 

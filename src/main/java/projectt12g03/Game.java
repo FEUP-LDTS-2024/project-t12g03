@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 public class Game {
-    public static final int FPS = 30;
+    public static final int FPS = 15;
     public static final int terminalWidth = 40;
     public static final int terminalHeight = 20;
     private static final String windowName = "GAME";
