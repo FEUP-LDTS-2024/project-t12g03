@@ -3,8 +3,6 @@ package projectt12g03.model.game.elements;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.room.Room;
 
-import java.security.PublicKey;
-
 public abstract class Movable extends Element {
     public Room room;
     private int velocity;
@@ -25,7 +23,7 @@ public abstract class Movable extends Element {
 
     public int getHealth(){ return  health;}
 
-    public void reducedHealth(){ this.health--;}
+    public void reduceHealth(){ this.health--;}
 
     public void increaseHealth(){ this.health++;}
 

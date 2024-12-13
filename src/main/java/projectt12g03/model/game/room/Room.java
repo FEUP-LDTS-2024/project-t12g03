@@ -5,6 +5,7 @@ import projectt12g03.model.game.elements.Monster;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,10 +34,22 @@ public class Room {
     public boolean checkDamage(Vector position){
         boolean monsterCollision =  checkMonsterCollision(position);
         if (monsterCollision && player.getImmunity() == 0){
-            player.reducedHealth();
+            player.reduceHealth();
             player.setImmunity(15);
         }
         return monsterCollision;
+    }
+
+    public void checkAttackCollision(ArrayList<Vector> positions){
+        for (Vector position : positions){
+            for (Monster monster : monsters){
+                if (monster.getPosition().equals(position)){
+                    monster.reduceHealth();
+                    if(monster.getHealth() == 0) monsters.remove(monster);
+                    return;
+                }
+            }
+        }
     }
 
     public boolean checkCollisionsForMonster(Vector position) { // repetitive code, find a way to make it look better
