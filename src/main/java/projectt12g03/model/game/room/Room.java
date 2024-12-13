@@ -1,18 +1,17 @@
 package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Door;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.elements.*;
 
 import java.util.List;
 
 public class Room {
-    private final int width;
-    private final int height;
+    private int width;
+    private int height;
 
     private Player player;
+    private Chest chest;
+    private Key key;
     private List<Wall> walls;
     private List<Door> doors;
     private List<Monster> monsters;
@@ -23,11 +22,19 @@ public class Room {
     }
 
     public boolean checkCollisionsForPlayer(Vector position) {
-        return checkWallCollision(position) || checkDamage(position) || isAtTransition(position);
+        if (checkKeyCollision(position)) {
+            setKey(null);
+            chest.foundKey();
+            return false;
+        }
+
+        return checkWallCollision(position) || checkDamage(position) ||
+                isAtTransition(position) || checkChestCollision(position);
     }
 
     public boolean checkCollisionsForMonster(Vector position) {
-        return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position) || isAtTransition(position);
+        return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position) ||
+                isAtTransition(position) || checkKeyCollision(position) || checkChestCollision(position);
     }
 
     public boolean checkDamage(Vector position){
@@ -59,6 +66,14 @@ public class Room {
         return false;
     }
 
+    public boolean checkKeyCollision(Vector position) {
+        if (key == null) return false;
+
+        return position.equals(key.getPosition());
+    }
+
+    public boolean checkChestCollision(Vector position) { return position.equals(chest.getPosition()); }
+
     public boolean isAtTransition(Vector position) {
         for (Door door : doors) {
             if (door.getPosition().equals(position))
@@ -67,7 +82,7 @@ public class Room {
         return false;
     }
 
-    public int getDoor(Vector position) {
+    public int getDoorNumber(Vector position) {
         for (Door door : doors) {
             if (door.getPosition().equals(position))
                 return door.getNumber();
@@ -81,7 +96,15 @@ public class Room {
 
     public List<Door> getDoors() { return doors; }
 
+    public Chest getChest() { return chest; }
+
+    public Key getKey() { return key; }
+
     public List<Monster> getMonsters() { return monsters; }
+
+    public int getWidth() { return width; }
+
+    public int getHeight() { return height; }
 
     public void setPlayer(Player player) { this.player = player; }
 
@@ -89,5 +112,13 @@ public class Room {
 
     public void setDoors(List<Door> doors) { this.doors = doors; }
 
+    public void setChest(Chest chest) { this.chest = chest; }
+
+    public void setKey(Key key) { this.key = key; }
+
     public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
+
+    public void setWidth(int width) { this.width = width; }
+
+    public void setHeight(int height) { this.height = height; }
 }

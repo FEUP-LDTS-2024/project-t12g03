@@ -1,9 +1,6 @@
 package projectt12g03.model.game.room;
 
-import projectt12g03.model.game.elements.Door;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.elements.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,7 +29,7 @@ public class RoomManager {
         roomBuilder(roomCode); //change in the future
     }
 
-    public Room roomBuilder(Integer roomCode) throws IOException {
+    public void roomBuilder(Integer roomCode) throws IOException {
         this.roomCode = roomCode;
         if(!roomsMap.containsKey(roomCode)) {
             URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
@@ -46,7 +43,8 @@ public class RoomManager {
             this.room = roomsMap.get(roomCode);
         }
 
-        return room;
+        room.setHeight(getHeight());
+        room.setWidth(getWidth());
     }
 
     public Room createRoom() {
@@ -54,6 +52,8 @@ public class RoomManager {
 
         room.setWalls(createWalls());
         room.setDoors(createDoors());
+        room.setChest(createChest());
+        room.setKey(createKey());
         room.setMonsters(createMonsters(room));
         room.setPlayer(createPlayer(room));
 
@@ -105,6 +105,30 @@ public class RoomManager {
             }
         }
         return doors;
+    }
+
+    protected Chest createChest() {
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'C') {
+                    return new Chest(x, y);
+                }
+            }
+        }
+        throw new IllegalStateException("Chest not found within the room file!");
+    }
+
+    protected Key createKey() {
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'K') {
+                    return new Key(x, y);
+                }
+            }
+        }
+        throw new IllegalStateException("Key not found within the room file!");
     }
 
     protected List<Monster> createMonsters(Room room) {
