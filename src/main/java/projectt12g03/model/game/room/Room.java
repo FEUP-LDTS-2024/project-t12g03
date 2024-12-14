@@ -99,6 +99,28 @@ public class Room {
         return 0;
     }
 
+    public int getLaserRange(Laser laser){
+        int range = 0;
+        double pos = laser.getPosition().getX();
+        switch (laser.getDirection()){
+            case "RIGHT":
+                pos++;
+                while (!checkCollisionsForMonster(new Vector(pos,laser.getPosition().getY()))){
+                    range++;
+                    pos++;
+                }
+                break;
+            case "LEFT":
+                pos--;
+                while (!checkCollisionsForMonster(new Vector(pos,laser.getPosition().getY()))){
+                    range++;
+                    pos--;
+                }
+                break;
+        }
+        return range;
+    }
+
     public Player getPlayer() { return player; }
 
     public List<Wall> getWalls() { return walls; }

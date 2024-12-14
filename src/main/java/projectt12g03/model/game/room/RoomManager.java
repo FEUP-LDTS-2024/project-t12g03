@@ -138,16 +138,15 @@ public class RoomManager {
     }
 
     protected List<Laser> createLasers(Room room){
-        List<Laser> lasers = new ArrayList<>();
+        List<Laser> lasers = new ArrayList<Laser>();
 
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'L') lasers.add(new Laser(x, y, "RIGHT"));
-                if (line.charAt(x) == 'J') lasers.add(new Laser(x, y, "LEFT"));
+                if (line.charAt(x) == 'L') lasers.add(new Laser(x, y, "RIGHT", room));
+                if (line.charAt(x) == 'J') lasers.add(new Laser(x, y, "LEFT", room ));
             }
         }
-
         return lasers;
     }
 }

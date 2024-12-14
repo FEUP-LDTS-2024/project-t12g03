@@ -1,5 +1,7 @@
 package projectt12g03.model.game.elements;
 
+import projectt12g03.model.game.room.Room;
+
 public class Laser extends Element{
     private int ACTIVE_TIME = 15;
     private int REST_TIME = 45;
@@ -7,12 +9,14 @@ public class Laser extends Element{
     private String direction;
     private int active;
     private int resting;
+    private Room room;
 
-    public Laser(double x, double y,String direction) {
+    public Laser(double x, double y,String direction, Room room) {
         super(x, y);
         setDirection(direction);
         setActive(0);
         setResting(REST_TIME);
+        this.room = room;
     }
 
     public String getDirection() {return direction;}
@@ -35,8 +39,12 @@ public class Laser extends Element{
         if(name == "ACTIVE"){
             setActive(ACTIVE_TIME);
         }
-        if(name == "Resting"){
+        if(name == "RESTING"){
             setResting(REST_TIME);
         }
+    }
+
+    public int getRange(){
+        return room.getLaserRange(this);
     }
 }

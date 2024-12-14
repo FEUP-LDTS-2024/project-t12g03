@@ -6,6 +6,7 @@ import projectt12g03.model.game.elements.Wall;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
+import projectt12g03.view.game.elements.LaserDisplayer;
 import projectt12g03.view.game.elements.MonsterDisplayer;
 import projectt12g03.view.game.elements.PlayerDisplayer;
 import projectt12g03.view.game.elements.WallDisplayer;
@@ -16,11 +17,13 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     private PlayerDisplayer playerDisplayer;
     private WallDisplayer wallDisplayer;
     private MonsterDisplayer monsterDisplayer;
+    private LaserDisplayer laserDisplayer;
     public GameDisplayer(RoomManager model) {
         super(model);
         playerDisplayer = new PlayerDisplayer();
         wallDisplayer = new WallDisplayer();
         monsterDisplayer = new MonsterDisplayer();
+        laserDisplayer = new LaserDisplayer();
     }
 
     @Override
@@ -29,6 +32,7 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         playerDisplayer.draw(getModel().getRoom().getPlayer(), gui);
         wallDisplayer.draw(getModel().getRoom().getWalls(), gui);
         monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui);
+        laserDisplayer.draw(getModel().getRoom().getLasers(),gui);
         gui.refresh();
     }
 }

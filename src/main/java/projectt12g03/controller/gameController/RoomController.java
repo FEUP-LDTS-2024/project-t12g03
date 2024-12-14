@@ -35,6 +35,7 @@ public class RoomController extends Controller<RoomManager> {
             default:
                 monsterController.step(game, action, time);
                 playerController.step(game, action, time);
+                laserController.step(game,action,time);
                 break;
         }
         if (player.getHealth() == 0) game.popState();
