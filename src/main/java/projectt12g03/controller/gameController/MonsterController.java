@@ -3,8 +3,7 @@ package projectt12g03.controller.gameController;
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;

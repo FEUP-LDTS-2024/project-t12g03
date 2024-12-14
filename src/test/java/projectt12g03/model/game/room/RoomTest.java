@@ -3,9 +3,10 @@ package projectt12g03.model.game.room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.elements.stationary.Door;
+import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.stationary.Wall;
 
 import java.util.*;
 
@@ -17,15 +18,15 @@ class RoomTest {
     private Player player;
     private List<Wall> walls;
     private List<Monster> monsters;
-    private Map<Integer, List<Wall>> doors;
+    private List<Door> doors;
 
     @BeforeEach
     void setup() {
-        room = new Room(10, 10, 1);
+        room = new Room(10, 10);
         player = mock(Player.class);
         walls = new ArrayList<>();
         monsters = new ArrayList<>();
-        doors = new HashMap<>();
+        doors = new ArrayList<>();
 
         room.setPlayer(player);
         room.setWalls(walls);
@@ -38,10 +39,8 @@ class RoomTest {
 
         walls.add(new Wall(3, 3));
         monsters.add(new Monster(1, 2, room));
-        List<Wall> doorWalls = new ArrayList<>();
-        doorWalls.add(new Wall(8, 8));
-        doors.put(1, doorWalls);
-
+        List<Door> door = new ArrayList<>();
+        door.add(new Door(8, 8, 1));
 
         assertFalse(room.checkCollisionsForPlayer(new Vector(5, 5)));
     }
@@ -63,9 +62,8 @@ class RoomTest {
 
     @Test
     void testCheckCollisionsForPlayerWithTransition() {
-        List<Wall> doorWalls = new ArrayList<>();
-        doorWalls.add(new Wall(8, 8));
-        doors.put(1, doorWalls);
+        List<Door> door = new ArrayList<>();
+        door.add(new Door(8, 8, 1));
 
         assertTrue(room.checkCollisionsForPlayer(new Vector(8, 8)));
     }
@@ -103,9 +101,8 @@ class RoomTest {
 
     @Test
     void testIsAtTransition() {
-        List<Wall> doorWalls = new ArrayList<>();
-        doorWalls.add(new Wall(7, 7));
-        doors.put(1, doorWalls);
+        List<Door> door = new ArrayList<>();
+        door.add(new Door(7, 7, 1));
 
         assertTrue(room.isAtTransition(new Vector(7, 7)));
         assertFalse(room.isAtTransition(new Vector(8, 8)));
@@ -113,19 +110,11 @@ class RoomTest {
 
     @Test
     void testGetDoor() {
-        List<Wall> doorWalls = new ArrayList<>();
-        doorWalls.add(new Wall(7, 7));
-        doors.put(1, doorWalls);
+        List<Door> door = new ArrayList<>();
+        door.add(new Door(7, 7, 1));
 
-        assertEquals(1, room.getDoor(new Vector(7, 7)));
-        assertEquals(0, room.getDoor(new Vector(8, 8)));
-    }
-
-    @Test
-    void testSetAndGetPlayer() {
-        Player newPlayer = mock(Player.class);
-        room.setPlayer(newPlayer);
-        assertEquals(newPlayer, room.getPlayer());
+        assertEquals(1, room.getDoorNumber(new Vector(7, 7)));
+        assertEquals(0, room.getDoorNumber(new Vector(8, 8)));
     }
 
     @Test
@@ -144,7 +133,7 @@ class RoomTest {
 
     @Test
     void testSetAndGetDoors() {
-        Map<Integer, List<Wall>> newDoors = new HashMap<>();
+        List<Door> newDoors = new ArrayList<>();
         room.setDoors(newDoors);
         assertEquals(newDoors, room.getDoors());
     }

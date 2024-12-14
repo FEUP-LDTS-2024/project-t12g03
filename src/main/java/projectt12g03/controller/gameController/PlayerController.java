@@ -4,12 +4,8 @@ import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.room.RoomManager;
-import projectt12g03.model.menu.PauseMenu;
-import projectt12g03.state.GameState;
-import projectt12g03.state.menuSate.PauseMenuState;
 
 import java.io.IOException;
 
@@ -20,46 +16,37 @@ public class PlayerController extends Controller<RoomManager> {
 
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
-        Player player = getModel().getRoom().getPlayer();
-        Vector checkPosition = null;
+        Player player = getModel().getPlayer();
+        Vector nextPosition = null;
 
         if (player.getImmunity() > 0) player.reduceImmunity();
 
         switch (action) {
             case UP:
-                if(player.canMove(player.moveUp()))
-                    player.setPosition(player.moveUp());
-
-                else checkPosition = player.moveUp();
-
+                nextPosition = player.moveUp();
+                player.setDirection("UP");
                 break;
             case DOWN:
-                if(player.canMove(player.moveDown()))
-                    player.setPosition(player.moveDown());
-
-                else checkPosition = player.moveDown();
-
+                nextPosition = player.moveDown();
+                player.setDirection("DOWN");
                 break;
             case LEFT:
-                if(player.canMove(player.moveLeft()))
-                    player.setPosition(player.moveLeft());
-
-                else checkPosition = player.moveLeft();
-
+                nextPosition = player.moveLeft();
+                player.setDirection("LEFT");
                 break;
             case RIGHT:
-                if(player.canMove(player.moveRight()))
-                    player.setPosition(player.moveRight());
-
-                else checkPosition = player.moveRight();
-
+                nextPosition = player.moveRight();
+                player.setDirection("RIGHT");
                 break;
         }
 
-        if (checkPosition != null) {
-            if (getModel().getRoom().isAtTransition(checkPosition)) {
-                getModel().roomBuilder(getModel().getRoom().getDoor(checkPosition));
+        if (nextPosition != null) {
+            if (player.canMove(nextPosition)) {
+                player.setPosition(nextPosition);
+            } else if (getModel().getRoom().isAtTransition(nextPosition)) {
+                getModel().loadRoom(getModel().getRoom().getDoorNumber(nextPosition)); // Transition to the next room
             }
         }
     }
+
 }

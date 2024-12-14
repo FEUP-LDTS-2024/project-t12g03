@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
 
-class RoomControllerTest {
+class GameControllerTest {
     private Game game;
     private Room room;
-    private RoomController roomController;
+    private GameController gameController;
     private RoomManager roomManager;
     private PlayerController playerController;
     private MonsterController monsterController;
@@ -28,12 +28,12 @@ class RoomControllerTest {
         Player player = Mockito.mock(Player.class);
 
         Mockito.when(roomManager.getRoom()).thenReturn(room);
-        Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
+        Mockito.when(roomManager.getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);
         this.monsterController = Mockito.mock(MonsterController.class);
 
-        this.roomController = new RoomController(roomManager, playerController, monsterController);
+        this.gameController = new GameController(roomManager, playerController, monsterController);
     }
 
     @Test
@@ -41,7 +41,7 @@ class RoomControllerTest {
         GUI.userInput action = GUI.userInput.NONE;
         long frameCount = 0;
 
-        roomController.step(game, action, frameCount);
+        gameController.step(game, action, frameCount);
         Mockito.verify(playerController, Mockito.times(1))
                 .step(game, action, frameCount);
         Mockito.verify(monsterController, Mockito.times(1)).step(game, action, frameCount);
