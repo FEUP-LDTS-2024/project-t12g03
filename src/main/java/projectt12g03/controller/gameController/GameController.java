@@ -6,7 +6,7 @@ import projectt12g03.gui.GUI;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.menuSate.PauseMenuState;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.movable.Player;
 
 import java.io.IOException;
 

@@ -1,6 +1,11 @@
 package projectt12g03.model.game.room;
 
-import projectt12g03.model.game.elements.*;
+import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.stationary.Chest;
+import projectt12g03.model.game.elements.stationary.Door;
+import projectt12g03.model.game.elements.stationary.Key;
+import projectt12g03.model.game.elements.stationary.Wall;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -3,10 +3,10 @@ package projectt12g03.model.game.room;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Door;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.elements.stationary.Door;
+import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.stationary.Wall;
 
 import java.util.*;
 

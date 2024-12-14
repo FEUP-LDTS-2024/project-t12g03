@@ -1,9 +1,6 @@
 package projectt12g03.view.game;
 
 import projectt12g03.gui.GUI;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Wall;
-import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.game.elements.*;

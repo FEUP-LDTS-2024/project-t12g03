@@ -1,4 +1,4 @@
-package projectt12g03.model.game.elements;
+package projectt12g03.model.game.elements.movable;
 
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.room.Room;

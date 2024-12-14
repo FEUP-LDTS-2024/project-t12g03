@@ -3,10 +3,11 @@ package projectt12g03.controller.gameController;
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
+import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.menuSate.PauseMenuState;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.movable.Player;
 
 import java.io.IOException;
 
@@ -24,6 +25,11 @@ public class RoomController extends Controller<RoomManager> {
     @Override
     public void step(Game game, GUI.userInput action, long time) throws IOException {
         Player player = getModel().getRoom().getPlayer();
+        Chest chest = getModel().getRoom().getChest();
+
+        if (chest.getPotion() != null && chest.isOpened()) {
+            if (chest.getPotion().getImmunity() > 0) chest.getPotion().reduceImmunity();
+        }
 
         switch (action) {
             case QUIT:

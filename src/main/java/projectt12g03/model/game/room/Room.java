@@ -1,7 +1,12 @@
 package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.*;
+import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.stationary.Chest;
+import projectt12g03.model.game.elements.stationary.Door;
+import projectt12g03.model.game.elements.stationary.Key;
+import projectt12g03.model.game.elements.stationary.Wall;
 
 import java.util.List;
 
@@ -27,9 +32,22 @@ public class Room {
             chest.foundKey();
             return false;
         }
+        else if (checkChestCollision(position)) {
+            if (chest.isUnlockable() && !chest.isOpened()) {
+                chest.open();
+            }
+            else if (chest.isUnlockable()) {
+                if (chest.getPotion() != null) {
+                    if (chest.getPotion().getImmunity() == 0) {
+                        chest.setPotion(null);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
-        return checkWallCollision(position) || checkDamage(position) ||
-                isAtTransition(position) || checkChestCollision(position);
+        return checkWallCollision(position) || checkDamage(position) || isAtTransition(position);
     }
 
     public boolean checkCollisionsForMonster(Vector position) {

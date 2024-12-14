@@ -4,12 +4,8 @@ import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.room.RoomManager;
-import projectt12g03.model.menu.PauseMenu;
-import projectt12g03.state.GameState;
-import projectt12g03.state.menuSate.PauseMenuState;
 
 import java.io.IOException;
 

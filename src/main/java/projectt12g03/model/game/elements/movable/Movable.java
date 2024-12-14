@@ -1,9 +1,8 @@
-package projectt12g03.model.game.elements;
+package projectt12g03.model.game.elements.movable;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.room.Room;
-
-import java.security.PublicKey;
 
 public abstract class Movable extends Element {
     public Room room;

@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 

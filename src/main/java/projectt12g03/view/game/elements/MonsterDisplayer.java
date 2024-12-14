@@ -2,10 +2,8 @@ package projectt12g03.view.game.elements;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.elements.movable.Monster;
 
-import javax.management.monitor.MonitorSettingException;
 import java.util.List;
 
 public class MonsterDisplayer {
