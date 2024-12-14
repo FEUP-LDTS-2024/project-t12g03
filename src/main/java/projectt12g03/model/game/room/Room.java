@@ -3,10 +3,7 @@ package projectt12g03.model.game.room;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.elements.movable.Player;
-import projectt12g03.model.game.elements.stationary.Chest;
-import projectt12g03.model.game.elements.stationary.Door;
-import projectt12g03.model.game.elements.stationary.Key;
-import projectt12g03.model.game.elements.stationary.Wall;
+import projectt12g03.model.game.elements.stationary.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ public class Room {
     private Player player;
     private Chest chest;
     private Key key;
+    private List<Floor> floors;
     private List<Wall> walls;
     private List<Door> doors;
     private List<Monster> monsters;
@@ -109,6 +107,8 @@ public class Room {
         return 0;
     }
 
+    public List<Floor> getFloors() { return floors; }
+
     public List<Wall> getWalls() { return walls; }
 
     public List<Door> getDoors() { return doors; }
@@ -129,6 +129,8 @@ public class Room {
             player.setRoom(this);
         }
     }
+
+    public void setFloors(List<Floor> floors) { this.floors = floors; }
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
 

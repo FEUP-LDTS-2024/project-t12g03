@@ -3,10 +3,7 @@ package projectt12g03.model.game.room;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.elements.movable.Player;
-import projectt12g03.model.game.elements.stationary.Chest;
-import projectt12g03.model.game.elements.stationary.Door;
-import projectt12g03.model.game.elements.stationary.Key;
-import projectt12g03.model.game.elements.stationary.Wall;
+import projectt12g03.model.game.elements.stationary.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -63,6 +60,7 @@ public class RoomManager {
     public Room createRoom() {
         Room room = new Room(getWidth(), getHeight());
 
+        room.setFloors(createFloors());
         room.setWalls(createWalls());
         room.setDoors(createDoors());
         room.setChest(createChest());
@@ -95,6 +93,18 @@ public class RoomManager {
 
     public Player getPlayer() {
         return player;
+    }
+
+    private List<Floor> createFloors() {
+        List<Floor> floors = new ArrayList<>();
+
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == ' ') floors.add(new Floor(x, y));
+        }
+
+        return floors;
     }
 
     protected List<Wall> createWalls() {

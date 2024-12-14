@@ -12,8 +12,8 @@ import java.util.*;
 
 public class Game {
     public static final int FPS = 15;
-    public static final int terminalWidth = 40;
-    public static final int terminalHeight = 20;
+    public static final int terminalWidth = 320;
+    public static final int terminalHeight = 160;
     private static final String windowName = "GAME";
     private final Stack<State> stateStack;
     private final LanternaGui gui;

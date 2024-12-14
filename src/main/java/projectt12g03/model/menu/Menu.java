@@ -21,6 +21,10 @@ public abstract class Menu {
             currentEntry = 0;
     }
 
+    public int getCurrentEntryNumber() {
+        return currentEntry;
+    }
+
     public String getCurrentEntry() {
         return entriesList.get(currentEntry);
     }

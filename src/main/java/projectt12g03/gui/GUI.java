@@ -14,9 +14,7 @@ public interface GUI {
 
     void drawCharacter(Vector position, char c, TextColor color);
 
-    void drawWall(Vector position);
-
-    void drawPlayer(Vector position, char design, TextColor color);
+    void drawPixel(double x, double y, TextColor color);
 
     void clear();
 

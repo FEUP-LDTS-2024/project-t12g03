@@ -5,7 +5,7 @@ import projectt12g03.controller.gameController.PlayerController;
 import projectt12g03.controller.gameController.GameController;
 import projectt12g03.controller.Controller;
 import projectt12g03.model.game.room.RoomManager;
-import projectt12g03.view.game.GameDisplayer;
+import projectt12g03.view.gameDisplayer.GameDisplayer;
 import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;

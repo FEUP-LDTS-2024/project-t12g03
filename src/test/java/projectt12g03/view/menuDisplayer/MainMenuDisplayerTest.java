@@ -20,7 +20,7 @@ class MainMenuDisplayerTest {
     private MainMenuDisplayer mainMenuDisplayer;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         this.mainMenu = new MainMenu();
         this.mainMenuDisplayer = new MainMenuDisplayer(mainMenu);
         this.gui = Mockito.mock(LanternaGui.class);
