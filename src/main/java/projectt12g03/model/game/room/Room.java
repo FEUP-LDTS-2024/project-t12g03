@@ -1,6 +1,7 @@
 package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.Laser;
 import projectt12g03.model.game.elements.Monster;
 import projectt12g03.model.game.elements.Player;
 import projectt12g03.model.game.elements.Wall;
@@ -18,6 +19,7 @@ public class Room {
     private List<Wall> walls;
     private Map<Integer, List<Wall>> doors;
     private List<Monster> monsters;
+    private List<Laser> lasers;
     private RoomManager roomManager;
 
     //hard coded for now for testing and implementing
@@ -112,4 +114,8 @@ public class Room {
     public void setDoors(Map<Integer, List<Wall>> doors) { this.doors = doors; }
 
     public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
+
+    public  void setLasers(List<Laser> lasers) { this.lasers = lasers; }
+
+    public List<Laser> getLasers() { return lasers; }
 }

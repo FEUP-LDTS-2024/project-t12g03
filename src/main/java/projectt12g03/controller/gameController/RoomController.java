@@ -14,12 +14,14 @@ import java.io.IOException;
 public class RoomController extends Controller<RoomManager> {
     private final PlayerController playerController;
     private final MonsterController monsterController;
+    private final LaserController laserController;
 
-    public RoomController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController) {
+    public RoomController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController) {
         super(roomManager);
 
         this.playerController = playerController;
         this.monsterController = monsterController;
+        this.laserController = laserController;
     }
 
     @Override
