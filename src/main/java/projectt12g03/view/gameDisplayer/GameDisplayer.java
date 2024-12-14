@@ -20,7 +20,7 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     private KeyDisplayer keyDisplayer;
     private FloorDisplayer floorDisplayer;
 
-    public GameDisplayer(RoomManager model) {
+    public GameDisplayer(RoomManager model) throws IOException {
         super(model);
 
         playerDisplayer = new PlayerDisplayer();

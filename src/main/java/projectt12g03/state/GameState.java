@@ -20,7 +20,7 @@ public class GameState extends State<RoomManager> {
     }
 
     @Override
-    protected ScreenDisplayer<RoomManager> getScreenDisplayer() {
+    protected ScreenDisplayer<RoomManager> getScreenDisplayer() throws IOException {
         return new GameDisplayer(getModel());
     }
 

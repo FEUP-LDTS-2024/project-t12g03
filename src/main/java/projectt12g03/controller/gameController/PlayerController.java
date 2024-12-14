@@ -25,6 +25,7 @@ public class PlayerController extends Controller<RoomManager> {
             case UP:
                 nextPosition = player.moveUp();
                 player.setDirection("UP");
+                //player.setState("WALKING");
                 break;
             case DOWN:
                 nextPosition = player.moveDown();
