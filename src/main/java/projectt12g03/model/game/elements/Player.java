@@ -10,6 +10,7 @@ public class Player extends Movable {
     private int HEALTH = 3;
     private int ATTACKDELAY = 6;
 
+    private String direction;
     private int immunity = 0;
     private int isAttacking = 0;
 
@@ -28,21 +29,23 @@ public class Player extends Movable {
 
     public int getImmunity() { return immunity; }
 
-    public void setImmunity(int i){ this.immunity = i;}
+    public void setImmunity(int i){ this.immunity = i; }
 
-    public void reduceImmunity(){ this.immunity--;}
+    public void setDirection(String direction) { this.direction = direction; }
 
-    public int getIsAttacking(){return this.isAttacking;}
+    public void reduceImmunity() { this.immunity--; }
 
-    public void reduceIsAttacking(){this.isAttacking--;}
+    public int getIsAttacking() { return this.isAttacking; }
+
+    public void reduceIsAttacking() { this.isAttacking--; }
 
     @Override
     public boolean canMove(Vector position) { return !room.checkCollisionsForPlayer(position) && isAttacking == 0; }
 
-    public void attack(String direction){
+    public void attack(){
         if(isAttacking != 0) return;
         isAttacking = ATTACKDELAY;
-        ArrayList<Vector> positions = new ArrayList<Vector>();
+        ArrayList<Vector> positions = new ArrayList<>();
         switch (direction){
             case "LEFT":
                 positions.add(new Vector(getPosition().getX() - 1,getPosition().getY()));
