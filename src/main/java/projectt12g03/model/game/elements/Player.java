@@ -9,6 +9,7 @@ public class Player extends Movable {
     private int WALK_SPEED = 1;
     private int HEALTH = 3;
     private int ATTACKDELAY = 6;
+    private int IMMUNITY = 15;
 
     private String direction;
     private int immunity = 0;
@@ -20,16 +21,11 @@ public class Player extends Movable {
         setHealth(HEALTH);
     }
 
-    public Player(double x, double y, Room room, int immunity) { //for changing rooms
-        super(x, y, room);
-        setVelocity(WALK_SPEED);
-        setHealth(HEALTH);
-        setImmunity(immunity);
-    }
-
     public int getImmunity() { return immunity; }
 
-    public void setImmunity(int i){ this.immunity = i; }
+    public void setImmunity(){ this.immunity = IMMUNITY; }
+
+    public String getDirection(){return direction;}
 
     public void setDirection(String direction) { this.direction = direction; }
 

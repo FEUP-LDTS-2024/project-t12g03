@@ -1,10 +1,7 @@
 package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Laser;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.elements.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +27,18 @@ public class Room {
     }
 
     public boolean checkCollisionsForPlayer(Vector position) {
-        return checkWallCollision(position) || checkDamage(position) || isAtTransition(position);
+        return checkWallCollision(position) || checkMonsterDamage(position) ||
+                isAtTransition(position) || checkLaserCollision(position);
     }
 
-    public boolean checkDamage(Vector position){
+    public boolean checkMonsterDamage(Vector position){
         boolean monsterCollision =  checkMonsterCollision(position);
         if (monsterCollision && player.getImmunity() == 0){
             player.reduceHealth();
-            player.setImmunity(15);
+            player.setImmunity();
+            System.out.println("Damage taken : " + player.getHealth());
         }
+
         return monsterCollision;
     }
 
@@ -66,6 +66,45 @@ public class Room {
         for (Monster monster : monsters) {
             if (monster.getPosition().equals(position))
                 return true;
+        }
+        return false;
+    }
+
+    public boolean checkLaserCollision(Vector position) {
+        for (Laser laser : lasers) {
+            if (laser.getPosition().equals(position))
+                return true;
+        }
+        return false;
+    }
+
+    public void checkRayDamage(){
+        if (checkRayCollision(player.getPosition()) && player.getImmunity() == 0){
+            player.reduceHealth();
+            System.out.println("Damage taken: " + player.getHealth());
+            player.setImmunity();
+            return;
+        }
+        for (Monster monster : monsters){
+            if (checkRayCollision(monster.getPosition())){
+                monster.reduceHealth();
+                if(monster.getHealth() == 0) monsters.remove(monster);
+                return;
+            }
+        }
+
+    }
+    public boolean checkRayCollision(Vector position){
+        for (Laser laser : lasers){
+            if (laser.getActive() == 0) return false;
+            switch (laser.getDirection()){
+                case "LEFT":
+                    if (position.equals(new Vector(laser.getPosition().getX() - getLaserRange(laser) - 1,laser.getPosition().getY()))) return true;
+                    break;
+                case "RIGHT":
+                    if (position.equals(new Vector(laser.getPosition().getX() + getLaserRange(laser) + 1,laser.getPosition().getY()))) return true;
+                    break;
+            }
         }
         return false;
     }

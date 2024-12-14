@@ -26,7 +26,7 @@ public class GameController extends Controller<RoomManager> {
     @Override
     public void step(Game game, GUI.userInput action, long time) throws IOException {
         Player player = getModel().getRoom().getPlayer();
-
+        getModel().getRoom().checkRayDamage();
         switch (action) {
             case PAUSE:
                 game.setState(new PauseMenuState(new PauseMenu(getModel().getRoom())));

@@ -2,6 +2,8 @@ package projectt12g03.model.game.elements;
 
 import projectt12g03.model.game.room.Room;
 
+import java.util.Objects;
+
 public class Laser extends Element{
     private int ACTIVE_TIME = 15;
     private int REST_TIME = 45;
@@ -36,12 +38,8 @@ public class Laser extends Element{
     public void reduceActive(){this.active--;}
 
     public void changeMode(String name) {
-        if(name == "ACTIVE"){
-            setActive(ACTIVE_TIME);
-        }
-        if(name == "RESTING"){
-            setResting(REST_TIME);
-        }
+        if(Objects.equals(name, "ACTIVE")) setActive(ACTIVE_TIME);
+        else if(Objects.equals(name, "RESTING")) setResting(REST_TIME);
     }
 
     public int getRange(){
