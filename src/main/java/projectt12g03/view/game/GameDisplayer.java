@@ -26,7 +26,7 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     @Override
     public void draw(GUI gui) throws IOException {
         gui.clear();
-        playerDisplayer.draw(getModel().getRoom().getPlayer(), gui);
+        playerDisplayer.draw(getModel().getPlayer(), gui);
         wallDisplayer.draw(getModel().getRoom().getWalls(), gui);
         monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui);
         chestDisplayer.draw(getModel().getRoom().getChest(), gui);

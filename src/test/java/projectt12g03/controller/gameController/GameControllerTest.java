@@ -28,7 +28,7 @@ class GameControllerTest {
         Player player = Mockito.mock(Player.class);
 
         Mockito.when(roomManager.getRoom()).thenReturn(room);
-        Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
+        Mockito.when(roomManager.getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);
         this.monsterController = Mockito.mock(MonsterController.class);

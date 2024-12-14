@@ -18,7 +18,7 @@ public class PlayerDisplayerTest {
 
     @BeforeEach
     void setUp(){
-        player = new Player(10,10,new Room(20,20,1));
+        player = new Player(10,10,new Room(20,20));
         displayer = new PlayerDisplayer();
         gui = Mockito.mock(LanternaGui.class);
     }

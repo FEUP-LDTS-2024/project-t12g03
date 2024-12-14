@@ -34,7 +34,7 @@ public class GameDisplayerTest {
         monster = mock(Monster.class);
 
         when(roomManager.getRoom()).thenReturn(room);
-        when(room.getPlayer()).thenReturn(player);
+        when(roomManager.getPlayer()).thenReturn(player);
         when(room.getMonsters()).thenReturn(Arrays.asList(monster));
         when(room.getWalls()).thenReturn(Arrays.asList(new Wall(1, 1), new Wall(2, 2), new Wall(2, 3)));
 

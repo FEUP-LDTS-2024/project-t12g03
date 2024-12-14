@@ -27,7 +27,7 @@ public class ChestDisplayer {
                         gui.drawText(chest.getPosition(), "R", range);
                         break;
                     case "immunity":
-                        gui.drawText(chest.getPosition(), "O", immunity);
+                        gui.drawText(chest.getPosition(), "G", immunity);
                         break;
 
                 }

@@ -118,13 +118,6 @@ class RoomTest {
     }
 
     @Test
-    void testSetAndGetPlayer() {
-        Player newPlayer = mock(Player.class);
-        room.setPlayer(newPlayer);
-        assertEquals(newPlayer, room.getPlayer());
-    }
-
-    @Test
     void testSetAndGetWalls() {
         List<Wall> newWalls = new ArrayList<>();
         room.setWalls(newWalls);

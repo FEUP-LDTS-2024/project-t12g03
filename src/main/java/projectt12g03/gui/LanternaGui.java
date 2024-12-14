@@ -141,12 +141,13 @@ public class LanternaGui implements GUI {
 
         //if(!keySpam) { remove "//" after adding player
             return switch (keyCode) {
-                case VK_A, VK_LEFT -> userInput.LEFT;
-                case VK_D, VK_RIGHT -> userInput.RIGHT;
-                case VK_W, VK_UP -> userInput.UP;
-                case VK_S, VK_DOWN -> userInput.DOWN;
-                case VK_ESCAPE -> userInput.QUIT;
+                case VK_LEFT -> userInput.LEFT;
+                case VK_RIGHT -> userInput.RIGHT;
+                case VK_UP -> userInput.UP;
+                case VK_DOWN -> userInput.DOWN;
+                case VK_ESCAPE -> userInput.PAUSE;
                 case VK_ENTER -> userInput.SELECT;
+                case VK_SPACE -> userInput.ATTACK;
                 default -> userInput.NONE;
             };
         //} //remove "//" after adding player

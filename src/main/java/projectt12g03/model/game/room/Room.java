@@ -47,6 +47,7 @@ public class Room {
             return true;
         }
 
+
         return checkWallCollision(position) || checkDamage(position) || isAtTransition(position);
     }
 
@@ -108,8 +109,6 @@ public class Room {
         return 0;
     }
 
-    public Player getPlayer() { return player; }
-
     public List<Wall> getWalls() { return walls; }
 
     public List<Door> getDoors() { return doors; }
@@ -124,7 +123,12 @@ public class Room {
 
     public int getHeight() { return height; }
 
-    public void setPlayer(Player player) { this.player = player; }
+    public void setPlayer(Player player) {
+        this.player = player;
+        if (player != null) {
+            player.setRoom(this);
+        }
+    }
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
 

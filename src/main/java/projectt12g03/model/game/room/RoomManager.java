@@ -1,5 +1,6 @@
 package projectt12g03.model.game.room;
 
+import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.elements.stationary.Chest;
@@ -19,37 +20,44 @@ import java.util.Map;
 import static java.lang.Character.isDigit;
 
 public class RoomManager {
+    private final Player player;
+
     private Map<Integer, Room> roomsMap = new HashMap<>();
     private List<String> lines;
     private Integer roomCode = 1;
     private Room room;
 
     public RoomManager() throws IOException {
+        player = new Player(0, 0, null);
 
         URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         this.lines = readLines(br);
 
-        roomBuilder(roomCode); //change in the future
+        loadRoom(roomCode);
     }
 
-    public void roomBuilder(Integer roomCode) throws IOException {
+    public void loadRoom(Integer roomCode) throws IOException {
         this.roomCode = roomCode;
         if(!roomsMap.containsKey(roomCode)) {
             URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
             this.lines = readLines(br);
-
             this.room = createRoom();
         }
         else {
             this.room = roomsMap.get(roomCode);
+
+            Vector playerPosition = player.calculateNewPosition();
+            player.setPosition(playerPosition);
+            room.setPlayer(player);
         }
 
         room.setHeight(getHeight());
         room.setWidth(getWidth());
+        player.setRoom(room);
     }
 
     public Room createRoom() {
@@ -60,7 +68,7 @@ public class RoomManager {
         room.setChest(createChest());
         room.setKey(createKey());
         room.setMonsters(createMonsters(room));
-        room.setPlayer(createPlayer(room));
+        room.setPlayer(createPlayer());
 
         roomsMap.put(roomCode, room);
 
@@ -84,6 +92,10 @@ public class RoomManager {
     protected int getHeight() { return lines.size(); }
 
     public Room getRoom() { return room; }
+
+    public Player getPlayer() {
+        return player;
+    }
 
     protected List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
@@ -148,12 +160,13 @@ public class RoomManager {
         return monsters;
     }
 
-    protected Player createPlayer(Room room) {
+    protected Player createPlayer() {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++){
                 if (line.charAt(x) == 'P'){
-                    return new Player(x, y, room);
+                    player.setPosition(new Vector(x,y));
+                    return player;
                 }
             }
         }

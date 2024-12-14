@@ -32,7 +32,7 @@ class PlayerControllerTest {
 
         Mockito.when(player.getPosition()).thenReturn(new Vector(5, 5));
         Mockito.when(roomManager.getRoom()).thenReturn(room);
-        Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
+        Mockito.when(roomManager.getPlayer()).thenReturn(player);
     }
 
     @Test
