@@ -7,16 +7,15 @@ import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.menuSate.PauseMenuState;
 import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Monster;
 
 import java.io.IOException;
 
-public class RoomController extends Controller<RoomManager> {
+public class GameController extends Controller<RoomManager> {
     private final PlayerController playerController;
     private final MonsterController monsterController;
     private final LaserController laserController;
 
-    public RoomController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController) {
+    public GameController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController) {
         super(roomManager);
 
         this.playerController = playerController;
@@ -29,7 +28,7 @@ public class RoomController extends Controller<RoomManager> {
         Player player = getModel().getRoom().getPlayer();
 
         switch (action) {
-            case QUIT:
+            case PAUSE:
                 game.setState(new PauseMenuState(new PauseMenu(getModel().getRoom())));
                 break;
             default:

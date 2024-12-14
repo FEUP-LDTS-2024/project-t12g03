@@ -32,10 +32,10 @@ public class Laser extends Element{
     public void reduceActive(){this.active--;}
 
     public void changeMode(String name) {
-        if(name == "ACTIVE"){
+        if(name.equals("ACTIVE")){
             setActive(ACTIVE_TIME);
         }
-        if(name == "Resting"){
+        if(name.equals("Resting")){
             setResting(REST_TIME);
         }
     }

@@ -11,10 +11,10 @@ import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
 
-class RoomControllerTest {
+class GameControllerTest {
     private Game game;
     private Room room;
-    private RoomController roomController;
+    private GameController gameController;
     private RoomManager roomManager;
     private PlayerController playerController;
     private MonsterController monsterController;
@@ -35,7 +35,7 @@ class RoomControllerTest {
         this.monsterController = Mockito.mock(MonsterController.class);
         this.laserController = Mockito.mock(LaserController.class);
 
-        this.roomController = new RoomController(roomManager, playerController, monsterController,laserController);
+        this.gameController = new GameController(roomManager, playerController, monsterController,laserController);
     }
 
     @Test
@@ -43,7 +43,7 @@ class RoomControllerTest {
         GUI.userInput action = GUI.userInput.NONE;
         long frameCount = 0;
 
-        roomController.step(game, action, frameCount);
+        gameController.step(game, action, frameCount);
         Mockito.verify(playerController, Mockito.times(1))
                 .step(game, action, frameCount);
         Mockito.verify(monsterController, Mockito.times(1)).step(game, action, frameCount);

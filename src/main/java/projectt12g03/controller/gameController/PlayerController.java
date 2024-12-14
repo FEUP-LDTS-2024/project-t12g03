@@ -15,9 +15,6 @@ import projectt12g03.state.menuSate.PauseMenuState;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
-    private String direction = "RIGHT";
-
-
     public PlayerController(RoomManager model) { super(model); }
 
     //A LOT OF HARDCODE NEEDS TO BE REDONE
@@ -33,31 +30,31 @@ public class PlayerController extends Controller<RoomManager> {
                 if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX(), player.getPosition().getY()-1))) {
                     getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX(), player.getPosition().getY()-1)));
                 }
-                direction = "UP";
+                player.setDirection("UP");
                 break;
             case DOWN:
                 player.setPosition(player.moveDown());
                 if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX(), player.getPosition().getY()+1))) {
                     getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX(), player.getPosition().getY()+1)));
                 }
-                direction = "DOWN";
+                player.setDirection("DOWN");
                 break;
             case LEFT:
                 player.setPosition(player.moveLeft());
                 if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX()-1, player.getPosition().getY()))) {
                     getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX()-1, player.getPosition().getY())));
                 }
-                direction = "LEFT";
+                player.setDirection("LEFT");
                 break;
             case RIGHT:
                 player.setPosition(player.moveRight());
                 if (getModel().getRoom().isAtTransition(new Vector(player.getPosition().getX()+1, player.getPosition().getY()))) {
                     getModel().roomBuilder(getModel().getRoom().getDoor(new Vector(player.getPosition().getX()+1, player.getPosition().getY())));
                 }
-                direction = "RIGHT";
+                player.setDirection("RIGHT");
                 break;
-            case SELECT:
-                player.attack(direction);
+            case ATTACK:
+                player.attack();
                 break;
         }
     }
