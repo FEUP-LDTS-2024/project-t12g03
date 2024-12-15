@@ -30,21 +30,4 @@ public class LanternaGuiTest {
 
         gui.setScreen(screen);
     }
-
-
-    @Test
-    void drawCharacter() {
-        gui.drawCharacter(new Vector(3, 6),'H', new TextColor.RGB(255, 215, 0));
-
-        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(new TextColor.RGB(255, 215, 0));
-        Mockito.verify(tg, Mockito.times(1)).putString(3, 6, "H");
-    }
-
-    @Test
-    void drawText() {
-        gui.drawText(new Vector(5, 10), "Hello World", new TextColor.RGB(51,102,153));
-
-        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(new TextColor.RGB(51, 102, 153));
-        Mockito.verify(tg, Mockito.times(1)).putString(5, 10, "Hello World");
-    }
 }

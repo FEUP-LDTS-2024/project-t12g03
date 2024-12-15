@@ -6,13 +6,11 @@ import projectt12g03.model.Vector;
 import java.io.IOException;
 
 public interface GUI {
-    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK}
+    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK, INVENTORY}
 
     userInput getNextUserInput() throws IOException;
 
     void drawText(Vector position, String text, TextColor color);
-
-    void drawCharacter(Vector position, char c, TextColor color);
 
     void drawPixel(double x, double y, TextColor color);
 

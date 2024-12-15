@@ -29,11 +29,6 @@ public class RoomManager {
     public RoomManager() throws IOException {
         player = new Player(0, 0, null);
 
-        URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
-
-        this.lines = readLines(br);
-
         loadRoom(roomCode);
     }
 
