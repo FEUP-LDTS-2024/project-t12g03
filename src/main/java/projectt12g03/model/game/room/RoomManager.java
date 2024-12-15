@@ -1,5 +1,7 @@
 package projectt12g03.model.game.room;
 
+
+import projectt12g03.model.game.elements.stationary.Laser;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.elements.movable.Player;
@@ -7,6 +9,7 @@ import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.elements.stationary.Door;
 import projectt12g03.model.game.elements.stationary.Key;
 import projectt12g03.model.game.elements.stationary.Wall;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -68,6 +71,7 @@ public class RoomManager {
         room.setChest(createChest());
         room.setKey(createKey());
         room.setMonsters(createMonsters(room));
+        room.setLasers(createLasers(room));
         room.setPlayer(createPlayer());
 
         roomsMap.put(roomCode, room);
@@ -171,5 +175,18 @@ public class RoomManager {
             }
         }
         throw new IllegalStateException("Player not found within the room file!");
+    }
+
+    protected List<Laser> createLasers(Room room){
+        List<Laser> lasers = new ArrayList<Laser>();
+
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'L') lasers.add(new Laser(x, y, "RIGHT", room));
+                if (line.charAt(x) == 'J') lasers.add(new Laser(x, y, "LEFT", room ));
+            }
+        }
+        return lasers;
     }
 }

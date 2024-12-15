@@ -24,7 +24,7 @@ public abstract class Movable extends Element {
 
     public void setHealth(int h){ this.health = h; }
 
-    public void reducedHealth(){ this.health--; }
+    public void reduceHealth() { this.health--; }
 
     public void increaseHealth(){ this.health++; }
 

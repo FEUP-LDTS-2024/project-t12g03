@@ -5,12 +5,14 @@ import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.game.elements.*;
 
+
 import java.io.IOException;
 
 public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     private PlayerDisplayer playerDisplayer;
     private WallDisplayer wallDisplayer;
     private MonsterDisplayer monsterDisplayer;
+    private LaserDisplayer laserDisplayer;
     private ChestDisplayer chestDisplayer;
     private KeyDisplayer keyDisplayer;
 
@@ -19,6 +21,7 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         playerDisplayer = new PlayerDisplayer();
         wallDisplayer = new WallDisplayer();
         monsterDisplayer = new MonsterDisplayer();
+        laserDisplayer = new LaserDisplayer();
         chestDisplayer = new ChestDisplayer();
         keyDisplayer = new KeyDisplayer();
     }
@@ -29,6 +32,7 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         playerDisplayer.draw(getModel().getPlayer(), gui);
         wallDisplayer.draw(getModel().getRoom().getWalls(), gui);
         monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui);
+        laserDisplayer.draw(getModel().getRoom().getLasers(),gui);
         chestDisplayer.draw(getModel().getRoom().getChest(), gui);
         keyDisplayer.draw(getModel().getRoom().getKey(), gui);
         gui.refresh();

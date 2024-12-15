@@ -16,18 +16,22 @@ import static projectt12g03.gui.GUI.userInput.PAUSE;
 public class GameController extends Controller<RoomManager> {
     private final PlayerController playerController;
     private final MonsterController monsterController;
+    private final LaserController laserController;
 
-    public GameController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController) {
+    public GameController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController) {
         super(roomManager);
 
         this.playerController = playerController;
         this.monsterController = monsterController;
+        this.laserController = laserController;
     }
 
     @Override
     public void step(Game game, GUI.userInput action, long time) throws IOException {
+
         Player player = getModel().getPlayer();
         Chest chest = getModel().getRoom().getChest();
+        getModel().getRoom().checkRayDamage();
 
         if (chest.getPotion() != null && chest.isOpened()) {
             if (chest.getPotion().getImmunity() > 0) chest.getPotion().reduceImmunity();
@@ -38,6 +42,7 @@ public class GameController extends Controller<RoomManager> {
         else {
             monsterController.step(game, action, time);
             playerController.step(game, action, time);
+            laserController.step(game,action,time);
         }
 
         if (player.getHealth() == 0) game.popState();
