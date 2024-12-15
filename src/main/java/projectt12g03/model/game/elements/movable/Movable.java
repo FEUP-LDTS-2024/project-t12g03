@@ -8,6 +8,8 @@ public abstract class Movable extends Element {
     public Room room;
     private int velocity;
     private int health;
+    private String direction;
+    private String state;
 
     public Movable(double x, double y, Room room) {
         super(x,y);
@@ -20,7 +22,15 @@ public abstract class Movable extends Element {
         this.velocity = v;
     }
 
-    public int getHealth(){ return  health; }
+    public int getHealth() { return  health; }
+
+    public String getDirection() { return direction; }
+
+    public String getState() { return state; }
+
+    public void setDirection(String direction) { this.direction = direction; }
+
+    public void setState(String state) { this.state = state; }
 
     public void setHealth(int h){ this.health = h; }
 

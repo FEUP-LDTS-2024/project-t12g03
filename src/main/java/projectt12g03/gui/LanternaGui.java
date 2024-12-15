@@ -30,8 +30,6 @@ public class LanternaGui implements GUI {
     private TerminalSize terminalSize;
     private TerminalScreen screen;
 
-    //remove "//" after adding player
-    //private Set<Integer> pressedKeys;
     private final KeyAdapter keyAdapter;
     private KeyEvent keyPressed;
     private KeyEvent priorityKey;
@@ -43,8 +41,6 @@ public class LanternaGui implements GUI {
         this.keyPressed = null;
         this.priorityKey = null;
         this.keySpam = false;
-        //remove "//" after adding player
-        //this.pressedKeys = new HashSet<>();
         this.keyAdapter = createKeyAdapter();
         this.screen = createScreen();
         this.title = title;
@@ -88,7 +84,7 @@ public class LanternaGui implements GUI {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(font);
 
-            Font newfont = font.deriveFont(Font.PLAIN, 25);
+            Font newfont = font.deriveFont(Font.PLAIN, 3);
 
             return AWTTerminalFontConfiguration.newInstance(newfont);
     }
@@ -102,8 +98,6 @@ public class LanternaGui implements GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (keySpam) {
-                    //remove "//" after adding player
-                    //pressedKeys.add(e.getKeyCode());
                     keyPressed = priorityKey = e;
                 }
                 else
@@ -137,6 +131,11 @@ public class LanternaGui implements GUI {
             case VK_ESCAPE -> userInput.PAUSE;
             case VK_ENTER -> userInput.SELECT;
             case VK_SPACE -> userInput.ATTACK;
+            case VK_H -> userInput.HEAL;
+            case VK_1 -> userInput.ONE;
+            case VK_2 -> userInput.TWO;
+            case VK_3 -> userInput.THREE;
+            case VK_4 -> userInput.FOUR;
             default -> userInput.NONE;
         };
     }
@@ -161,14 +160,11 @@ public class LanternaGui implements GUI {
         tg.putString((int) position.getX(), (int) position.getY(), "" + c);
     }
 
-    @Override   //used for tests
-    public void drawWall(Vector position){ //may change
-        drawCharacter(position,'#',new TextColor.RGB(255,255,255));
-    }
-
-    @Override   //used for tests
-    public void drawPlayer(Vector position, char design, TextColor color){ //will change when player becomes complex
-        drawCharacter(position, design, color);
+    @Override
+    public void drawPixel(double x, double y, TextColor color) {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(color);
+        tg.setCharacter((int) x, (int) y, ' ');
     }
 
     @Override

@@ -17,13 +17,15 @@ public class GameController extends Controller<RoomManager> {
     private final PlayerController playerController;
     private final MonsterController monsterController;
     private final LaserController laserController;
+    private final HudController hudController;
 
-    public GameController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController) {
+    public GameController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController, HudController hudController) {
         super(roomManager);
 
         this.playerController = playerController;
         this.monsterController = monsterController;
         this.laserController = laserController;
+        this.hudController = hudController;
     }
 
     @Override
@@ -43,6 +45,7 @@ public class GameController extends Controller<RoomManager> {
             monsterController.step(game, action, time);
             playerController.step(game, action, time);
             laserController.step(game,action,time);
+            hudController.step(game, action, time);
         }
 
         if (player.getHealth() == 0) game.popState();

@@ -1,5 +1,7 @@
 package projectt12g03.model.game.elements.stationary;
 
+import projectt12g03.model.game.elements.Element;
+
 import java.util.Random;
 
 public class Potion {
@@ -10,6 +12,8 @@ public class Potion {
     public Potion() {
         createEffect();
     }
+
+    public int getDuration() { return duration; }
 
     public int getImmunity() { return immunity; }
 
@@ -29,12 +33,12 @@ public class Potion {
                 duration = 150;
                 break;
             case 2:
-                effect = "range";
-                duration = 300;
+                effect = "heal";
+                duration = 0;
                 break;
             case 3:
                 effect = "immunity";
-                duration = 150;
+                duration = 300;
                 break;
         }
     }

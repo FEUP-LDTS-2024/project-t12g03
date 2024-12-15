@@ -3,12 +3,10 @@ package projectt12g03.model.game.room;
 
 import projectt12g03.model.game.elements.stationary.Laser;
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.elements.movable.Player;
-import projectt12g03.model.game.elements.stationary.Chest;
-import projectt12g03.model.game.elements.stationary.Door;
-import projectt12g03.model.game.elements.stationary.Key;
-import projectt12g03.model.game.elements.stationary.Wall;
+import projectt12g03.model.game.elements.stationary.*;
 
 
 import java.io.BufferedReader;
@@ -25,6 +23,7 @@ import static java.lang.Character.isDigit;
 public class RoomManager {
     private final Player player;
 
+    private Map<Element, Vector> sortedElementsMap = new HashMap<>();
     private Map<Integer, Room> roomsMap = new HashMap<>();
     private List<String> lines;
     private Integer roomCode = 1;
@@ -32,11 +31,6 @@ public class RoomManager {
 
     public RoomManager() throws IOException {
         player = new Player(0, 0, null);
-
-        URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
-
-        this.lines = readLines(br);
 
         loadRoom(roomCode);
     }
@@ -66,6 +60,7 @@ public class RoomManager {
     public Room createRoom() {
         Room room = new Room(getWidth(), getHeight());
 
+        room.setFloors(createFloors());
         room.setWalls(createWalls());
         room.setDoors(createDoors());
         room.setChest(createChest());
@@ -101,13 +96,28 @@ public class RoomManager {
         return player;
     }
 
+    private List<Floor> createFloors() {
+        List<Floor> floors = new ArrayList<>();
+
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == ' ' || line.charAt(x) == 'C' || line.charAt(x) == 'K' ||
+                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x))) {
+                    floors.add(new Floor(x * 16, y * 16));
+                }
+        }
+
+        return floors;
+    }
+
     protected List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
 
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '#') walls.add(new Wall(x, y));
+                if (line.charAt(x) == '#') walls.add(new Wall(x*16, y*16));
         }
 
         return walls;
@@ -121,7 +131,7 @@ public class RoomManager {
             for (int x = 0; x < line.length(); x++) {
                 if (isDigit(line.charAt(x))) {
                     int n = line.charAt(x) - '0';
-                    doors.add(new Door(x, y, n));
+                    doors.add(new Door(x*16, y*16, n));
                 }
             }
         }
@@ -133,7 +143,7 @@ public class RoomManager {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
                 if (line.charAt(x) == 'C') {
-                    return new Chest(x, y);
+                    return new Chest(x*16, y*16);
                 }
             }
         }
@@ -145,7 +155,7 @@ public class RoomManager {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
                 if (line.charAt(x) == 'K') {
-                    return new Key(x, y);
+                    return new Key(x*16, y*16);
                 }
             }
         }
@@ -158,7 +168,7 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'M') monsters.add(new Monster(x,y, room));
+                if (line.charAt(x) == 'M') monsters.add(new Monster(x*16,y*16, room));
         }
 
         return monsters;
@@ -169,7 +179,7 @@ public class RoomManager {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++){
                 if (line.charAt(x) == 'P'){
-                    player.setPosition(new Vector(x,y));
+                    player.setPosition(new Vector(x*16,y*16));
                     return player;
                 }
             }

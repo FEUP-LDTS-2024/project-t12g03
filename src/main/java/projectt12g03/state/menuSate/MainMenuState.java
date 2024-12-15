@@ -22,7 +22,7 @@ public class MainMenuState extends State<MainMenu> {
     }
 
     @Override
-    protected ScreenDisplayer<MainMenu> getScreenDisplayer() { return new MainMenuDisplayer(getModel()); }
+    protected ScreenDisplayer<MainMenu> getScreenDisplayer() throws IOException { return new MainMenuDisplayer(getModel()); }
 
     @Override
     protected boolean allowInputSpam() { return false; }

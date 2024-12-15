@@ -1,4 +1,4 @@
-package projectt12g03.view.game;
+package projectt12g03.view.gameDisplayer;
 
 import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,9 +62,9 @@ public class GameDisplayerTest {
     void drawShouldDisplayWalls() throws IOException {
         displayer.draw(gui);
 
-        verify(gui).drawWall(new Vector(1, 1));
-        verify(gui).drawWall(new Vector(2, 2));
-        verify(gui).drawWall(new Vector(2, 3));
+        verify(gui).drawText(new Vector(1, 1), "#", new TextColor.RGB(255,255,255));
+        verify(gui).drawText(new Vector(2, 2), "#", new TextColor.RGB(255,255,255));
+        verify(gui).drawText(new Vector(2, 3), "#", new TextColor.RGB(255,255,255));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class GameDisplayerTest {
 
         displayer.draw(gui);
 
-        verify(gui, never()).drawWall(any(Vector.class));
+        verify(gui, never()).drawText(any(Vector.class), "#", new TextColor.RGB(255,255,255));
     }
 
     @Test

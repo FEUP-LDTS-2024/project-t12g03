@@ -14,7 +14,7 @@ public class PauseMenuDisplayer extends ScreenDisplayer<PauseMenu> {
     public PauseMenuDisplayer(PauseMenu model) { super(model); }
 
     @Override
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         gui.drawText(new Vector(15, 3),
                 "PAUSE MENU",

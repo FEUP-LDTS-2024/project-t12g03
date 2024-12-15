@@ -11,6 +11,8 @@ public class Monster extends Movable {
         super(x, y, room);
         setVelocity(WALK_SPEED);
         setHealth(HEALTH);
+        setDirection("DOWN");
+        setState("IDLE");
     }
 
     @Override

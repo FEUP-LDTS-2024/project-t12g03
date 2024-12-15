@@ -7,14 +7,10 @@ import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
-import projectt12g03.view.game.GameDisplayer;
 
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameStateTest {
     private Game game;

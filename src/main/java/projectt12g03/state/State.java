@@ -19,7 +19,7 @@ public abstract class State<T> {
     }
 
     protected abstract Controller<T> getController();
-    protected abstract ScreenDisplayer<T> getScreenDisplayer();
+    protected abstract ScreenDisplayer<T> getScreenDisplayer() throws IOException;
     protected abstract boolean allowInputSpam();
 
 
@@ -32,7 +32,7 @@ public abstract class State<T> {
         game.setKeySpam(allowInputSpam());
         LanternaGui.userInput action = gui.getNextUserInput();
         controller.step(game, action, time);
-        screenDisplayer.draw(gui);
+        screenDisplayer.draw(gui, time);
     }
 
 }

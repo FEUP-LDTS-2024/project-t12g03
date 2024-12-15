@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Inventory {
     private List<Potion> potions;
+    private int slotSelected = 0;
 
     public Inventory() {
         potions = new ArrayList<>(4);
@@ -40,9 +41,13 @@ public class Inventory {
         return null;
     }
 
-    public List<Potion> getPotions() { return potions; }
+    public int getSlotSelected() { return slotSelected; }
 
     public boolean isNotFull() {
         return potions.contains(null);
     }
+
+    public void select(int slot) { slotSelected = slot; }
+
+    public boolean isSelected(int slot) { return slotSelected == slot; }
 }
