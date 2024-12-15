@@ -1,6 +1,7 @@
 package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.elements.stationary.*;
@@ -19,6 +20,7 @@ import static java.lang.Character.isDigit;
 public class RoomManager {
     private final Player player;
 
+    private Map<Element, Vector> sortedElementsMap = new HashMap<>();
     private Map<Integer, Room> roomsMap = new HashMap<>();
     private List<String> lines;
     private Integer roomCode = 1;
@@ -102,7 +104,9 @@ public class RoomManager {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
                 if (line.charAt(x) == ' ' || line.charAt(x) == 'C' || line.charAt(x) == 'K' ||
-                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x))) floors.add(new Floor(x*16, y*16));
+                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x))) {
+                    floors.add(new Floor(x * 16, y * 16));
+                }
         }
 
         return floors;

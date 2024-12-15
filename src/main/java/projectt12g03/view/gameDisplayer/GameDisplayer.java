@@ -32,14 +32,14 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     }
 
     @Override
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         floorDisplayer.draw(getModel().getRoom().getFloors(), gui);
-        playerDisplayer.draw(getModel().getPlayer(), gui);
         wallDisplayer.draw(getModel().getRoom().getWalls(), gui);
-        monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui);
         chestDisplayer.draw(getModel().getRoom().getChest(), gui);
         keyDisplayer.draw(getModel().getRoom().getKey(), gui);
+        monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui, frameCount);
+        playerDisplayer.draw(getModel().getPlayer(), gui, frameCount);
         gui.refresh();
     }
 }

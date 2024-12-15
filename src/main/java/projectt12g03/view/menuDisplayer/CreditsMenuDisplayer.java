@@ -12,7 +12,7 @@ import java.util.List;
 public class CreditsMenuDisplayer extends ScreenDisplayer<CreditsMenu> {
     public CreditsMenuDisplayer(CreditsMenu model) { super(model); }
 
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         gui.drawText(new Vector(16, 2),
                 "CREDITS",

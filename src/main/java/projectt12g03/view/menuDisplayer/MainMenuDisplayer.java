@@ -21,7 +21,7 @@ public class MainMenuDisplayer extends ScreenDisplayer<MainMenu> {
     }
 
     @Override
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         int entry = getModel().getCurrentEntryNumber();
         Sprite image = backGroundMap.get(entry);

@@ -28,7 +28,7 @@ class MainMenuDisplayerTest {
 
     @Test
     public void drawTest() throws IOException {
-        mainMenuDisplayer.draw(gui);
+        mainMenuDisplayer.draw(gui, 1);
 
         verify(gui, times(1)).clear();
 

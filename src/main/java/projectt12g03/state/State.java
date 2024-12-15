@@ -32,7 +32,7 @@ public abstract class State<T> {
         game.setKeySpam(allowInputSpam());
         LanternaGui.userInput action = gui.getNextUserInput();
         controller.step(game, action, time);
-        screenDisplayer.draw(gui);
+        screenDisplayer.draw(gui, time);
     }
 
 }
