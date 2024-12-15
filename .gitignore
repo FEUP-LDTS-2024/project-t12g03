@@ -47,3 +47,4 @@ out/
 build/
 *.iml
 .jqwik-database
+*.hprof

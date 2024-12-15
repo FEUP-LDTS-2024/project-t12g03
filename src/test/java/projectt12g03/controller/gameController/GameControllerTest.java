@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 
@@ -29,12 +29,11 @@ class GameControllerTest {
         Player player = Mockito.mock(Player.class);
 
         Mockito.when(roomManager.getRoom()).thenReturn(room);
-        Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
+        Mockito.when(roomManager.getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);
         this.monsterController = Mockito.mock(MonsterController.class);
         this.laserController = Mockito.mock(LaserController.class);
-
         this.gameController = new GameController(roomManager, playerController, monsterController,laserController);
     }
 

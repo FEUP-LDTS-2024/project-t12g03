@@ -1,34 +1,60 @@
 package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.*;
+
+import projectt12g03.model.game.elements.Laser;
+import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.stationary.Chest;
+import projectt12g03.model.game.elements.stationary.Door;
+import projectt12g03.model.game.elements.stationary.Key;
+import projectt12g03.model.game.elements.stationary.Wall;
+
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Room {
-    private final int width;
-    private final int height;
-    private final int roomCode;
+    private int width;
+    private int height;
 
     private Player player;
+    private Chest chest;
+    private Key key;
     private List<Wall> walls;
-    private Map<Integer, List<Wall>> doors;
+    private List<Door> doors;
     private List<Monster> monsters;
     private List<Laser> lasers;
-    private RoomManager roomManager;
 
-    //hard coded for now for testing and implementing
-    public Room(int width, int height, int roomCode) {
+
+
+    public Room(int width, int height) {
         this.width = width;
         this.height = height;
-        this.roomCode = roomCode;
     }
 
     public boolean checkCollisionsForPlayer(Vector position) {
-        return checkWallCollision(position) || checkMonsterDamage(position) ||
-                isAtTransition(position) || checkLaserCollision(position);
+        if (checkKeyCollision(position)) {
+            setKey(null);
+            chest.foundKey();
+            return false;
+        }
+        else if (checkChestCollision(position)) {
+            if (chest.isUnlockable() && !chest.isOpened()) {
+                chest.open();
+            }
+            else if (chest.isUnlockable()) {
+                if (chest.getPotion() != null) {
+                    if (chest.getPotion().getImmunity() == 0) {
+                        chest.setPotion(null);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        return checkWallCollision(position) || checkMonsterDamage(position) || isAtTransition(position) || checkLaserCollision(position);
     }
 
     public boolean checkMonsterDamage(Vector position){
@@ -42,7 +68,12 @@ public class Room {
         return monsterCollision;
     }
 
-    public void checkAttackCollision(ArrayList<Vector> positions){
+    public boolean checkCollisionsForMonster(Vector position) {
+        return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position) ||
+                isAtTransition(position) || checkKeyCollision(position) || checkChestCollision(position);
+    }
+
+    public void checkAttackCollision(ArrayList<Vector> positions) {
         for (Vector position : positions){
             for (Monster monster : monsters){
                 if (monster.getPosition().equals(position)){
@@ -52,10 +83,6 @@ public class Room {
                 }
             }
         }
-    }
-
-    public boolean checkCollisionsForMonster(Vector position) { // repetitive code, find a way to make it look better
-        return checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position);
     }
 
     public boolean checkPlayerCollision(Vector position) {
@@ -78,7 +105,7 @@ public class Room {
         return false;
     }
 
-    public void checkRayDamage(){
+    public void checkRayDamage() {
         if (checkRayCollision(player.getPosition()) && player.getImmunity() == 0){
             player.reduceHealth();
             System.out.println("Damage taken: " + player.getHealth());
@@ -117,23 +144,26 @@ public class Room {
         return false;
     }
 
+    public boolean checkKeyCollision(Vector position) {
+        if (key == null) return false;
+
+        return position.equals(key.getPosition());
+    }
+
+    public boolean checkChestCollision(Vector position) { return position.equals(chest.getPosition()); }
+
     public boolean isAtTransition(Vector position) {
-        for (Map.Entry<Integer, List<Wall>> entry : doors.entrySet()) {
-            List<Wall> doors = entry.getValue();
-            for(Wall door : doors) {
-                if(position.equals(door.getPosition())) return true;
-            }
+        for (Door door : doors) {
+            if (door.getPosition().equals(position))
+                return true;
         }
         return false;
     }
 
-    public int getDoor(Vector position) {
-        for (Map.Entry<Integer, List<Wall>> entry : doors.entrySet()) {
-            Integer num = entry.getKey();
-            List<Wall> doors = entry.getValue();
-            for(Wall door : doors) {
-                if(position.equals(door.getPosition())) return num;
-            }
+    public int getDoorNumber(Vector position) {
+        for (Door door : doors) {
+            if (door.getPosition().equals(position))
+                return door.getNumber();
         }
         return 0;
     }
@@ -164,19 +194,41 @@ public class Room {
 
     public List<Wall> getWalls() { return walls; }
 
-    public Map<Integer, List<Wall>> getDoors() { return doors; }    //make a class for it
+    public List<Door> getDoors() { return doors; }
+
+    public Chest getChest() { return chest; }
+
+    public Key getKey() { return key; }
 
     public List<Monster> getMonsters() { return monsters; }
 
-    public void setPlayer(Player player) { this.player = player; }
+    public int getWidth() { return width; }
+
+    public int getHeight() { return height; }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        if (player != null) {
+            player.setRoom(this);
+        }
+    }
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
 
-    public void setDoors(Map<Integer, List<Wall>> doors) { this.doors = doors; }
+    public void setDoors(List<Door> doors) { this.doors = doors; }
+
+    public void setChest(Chest chest) { this.chest = chest; }
+
+    public void setKey(Key key) { this.key = key; }
 
     public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
 
     public  void setLasers(List<Laser> lasers) { this.lasers = lasers; }
 
     public List<Laser> getLasers() { return lasers; }
+
+    public void setWidth(int width) { this.width = width; }
+
+    public void setHeight(int height) { this.height = height; }
+
 }

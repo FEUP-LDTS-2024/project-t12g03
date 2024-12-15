@@ -3,12 +3,15 @@ package projectt12g03.controller.gameController;
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
+import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.menuSate.PauseMenuState;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.movable.Player;
 
 import java.io.IOException;
+
+import static projectt12g03.gui.GUI.userInput.PAUSE;
 
 public class GameController extends Controller<RoomManager> {
     private final PlayerController playerController;
@@ -25,18 +28,23 @@ public class GameController extends Controller<RoomManager> {
 
     @Override
     public void step(Game game, GUI.userInput action, long time) throws IOException {
-        Player player = getModel().getRoom().getPlayer();
+
+        Player player = getModel().getPlayer();
+        Chest chest = getModel().getRoom().getChest();
         getModel().getRoom().checkRayDamage();
-        switch (action) {
-            case PAUSE:
-                game.setState(new PauseMenuState(new PauseMenu(getModel().getRoom())));
-                break;
-            default:
-                monsterController.step(game, action, time);
-                playerController.step(game, action, time);
-                laserController.step(game,action,time);
-                break;
+
+        if (chest.getPotion() != null && chest.isOpened()) {
+            if (chest.getPotion().getImmunity() > 0) chest.getPotion().reduceImmunity();
         }
+
+        if (action == PAUSE)
+            game.setState(new PauseMenuState(new PauseMenu(getModel().getRoom())));
+        else {
+            monsterController.step(game, action, time);
+            playerController.step(game, action, time);
+            laserController.step(game,action,time);
+        }
+
         if (player.getHealth() == 0) game.popState();
     }
 }

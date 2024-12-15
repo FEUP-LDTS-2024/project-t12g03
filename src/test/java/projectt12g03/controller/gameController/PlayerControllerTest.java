@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Player;
+import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 
@@ -32,7 +32,7 @@ class PlayerControllerTest {
 
         Mockito.when(player.getPosition()).thenReturn(new Vector(5, 5));
         Mockito.when(roomManager.getRoom()).thenReturn(room);
-        Mockito.when(roomManager.getRoom().getPlayer()).thenReturn(player);
+        Mockito.when(roomManager.getPlayer()).thenReturn(player);
     }
 
     @Test

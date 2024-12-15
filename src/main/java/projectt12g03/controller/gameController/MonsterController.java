@@ -3,8 +3,7 @@ package projectt12g03.controller.gameController;
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.room.Room;
+import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
@@ -22,17 +21,16 @@ public class MonsterController extends Controller<RoomManager> {
 
                 switch (direction) {
                     case 0:
-                        monster.setPosition(monster.moveUp());
+                        if (monster.canMove(monster.moveUp())) monster.setPosition(monster.moveUp());
                         break;
                     case 1:
-                        monster.setPosition(monster.moveDown());
-                        ;
+                        if (monster.canMove(monster.moveDown())) monster.setPosition(monster.moveDown());
                         break;
                     case 2:
-                        monster.setPosition(monster.moveRight());
+                        if (monster.canMove(monster.moveRight())) monster.setPosition(monster.moveRight());
                         break;
                     case 3:
-                        monster.setPosition(monster.moveLeft());
+                        if (monster.canMove(monster.moveLeft())) monster.setPosition(monster.moveLeft());
                         break;
                 }
             }

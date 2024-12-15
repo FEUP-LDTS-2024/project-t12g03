@@ -3,12 +3,11 @@ package projectt12g03.view.game;
 import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.stationary.Wall;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
 
@@ -35,7 +34,7 @@ public class GameDisplayerTest {
         monster = mock(Monster.class);
 
         when(roomManager.getRoom()).thenReturn(room);
-        when(room.getPlayer()).thenReturn(player);
+        when(roomManager.getPlayer()).thenReturn(player);
         when(room.getMonsters()).thenReturn(Arrays.asList(monster));
         when(room.getWalls()).thenReturn(Arrays.asList(new Wall(1, 1), new Wall(2, 2), new Wall(2, 3)));
 

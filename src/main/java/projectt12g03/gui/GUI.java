@@ -6,7 +6,8 @@ import projectt12g03.model.Vector;
 import java.io.IOException;
 
 public interface GUI {
-    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, ATTACK, SELECT}
+
+    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK};
 
     userInput getNextUserInput() throws IOException;
 

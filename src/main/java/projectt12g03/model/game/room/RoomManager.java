@@ -1,9 +1,15 @@
 package projectt12g03.model.game.room;
 
+
 import projectt12g03.model.game.elements.Laser;
-import projectt12g03.model.game.elements.Monster;
-import projectt12g03.model.game.elements.Player;
-import projectt12g03.model.game.elements.Wall;
+import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.stationary.Chest;
+import projectt12g03.model.game.elements.stationary.Door;
+import projectt12g03.model.game.elements.stationary.Key;
+import projectt12g03.model.game.elements.stationary.Wall;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,46 +23,56 @@ import java.util.Map;
 import static java.lang.Character.isDigit;
 
 public class RoomManager {
+    private final Player player;
+
     private Map<Integer, Room> roomsMap = new HashMap<>();
     private List<String> lines;
     private Integer roomCode = 1;
     private Room room;
 
     public RoomManager() throws IOException {
+        player = new Player(0, 0, null);
 
         URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         this.lines = readLines(br);
 
-        roomBuilder(roomCode); //change in the future
+        loadRoom(roomCode);
     }
 
-    public Room roomBuilder(Integer roomCode) throws IOException {
+    public void loadRoom(Integer roomCode) throws IOException {
         this.roomCode = roomCode;
         if(!roomsMap.containsKey(roomCode)) {
             URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
             this.lines = readLines(br);
-
-            this.room = createRoom(new Player(0, 0, null)); // change (maybe keep track of the player after first creation)
+            this.room = createRoom();
         }
         else {
             this.room = roomsMap.get(roomCode);
+
+            Vector playerPosition = player.calculateNewPosition();
+            player.setPosition(playerPosition);
+            room.setPlayer(player);
         }
 
-        return room;
+        room.setHeight(getHeight());
+        room.setWidth(getWidth());
+        player.setRoom(room);
     }
 
-    public Room createRoom(Player player) {
-        Room room = new Room(getWidth(), getHeight(), roomCode);
+    public Room createRoom() {
+        Room room = new Room(getWidth(), getHeight());
 
         room.setWalls(createWalls());
         room.setDoors(createDoors());
+        room.setChest(createChest());
+        room.setKey(createKey());
         room.setMonsters(createMonsters(room));
-        room.setPlayer(createPlayer(room));
         room.setLasers(createLasers(room));
+        room.setPlayer(createPlayer());
 
         roomsMap.put(roomCode, room);
 
@@ -81,6 +97,10 @@ public class RoomManager {
 
     public Room getRoom() { return room; }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     protected List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
 
@@ -93,24 +113,43 @@ public class RoomManager {
         return walls;
     }
 
-    protected Map<Integer, List<Wall>> createDoors() {
-        Map<Integer, List<Wall>> doorsMap = new HashMap<>();
+    protected List<Door> createDoors() {
+        List<Door> doors = new ArrayList<>();
+
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            int n;
             for (int x = 0; x < line.length(); x++) {
                 if (isDigit(line.charAt(x))) {
-                    n = line.charAt(x) - '0';
-                    if(doorsMap.containsKey(n) && n != 0) doorsMap.get(n).add(new Wall(x,y));
-                    else if ((!doorsMap.containsKey(n)) && n != 0) {
-                        doorsMap.put(n, new ArrayList<>());
-                        doorsMap.get(n).add(new Wall(x,y));
-                    }
+                    int n = line.charAt(x) - '0';
+                    doors.add(new Door(x, y, n));
                 }
             }
         }
+        return doors;
+    }
 
-        return doorsMap;
+    protected Chest createChest() {
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'C') {
+                    return new Chest(x, y);
+                }
+            }
+        }
+        throw new IllegalStateException("Chest not found within the room file!");
+    }
+
+    protected Key createKey() {
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'K') {
+                    return new Key(x, y);
+                }
+            }
+        }
+        throw new IllegalStateException("Key not found within the room file!");
     }
 
     protected List<Monster> createMonsters(Room room) {
@@ -125,12 +164,13 @@ public class RoomManager {
         return monsters;
     }
 
-    protected Player createPlayer(Room room) {
+    protected Player createPlayer() {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++){
                 if (line.charAt(x) == 'P'){
-                    return new Player(x, y, room);
+                    player.setPosition(new Vector(x,y));
+                    return player;
                 }
             }
         }
