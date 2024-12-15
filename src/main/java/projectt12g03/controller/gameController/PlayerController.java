@@ -18,6 +18,7 @@ public class PlayerController extends Controller<RoomManager> {
         Player player = getModel().getPlayer();
         Vector nextPosition = null;
 
+        if (player.getEffectDuration() > 0) player.reduceEffectDuration();
         if (player.getImmunity() > 0) player.reduceImmunity();
         if (player.getIsAttacking() > 0) player.reduceIsAttacking();    //add setState("ATTACKING") when done
 
@@ -45,6 +46,9 @@ public class PlayerController extends Controller<RoomManager> {
                     break;
                 case ATTACK:
                     player.attack();
+                    break;
+                case HEAL:
+                    player.heal();
                     break;
                 default:
                     player.setState("IDLE");
