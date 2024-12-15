@@ -2,7 +2,7 @@ package projectt12g03.model.game.room;
 
 import projectt12g03.model.Vector;
 
-import projectt12g03.model.game.elements.Laser;
+import projectt12g03.model.game.elements.stationary.Laser;
 import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.elements.movable.Player;
 import projectt12g03.model.game.elements.stationary.Chest;

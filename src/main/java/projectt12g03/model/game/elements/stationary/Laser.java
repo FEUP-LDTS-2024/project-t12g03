@@ -1,10 +1,11 @@
-package projectt12g03.model.game.elements;
+package projectt12g03.model.game.elements.stationary;
 
+import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.room.Room;
 
 import java.util.Objects;
 
-public class Laser extends Element{
+public class Laser extends Element {
     private int ACTIVE_TIME = 15;
     private int REST_TIME = 45;
 
