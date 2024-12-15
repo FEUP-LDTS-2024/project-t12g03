@@ -46,10 +46,14 @@ public class Room {
             else if (chest.isUnlockable()) {
                 if (chest.getPotion() != null) {
                     if (chest.getPotion().getImmunity() == 0) {
-                        chest.setPotion(null);
-                        return false;
+                        if (player.getInventory().isNotFull()) {
+                            player.getInventory().addPotion(chest.getPotion());
+                            chest.setPotion(null);
+                            return false;
+                        }
                     }
                 }
+                else return false;
             }
             return true;
         }

@@ -1,6 +1,7 @@
 package projectt12g03.model.game.elements.movable;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.inventory.Inventory;
 import projectt12g03.model.game.room.Room;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class Player extends Movable {
     private int ATTACKDELAY = 6;
     private int IMMUNITY = 15;
 
+    private Inventory inventory;
     private String direction;
     private int immunity = 0;
     private int isAttacking = 0;
@@ -19,6 +21,7 @@ public class Player extends Movable {
         super(x, y, room);
         setVelocity(WALK_SPEED);
         setHealth(HEALTH);
+        inventory = new Inventory();
     }
 
     public void reduceIsAttacking() { this.isAttacking--; }
@@ -30,6 +33,8 @@ public class Player extends Movable {
     public int getIsAttacking() { return isAttacking; }
 
     public String getDirection() { return direction; }
+
+    public Inventory getInventory() { return inventory; }
 
     public void setImmunity(){ this.immunity = IMMUNITY; }
 
