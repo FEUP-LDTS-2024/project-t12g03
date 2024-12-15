@@ -6,19 +6,20 @@ import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.gameDisplayer.elements.movable.MonsterDisplayer;
 import projectt12g03.view.gameDisplayer.elements.movable.PlayerDisplayer;
 import projectt12g03.view.gameDisplayer.elements.stationary.*;
+import projectt12g03.view.gameDisplayer.hud.HudDisplayer;
 
 
 import java.io.IOException;
 
 public class GameDisplayer extends ScreenDisplayer<RoomManager> {
-    private PlayerDisplayer playerDisplayer;
-    private WallDisplayer wallDisplayer;
-    private MonsterDisplayer monsterDisplayer;
-    private LaserDisplayer laserDisplayer;
-    private ChestDisplayer chestDisplayer;
-    private KeyDisplayer keyDisplayer;
-    private FloorDisplayer floorDisplayer;
-    private PotionDisplayer potionDisplayer;
+    private final PlayerDisplayer playerDisplayer;
+    private final WallDisplayer wallDisplayer;
+    private final MonsterDisplayer monsterDisplayer;
+    private final LaserDisplayer laserDisplayer;
+    private final ChestDisplayer chestDisplayer;
+    private final KeyDisplayer keyDisplayer;
+    private final FloorDisplayer floorDisplayer;
+    private final HudDisplayer hudDisplayer;
 
     public GameDisplayer(RoomManager model) throws IOException {
         super(model);
@@ -30,7 +31,7 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         chestDisplayer = new ChestDisplayer();
         keyDisplayer = new KeyDisplayer();
         floorDisplayer = new FloorDisplayer();
-        potionDisplayer = new PotionDisplayer();
+        hudDisplayer = new HudDisplayer();
     }
 
     @Override
@@ -39,11 +40,12 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         floorDisplayer.draw(getModel().getRoom().getFloors(), gui);
         wallDisplayer.draw(getModel().getRoom().getWalls(), gui);
         monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui, frameCount);
-        chestDisplayer.draw(getModel().getRoom().getChest(), gui, potionDisplayer);
+        chestDisplayer.draw(getModel().getRoom().getChest(), gui);
         keyDisplayer.draw(getModel().getRoom().getKey(), gui);
         monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui, frameCount);
         playerDisplayer.draw(getModel().getPlayer(), gui, frameCount);
         laserDisplayer.draw(getModel().getRoom().getLasers(),gui);
+        hudDisplayer.draw(getModel().getPlayer(), gui);
         gui.refresh();
     }
 }

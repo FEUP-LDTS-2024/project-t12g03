@@ -33,9 +33,6 @@ public class PlayerDisplayer {
         sprites = playerMap.get(player.getState());
         int cycle = (int) (frameCount % 6) / 3;
 
-        System.out.println(player.getDirection());
-        System.out.println(player.getState());
-
         switch (player.getDirection()) {
             case "UP":
                 spriteSequence = sprites[0];

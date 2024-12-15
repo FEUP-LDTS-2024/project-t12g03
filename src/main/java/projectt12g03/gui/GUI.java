@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public interface GUI {
 
-    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK};
+    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK, HEAL, ONE, TWO, THREE, FOUR};
 
 
     userInput getNextUserInput() throws IOException;

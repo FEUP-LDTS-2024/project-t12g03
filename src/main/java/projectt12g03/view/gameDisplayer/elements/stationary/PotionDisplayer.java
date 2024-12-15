@@ -1,6 +1,5 @@
 package projectt12g03.view.gameDisplayer.elements.stationary;
 
-import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
 import projectt12g03.model.game.elements.stationary.Potion;
@@ -17,7 +16,7 @@ public class PotionDisplayer {
         potionMap = new HashMap<>();
         potionMap.put("invisibility", new Sprite("sprites/elements/potions/potion_invisibility.png"));
         potionMap.put("speed", new Sprite("sprites/elements/potions/potion_speed.png"));
-        potionMap.put("range", new Sprite("sprites/elements/potions/potion_range.png"));
+        potionMap.put("heal", new Sprite("sprites/elements/potions/potion_heal.png"));
         potionMap.put("immunity", new Sprite("sprites/elements/potions/potion_immunity.png"));
     }
 

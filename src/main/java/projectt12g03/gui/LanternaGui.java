@@ -131,6 +131,11 @@ public class LanternaGui implements GUI {
             case VK_ESCAPE -> userInput.PAUSE;
             case VK_ENTER -> userInput.SELECT;
             case VK_SPACE -> userInput.ATTACK;
+            case VK_H -> userInput.HEAL;
+            case VK_1 -> userInput.ONE;
+            case VK_2 -> userInput.TWO;
+            case VK_3 -> userInput.THREE;
+            case VK_4 -> userInput.FOUR;
             default -> userInput.NONE;
         };
     }

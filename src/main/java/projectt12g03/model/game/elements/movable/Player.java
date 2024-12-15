@@ -1,6 +1,7 @@
 package projectt12g03.model.game.elements.movable;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.stationary.Potion;
 import projectt12g03.model.game.inventory.Inventory;
 import projectt12g03.model.game.room.Room;
 
@@ -8,14 +9,16 @@ import java.util.ArrayList;
 
 public class Player extends Movable {
     private final Inventory inventory;
-    private final int WALK_SPEED = 2;
-    private final int HEALTH = 3;
+    private int WALK_SPEED = 2;
+    private final int HEALTH = 4;
     private final int ATTACKDELAY = 6;
     private final int IMMUNITY = 15;
 
-    private String direction;
+    private String lastEffect;
     private int immunity = 0;
     private int isAttacking = 0;
+    private int energy = 800;
+    private int effectDuration = 0;
 
     public Player(double x, double y, Room room) {
         super(x, y, room);
@@ -26,15 +29,63 @@ public class Player extends Movable {
         inventory = new Inventory();
     }
 
+    public void heal() {
+        if (getHealth() < 4) {
+            energy = 0;
+            int newHealth = getHealth() + 1;
+            setHealth(newHealth);
+        }
+    }
+
+    public void consume(Potion potion) {
+        if (effectDuration == 0) {
+            effectDuration = potion.getDuration();
+            switch (potion.getEffect()) {
+                case "speed":
+                    setVelocity(WALK_SPEED*3);
+                    lastEffect = "speed";
+                    break;
+                case "heal":
+                    increaseHealth();
+                    lastEffect = "heal";
+                    break;
+                default:
+                    lastEffect = "HERE SO IT DOESNT STOP RUNNING"; //remove after all effects added
+            }
+        }
+    }
+
+    public void removeEffect() {
+        switch (lastEffect) {
+            case "speed":
+                setVelocity(WALK_SPEED);
+                break;
+        }
+    }
+
     public void reduceIsAttacking() { this.isAttacking--; }
 
     public void reduceImmunity() { this.immunity--; }
+
+    public void reduceEffectDuration() {
+        this.effectDuration--;
+        System.out.println(effectDuration);
+        if (effectDuration == 0) {
+            removeEffect();
+        }
+    }
+
+    public void increaseEnergy() { this.energy++;}
+
+    public int getEffectDuration() { return effectDuration;}
 
     public int getImmunity() { return immunity; }
 
     public int getIsAttacking() { return isAttacking; }
 
     public Inventory getInventory() { return inventory; }
+
+    public int getEnergy() { return energy; }
 
     public void setImmunity(){ this.immunity = IMMUNITY; }
 
@@ -56,7 +107,7 @@ public class Player extends Movable {
         if(isAttacking != 0) return;
         isAttacking = ATTACKDELAY;
         ArrayList<Vector> positions = new ArrayList<>();
-        switch (direction){
+        switch (getDirection()){
             case "LEFT":
                 positions.add(new Vector(getPosition().getX() - 1,getPosition().getY()));
                 positions.add(new Vector(getPosition().getX() - 2,getPosition().getY()));

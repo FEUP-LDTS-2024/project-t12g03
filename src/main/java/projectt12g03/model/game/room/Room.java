@@ -64,7 +64,6 @@ public class Room {
         if (monsterCollision && player.getImmunity() == 0){
             player.reduceHealth();
             player.setImmunity();
-            System.out.println("Damage taken : " + player.getHealth());
         }
 
         return monsterCollision;
@@ -110,7 +109,6 @@ public class Room {
     public void checkRayDamage() {
         if (checkRayCollision(player.getPosition()) && player.getImmunity() == 0){
             player.reduceHealth();
-            System.out.println("Damage taken: " + player.getHealth());
             player.setImmunity();
             return;
         }

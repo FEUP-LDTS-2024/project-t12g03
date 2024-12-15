@@ -4,15 +4,16 @@ import projectt12g03.model.game.elements.Element;
 
 import java.util.Random;
 
-public class Potion extends Element {
+public class Potion {
     private String effect;
     private int duration;
     private int immunity = 15;
 
-    public Potion(double x, double y) {
-        super(x,y);
+    public Potion() {
         createEffect();
     }
+
+    public int getDuration() { return duration; }
 
     public int getImmunity() { return immunity; }
 
@@ -32,12 +33,12 @@ public class Potion extends Element {
                 duration = 150;
                 break;
             case 2:
-                effect = "range";
-                duration = 300;
+                effect = "heal";
+                duration = 0;
                 break;
             case 3:
                 effect = "immunity";
-                duration = 150;
+                duration = 300;
                 break;
         }
     }
