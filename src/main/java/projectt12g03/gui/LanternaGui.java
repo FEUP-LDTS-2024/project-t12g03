@@ -97,9 +97,6 @@ public class LanternaGui implements GUI {
 
     public int getHeight() { return terminalSize.getRows(); }
 
-    //remove "//" after adding player
-    //public Set<Integer> getPressedKeys() { return pressedKeys; }
-
     private KeyAdapter createKeyAdapter() {
         return new KeyAdapter() {
             @Override
@@ -116,8 +113,6 @@ public class LanternaGui implements GUI {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (keySpam) {
-                    //remove "//" after adding player
-                    //pressedKeys.remove(e.getKeyCode());
                     keyPressed = priorityKey = null;
                 }
                 else
@@ -128,30 +123,22 @@ public class LanternaGui implements GUI {
 
     @Override
     public userInput getNextUserInput() {
-        //remove "//" after adding player
-        //List<userInput> inputs = new ArrayList<>();
-        //inputs.add(userInput.NONE);
-
-        //remove "/* */" after adding player
-        if (/*pressedKeys.isEmpty() && */keyPressed == null)
+        if (keyPressed == null)
             return userInput.NONE;
 
         int keyCode = keyPressed.getKeyCode();
         keyPressed = priorityKey;
 
-        //if(!keySpam) { remove "//" after adding player
-            return switch (keyCode) {
-                case VK_LEFT -> userInput.LEFT;
-                case VK_RIGHT -> userInput.RIGHT;
-                case VK_UP -> userInput.UP;
-                case VK_DOWN -> userInput.DOWN;
-                case VK_ESCAPE -> userInput.PAUSE;
-                case VK_ENTER -> userInput.SELECT;
-                case VK_SPACE -> userInput.ATTACK;
-                case VK_I -> userInput.INVENTORY;
-                default -> userInput.NONE;
-            };
-        //} //remove "//" after adding player
+        return switch (keyCode) {
+            case VK_A, VK_LEFT -> userInput.LEFT;
+            case VK_D, VK_RIGHT -> userInput.RIGHT;
+            case VK_W, VK_UP -> userInput.UP;
+            case VK_S, VK_DOWN -> userInput.DOWN;
+            case VK_ESCAPE -> userInput.PAUSE;
+            case VK_ENTER -> userInput.SELECT;
+            case VK_SPACE -> userInput.ATTACK;
+            default -> userInput.NONE;
+        };
     }
 
     public void setKeySpam(boolean keySpam) {

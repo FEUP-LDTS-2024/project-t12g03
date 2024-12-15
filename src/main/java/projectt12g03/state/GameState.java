@@ -1,5 +1,6 @@
 package projectt12g03.state;
 
+import projectt12g03.controller.gameController.LaserController;
 import projectt12g03.controller.gameController.MonsterController;
 import projectt12g03.controller.gameController.PlayerController;
 import projectt12g03.controller.gameController.GameController;
@@ -16,7 +17,7 @@ public class GameState extends State<RoomManager> {
 
     @Override
     protected Controller<RoomManager> getController() {
-        return new GameController(getModel(), new PlayerController(getModel()), new MonsterController(getModel()));
+        return new GameController(getModel(), new PlayerController(getModel()), new MonsterController(getModel()), new LaserController(getModel()));
     }
 
     @Override

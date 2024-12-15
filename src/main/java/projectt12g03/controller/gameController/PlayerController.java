@@ -2,6 +2,7 @@ package projectt12g03.controller.gameController;
 
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
+import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Player;
@@ -10,8 +11,6 @@ import projectt12g03.model.game.room.RoomManager;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
-
-
     public PlayerController(RoomManager model) { super(model); }
 
     @Override
@@ -20,6 +19,7 @@ public class PlayerController extends Controller<RoomManager> {
         Vector nextPosition = null;
 
         if (player.getImmunity() > 0) player.reduceImmunity();
+        if (player.getIsAttacking() > 0) player.reduceIsAttacking();
 
         switch (action) {
             case UP:
@@ -42,8 +42,12 @@ public class PlayerController extends Controller<RoomManager> {
                 player.setDirection("RIGHT");
                 player.setState("WALKING");
                 break;
+            case ATTACK:
+                player.attack();
+                break;
             default:
                 player.setState("IDLE");
+                break;
         }
 
         if (nextPosition != null) {
@@ -54,5 +58,4 @@ public class PlayerController extends Controller<RoomManager> {
             }
         }
     }
-
 }
