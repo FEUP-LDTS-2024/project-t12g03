@@ -30,10 +30,14 @@ public class PlayerDisplayer {
     public void draw(Player player, GUI gui, long frameCount) {
         Sprite[][] sprites;
         Sprite[] spriteSequence;
+        sprites = playerMap.get(player.getState());
         int cycle = (int) (frameCount % 6) / 3;
+
+        System.out.println(player.getDirection());
+        System.out.println(player.getState());
+
         switch (player.getDirection()) {
             case "UP":
-                sprites = playerMap.get(player.getState());
                 spriteSequence = sprites[0];
                 if (player.getState().equals("WALKING")) {
                     spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
@@ -41,7 +45,6 @@ public class PlayerDisplayer {
                 else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
                 break;
             case "DOWN":
-                sprites = playerMap.get(player.getState());
                 spriteSequence = sprites[1];
                 if (player.getState().equals("WALKING")) {
                     spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
@@ -49,7 +52,6 @@ public class PlayerDisplayer {
                 else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
                 break;
             case "LEFT":
-                sprites = playerMap.get(player.getState());
                 spriteSequence = sprites[2];
                 if (player.getState().equals("WALKING")) {
                     spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
@@ -57,7 +59,6 @@ public class PlayerDisplayer {
                 else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
                 break;
             case "RIGHT":
-                sprites = playerMap.get(player.getState());
                 spriteSequence = sprites[3];
                 if (player.getState().equals("WALKING")) {
                     spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());

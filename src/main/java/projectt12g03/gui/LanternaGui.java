@@ -30,8 +30,6 @@ public class LanternaGui implements GUI {
     private TerminalSize terminalSize;
     private TerminalScreen screen;
 
-    //remove "//" after adding player
-    //private Set<Integer> pressedKeys;
     private final KeyAdapter keyAdapter;
     private KeyEvent keyPressed;
     private KeyEvent priorityKey;
@@ -43,8 +41,6 @@ public class LanternaGui implements GUI {
         this.keyPressed = null;
         this.priorityKey = null;
         this.keySpam = false;
-        //remove "//" after adding player
-        //this.pressedKeys = new HashSet<>();
         this.keyAdapter = createKeyAdapter();
         this.screen = createScreen();
         this.title = title;
@@ -102,8 +98,6 @@ public class LanternaGui implements GUI {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (keySpam) {
-                    //remove "//" after adding player
-                    //pressedKeys.add(e.getKeyCode());
                     keyPressed = priorityKey = e;
                 }
                 else

@@ -9,7 +9,7 @@ public class Chest extends Element {
 
     public Chest(double x, double y) {
         super(x, y);
-        potion = new Potion();
+        potion = new Potion(x,y);
     }
 
     public boolean isUnlockable() { return unlockable; }

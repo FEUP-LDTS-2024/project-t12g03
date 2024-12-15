@@ -34,8 +34,6 @@ public class Player extends Movable {
 
     public int getIsAttacking() { return isAttacking; }
 
-    public String getDirection() { return direction; }
-
     public Inventory getInventory() { return inventory; }
 
     public void setImmunity(){ this.immunity = IMMUNITY; }

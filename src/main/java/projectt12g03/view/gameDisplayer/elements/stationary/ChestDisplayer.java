@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
 import projectt12g03.model.game.elements.stationary.Chest;
+import projectt12g03.model.game.elements.stationary.Potion;
 
 import java.io.IOException;
 import java.util.Map;
@@ -20,27 +21,13 @@ public class ChestDisplayer {
         this.sprite = new Sprite("sprites/elements/chest/chest.png");
     }
 
-    public void draw(Chest chest, GUI gui) {
+    public void draw(Chest chest, GUI gui, PotionDisplayer potionDisplayer) {
         if (!chest.isOpened())
             sprite.draw(gui, chest.getPosition().getX(), chest.getPosition().getY());
         else {
-            if (chest.getPotion() != null) {
-                String effect = chest.getPotion().getEffect();
-                switch (effect) {
-                    case "invisibility":
-                        gui.drawPixel(chest.getPosition().getX(), chest.getPosition().getY(), invisibilityColor);
-                        break;
-                    case "speed":
-                        gui.drawPixel(chest.getPosition().getX(), chest.getPosition().getY(), speedColor);
-                        break;
-                    case "range":
-                        gui.drawPixel(chest.getPosition().getX(), chest.getPosition().getY(), rangeColor);
-                        break;
-                    case "immunity":
-                        gui.drawPixel(chest.getPosition().getX(), chest.getPosition().getY(), immunityColor);
-                        break;
-
-                }
+            Potion potion = chest.getPotion();
+            if (potion != null) {
+                potionDisplayer.draw(potion, chest.getPosition(), gui);
             }
         }
     }

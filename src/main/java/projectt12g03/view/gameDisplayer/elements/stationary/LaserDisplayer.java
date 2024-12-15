@@ -1,4 +1,4 @@
-package projectt12g03.view.game.elements;
+package projectt12g03.view.gameDisplayer.elements.stationary;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
