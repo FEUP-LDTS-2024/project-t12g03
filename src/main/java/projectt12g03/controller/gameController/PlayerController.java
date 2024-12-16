@@ -58,7 +58,7 @@ public class PlayerController extends Controller<RoomManager> {
             if (nextPosition != null) {
                 if (player.canMove(nextPosition)) {
                     player.setPosition(nextPosition);
-                } else if (getModel().getRoom().isAtTransition(nextPosition)) {
+                } else if (getModel().getRoom().isAtTransition(player, nextPosition)) {
                     getModel().loadRoom(getModel().getRoom().getDoorNumber(nextPosition)); // Transition to the next room
                 }
             }

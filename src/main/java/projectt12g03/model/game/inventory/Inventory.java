@@ -25,13 +25,10 @@ public class Inventory {
         }
     }
 
-    public Potion removePotion(int index) {
+    public void removePotion(int index) {
         if (index >= 0 && index < potions.size() && potions.get(index) != null) {
-            Potion removedPotion = potions.get(index);
             potions.set(index, null);
-            return removedPotion;
         }
-        return null;
     }
 
     public Potion getPotion(int index) {

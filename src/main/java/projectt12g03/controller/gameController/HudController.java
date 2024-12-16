@@ -37,9 +37,10 @@ public class HudController extends Controller<RoomManager> {
                 inventory.select(3);
                 break;
             case SELECT:
-                Potion potion = inventory.removePotion(inventory.getSlotSelected());
-                if (potion != null) {
+                Potion potion = inventory.getPotion(inventory.getSlotSelected());
+                if (potion != null && player.getEffectDuration() == 0) {
                     player.consume(potion);
+                    inventory.removePotion(inventory.getSlotSelected());
                 }
                 break;
         }

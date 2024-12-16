@@ -7,46 +7,45 @@ import projectt12g03.model.game.elements.movable.Monster;
 import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
-import java.util.Random;
+import java.util.*;
 
 public class MonsterController extends Controller<RoomManager> {
-    public MonsterController(RoomManager model) { super(model); }
+    public MonsterController(RoomManager model) {
+        super(model);
+    }
 
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
         Random rand = new Random();
         for (Monster monster : getModel().getRoom().getMonsters()) {
-            if(time % (game.getFps() / 2) != 0) {
-                monster.setState("IDLE");
-                continue;
-            }
+            if(time % (game.getFps() / 2) == 0) {
+                int direction = rand.nextInt(5);
 
-            int direction = rand.nextInt(5);
-
-            switch (direction) {
-                case 0:
-                    if (monster.canMove(monster.moveUp())) monster.setPosition(monster.moveUp());
-                    monster.setDirection("UP");
-                    monster.setState("WALKING");
-                    break;
-                case 1:
-                    if (monster.canMove(monster.moveDown())) monster.setPosition(monster.moveDown());
-                    monster.setDirection("DOWN");
-                    monster.setState("WALKING");
-                    break;
-                case 2:
-                    if (monster.canMove(monster.moveRight())) monster.setPosition(monster.moveRight());
-                    monster.setDirection("RIGHT");
-                    monster.setState("WALKING");
-                    break;
-                case 3:
-                    if (monster.canMove(monster.moveLeft())) monster.setPosition(monster.moveLeft());
-                    monster.setDirection("LEFT");
-                    monster.setState("WALKING");
-                    break;
-                case 4:
-                    monster.setState("IDLE");
-                    break;
+                switch (direction) {
+                    case 0:
+                        if (monster.canMove(monster.moveUp())) monster.setPosition(monster.moveUp());
+                        monster.setDirection("UP");
+                        monster.setState("WALKING");
+                        break;
+                    case 1:
+                        if (monster.canMove(monster.moveDown())) monster.setPosition(monster.moveDown());
+                        monster.setDirection("DOWN");
+                        monster.setState("WALKING");
+                        break;
+                    case 2:
+                        if (monster.canMove(monster.moveRight())) monster.setPosition(monster.moveRight());
+                        monster.setDirection("RIGHT");
+                        monster.setState("WALKING");
+                        break;
+                    case 3:
+                        if (monster.canMove(monster.moveLeft())) monster.setPosition(monster.moveLeft());
+                        monster.setDirection("LEFT");
+                        monster.setState("WALKING");
+                        break;
+                    case 4:
+                        monster.setState("IDLE");
+                        break;
+                }
             }
         }
     }

@@ -4,12 +4,13 @@ import projectt12g03.model.game.elements.Element;
 
 import java.util.Random;
 
-public class Potion {
+public class Potion extends Element {
     private String effect;
     private int duration;
     private int immunity = 15;
 
-    public Potion() {
+    public Potion(int x,int y) {
+        super(x,y, 1,7,14,9);
         createEffect();
     }
 

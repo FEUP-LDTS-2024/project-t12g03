@@ -11,8 +11,8 @@ public abstract class Movable extends Element {
     private String direction;
     private String state;
 
-    public Movable(double x, double y, Room room) {
-        super(x,y);
+    public Movable(int x, int y, Room room) {
+        super(x,y,2,16,12,16);
         this.room = room;
     }
 
@@ -55,4 +55,5 @@ public abstract class Movable extends Element {
     }
 
     public abstract boolean canMove(Vector position);
+
 }
