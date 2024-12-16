@@ -15,6 +15,7 @@ public class Laser extends Element {
     private String direction;
     private int active;
     private int resting;
+    private int range;
     private Room room;
 
     public Laser(int x, int y,String direction, Room room) {
@@ -22,8 +23,14 @@ public class Laser extends Element {
         setDirection(direction);
         setActive(0);
         setResting(REST_TIME);
-        laserBeamHitbox = new Rectangle(-1, 7, 1, 6);
+        setLaserBeamHitbox();
         this.room = room;
+        this.range = 0;
+    }
+
+    private void setLaserBeamHitbox() {
+        if (direction.equals("LEFT")) laserBeamHitbox = new Rectangle(-1, 5, 1, 6);
+        else laserBeamHitbox = new Rectangle(16, 5, 1, 6);
     }
 
     public String getDirection() {return direction;}
@@ -53,5 +60,9 @@ public class Laser extends Element {
 
     public Rectangle getLaserBeamHitbox() {
         return laserBeamHitbox;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 }

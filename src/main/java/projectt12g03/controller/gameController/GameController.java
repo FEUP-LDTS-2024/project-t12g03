@@ -33,7 +33,6 @@ public class GameController extends Controller<RoomManager> {
 
         Player player = getModel().getPlayer();
         Chest chest = getModel().getRoom().getChest();
-        getModel().getRoom().checkRayDamage();
 
         if (chest.getPotion() != null && chest.isOpened()) {
             if (chest.getPotion().getImmunity() > 0) chest.getPotion().reduceImmunity();
