@@ -85,8 +85,8 @@ public class Room {
     }
 
     public boolean checkCollisionsForMonster(Monster monster, Vector position) {
-        return checkWallCollision(monster, position) || checkMonsterCollision(monster, position) || checkPlayerCollision(monster, position) ||
-                isAtTransition(monster, position) || checkKeyCollision(monster, position) || checkChestCollision(monster, position) || checkLaserCollision(monster, position);
+        return checkWallCollision(monster, position) || checkMonsterCollision(monster, position) || isAtTransition(monster, position) ||
+                checkKeyCollision(monster, position) || checkChestCollision(monster, position) || checkLaserCollision(monster, position) || checkPlayerCollision(monster, position);
     }
 
     public void checkAttackCollision(ArrayList<Vector> positions) {
@@ -102,7 +102,14 @@ public class Room {
     }
 
     private boolean checkPlayerCollision(Element a, Vector position) {
-        return checkCollision(a, player, position);
+        if(checkCollision(a, player, position)) {
+            if(player.getImmunity() == 0) {
+                player.reduceHealth();
+                player.setImmunity();
+            }
+            return true;
+        }
+        return false;
     }
 
     private boolean checkMonsterCollision(Element a, Vector position) {
@@ -139,7 +146,7 @@ public class Room {
         return checkCollision(a, chest, position);
     }
 
-    private boolean checkCollisionsForLaser(Laser laser, int displacement) { //change after hitboxs working
+    private boolean checkCollisionsForLaser(Laser laser, int displacement) {
         Vector laserBeamPosition = new Vector (displacement, laser.getPosition().getY());
         if(checkCollisionForBeam(player, laser.getLaserBeamHitbox(), laserBeamPosition)) {
             if (player.getImmunity() == 0) {

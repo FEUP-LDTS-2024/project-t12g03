@@ -12,7 +12,7 @@ public class Player extends Movable {
     private final int WALK_SPEED = 2;
     private final int HEALTH = 4;
     private final int ATTACKDELAY = 6;
-    private final int IMMUNITY = 60;
+    private final int IMMUNITY = 30;
 
     private String lastEffect;
     private int immunity = 0;

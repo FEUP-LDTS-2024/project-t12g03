@@ -16,7 +16,7 @@ public class HealthDisplayer {
 
     public void draw(int health, GUI gui) {
         for (int i = 0; i < health; i++) {
-            sprite.draw(gui, 19 + (i * SPACING), 170);
+            sprite.draw(gui, 19 + (i * SPACING), 266);
         }
     }
 }
