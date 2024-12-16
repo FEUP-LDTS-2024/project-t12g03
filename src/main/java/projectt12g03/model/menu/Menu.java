@@ -1,14 +1,18 @@
 package projectt12g03.model.menu;
 
-import projectt12g03.model.Vector;
 
 import java.util.*;
 
 public abstract class Menu {
-    protected final Map<String, Vector> entries = new LinkedHashMap<>();
-    protected final List<String> entriesList = new ArrayList<>();
-    protected int currentEntry = 0;
-    
+    public enum Type { START, CONTROLS, CREDITS, EXIT, GO_BACK, RESUME }
+
+    private final Map<Integer, Type> entries;
+    private int currentEntry = 0;
+
+    public Menu() {
+        this.entries = createEntries();
+    }
+
     public void moveUp() {
         currentEntry--;
         if (currentEntry < 0)
@@ -25,15 +29,11 @@ public abstract class Menu {
         return currentEntry;
     }
 
-    public String getCurrentEntry() {
-        return entriesList.get(currentEntry);
+    protected abstract Map<Integer, Type> createEntries();
+
+    public Type getCurrentEntry() {
+        return entries.get(currentEntry);
     }
 
-    public int getNumberEntries() { return entriesList.size(); }
-
-    public List<String> getEntries() { return entriesList; }
-
-    public Vector getEntryPosition(String entryName) { return entries.get(entryName); }
-
-
+    public int getNumberEntries() { return entries.size(); }
 }
