@@ -32,7 +32,7 @@ public class Room {
         this.height = height;
     }
 
-    public boolean checkCollision(Element a, Element b, Vector position) {
+    private boolean checkCollision(Element a, Element b, Vector position) {
         int aHitboxX = position.getX() + a.getHitbox().x;
         int aHitboxY = position.getY() + a.getHitbox().y;
         int aHitboxWidth = a.getHitbox().width;
@@ -74,7 +74,7 @@ public class Room {
         return checkWallCollision(player, position) || checkMonsterDamage(position) || isAtTransition(player, position) || checkLaserCollision(player, position);
     }
 
-    public boolean checkMonsterDamage(Vector position) {
+    private boolean checkMonsterDamage(Vector position) {
         boolean monsterCollision = checkMonsterCollision(player, position);
         if (monsterCollision && player.getImmunity() == 0) {
             player.reduceHealth();
@@ -101,11 +101,11 @@ public class Room {
         }
     }
 
-    public boolean checkPlayerCollision(Element a, Vector position) {
+    private boolean checkPlayerCollision(Element a, Vector position) {
         return checkCollision(a, player, position);
     }
 
-    public boolean checkMonsterCollision(Element a, Vector position) {
+    private boolean checkMonsterCollision(Element a, Vector position) {
         for (Monster monster : monsters) {
             if (checkCollision(a, monster, position) && (monster != a))
                 return true;
@@ -113,7 +113,7 @@ public class Room {
         return false;
     }
 
-    public boolean checkLaserCollision(Element a, Vector position) {
+    private boolean checkLaserCollision(Element a, Vector position) {
         for (Laser laser : lasers) {
             if (checkCollision(a, laser, position))
                 return true;
@@ -121,40 +121,7 @@ public class Room {
         return false;
     }
 
-    public void checkRayDamage() { //change after hitboxs working
-        if (checkRayCollision(player.getPosition()) && player.getImmunity() == 0) {
-            player.reduceHealth();
-            player.setImmunity();
-            return;
-        }
-        for (Monster monster : monsters) {
-            if (checkRayCollision(monster.getPosition())) {
-                monster.reduceHealth();
-                if (monster.getHealth() == 0) monsters.remove(monster);
-                return;
-            }
-        }
-
-    }
-
-    public boolean checkRayCollision(Vector position) { //change after hitboxs working
-        for (Laser laser : lasers) {
-            if (laser.getActive() == 0) return false;
-            switch (laser.getDirection()) {
-                case "LEFT":
-                    if (position.equals(new Vector(laser.getPosition().getX() - getLaserRange(laser) - 1, laser.getPosition().getY())))
-                        return true;
-                    break;
-                case "RIGHT":
-                    if (position.equals(new Vector(laser.getPosition().getX() + getLaserRange(laser) + 1, laser.getPosition().getY())))
-                        return true;
-                    break;
-            }
-        }
-        return false;
-    }
-
-    public boolean checkWallCollision(Element a, Vector position) {
+    private boolean checkWallCollision(Element a, Vector position) {
         for (Wall wall : walls) {
             if (checkCollision(a, wall, position))
                 return true;
@@ -162,18 +129,55 @@ public class Room {
         return false;
     }
 
-    public boolean checkKeyCollision(Element a, Vector position) {
+    private boolean checkKeyCollision(Element a, Vector position) {
         if (key == null) return false;
 
         return checkCollision(a, key, position);
     }
 
-    public boolean checkChestCollision(Element a, Vector position) {
+    private boolean checkChestCollision(Element a, Vector position) {
         return checkCollision(a, chest, position);
     }
 
-    private boolean checkCollisionsForLaser(Vector vector) { //change after hitboxs working
-        return true;
+    private boolean checkCollisionsForLaser(Laser laser, int displacement) { //change after hitboxs working
+        Vector laserBeamPosition = new Vector (displacement, laser.getPosition().getY());
+        if(checkCollisionForBeam(player, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+            if (player.getImmunity() == 0) {
+                player.reduceHealth();
+                player.setImmunity();
+            }
+            return true;
+        }
+
+        for (Wall wall : walls) {
+            if(checkCollisionForBeam(wall, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+                return true;
+            }
+        }
+
+        for (Monster monster : monsters) {
+            if(checkCollisionForBeam(monster, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkCollisionForBeam(Element b, Rectangle laserBeamHitbox, Vector position) {
+        int aHitboxX = position.getX() + laserBeamHitbox.x;
+        int aHitboxY = position.getY() + laserBeamHitbox.y;
+        int aHitboxWidth = laserBeamHitbox.width;
+        int aHitboxHeight = laserBeamHitbox.height;
+
+        int bHitboxX = b.getPosition().getX() + b.getHitbox().x;
+        int bHitboxY = b.getPosition().getY() + b.getHitbox().y;
+        int bHitboxWidth = b.getHitbox().width;
+        int bHitboxHeight = b.getHitbox().height;
+
+        boolean collisionX = aHitboxX < bHitboxX + bHitboxWidth && aHitboxX + aHitboxWidth > bHitboxX;
+        boolean collisionY = aHitboxY < bHitboxY + bHitboxHeight && aHitboxY + aHitboxHeight > bHitboxY;
+
+        return collisionX && collisionY;
     }
 
     public boolean isAtTransition(Element a, Vector position) {
@@ -202,14 +206,14 @@ public class Room {
         switch (laser.getDirection()) {
             case "RIGHT":
                 pos++;
-                while (!checkCollisionsForLaser(new Vector(pos, laser.getPosition().getY()))) {
+                while (!checkCollisionsForLaser(laser, pos)) {
                     range++;
                     pos++;
                 }
                 break;
             case "LEFT":
                 pos--;
-                while (!checkCollisionsForLaser(new Vector(pos, laser.getPosition().getY()))) {
+                while (!checkCollisionsForLaser(laser, pos)) {
                     range++;
                     pos--;
                 }
