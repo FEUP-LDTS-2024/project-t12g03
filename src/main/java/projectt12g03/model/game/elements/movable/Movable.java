@@ -8,6 +8,7 @@ public abstract class Movable extends Element {
     public Room room;
     private int velocity;
     private int health;
+    private int speed_boost;
     private String direction;
     private String state;
 
@@ -34,24 +35,26 @@ public abstract class Movable extends Element {
 
     public void setHealth(int h){ this.health = h; }
 
+    public void setSpeedBoost(int speedBoost) { this.speed_boost = speedBoost; }
+
     public void reduceHealth() { this.health--; }
 
     public void increaseHealth(){ this.health++; }
 
     public Vector moveUp() {
-        return new Vector(getPosition().getX(), getPosition().getY() - velocity);
+        return new Vector(getPosition().getX(), getPosition().getY() - (velocity * speed_boost));
     }
 
     public Vector moveDown() {
-        return new Vector(getPosition().getX(), getPosition().getY() + velocity);
+        return new Vector(getPosition().getX(), getPosition().getY() + (velocity * speed_boost));
     }
 
     public Vector moveRight() {
-        return new Vector(getPosition().getX() + velocity, getPosition().getY());
+        return new Vector(getPosition().getX() + (velocity * speed_boost), getPosition().getY());
     }
 
     public Vector moveLeft() {
-        return new Vector(getPosition().getX() - velocity, getPosition().getY());
+        return new Vector(getPosition().getX() - (velocity * speed_boost), getPosition().getY());
     }
 
     public abstract boolean canMove(Vector position);

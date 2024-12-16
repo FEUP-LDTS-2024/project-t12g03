@@ -17,9 +17,9 @@ public class PlayerController extends Controller<RoomManager> {
         Player player = getModel().getPlayer();
         Vector nextPosition = null;
 
-        if (player.getEffectDuration() > 0) player.reduceEffectDuration();
-        if (player.getImmunity() > 0) player.reduceImmunity();
-        if (player.getIsAttacking() > 0) {
+        reducePlayerCooldDowns(player);
+
+        if (player.getIsAttacking() > 0) {  //player cant move when attacking
             player.reduceIsAttacking();
             getModel().getRoom().checkAttackCollision();
         }
@@ -50,6 +50,8 @@ public class PlayerController extends Controller<RoomManager> {
                     player.setState("ATTACKING");
                     player.attack();
                     break;
+                case SPRINT:
+                    player.sprint();
                 case HEAL:
                     player.heal();
                     break;
@@ -66,5 +68,14 @@ public class PlayerController extends Controller<RoomManager> {
                 }
             }
         }
+    }
+
+    private void reducePlayerCooldDowns(Player player) {
+        if (player.isSprinting()) {
+            player.reduceEnergy();
+            if (player.getEnergy() < 5) player.walk();
+        }
+        if (player.getEffectDuration() > 0) player.reduceEffectDuration();
+        if (player.getImmunity() > 0) player.reduceImmunity();
     }
 }
