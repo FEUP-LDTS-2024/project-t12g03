@@ -2,7 +2,7 @@ package projectt12g03.view.gameDisplayer.elements.movable;
 
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
-import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.movable.player.Player;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,6 +24,12 @@ public class PlayerDisplayer {
                 { new Sprite("sprites/elements/hero/down/hero_walk_down1.png"), new Sprite("sprites/elements/hero/down/hero_walk_down2.png") },
                 { new Sprite("sprites/elements/hero/left/hero_walk_left1.png"), new Sprite("sprites/elements/hero/left/hero_walk_left2.png") },
                 { new Sprite("sprites/elements/hero/right/hero_walk_right1.png"), new Sprite("sprites/elements/hero/right/hero_walk_right2.png")}
+        });
+        playerMap.put("ATTACKING", new Sprite[][]{
+                {new Sprite("sprites/elements/hero/up/hero_attacking_up.png")},
+                {new Sprite("sprites/elements/hero/down/hero_attacking_down.png")},
+                {new Sprite("sprites/elements/hero/left/hero_attacking_left.png")},
+                {new Sprite("sprites/elements/hero/right/hero_attacking_right.png")}
         });
     }
 

@@ -1,11 +1,11 @@
-package projectt12g03.model.game.elements.movable;
+package projectt12g03.model.game.elements.movable.hostile;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.movable.Movable;
 import projectt12g03.model.game.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Monster extends Movable {
     private int WALK_SPEED = 1;

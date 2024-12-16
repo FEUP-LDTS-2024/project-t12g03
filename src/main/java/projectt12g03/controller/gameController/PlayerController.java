@@ -2,10 +2,9 @@ package projectt12g03.controller.gameController;
 
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
-import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.RoomManager;
 
 import java.io.IOException;
@@ -20,7 +19,10 @@ public class PlayerController extends Controller<RoomManager> {
 
         if (player.getEffectDuration() > 0) player.reduceEffectDuration();
         if (player.getImmunity() > 0) player.reduceImmunity();
-        if (player.getIsAttacking() > 0) player.reduceIsAttacking();    //add setState("ATTACKING") when done
+        if (player.getIsAttacking() > 0) {
+            player.reduceIsAttacking();
+            getModel().getRoom().checkAttackCollision();
+        }
 
         else {
             switch (action) {
@@ -45,6 +47,7 @@ public class PlayerController extends Controller<RoomManager> {
                     player.setState("WALKING");
                     break;
                 case ATTACK:
+                    player.setState("ATTACKING");
                     player.attack();
                     break;
                 case HEAL:

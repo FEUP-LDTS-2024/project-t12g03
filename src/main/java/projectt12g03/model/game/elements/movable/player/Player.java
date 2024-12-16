@@ -1,24 +1,27 @@
-package projectt12g03.model.game.elements.movable;
+package projectt12g03.model.game.elements.movable.player;
 
 import projectt12g03.model.Vector;
+import projectt12g03.model.game.elements.movable.Movable;
 import projectt12g03.model.game.elements.stationary.Potion;
 import projectt12g03.model.game.inventory.Inventory;
 import projectt12g03.model.game.room.Room;
 
-import java.util.ArrayList;
+import java.awt.*;
 
-public class Player extends Movable {
+public class Player extends Movable implements Weapon {
     private final Inventory inventory;
     private final int WALK_SPEED = 2;
     private final int HEALTH = 4;
     private final int ATTACKDELAY = 6;
     private final int IMMUNITY = 30;
 
+    private Rectangle spear;
     private String lastEffect;
     private int immunity = 0;
     private int isAttacking = 0;
     private int energy = 800;
     private int effectDuration = 0;
+
 
     public Player(int x, int y, Room room) {
         super(x, y, room);
@@ -90,6 +93,8 @@ public class Player extends Movable {
 
     public int getEnergy() { return energy; }
 
+    public Rectangle getSpear() { return spear; }
+
     public void setImmunity(){ this.immunity = IMMUNITY; }
 
     public void setImmunity(int immunity) {this.immunity = immunity; };
@@ -111,32 +116,21 @@ public class Player extends Movable {
     public void attack(){
         if(isAttacking != 0) return;
         isAttacking = ATTACKDELAY;
-        ArrayList<Vector> positions = new ArrayList<>();
-        switch (getDirection()){
-            case "LEFT":
-                positions.add(new Vector(getPosition().getX() - 1,getPosition().getY()));
-                positions.add(new Vector(getPosition().getX() - 2,getPosition().getY()));
-                room.checkAttackCollision(positions);
-                break;
-            case "RIGHT":
-                positions.add(new Vector(getPosition().getX() + 1,getPosition().getY()));
-                positions.add(new Vector(getPosition().getX() + 2,getPosition().getY()));
-                room.checkAttackCollision(positions);
-                break;
-            case "UP":
-                positions.add(new Vector(getPosition().getX(),getPosition().getY() - 1));
-                positions.add(new Vector(getPosition().getX(),getPosition().getY() - 2));
-                room.checkAttackCollision(positions);
-                break;
-            case "DOWN":
-                positions.add(new Vector(getPosition().getX(),getPosition().getY() + 1));
-                positions.add(new Vector(getPosition().getX(),getPosition().getY() + 2));
-                room.checkAttackCollision(positions);
-                break;
-        }
+        spear = setWeaponHitbox();
     }
 
     @Override
     public boolean canMove(Vector position) { return !room.checkCollisionsForPlayer(position) && isAttacking == 0; }
+
+    @Override
+    public Rectangle setWeaponHitbox() {
+        return switch (getDirection()) {
+            case "UP" -> new Rectangle(5, 0, 6, 18);
+            case "DOWN" -> new Rectangle(5, 29, 6, 18);
+            case "LEFT" -> new Rectangle(2, 22, 6, 18);
+            case "RIGHT" -> new Rectangle(13, 20, 4, 18);
+            default -> throw new IllegalArgumentException("Direction for Spear not Found");
+        };
+    }
 }
 
