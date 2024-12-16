@@ -17,8 +17,9 @@ public class Monster extends Movable {
         setVelocity(WALK_SPEED);
         setHealth(HEALTH);
         setDirection("DOWN");
-        directions = new ArrayList<>();;
         setState("IDLE");
+        setSpeedBoost(1);
+        directions = new ArrayList<>();;
     }
 
     public void setDirections(List<String> directions) { this.directions = directions; }

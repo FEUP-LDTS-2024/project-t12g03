@@ -10,17 +10,20 @@ import java.awt.*;
 
 public class Player extends Movable implements Weapon {
     private final Inventory inventory;
+    private final int SPEED_BOOST = 2;
     private final int WALK_SPEED = 2;
+    private final int SPRINT_SPEED = 5;
     private final int HEALTH = 4;
     private final int ATTACKDELAY = 6;
     private final int IMMUNITY = 30;
 
     private Rectangle spear;
     private String lastEffect;
-    private int immunity = 0;
-    private int isAttacking = 0;
-    private int energy = 800;
-    private int effectDuration = 0;
+    private boolean isSprinting;
+    private int energy;
+    private int immunity;
+    private int isAttacking;
+    private int effectDuration;
 
 
     public Player(int x, int y, Room room) {
@@ -29,8 +32,35 @@ public class Player extends Movable implements Weapon {
         setHealth(HEALTH);
         setDirection("DOWN");
         setState("IDLE");
+        setSpeedBoost(1);
         inventory = new Inventory();
+        this.isSprinting = false;
+        this.isAttacking = 0;
+        this.effectDuration = 0;
+        this.immunity = 0;
+        this.energy = 800;
     }
+
+    public void walk() {
+        isSprinting = false;
+        setState("WALKING");
+        setVelocity(WALK_SPEED);
+    }
+
+    public void sprint() {
+        if (isSprinting) {
+            walk();
+        }
+        else {
+            if (energy > 4){
+                isSprinting = true;
+                setVelocity(SPRINT_SPEED);
+                setState("RUNNING");
+            }
+        }
+    }
+
+    public boolean isSprinting() { return isSprinting; }
 
     public void heal() {
         if (getHealth() < 4 && energy == 800) {
@@ -45,11 +75,12 @@ public class Player extends Movable implements Weapon {
             effectDuration = potion.getDuration();
             switch (potion.getEffect()) {
                 case "speed":
-                    setVelocity(WALK_SPEED*3);
+                    setSpeedBoost(SPEED_BOOST);
                     lastEffect = "speed";
                     break;
                 case "immunity":
                     setImmunity(potion.getDuration());
+                    lastEffect = "immunity";
                 case "heal":
                     if (getHealth() < 4) {
                         increaseHealth();
@@ -63,12 +94,10 @@ public class Player extends Movable implements Weapon {
     }
 
     public void removeEffect() {
-        switch (lastEffect) {
-            case "speed":
-                setVelocity(WALK_SPEED);
-                break;
-        }
+        if (lastEffect.equals("speed")) setSpeedBoost(1);
     }
+
+    public void reduceEnergy() { this.energy -= 5;}
 
     public void reduceIsAttacking() { this.isAttacking--; }
 
