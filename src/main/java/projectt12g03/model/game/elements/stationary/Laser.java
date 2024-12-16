@@ -1,14 +1,17 @@
 package projectt12g03.model.game.elements.stationary;
 
+import com.googlecode.lanterna.TerminalRectangle;
 import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.room.Room;
 
+import java.awt.*;
 import java.util.Objects;
 
 public class Laser extends Element {
     private final int ACTIVE_TIME = 15;
     private final int REST_TIME = 45;
 
+    private Rectangle laserBeamHitbox;
     private String direction;
     private int active;
     private int resting;
@@ -19,6 +22,7 @@ public class Laser extends Element {
         setDirection(direction);
         setActive(0);
         setResting(REST_TIME);
+        laserBeamHitbox = new Rectangle(-1, 7, 1, 6);
         this.room = room;
     }
 
@@ -45,5 +49,9 @@ public class Laser extends Element {
 
     public int getRange(){
         return room.getLaserRange(this);
+    }
+
+    public Rectangle getLaserBeamHitbox() {
+        return laserBeamHitbox;
     }
 }

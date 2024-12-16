@@ -48,8 +48,10 @@ public class Player extends Movable {
                 case "immunity":
                     setImmunity(potion.getDuration());
                 case "heal":
-                    increaseHealth();
-                    lastEffect = "heal";
+                    if (getHealth() < 4) {
+                        increaseHealth();
+                        lastEffect = "heal";
+                    }
                     break;
                 default:
                     lastEffect = "HERE SO IT DOESNT STOP RUNNING"; //remove after all effects added
