@@ -3,7 +3,7 @@ package projectt12g03.view.gameDisplayer.elements.movable;
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
-import projectt12g03.model.game.elements.movable.Monster;
+import projectt12g03.model.game.elements.movable.hostile.Monster;
 
 import java.io.IOException;
 import java.util.HashMap;

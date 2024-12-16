@@ -2,7 +2,8 @@ package projectt12g03.view.gameDisplayer.elements.movable;
 
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
-import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.movable.player.Player;
+import projectt12g03.view.gameDisplayer.elements.weapon.SpearDisplayer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,6 +11,8 @@ import java.util.Map;
 
 public class PlayerDisplayer {
     private final Map<String, Sprite[][]> playerMap;
+
+    private final SpearDisplayer spearDisplayer;
 
     public PlayerDisplayer() throws IOException {
         playerMap = new HashMap<>();
@@ -25,43 +28,43 @@ public class PlayerDisplayer {
                 { new Sprite("sprites/elements/hero/left/hero_walk_left1.png"), new Sprite("sprites/elements/hero/left/hero_walk_left2.png") },
                 { new Sprite("sprites/elements/hero/right/hero_walk_right1.png"), new Sprite("sprites/elements/hero/right/hero_walk_right2.png")}
         });
+        playerMap.put("ATTACKING", new Sprite[][]{
+                {new Sprite("sprites/elements/hero/up/hero_attacking_up.png")},
+                {new Sprite("sprites/elements/hero/down/hero_attacking_down.png")},
+                {new Sprite("sprites/elements/hero/left/hero_attacking_left.png")},
+                {new Sprite("sprites/elements/hero/right/hero_attacking_right.png")}
+        });
+
+        spearDisplayer = new SpearDisplayer();
     }
 
     public void draw(Player player, GUI gui, long frameCount) {
         Sprite[][] sprites;
-        Sprite[] spriteSequence;
         sprites = playerMap.get(player.getState());
-        int cycle = (int) (frameCount % 6) / 3;
+        int walkingCycle = (int) (frameCount % 6) / 3;
+        int sprintCyle = (int) (frameCount / 2);
 
-        switch (player.getDirection()) {
-            case "UP":
-                spriteSequence = sprites[0];
-                if (player.getState().equals("WALKING")) {
-                    spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                }
-                else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                break;
-            case "DOWN":
-                spriteSequence = sprites[1];
-                if (player.getState().equals("WALKING")) {
-                    spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                }
-                else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                break;
-            case "LEFT":
-                spriteSequence = sprites[2];
-                if (player.getState().equals("WALKING")) {
-                    spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                }
-                else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                break;
-            case "RIGHT":
-                spriteSequence = sprites[3];
-                if (player.getState().equals("WALKING")) {
-                    spriteSequence[cycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                }
-                else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
-                break;
+        Sprite[] spriteSequence = getSpriteSequence(player.getDirection(), sprites);
+
+        if (player.getState().equals("WALKING"))
+            spriteSequence[walkingCycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+        else if (player.getState().equals("RUNNING"))
+            spriteSequence[sprintCyle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+        else if (player.getState().equals("ATTACKING")) {
+            spearDisplayer.draw(player, gui);
+            spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
         }
+        else spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+
+    }
+
+    public Sprite[] getSpriteSequence(String direction, Sprite[][] sprites) {
+        return switch (direction) {
+            case "UP" -> sprites[0];
+            case "DOWN" -> sprites[1];
+            case "LEFT" -> sprites[2];
+            case "RIGHT" -> sprites[3];
+            default -> sprites[4];
+        };
     }
 }

@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.stationary.Door;
-import projectt12g03.model.game.elements.movable.Monster;
-import projectt12g03.model.game.elements.movable.Player;
+import projectt12g03.model.game.elements.movable.hostile.Monster;
+import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.elements.stationary.Wall;
 
 import java.util.*;
