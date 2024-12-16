@@ -93,9 +93,10 @@ public class Room {
         for (Monster monster : monsters) {
             if(checkCollisionForDamage(monster, player.getSpear(), player.getPosition())) {
                 monster.reduceHealth();
-                if (monster.getHealth() <= 0)
+                if (monster.getHealth() <= 0) {
                     monsters.remove(monster);
-                return;
+                }
+                break;
             }
         }
     }

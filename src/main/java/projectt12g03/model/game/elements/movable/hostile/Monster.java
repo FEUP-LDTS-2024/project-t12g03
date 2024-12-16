@@ -29,4 +29,10 @@ public class Monster extends Movable {
     public boolean canMove(Vector position) {
         return !room.checkCollisionsForMonster(this, position);
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Monster)){return false;}
+        return ((Monster) o).getPosition().equals(this.getPosition());
+    }
 }

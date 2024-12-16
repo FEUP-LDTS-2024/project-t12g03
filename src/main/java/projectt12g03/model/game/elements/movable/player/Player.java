@@ -127,8 +127,8 @@ public class Player extends Movable implements Weapon {
         return switch (getDirection()) {
             case "UP" -> new Rectangle(5, 0, 6, 18);
             case "DOWN" -> new Rectangle(5, 29, 6, 18);
-            case "LEFT" -> new Rectangle(2, 22, 6, 18);
-            case "RIGHT" -> new Rectangle(13, 20, 4, 18);
+            case "LEFT" -> new Rectangle(-15, 20, 18, 6);
+            case "RIGHT" -> new Rectangle(13, 20, 18, 6);
             default -> throw new IllegalArgumentException("Direction for Spear not Found");
         };
     }
