@@ -26,9 +26,9 @@ public class InventoryDisplayer {
 
     public void draw(Inventory inventory, GUI gui) {
         for (int i = 0; i < 4; i++) {
-            sprite[inventory.isSelected(i) ? 1 : 0].draw(gui, 91 + (i * SPACING), 162);
+            sprite[inventory.isSelected(i) ? 1 : 0].draw(gui, 91 + (i * SPACING), 258);
             Potion potion = inventory.getPotion(i);
-            if (potion != null) potionDisplayer.draw(potion, new Vector(98 + (i * SPACING), 168), gui);
+            if (potion != null) potionDisplayer.draw(potion, new Vector(98 + (i * SPACING), 264), gui);
         }
     }
 }

@@ -1,6 +1,8 @@
 package projectt12g03.view.gameDisplayer;
 
+import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
+import projectt12g03.model.game.elements.stationary.Door;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.gameDisplayer.elements.movable.MonsterDisplayer;

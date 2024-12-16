@@ -43,7 +43,8 @@ public class GameDisplayerTest {
 
     @Test
     void drawShouldClearAndRefresh() throws IOException {
-        displayer.draw(gui);
+        long time = 0;
+        displayer.draw(gui, time);
 
         verify(gui).clear();
         verify(gui).refresh();
@@ -51,16 +52,18 @@ public class GameDisplayerTest {
 
     @Test
     void drawShouldDisplayPlayer() throws IOException {
+        long time = 0;
         when(player.getPosition()).thenReturn(new Vector(0, 0));
 
-        displayer.draw(gui);
+        displayer.draw(gui, time);
 
         verify(gui).drawText(new Vector(0, 0), "P", new TextColor.RGB(85, 201, 81));
     }
 
     @Test
     void drawShouldDisplayWalls() throws IOException {
-        displayer.draw(gui);
+        long time = 0;
+        displayer.draw(gui,time);
 
         verify(gui).drawText(new Vector(1, 1), "#", new TextColor.RGB(255,255,255));
         verify(gui).drawText(new Vector(2, 2), "#", new TextColor.RGB(255,255,255));
@@ -69,27 +72,30 @@ public class GameDisplayerTest {
 
     @Test
     void drawShouldDisplayMonsters() throws IOException {
+        long time = 0;
         when(monster.getPosition()).thenReturn(new Vector(5, 5));
 
-        displayer.draw(gui);
+        displayer.draw(gui, time);
 
         verify(gui).drawText(new Vector(5, 5), "M", new TextColor.RGB(255, 0, 0));
     }
 
     @Test
     void drawShouldHandleNoWalls() throws IOException {
+        long time = 0;
         when(room.getWalls()).thenReturn(Arrays.asList());
 
-        displayer.draw(gui);
+        displayer.draw(gui, time);
 
         verify(gui, never()).drawText(any(Vector.class), "#", new TextColor.RGB(255,255,255));
     }
 
     @Test
     void drawShouldHandleNoMonsters() throws IOException {
+        long time = 0;
         when(room.getMonsters()).thenReturn(Arrays.asList());
 
-        displayer.draw(gui);
+        displayer.draw(gui, time);
 
         verify(gui, never()).drawText(any(Vector.class), eq("M"), any());
     }

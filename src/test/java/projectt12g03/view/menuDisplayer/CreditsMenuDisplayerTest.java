@@ -28,7 +28,8 @@ class CreditsMenuDisplayerTest {
 
     @Test
     public void drawTest() throws IOException {
-        creditsMenuDisplayer.draw(gui);
+        long time = 0;
+        creditsMenuDisplayer.draw(gui, time);
 
         verify(gui, times(1)).clear();
 

@@ -2,12 +2,18 @@ package projectt12g03.model.game.elements;
 
 import projectt12g03.model.Vector;
 
-public abstract class Element {
-    private Vector position;
+import java.awt.*;
 
-    public Element(double x, double y) {
+public abstract class Element extends Rectangle {
+    private Vector position;
+    private Rectangle hitbox;
+
+    public Element(int x, int y, int dx, int dy, int width, int height) {
         this.position = new Vector(x, y);
+        hitbox = new Rectangle(dx, dy, width, height);
     }
+
+    public Rectangle getHitbox() { return hitbox; }
 
     public Vector getPosition() {
         return this.position;

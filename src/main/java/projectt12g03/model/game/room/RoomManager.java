@@ -43,13 +43,16 @@ public class RoomManager {
 
             this.lines = readLines(br);
             this.room = createRoom();
+            if (roomCode != 1) {
+                Vector playerPosition = player.calculateNewPosition();
+                player.setPosition(playerPosition);
+            }
         }
         else {
             this.room = roomsMap.get(roomCode);
 
             Vector playerPosition = player.calculateNewPosition();
             player.setPosition(playerPosition);
-            room.setPlayer(player);
         }
 
         room.setHeight(getHeight());
@@ -131,11 +134,45 @@ public class RoomManager {
             for (int x = 0; x < line.length(); x++) {
                 if (isDigit(line.charAt(x))) {
                     int n = line.charAt(x) - '0';
-                    doors.add(new Door(x*16, y*16, n));
+                    int[] constructorValues = checkDoorPosition(x,y);
+                    doors.add(new Door(x*16, y*16, constructorValues[0], constructorValues[1], constructorValues[2], constructorValues[3], n));
                 }
             }
         }
         return doors;
+    }
+
+    protected int[] checkDoorPosition(int x, int y) {    //hard coded change when better solution found
+        int dx;
+        int dy;
+        int width;
+        int height;
+
+        if (y == 0) {
+            dx = 0;
+            dy = 0;
+            width = 16;
+            height = 1;
+        }
+        else if (y == 9) {
+            dx = 0;
+            dy = 15;
+            width = 16;
+            height = 1;
+        }
+        else if (x == 0) {
+            dx = 0;
+            dy = 0;
+            width = 1;
+            height = 16;
+        }
+        else {
+            dx = 15;
+            dy = 0;
+            width = 1;
+            height = 16;
+        }
+        return new int[]{dx, dy, width, height};
     }
 
     protected Chest createChest() {
@@ -188,13 +225,13 @@ public class RoomManager {
     }
 
     protected List<Laser> createLasers(Room room){
-        List<Laser> lasers = new ArrayList<Laser>();
+        List<Laser> lasers = new ArrayList<>();
 
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'L') lasers.add(new Laser(x, y, "RIGHT", room));
-                if (line.charAt(x) == 'J') lasers.add(new Laser(x, y, "LEFT", room ));
+                if (line.charAt(x) == 'L') lasers.add(new Laser(x*16, y*16, "RIGHT", room));
+                if (line.charAt(x) == 'J') lasers.add(new Laser(x*16, y*16, "LEFT", room ));
             }
         }
         return lasers;

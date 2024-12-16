@@ -3,10 +3,10 @@ package projectt12g03.model.game.elements.stationary;
 import projectt12g03.model.game.elements.Element;
 
 public class Door extends Element {
-    private int doorNumber;
+    private final int doorNumber;
 
-    public Door(double x, double y, int doorNumber) {
-        super(x, y);
+    public Door(int x, int y, int dx, int dy, int width, int height, int doorNumber) {
+        super(x, y,dx,dy,width,height);
         this.doorNumber = doorNumber;
     }
 

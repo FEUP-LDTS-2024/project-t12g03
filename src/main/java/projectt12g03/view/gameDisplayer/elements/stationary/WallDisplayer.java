@@ -12,7 +12,7 @@ public class WallDisplayer {
     private final Sprite sprite;
 
     public WallDisplayer() throws IOException {
-        sprite = new Sprite("sprites/elements/wall/wall1.png");
+        sprite = new Sprite("sprites/elements/wall/wall2.png");
     }
 
     public void draw(List<Wall> walls, GUI gui) {

@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class Player extends Movable {
     private final Inventory inventory;
-    private int WALK_SPEED = 2;
+    private final int WALK_SPEED = 2;
     private final int HEALTH = 4;
     private final int ATTACKDELAY = 6;
-    private final int IMMUNITY = 15;
+    private final int IMMUNITY = 30;
 
     private String lastEffect;
     private int immunity = 0;
@@ -20,7 +20,7 @@ public class Player extends Movable {
     private int energy = 800;
     private int effectDuration = 0;
 
-    public Player(double x, double y, Room room) {
+    public Player(int x, int y, Room room) {
         super(x, y, room);
         setVelocity(WALK_SPEED);
         setHealth(HEALTH);
@@ -30,7 +30,7 @@ public class Player extends Movable {
     }
 
     public void heal() {
-        if (getHealth() < 4) {
+        if (getHealth() < 4 && energy == 800) {
             energy = 0;
             int newHealth = getHealth() + 1;
             setHealth(newHealth);
@@ -45,9 +45,13 @@ public class Player extends Movable {
                     setVelocity(WALK_SPEED*3);
                     lastEffect = "speed";
                     break;
+                case "immunity":
+                    setImmunity(potion.getDuration());
                 case "heal":
-                    increaseHealth();
-                    lastEffect = "heal";
+                    if (getHealth() < 4) {
+                        increaseHealth();
+                        lastEffect = "heal";
+                    }
                     break;
                 default:
                     lastEffect = "HERE SO IT DOESNT STOP RUNNING"; //remove after all effects added
@@ -69,7 +73,6 @@ public class Player extends Movable {
 
     public void reduceEffectDuration() {
         this.effectDuration--;
-        System.out.println(effectDuration);
         if (effectDuration == 0) {
             removeEffect();
         }
@@ -88,6 +91,8 @@ public class Player extends Movable {
     public int getEnergy() { return energy; }
 
     public void setImmunity(){ this.immunity = IMMUNITY; }
+
+    public void setImmunity(int immunity) {this.immunity = immunity; };
 
     public void setRoom(Room room) {
         this.room = room;

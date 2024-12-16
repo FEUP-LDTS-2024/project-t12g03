@@ -4,8 +4,8 @@ import projectt12g03.model.game.elements.Element;
 
 public class Wall extends Element {
 
-    public Wall(double x, double y) {
-        super(x, y);
+    public Wall(int x, int y) {
+        super(x, y, 0, 0, 16, 16);
     }
 
 }

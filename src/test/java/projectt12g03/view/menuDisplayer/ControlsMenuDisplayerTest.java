@@ -28,7 +28,8 @@ class ControlsMenuDisplayerTest {
 
     @Test
     public void drawTest() throws IOException {
-        controlsMenuDisplayer.draw(gui);
+        long time = 0;
+        controlsMenuDisplayer.draw(gui, time);
 
         verify(gui, times(1)).clear();
 

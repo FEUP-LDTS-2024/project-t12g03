@@ -19,6 +19,7 @@ class GameControllerTest {
     private PlayerController playerController;
     private MonsterController monsterController;
     private LaserController laserController;
+    private HudController hudController;
 
     @BeforeEach
     public void setup() {
@@ -34,7 +35,8 @@ class GameControllerTest {
         this.playerController = Mockito.mock(PlayerController.class);
         this.monsterController = Mockito.mock(MonsterController.class);
         this.laserController = Mockito.mock(LaserController.class);
-        this.gameController = new GameController(roomManager, playerController, monsterController,laserController);
+        this.hudController = Mockito.mock(HudController.class);
+        this.gameController = new GameController(roomManager, playerController, monsterController,laserController,hudController);
     }
 
     @Test
@@ -47,5 +49,6 @@ class GameControllerTest {
                 .step(game, action, frameCount);
         Mockito.verify(monsterController, Mockito.times(1)).step(game, action, frameCount);
         Mockito.verify(laserController,Mockito.times(1)).step(game,action,frameCount);
+        Mockito.verify(hudController,Mockito.times(1)).step(game,action,frameCount);
     }
 }

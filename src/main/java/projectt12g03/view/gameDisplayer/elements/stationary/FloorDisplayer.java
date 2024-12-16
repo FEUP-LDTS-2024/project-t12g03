@@ -14,7 +14,7 @@ public class FloorDisplayer {
     private final Sprite sprite;
 
     public FloorDisplayer() throws IOException {
-        sprite = new Sprite("sprites/elements/floor/grass4.png");
+        sprite = new Sprite("sprites/elements/floor/lighter_grass.png");
     }
 
     public void draw(List<Floor> floors, GUI gui) {

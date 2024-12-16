@@ -55,6 +55,6 @@ class GameStateTest {
         Mockito.verify(gui, Mockito.times(1)).getNextUserInput();
         Mockito.verify(state.getController(), Mockito.times(1))
                 .step(game, GUI.userInput.NONE, time);
-        Mockito.verify(state.getScreenDisplayer(), Mockito.times(1)).draw(gui);
+        Mockito.verify(state.getScreenDisplayer(), Mockito.times(1)).draw(gui, time);
     }
 }

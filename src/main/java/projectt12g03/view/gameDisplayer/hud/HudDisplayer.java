@@ -25,7 +25,7 @@ public class HudDisplayer {
     }
 
     public void draw(Player player, GUI gui) {
-        sprite.draw(gui, 0, 160);
+        sprite.draw(gui, 0, 256);
 
         inventoryDisplayer.draw(player.getInventory(), gui);
         energyDisplayer.draw(player.getEnergy(), gui);

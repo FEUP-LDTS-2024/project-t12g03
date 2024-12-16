@@ -30,7 +30,8 @@ class PauseMenuDisplayerTest {
 
     @Test
     public void drawTest() throws IOException {
-        pauseMenuDisplayer.draw(gui);
+        long time = 0;
+        pauseMenuDisplayer.draw(gui, time);
 
         verify(gui, times(1)).clear();
 
