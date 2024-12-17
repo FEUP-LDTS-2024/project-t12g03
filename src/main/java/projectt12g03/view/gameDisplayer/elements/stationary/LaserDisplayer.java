@@ -21,7 +21,7 @@ public class LaserDisplayer implements ElementDisplayer<Laser> {
         sprite[laser.isPointingLeft() ? 0 : 1].draw(gui, laser.getPosition().getX(), laser.getPosition().getY());
         if (laser.getActive() > 0){
             for (int i = 0; i <= laser.getRange();  i++){
-                sprite[2].draw(gui, laser.getPosition().getX() + laser.getLaserBeamHitbox().x + (i * direction), laser.getPosition().getY() + laser.getLaserBeamHitbox().y);
+                sprite[2].draw(gui, laser.getPosition().getX() + laser.getLaserBeamHitbox().x + (i * 4 * direction), laser.getPosition().getY() + laser.getLaserBeamHitbox().y);
             }
         }
     }

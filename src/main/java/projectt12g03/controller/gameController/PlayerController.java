@@ -10,7 +10,7 @@ import projectt12g03.model.game.room.RoomManager;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
-    private final int KEY_DELAY = 5;
+    private final int KEY_DELAY = 10;
     private int delay;
 
     public PlayerController(RoomManager model) { super(model); }
