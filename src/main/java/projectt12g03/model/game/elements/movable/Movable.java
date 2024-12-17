@@ -13,7 +13,7 @@ public abstract class Movable extends Element {
     private String state;
 
     public Movable(int x, int y, Room room) {
-        super(x,y,2,18,12,14);
+        super(x,y,1,17,14,16);
         this.room = room;
     }
 

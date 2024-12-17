@@ -25,25 +25,25 @@ import java.util.Set;
 import static java.awt.event.KeyEvent.*;
 
 public class LanternaGui implements GUI {
-    private String title;
+    private final String title;
+    private final KeyAdapter keyAdapter;
+    private final TerminalSize terminalSize;
 
-    private TerminalSize terminalSize;
     private TerminalScreen screen;
 
-    private final KeyAdapter keyAdapter;
     private KeyEvent keyPressed;
     private KeyEvent priorityKey;
     private boolean keySpam;
 
 
     public LanternaGui(int terminalWidth, int terminalHeight, String title) throws IOException, URISyntaxException, FontFormatException {
+        this.title = title;
         this.terminalSize = new TerminalSize(terminalWidth, terminalHeight);
         this.keyPressed = null;
         this.priorityKey = null;
         this.keySpam = false;
         this.keyAdapter = createKeyAdapter();
         this.screen = createScreen();
-        this.title = title;
     }
 
     private TerminalScreen createScreen() throws URISyntaxException, IOException, FontFormatException {
@@ -62,8 +62,7 @@ public class LanternaGui implements GUI {
         DefaultTerminalFactory terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(terminalSize)
                 .setForceAWTOverSwing(true)
-                .setTerminalEmulatorFontConfiguration(fontConfig)
-                .setTerminalEmulatorTitle(title);
+                .setTerminalEmulatorFontConfiguration(fontConfig);
 
         return terminal;
     }
@@ -84,14 +83,10 @@ public class LanternaGui implements GUI {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(font);
 
-            Font newfont = font.deriveFont(Font.PLAIN, 3);
+            Font newfont = font.deriveFont(Font.PLAIN, 2);
 
             return AWTTerminalFontConfiguration.newInstance(newfont);
     }
-
-    public int getWidth() { return terminalSize.getColumns(); }
-
-    public int getHeight() { return terminalSize.getRows(); }
 
     private KeyAdapter createKeyAdapter() {
         return new KeyAdapter() {
@@ -151,14 +146,7 @@ public class LanternaGui implements GUI {
     public void drawText(Vector position, String text, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(color);
-        tg.putString((int) position.getX(), (int) position.getY(), text);
-    }
-
-
-    public void drawCharacter(Vector position, char c, TextColor color) {
-        TextGraphics tg = screen.newTextGraphics();
-        tg.setForegroundColor(color);
-        tg.putString((int) position.getX(), (int) position.getY(), "" + c);
+        tg.putString(position.getX(), position.getY(), text);
     }
 
     @Override
