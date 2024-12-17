@@ -17,7 +17,7 @@ public class FloorDisplayer implements ElementDisplayer<Floor> {
         sprite = new HashMap<>();
 
         sprite.put('d', new Sprite("sprites/elements/floor/lighter_grass.png"));
-        sprite.put('e', new Sprite("sprites/elements/floor/grass5.png"));
+        sprite.put('e', new Sprite("sprites/elements/floor/le_portal2.png"));
     }
 
     @Override
