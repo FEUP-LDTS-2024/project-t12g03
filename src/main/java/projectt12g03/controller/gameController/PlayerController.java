@@ -6,6 +6,10 @@ import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.RoomManager;
+import projectt12g03.model.menu.CongratulationsMenu;
+import projectt12g03.model.menu.GameOverMenu;
+import projectt12g03.state.menuSate.CongratulationsMenuState;
+import projectt12g03.state.menuSate.GameOverMenuState;
 
 import java.io.IOException;
 
@@ -70,10 +74,28 @@ public class PlayerController extends Controller<RoomManager> {
             if (nextPosition != null) {
                 if (player.canMove(nextPosition)) {
                     player.setPosition(nextPosition);
-                } else if (getModel().getRoom().isAtTransition(player, nextPosition)) {
-                    getModel().loadRoom(getModel().getRoom().getDoorNumber(nextPosition)); // Transition to the next room
+                }
+                else if (getModel().getRoom().isAtTransition(player, nextPosition)) {
+                    int doorNumber = getModel().getRoom().getDoorNumber(nextPosition);
+                    if (doorNumber != 0) {
+                        getModel().loadRoom(doorNumber); // Transition to the next room
+                    }
+                    else {
+                        chooseScreen(game);
+                    }
                 }
             }
+        }
+    }
+
+    private void chooseScreen(Game game) throws IOException {
+        if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
+            game.popState();
+            game.setState(new GameOverMenuState(new GameOverMenu()));
+        }
+        else {
+            game.popState();
+            game.setState(new CongratulationsMenuState(new CongratulationsMenu()));
         }
     }
 

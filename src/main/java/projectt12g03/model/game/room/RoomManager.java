@@ -22,15 +22,17 @@ import static java.lang.Character.isDigit;
 
 public class RoomManager {
     private final Player player;
+    private final Map<Integer, Room> roomsMap;
 
-    private Map<Element, Vector> sortedElementsMap = new HashMap<>();
-    private Map<Integer, Room> roomsMap = new HashMap<>();
     private List<String> lines;
-    private Integer roomCode = 1;
     private Room room;
+    private Integer roomCode = 1;
+    private int totalMonsters;
 
     public RoomManager() throws IOException {
-        player = new Player(0, 0, null);
+        this.player = new Player(0, 0, null);
+        this.roomsMap = new HashMap<>();
+        this.totalMonsters = 0;
 
         loadRoom(roomCode);
     }
@@ -93,22 +95,18 @@ public class RoomManager {
 
     protected int getHeight() { return lines.size(); }
 
-    public Room getRoom() { return room; }
-
-    public Player getPlayer() {
-        return player;
-    }
-
     private List<Floor> createFloors() {
         List<Floor> floors = new ArrayList<>();
 
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
+            for (int x = 0; x < line.length(); x++) {
                 if (line.charAt(x) == ' ' || line.charAt(x) == 'C' || line.charAt(x) == 'K' ||
-                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x))) {
-                    floors.add(new Floor(x * 16, y * 16));
-                }
+                        line.charAt(x) == 'M' || line.charAt(x) == 'P')
+                    floors.add(new Floor(x * 16, y * 16, 'd'));
+
+                else if (isDigit(line.charAt(x))) floors.add(new Floor(x * 16, y * 16, 'e'));
+            }
         }
 
         return floors;
@@ -205,7 +203,10 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'M') monsters.add(new Monster(x*16,y*16, room));
+                if (line.charAt(x) == 'M') {
+                    monsters.add(new Monster(x * 16, y * 16, room));
+                    totalMonsters++;
+                }
         }
 
         return monsters;
@@ -236,4 +237,26 @@ public class RoomManager {
         }
         return lasers;
     }
+
+    public Room getRoom() { return room; }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getTotalMonsters() {
+        return totalMonsters;
+    }
+
+    public int getCurrentMonsters() {
+        int monstersInRooms = 0;
+        for (Room room : roomsMap.values()) {
+            List<Monster> monsters = room.getMonsters();
+            if (monsters != null) {
+                monstersInRooms += monsters.size();
+            }
+        }
+        return monstersInRooms;
+    }
+
 }
