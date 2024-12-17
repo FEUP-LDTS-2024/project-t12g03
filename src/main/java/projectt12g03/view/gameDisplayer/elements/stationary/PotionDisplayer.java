@@ -16,7 +16,7 @@ public class PotionDisplayer implements ElementDisplayer<Potion> {
 
     public PotionDisplayer() throws IOException {
         potionMap = new HashMap<>();
-        potionMap.put("invisibility", new Sprite("sprites/elements/potions/potion_invisibility.png"));
+        potionMap.put("energy", new Sprite("sprites/elements/potions/potion_energy.png"));
         potionMap.put("speed", new Sprite("sprites/elements/potions/potion_speed.png"));
         potionMap.put("heal", new Sprite("sprites/elements/potions/potion_heal.png"));
         potionMap.put("immunity", new Sprite("sprites/elements/potions/potion_immunity.png"));

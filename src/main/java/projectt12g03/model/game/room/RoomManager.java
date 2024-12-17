@@ -39,22 +39,20 @@ public class RoomManager {
 
     public void loadRoom(Integer roomCode) throws IOException {
         this.roomCode = roomCode;
+
+        Vector playerPosition = player.calculateNewPosition();
+        player.setPosition(playerPosition);
+
         if(!roomsMap.containsKey(roomCode)) {
             URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
             this.lines = readLines(br);
             this.room = createRoom();
-            if (roomCode != 1) {
-                Vector playerPosition = player.calculateNewPosition();
-                player.setPosition(playerPosition);
-            }
+            room.setPlayer(player);
         }
         else {
             this.room = roomsMap.get(roomCode);
-
-            Vector playerPosition = player.calculateNewPosition();
-            player.setPosition(playerPosition);
         }
 
         room.setHeight(getHeight());
@@ -72,7 +70,9 @@ public class RoomManager {
         room.setKey(createKey());
         room.setMonsters(createMonsters(room));
         room.setLasers(createLasers(room));
-        room.setPlayer(createPlayer());
+
+        if (roomCode == 1) room.setPlayer(createPlayer());
+
 
         roomsMap.put(roomCode, room);
 
@@ -87,13 +87,10 @@ public class RoomManager {
     }
 
     protected int getWidth() {
-        int width = 0;
-        for (String line : lines)
-            width = Math.max(width, line.length());
-        return width;
+        return lines.getFirst().length() * 16;
     }
 
-    protected int getHeight() { return lines.size(); }
+    protected int getHeight() { return lines.size() * 16; }
 
     private List<Floor> createFloors() {
         List<Floor> floors = new ArrayList<>();
@@ -152,7 +149,7 @@ public class RoomManager {
             width = 16;
             height = 1;
         }
-        else if (y == 9) {
+        else if (y == 15) {
             dx = 0;
             dy = 15;
             width = 16;
