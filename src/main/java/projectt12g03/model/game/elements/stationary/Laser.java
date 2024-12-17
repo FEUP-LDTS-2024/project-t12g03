@@ -10,13 +10,13 @@ import java.util.Objects;
 public class Laser extends Element {
     private final int ACTIVE_TIME = 15;
     private final int REST_TIME = 45;
+    private final boolean isPoitingLeft;
+    private final Room room;
 
-    private boolean isPoitingLeft;
     private Rectangle laserBeamHitbox;
     private String direction;
     private int active;
     private int resting;
-    private Room room;
 
     public Laser(int x, int y,String direction, Room room, boolean isPoitingLeft) {
         super(x, y,0, 0,16, 16);

@@ -29,6 +29,8 @@ public abstract class Movable extends Element {
 
     public String getState() { return state; }
 
+    public Room getRoom() { return room; }
+
     public void setDirection(String direction) { this.direction = direction; }
 
     public void setState(String state) { this.state = state; }

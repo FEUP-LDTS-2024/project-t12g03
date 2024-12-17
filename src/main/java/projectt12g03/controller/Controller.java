@@ -16,7 +16,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    //public void setModel(T model) { this.model = model; } maybe we will need it in the future
-
     public abstract void step(Game game, LanternaGui.userInput action, long time) throws IOException;
 }
