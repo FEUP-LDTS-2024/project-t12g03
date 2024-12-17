@@ -1,9 +1,7 @@
 package projectt12g03.view.gameDisplayer.elements.stationary;
 
-import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
-import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.stationary.Laser;
 
 import java.io.IOException;
@@ -24,7 +22,7 @@ public class LaserDisplayer {
                     sprite[1].draw(gui, laser.getPosition().getX(), laser.getPosition().getY());
                     if (laser.getActive() > 0){
                         for (int i = 0; i <= laser.getRange();  i++){
-                            sprite[2].draw(gui, laser.getPosition().getX() + laser.getLaserBeamHitbox().x + i, laser.getPosition().getY() + laser.getLaserBeamHitbox().y);
+                            sprite[2].draw(gui, laser.getPosition().getX() + laser.getLaserBeamHitbox().x + (i * 4), laser.getPosition().getY() + laser.getLaserBeamHitbox().y);
                         }
                     }
                     break;
@@ -32,7 +30,7 @@ public class LaserDisplayer {
                     sprite[0].draw(gui, laser.getPosition().getX(), laser.getPosition().getY());
                     if (laser.getActive() > 0){
                         for (int i = 0; i <= laser.getRange();  i++){
-                            sprite[2].draw(gui, laser.getPosition().getX() + laser.getLaserBeamHitbox().x - i, laser.getPosition().getY() + laser.getLaserBeamHitbox().y);
+                            sprite[2].draw(gui, laser.getPosition().getX() + laser.getLaserBeamHitbox().x - (i * 4), laser.getPosition().getY() + laser.getLaserBeamHitbox().y);
                         }
                     }
                     break;

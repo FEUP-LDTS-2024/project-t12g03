@@ -41,7 +41,6 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         gui.clear();
         floorDisplayer.draw(getModel().getRoom().getFloors(), gui);
         wallDisplayer.draw(getModel().getRoom().getWalls(), gui);
-        monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui, frameCount);
         chestDisplayer.draw(getModel().getRoom().getChest(), gui);
         keyDisplayer.draw(getModel().getRoom().getKey(), gui);
         monsterDisplayer.draw(getModel().getRoom().getMonsters(), gui, frameCount);
