@@ -26,8 +26,8 @@ public class Potion extends Element {
 
         switch (someEffect) {
             case 0:
-                effect = "invisibility";    //change or find a way to make it work visually
-                duration = 300;
+                effect = "energy";
+                duration = 0;
                 break;
             case 1:
                 effect = "speed";

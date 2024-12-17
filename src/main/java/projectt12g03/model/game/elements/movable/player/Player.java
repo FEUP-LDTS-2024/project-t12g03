@@ -1,5 +1,6 @@
 package projectt12g03.model.game.elements.movable.player;
 
+import jdk.jfr.consumer.RecordedThread;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Movable;
 import projectt12g03.model.game.elements.stationary.Potion;
@@ -87,6 +88,12 @@ public class Player extends Movable implements Weapon {
                         lastEffect = "heal";
                     }
                     break;
+                case "energy":
+                    if (getEnergy() < 800) {
+                        increaseEnergy(200);
+                        lastEffect = "energy";
+                    }
+                    break;
                 default:
                     lastEffect = "HERE SO IT DOESNT STOP RUNNING"; //remove after all effects added
             }
@@ -97,7 +104,7 @@ public class Player extends Movable implements Weapon {
         if (lastEffect.equals("speed")) setSpeedBoost(1);
     }
 
-    public void reduceEnergy() { this.energy -= 5;}
+    public void reduceEnergy() { this.energy -= 10;}
 
     public void reduceIsAttacking() { this.isAttacking--; }
 
@@ -110,7 +117,14 @@ public class Player extends Movable implements Weapon {
         }
     }
 
-    public void increaseEnergy() { this.energy++;}
+    public void increaseEnergy(int value) {
+        if (getEnergy() + value <= 800) {
+            this.energy += value;
+        }else{
+            this.energy = 800;
+        }
+
+    }
 
     public int getEffectDuration() { return effectDuration;}
 

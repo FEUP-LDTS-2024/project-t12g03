@@ -7,6 +7,7 @@ import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.RoomManager;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
@@ -84,7 +85,7 @@ public class PlayerController extends Controller<RoomManager> {
             player.reduceEnergy();
             if (player.getEnergy() < 5) player.walk();
         }
-        if (player.getEnergy() < 800) player.increaseEnergy();
+        if (player.getEnergy() < 800) player.increaseEnergy(1);
         if (player.getEffectDuration() > 0) player.reduceEffectDuration();
         if (player.getImmunity() > 0) player.reduceImmunity();
     }

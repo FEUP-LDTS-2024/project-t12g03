@@ -21,4 +21,9 @@ public class Vector {
         if (!(o instanceof Vector)){return false;}
         return ((Vector) o).getX() == this.getX() && ((Vector) o).getY() == this.getY();
     }
+
+    public void add(Vector v){
+        x += v.getX();
+        y += v.getY();
+    }
 }

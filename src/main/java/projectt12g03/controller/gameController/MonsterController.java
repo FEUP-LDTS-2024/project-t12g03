@@ -3,6 +3,7 @@ package projectt12g03.controller.gameController;
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
+import projectt12g03.controller.Path;
 import projectt12g03.model.game.elements.movable.hostile.Monster;
 import projectt12g03.model.game.room.RoomManager;
 
@@ -21,17 +22,18 @@ public class MonsterController extends Controller<RoomManager> {
         for (Monster monster : getModel().getRoom().getMonsters()) {
 
             List<String> directions = monster.getDirections();
-            SecureRandom rand = new SecureRandom();
+            String direction = Path.findNextMoveToPlayer(monster);
 
-            if (directions.isEmpty()) {
-                String randomDirection = getRandomDirection(rand);
-                int repeatCount = randomDirection.equals("IDLE") ? 24 : 16;
-                for (int i = 0; i < repeatCount; i++) {
-                    directions.add(randomDirection);
-                }
+            if (!direction.equals("IDLE")){
+               repeatStep(monster,direction,0);
+            }else{
+                SecureRandom rand = new SecureRandom();
+                repeatStep(monster,getRandomDirection(rand),12);
             }
 
-            String direction = directions.removeFirst();
+
+
+            direction = directions.removeFirst();
             monster.setDirections(directions);
             executeDirection(monster, direction);
         }
@@ -72,6 +74,17 @@ public class MonsterController extends Controller<RoomManager> {
             case "IDLE":
                 monster.setState("IDLE");
                 break;
+        }
+    }
+
+    public void repeatStep(Monster monster, String direction, int typeOfMovOffset){
+        List<String> directions = monster.getDirections();
+        if (directions.isEmpty()) {
+            int repeatCount = direction.equals("IDLE") ? 16 : 8 + typeOfMovOffset;
+            for (int i = 0; i < repeatCount; i++) {
+                directions.add(direction);
+            }
+            monster.setDirections(directions);
         }
     }
 }
