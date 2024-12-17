@@ -59,7 +59,6 @@ public class GameController extends Controller<RoomManager> {
             else {
                 type = "DIED_!KILLED";
             }
-            game.popState();
             game.setState(new GameOverMenuState(new GameOverMenu(type)));
         }
     }
