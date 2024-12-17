@@ -7,6 +7,7 @@ import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.RoomManager;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
@@ -52,6 +53,7 @@ public class PlayerController extends Controller<RoomManager> {
                     break;
                 case SPRINT:
                     player.sprint();
+                    break;
                 case HEAL:
                     player.heal();
                     break;

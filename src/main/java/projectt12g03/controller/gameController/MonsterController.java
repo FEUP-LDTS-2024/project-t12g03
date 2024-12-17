@@ -3,6 +3,8 @@ package projectt12g03.controller.gameController;
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.LanternaGui;
+import projectt12g03.model.Path;
+import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.hostile.Monster;
 import projectt12g03.model.game.room.RoomManager;
 
@@ -19,6 +21,12 @@ public class MonsterController extends Controller<RoomManager> {
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
         for (Monster monster : getModel().getRoom().getMonsters()) {
+
+            String move = Path.findNextMoveToPlayer(monster);
+            if (!move.equals("IDLE")){
+                executeDirection(monster,move);
+                return;
+            }
 
             List<String> directions = monster.getDirections();
             SecureRandom rand = new SecureRandom();

@@ -59,4 +59,7 @@ public abstract class Movable extends Element {
 
     public abstract boolean canMove(Vector position);
 
+    public Room getRoom() {
+        return room;
+    }
 }
