@@ -19,7 +19,7 @@ class PauseMenuControllerTest {
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.pauseMenu = Mockito.mock(PauseMenu.class);
-        this.pauseMenuController = new PauseMenuController(pauseMenu);
+        //this.pauseMenuController = new PauseMenuController(pauseMenu);
     }
 
 
@@ -41,7 +41,7 @@ class PauseMenuControllerTest {
 
     @Test
     public void selectResume() throws IOException {
-        Mockito.when(pauseMenu.getCurrentEntry()).thenReturn("resume");
+        //Mockito.when(pauseMenu.getCurrentEntry()).thenReturn("resume");
         pauseMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(1))
                 .popState();
@@ -49,7 +49,7 @@ class PauseMenuControllerTest {
 
     @Test
     public void selectExit() throws IOException {
-        Mockito.when(pauseMenu.getCurrentEntry()).thenReturn("exit");
+        //Mockito.when(pauseMenu.getCurrentEntry()).thenReturn("exit");
         pauseMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(2))
                 .popState();

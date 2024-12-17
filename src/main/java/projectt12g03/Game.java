@@ -14,7 +14,7 @@ public class Game {
     public static final int FPS = 10;
     public static final int terminalWidth = 320;
     public static final int terminalHeight = 288;
-    private static final String windowName = "GAME";
+    private static final String windowName = "SPEAR BOY";
     private final Stack<State> stateStack;
     private final LanternaGui gui;
 
@@ -26,8 +26,6 @@ public class Game {
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
         new Game().start();
     }
-
-    public int getFps() { return FPS; }
 
     public void setState(State state) {
         this.stateStack.push(state);
@@ -62,8 +60,7 @@ public class Game {
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;
 
-            try { if (sleepTime > 0) Thread.sleep(sleepTime);
-            else System.out.println(sleepTime);}
+            try { if (sleepTime > 0) Thread.sleep(sleepTime); }
             catch (InterruptedException e) { }
             frameCount++;
         }

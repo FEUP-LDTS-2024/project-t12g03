@@ -230,8 +230,8 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'L') lasers.add(new Laser(x*16, y*16, "RIGHT", room));
-                if (line.charAt(x) == 'J') lasers.add(new Laser(x*16, y*16, "LEFT", room ));
+                if (line.charAt(x) == 'L') lasers.add(new Laser(x*16, y*16, "RIGHT", room, false));
+                if (line.charAt(x) == 'J') lasers.add(new Laser(x*16, y*16, "LEFT", room, true ));
             }
         }
         return lasers;

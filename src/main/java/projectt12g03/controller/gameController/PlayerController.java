@@ -10,6 +10,9 @@ import projectt12g03.model.game.room.RoomManager;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
+    private final int KEY_DELAY = 10;
+    private int delay;
+
     public PlayerController(RoomManager model) { super(model); }
 
     @Override
@@ -17,7 +20,7 @@ public class PlayerController extends Controller<RoomManager> {
         Player player = getModel().getPlayer();
         Vector nextPosition = null;
 
-        reducePlayerCooldDowns(player);
+        reduceCooldDowns(player);
 
         if (player.getIsAttacking() > 0) {  //player cant move when attacking
             player.reduceIsAttacking();
@@ -51,6 +54,10 @@ public class PlayerController extends Controller<RoomManager> {
                     player.attack();
                     break;
                 case SPRINT:
+                    if (delay == 0) {
+                        player.sprint();
+                        delay = KEY_DELAY;
+                    }
                     player.sprint();
                     break;
                 case HEAL:
@@ -71,7 +78,8 @@ public class PlayerController extends Controller<RoomManager> {
         }
     }
 
-    private void reducePlayerCooldDowns(Player player) {
+    private void reduceCooldDowns(Player player) {
+        if (delay > 0) delay--;
         if (player.isSprinting()) {
             player.reduceEnergy();
             if (player.getEnergy() < 5) player.walk();

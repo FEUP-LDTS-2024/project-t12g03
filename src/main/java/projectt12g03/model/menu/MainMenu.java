@@ -1,20 +1,21 @@
 package projectt12g03.model.menu;
 
-import projectt12g03.model.Vector;
+import java.util.HashMap;
+import java.util.Map;
+
+import static projectt12g03.model.menu.Menu.Type.*;
 
 public class MainMenu extends Menu {
 
+    @Override
+    protected Map<Integer, Type> createEntries() {
+        Map<Integer, Type> entries = new HashMap<>();
 
-    public MainMenu() {
-        entries.clear();
+        entries.put(0, START);
+        entries.put(1, CONTROLS);
+        //entries.put(2, CREDITS);
+        entries.put(2, EXIT);
 
-        entries.put("start", new Vector(18, 7));
-        entries.put("controls", new Vector(18, 10));
-        //entries.put("credits", new Vector(18, 13));
-        entries.put("exit", new Vector(18, 16));
-
-        entriesList.addAll(entries.keySet());
-
-        currentEntry = 0;
+        return entries;
     }
 }

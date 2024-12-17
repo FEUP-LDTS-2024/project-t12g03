@@ -1,4 +1,4 @@
-package projectt12g03.model;
+package projectt12g03.view;
 
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
