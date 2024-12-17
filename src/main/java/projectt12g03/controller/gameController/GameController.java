@@ -52,7 +52,15 @@ public class GameController extends Controller<RoomManager> {
 
         if (player.getHealth() == 0) {
             game.popState();
-            game.setState(new GameOverMenuState(new GameOverMenu('g')));
+            String type;
+            if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
+                type = "DIED_KILLED";
+            }
+            else {
+                type = "DIED_!KILLED";
+            }
+            game.popState();
+            game.setState(new GameOverMenuState(new GameOverMenu(type)));
         }
     }
 }

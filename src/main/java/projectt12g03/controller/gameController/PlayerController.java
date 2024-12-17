@@ -113,7 +113,7 @@ public class PlayerController extends Controller<RoomManager> {
     private void chooseScreen(Game game) throws IOException {
         if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
             game.popState();
-            game.setState(new GameOverMenuState(new GameOverMenu('b')));
+            game.setState(new GameOverMenuState(new GameOverMenu("LIVED_KILLED")));
         }
         else {
             game.popState();

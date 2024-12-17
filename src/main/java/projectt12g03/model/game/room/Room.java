@@ -63,12 +63,11 @@ public class Room {
                         if (player.getInventory().isNotFull()) {
                             player.getInventory().addPotion(chest.getPotion());
                             chest.setPotion(null);
-                            return false;
                         }
                     }
-                } else return false;
+                }
             }
-            return true;
+            else return true;
         }
 
         return checkWallCollision(player, position) || checkMonsterDamage(position) || isAtTransition(player, position) || checkLaserCollision(player, position);

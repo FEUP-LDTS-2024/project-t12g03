@@ -6,9 +6,9 @@ import java.util.Map;
 import static projectt12g03.model.menu.Menu.Type.*;
 
 public class GameOverMenu extends Menu {
-    private final int type;
+    private final String type;
 
-    public GameOverMenu(char type) {
+    public GameOverMenu(String type) {
         this.type = type;
     }
 
@@ -22,5 +22,5 @@ public class GameOverMenu extends Menu {
         return entries;
     }
 
-    public int getType() { return type; }
+    public String getType() { return type; }
 }

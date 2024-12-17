@@ -22,9 +22,7 @@ public class ControlsMenuDisplayer extends MenuDisplayer<ControlsMenu> {
     @Override
     protected Map<Integer, Sprite> createBackGroundMap() throws IOException {
         Map<Integer, Sprite> backGroundMap = new HashMap<>();
-        backGroundMap.put(0, new Sprite("sprites/menu/background1.png"));
-        backGroundMap.put(1, new Sprite("sprites/menu/background2.png"));
-        backGroundMap.put(2, new Sprite("sprites/menu/background3.png"));
+        backGroundMap.put(0, new Sprite("sprites/menu/contentsMenu/controlsmenu.png"));
         return backGroundMap;
     }
 }
