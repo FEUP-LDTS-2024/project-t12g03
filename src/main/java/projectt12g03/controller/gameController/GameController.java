@@ -52,7 +52,7 @@ public class GameController extends Controller<RoomManager> {
 
         if (player.getHealth() == 0) {
             game.popState();
-            game.setState(new GameOverMenuState(new GameOverMenu()));
+            game.setState(new GameOverMenuState(new GameOverMenu('g')));
         }
     }
 }

@@ -6,6 +6,12 @@ import java.util.Map;
 import static projectt12g03.model.menu.Menu.Type.*;
 
 public class GameOverMenu extends Menu {
+    private final int type;
+
+    public GameOverMenu(char type) {
+        this.type = type;
+    }
+
     @Override
     protected Map<Integer, Menu.Type> createEntries() {
         Map<Integer, Menu.Type> entries = new HashMap<>();
@@ -15,4 +21,6 @@ public class GameOverMenu extends Menu {
 
         return entries;
     }
+
+    public void getType() { return type; }
 }
