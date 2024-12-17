@@ -1,6 +1,7 @@
 package projectt12g03.state.menuSate;
 
 import projectt12g03.controller.Controller;
+import projectt12g03.controller.menuController.EntriesController;
 import projectt12g03.controller.menuController.PauseMenuController;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.State;
@@ -17,11 +18,11 @@ public class PauseMenuState extends State<PauseMenu> {
 
     @Override
     protected Controller<PauseMenu> getController() {
-        return new PauseMenuController(getModel());
+        return new PauseMenuController(getModel(), new EntriesController(getModel()));
     }
 
     @Override
-    protected ScreenDisplayer<PauseMenu> getScreenDisplayer() { return new PauseMenuDisplayer(getModel()); }
+    protected ScreenDisplayer<PauseMenu> getScreenDisplayer() throws IOException { return new PauseMenuDisplayer(getModel()); }
 
     @Override
     protected boolean allowInputSpam() { return false; }

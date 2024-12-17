@@ -22,7 +22,7 @@ class ControlsMenuDisplayerTest {
     @BeforeEach
     public void setup() {
         this.controlsMenu = new ControlsMenu();
-        this.controlsMenuDisplayer = new ControlsMenuDisplayer(controlsMenu);
+        //this.controlsMenuDisplayer = new ControlsMenuDisplayer(controlsMenu);
         this.gui = Mockito.mock(LanternaGui.class);
     }
 

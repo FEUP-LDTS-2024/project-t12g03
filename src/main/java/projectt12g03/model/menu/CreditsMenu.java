@@ -1,13 +1,18 @@
 package projectt12g03.model.menu;
 
-import projectt12g03.model.Vector;
+import java.util.HashMap;
+import java.util.Map;
 
-public class CreditsMenu extends Menu{
-    public CreditsMenu(){
-        entries.clear();
-        entries.put("go back", new Vector(16, 17));
+import static projectt12g03.model.menu.Menu.Type.*;
 
-        entriesList.addAll(entries.keySet());
-        currentEntry = 0;
+public class CreditsMenu extends Menu {
+
+    @Override
+    protected Map<Integer, Type> createEntries() {
+        Map<Integer, Type> entries = new HashMap<>();
+
+        entries.put(0, GO_BACK);
+
+        return entries;
     }
 }

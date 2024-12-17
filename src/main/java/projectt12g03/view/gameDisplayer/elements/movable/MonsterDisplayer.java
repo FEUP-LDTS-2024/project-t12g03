@@ -1,16 +1,15 @@
 package projectt12g03.view.gameDisplayer.elements.movable;
 
-import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.Sprite;
+import projectt12g03.view.Sprite;
 import projectt12g03.model.game.elements.movable.hostile.Monster;
+import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class MonsterDisplayer {
+public class MonsterDisplayer extends MovableDisplayer implements ElementDisplayer<Monster> {
     private final Map<String, Sprite[][]> monsterMap;
 
     public MonsterDisplayer() throws IOException {
@@ -29,49 +28,20 @@ public class MonsterDisplayer {
         });
     }
 
-    public void draw(List<Monster> monsters, GUI gui, long frameCount) {
-        for(Monster monster : monsters){
-            Sprite[][] sprites;
-            Sprite[] spriteSequence;
-            switch (monster.getDirection()) {
-                case "UP":
-                    sprites = monsterMap.get(monster.getState());
-                    spriteSequence = sprites[0];
-                    if (monster.getState().equals("WALKING")) {
-                        int cycle = (int) (frameCount % 10) / 5;
-                        spriteSequence[cycle].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    }
-                    else spriteSequence[0].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    break;
-                case "DOWN":
-                    sprites = monsterMap.get(monster.getState());
-                    spriteSequence = sprites[1];
-                    if (monster.getState().equals("WALKING")) {
-                        int cycle = (int) (frameCount % 10) / 5;
-                        spriteSequence[cycle].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    }
-                    else spriteSequence[0].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    break;
-                case "LEFT":
-                    sprites = monsterMap.get(monster.getState());
-                    spriteSequence = sprites[2];
-                    if (monster.getState().equals("WALKING")) {
-                        int cycle = (int) (frameCount % 10) / 5;
-                        spriteSequence[cycle].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    }
-                    else spriteSequence[0].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    break;
-                case "RIGHT":
-                    sprites = monsterMap.get(monster.getState());
-                    spriteSequence = sprites[3];
-                    if (monster.getState().equals("WALKING")) {
-                        int cycle = (int) (frameCount % 10) / 5;
-                        spriteSequence[cycle].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    }
-                    else spriteSequence[0].draw(gui, monster.getPosition().getX(), monster.getPosition().getY());
-                    break;
 
-            }
+    @Override
+    public void draw(Monster model, GUI gui, long frameCount) {
+        Sprite[][] sprites;
+        sprites = monsterMap.get(model.getState());
+        int walkingCycle = (int) (frameCount % 10) / 5;
+
+        Sprite[] spriteSequence = getSpriteSequence(model.getDirection(), sprites);
+
+        if (model.getState().equals("WALKING")) {
+            spriteSequence[walkingCycle].draw(gui, model.getPosition().getX(), model.getPosition().getY());
+        } else {
+            spriteSequence[0].draw(gui, model.getPosition().getX(), model.getPosition().getY());
         }
     }
+
 }

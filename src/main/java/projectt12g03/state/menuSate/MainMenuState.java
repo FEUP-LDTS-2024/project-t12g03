@@ -2,6 +2,7 @@ package projectt12g03.state.menuSate;
 
 
 import projectt12g03.controller.Controller;
+import projectt12g03.controller.menuController.EntriesController;
 import projectt12g03.controller.menuController.MainMenuController;
 import projectt12g03.model.menu.MainMenu;
 import projectt12g03.state.State;
@@ -18,7 +19,7 @@ public class MainMenuState extends State<MainMenu> {
 
     @Override
     protected Controller<MainMenu> getController() {
-        return new MainMenuController(getModel());
+        return new MainMenuController(getModel(), new EntriesController(getModel()));
     }
 
     @Override

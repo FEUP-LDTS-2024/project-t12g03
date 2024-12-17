@@ -1,7 +1,7 @@
 package projectt12g03.view.gameDisplayer.hud;
 
 import projectt12g03.gui.GUI;
-import projectt12g03.model.Sprite;
+import projectt12g03.view.Sprite;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.view.gameDisplayer.hud.hudComponents.EnergyDisplayer;
 import projectt12g03.view.gameDisplayer.hud.hudComponents.HealthDisplayer;
@@ -24,10 +24,10 @@ public class HudDisplayer {
         healthDisplayer = new HealthDisplayer();
     }
 
-    public void draw(Player player, GUI gui) {
+    public void draw(Player player, GUI gui, long framecount) {
         sprite.draw(gui, 0, 256);
 
-        inventoryDisplayer.draw(player.getInventory(), gui);
+        inventoryDisplayer.draw(player.getInventory(), gui, framecount);
         energyDisplayer.draw(player.getEnergy(), gui);
         healthDisplayer.draw(player.getHealth(), gui);
     }

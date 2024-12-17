@@ -3,37 +3,26 @@ package projectt12g03.view.menuDisplayer;
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
+import projectt12g03.model.menu.MainMenu;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.view.ScreenDisplayer;
+import projectt12g03.view.Sprite;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class PauseMenuDisplayer extends ScreenDisplayer<PauseMenu> {
+public class PauseMenuDisplayer extends MenuDisplayer<PauseMenu> {
 
-    public PauseMenuDisplayer(PauseMenu model) { super(model); }
+    public PauseMenuDisplayer(PauseMenu model) throws IOException { super(model); }
 
     @Override
-    public void draw(GUI gui, long frameCount) throws IOException {
-        gui.clear();
-        gui.drawText(new Vector(15, 3),
-                "PAUSE MENU",
-                new TextColor.RGB(24, 112, 96));
-        drawEntries( gui, getModel().getEntries());
-        gui.refresh();
+    protected Map<Integer, Sprite> createBackGroundMap() throws IOException {
+        Map<Integer, Sprite> backGroundMap = new HashMap<>();
+        backGroundMap.put(0, new Sprite("sprites/menu/background1.png"));
+        backGroundMap.put(1, new Sprite("sprites/menu/background2.png"));
+        backGroundMap.put(2, new Sprite("sprites/menu/background3.png"));
+        return backGroundMap;
     }
-
-    private void drawEntries(GUI gui, List<String> entries) {
-        for (String entry : entries) {
-            Vector position = getModel().getEntryPosition(entry);
-            gui.drawText(
-                    position,
-                    entry,
-                    getModel().getCurrentEntry().equals(entry) ?
-                            new TextColor.RGB(24, 112, 96) :
-                            new TextColor.RGB(9, 59, 50)
-            );
-        }
-    }
-
 }

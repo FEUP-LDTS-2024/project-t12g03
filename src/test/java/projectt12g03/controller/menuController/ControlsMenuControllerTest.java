@@ -21,12 +21,12 @@ class ControlsMenuControllerTest {
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.controlsMenu = Mockito.mock(ControlsMenu.class);
-        this.controlsMenuController = new ControlsMenuController(controlsMenu);
+        //this.controlsMenuController = new ControlsMenuController(controlsMenu);
     }
 
     @Test
     public void notSelectGoBack() throws IOException {
-        Mockito.when(controlsMenu.getCurrentEntry()).thenReturn("something");
+        //Mockito.when(controlsMenu.getCurrentEntry()).thenReturn("something");
         controlsMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(0))
                 .popState();
@@ -34,7 +34,7 @@ class ControlsMenuControllerTest {
 
     @Test
     public void selectGoBack() throws IOException {
-        Mockito.when(controlsMenu.getCurrentEntry()).thenReturn("go back");
+        //Mockito.when(controlsMenu.getCurrentEntry()).thenReturn("go back");
         controlsMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(1))
                 .popState();

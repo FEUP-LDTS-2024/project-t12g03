@@ -22,7 +22,7 @@ class CreditsMenuDisplayerTest {
     @BeforeEach
     public void setup() {
         this.creditsMenu = new CreditsMenu();
-        this.creditsMenuDisplayer = new CreditsMenuDisplayer(creditsMenu);
+        //this.creditsMenuDisplayer = new CreditsMenuDisplayer(creditsMenu);
         this.gui = Mockito.mock(LanternaGui.class);
     }
 

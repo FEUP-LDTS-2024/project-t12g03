@@ -1,28 +1,18 @@
 package projectt12g03.model.menu;
 
-import projectt12g03.model.Vector;
-import projectt12g03.model.game.room.Room;
-import projectt12g03.state.State;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import static projectt12g03.model.menu.Menu.Type.*;
 
 public class PauseMenu extends Menu{
-    private final Room room;
 
+    @Override
+    protected Map<Integer, Type> createEntries() {
+        Map<Integer, Type> entries = new HashMap<>();
 
-    public PauseMenu(Room room) {
-        this.room = room;
+        entries.put(0, RESUME);
+        entries.put(1, EXIT);
 
-        entries.clear();
-        entries.put("resume", new Vector(17, 9));
-        entries.put("exit", new Vector(18, 12));
-
-        entriesList.addAll(entries.keySet());
-        currentEntry = 0;
+        return entries;
     }
-
-    public Room getRoom() { return room; }
 }

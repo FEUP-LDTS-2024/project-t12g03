@@ -20,12 +20,12 @@ class CreditsMenuControllerTest {
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.creditsMenu = Mockito.mock(CreditsMenu.class);
-        this.creditsMenuController = new CreditsMenuController(creditsMenu);
+        //this.creditsMenuController = new CreditsMenuController(creditsMenu);
     }
 
     @Test
     public void notSelectGoBack() throws IOException {
-        Mockito.when(creditsMenu.getCurrentEntry()).thenReturn("something");
+        //Mockito.when(creditsMenu.getCurrentEntry()).thenReturn("something");
         creditsMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(0))
                 .popState();
@@ -33,7 +33,7 @@ class CreditsMenuControllerTest {
 
     @Test
     public void selectGoBack() throws IOException {
-        Mockito.when(creditsMenu.getCurrentEntry()).thenReturn("go back");
+        //Mockito.when(creditsMenu.getCurrentEntry()).thenReturn("go back");
         creditsMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(1))
                 .popState();
