@@ -148,10 +148,10 @@ public class Player extends Movable implements Weapon {
 
     public Vector calculateNewPosition() {
         return switch (getDirection()) {
-            case "UP" -> new Vector(getPosition().getX(), room.getHeight() - 2);
-            case "DOWN" -> new Vector(getPosition().getX(), 1);
-            case "LEFT" -> new Vector(room.getWidth() - 2, getPosition().getY());
-            case "RIGHT" -> new Vector(1, getPosition().getY());
+            case "UP" -> new Vector(getPosition().getX(), 223);
+            case "DOWN" -> new Vector(getPosition().getX(), -15);
+            case "LEFT" -> new Vector(304, getPosition().getY());
+            case "RIGHT" -> new Vector(0, getPosition().getY());
             default -> throw new IllegalArgumentException("Direction for Transition not Found");
         };
     }
@@ -168,10 +168,10 @@ public class Player extends Movable implements Weapon {
     @Override
     public Rectangle setWeaponHitbox() {
         return switch (getDirection()) {
-            case "UP" -> new Rectangle(5, 0, 6, 18);
-            case "DOWN" -> new Rectangle(5, 29, 6, 18);
-            case "LEFT" -> new Rectangle(-15, 20, 18, 6);
-            case "RIGHT" -> new Rectangle(13, 20, 18, 6);
+            case "UP" -> new Rectangle(5, 2, 6, 18);
+            case "DOWN" -> new Rectangle(5, 30, 6, 18);
+            case "LEFT" -> new Rectangle(-14, 20, 18, 6);
+            case "RIGHT" -> new Rectangle(12, 20, 18, 6);
             default -> throw new IllegalArgumentException("Direction for Spear not Found");
         };
     }
