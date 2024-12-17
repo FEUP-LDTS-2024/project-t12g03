@@ -64,7 +64,7 @@ public class Player extends Movable implements Weapon {
     public boolean isSprinting() { return isSprinting; }
 
     public void heal() {
-        if (getHealth() < 4 && energy == 800) {
+        if (getHealth() < 4 && energy >= 800) {
             energy = 0;
             int newHealth = getHealth() + 1;
             setHealth(newHealth);
