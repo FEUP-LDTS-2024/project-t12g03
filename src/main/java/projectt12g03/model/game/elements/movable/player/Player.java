@@ -104,7 +104,7 @@ public class Player extends Movable implements Weapon {
         if (lastEffect.equals("speed")) setSpeedBoost(1);
     }
 
-    public void reduceEnergy() { this.energy -= 10;}
+    public void reduceEnergy() { this.energy -= 6;}
 
     public void reduceIsAttacking() { this.isAttacking--; }
 
