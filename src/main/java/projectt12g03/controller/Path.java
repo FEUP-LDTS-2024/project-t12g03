@@ -1,5 +1,6 @@
-package projectt12g03.model;
+package projectt12g03.controller;
 
+import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.hostile.Monster;
 import projectt12g03.model.game.room.Room;
 
@@ -25,15 +26,16 @@ public class Path {
 
     public static String findNextMoveToPlayer(Monster monster){
         Room room = monster.getRoom();
-        if(distance(monster.getPosition(),room) > 16*3) return "IDLE";
+
         double minScore = Integer.MAX_VALUE;
         int minMove = 4;
 
         for (int i = 0; i < 4; i++) {
-            int newX = (int) monster.getPosition().getX() + DX[i];
-            int newY = (int) monster.getPosition().getY() + DY[i];
+            int newX = monster.getPosition().getX() + DX[i];
+            int newY = monster.getPosition().getY() + DY[i];
             Vector neighbor = new Vector(newX, newY);
             double distance = distance(neighbor, room);
+            if(distance > 16*3) return "IDLE";
             if (distance < minScore && monster.canMove(neighbor)){
                 minMove = i;
                 minScore = distance;
