@@ -101,11 +101,11 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == ' ' || line.charAt(x) == 'C' || line.charAt(x) == 'K' ||
-                        line.charAt(x) == 'M' || line.charAt(x) == 'P')
-                    floors.add(new Floor(x * 16, y * 16, 'd'));
+                if (isDigit(line.charAt(x)) && (line.charAt(x) - '0' == 0)) floors.add(new Floor(x * 16, y * 16, 'e'));
 
-                else if (isDigit(line.charAt(x))) floors.add(new Floor(x * 16, y * 16, 'e'));
+                else if (line.charAt(x) == ' ' || line.charAt(x) == 'C' || line.charAt(x) == 'K' ||
+                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x)))
+                    floors.add(new Floor(x * 16, y * 16, 'd'));
             }
         }
 

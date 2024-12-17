@@ -3,20 +3,15 @@ package projectt12g03.controller.gameController;
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
-import projectt12g03.gui.LanternaGui;
-import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.GameOverMenu;
-import projectt12g03.model.menu.Menu;
 import projectt12g03.model.menu.PauseMenu;
 import projectt12g03.state.menuSate.GameOverMenuState;
 import projectt12g03.state.menuSate.PauseMenuState;
 import projectt12g03.model.game.elements.movable.player.Player;
-import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 
 import java.io.IOException;
-import java.util.List;
 
 import static projectt12g03.gui.GUI.userInput.PAUSE;
 
