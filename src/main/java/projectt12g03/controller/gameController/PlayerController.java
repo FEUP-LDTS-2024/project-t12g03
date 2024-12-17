@@ -85,7 +85,7 @@ public class PlayerController extends Controller<RoomManager> {
             player.reduceEnergy();
             if (player.getEnergy() < 5) player.walk();
         }
-        if (player.getEnergy() < 800) player.increaseEnergy();
+        if (player.getEnergy() < 800) player.increaseEnergy(1);
         if (player.getEffectDuration() > 0) player.reduceEffectDuration();
         if (player.getImmunity() > 0) player.reduceImmunity();
     }
