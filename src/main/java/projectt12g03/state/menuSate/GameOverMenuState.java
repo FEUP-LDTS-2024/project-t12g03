@@ -24,7 +24,7 @@ public class GameOverMenuState extends State<GameOverMenu> {
     }
 
     @Override
-    protected ScreenDisplayer<GameOverMenu> getScreenDisplayer() {
+    protected ScreenDisplayer<GameOverMenu> getScreenDisplayer() throws IOException {
         return new GameOverMenuDisplayer(getModel());
     }
 

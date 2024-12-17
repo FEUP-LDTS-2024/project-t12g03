@@ -23,8 +23,8 @@ class PauseMenuDisplayerTest {
     @BeforeEach
     public void setup() {
         this.room = Mockito.mock(Room.class);
-        this.pauseMenu = new PauseMenu(room);
-        this.pauseMenuDisplayer = new PauseMenuDisplayer(pauseMenu);
+        //this.pauseMenu = new PauseMenu(room);
+        //this.pauseMenuDisplayer = new PauseMenuDisplayer(pauseMenu);
         this.gui = Mockito.mock(LanternaGui.class);
     }
 

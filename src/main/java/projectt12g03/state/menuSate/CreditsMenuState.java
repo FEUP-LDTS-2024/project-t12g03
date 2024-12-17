@@ -20,7 +20,7 @@ public class CreditsMenuState extends State<CreditsMenu> {
     protected Controller<CreditsMenu> getController() { return new CreditsMenuController(getModel(), new EntriesController(getModel())); }
 
     @Override
-    protected ScreenDisplayer<CreditsMenu> getScreenDisplayer() { return new CreditsMenuDisplayer(getModel()); }
+    protected ScreenDisplayer<CreditsMenu> getScreenDisplayer() throws IOException { return new CreditsMenuDisplayer(getModel()); }
 
     @Override
     protected boolean allowInputSpam() {

@@ -21,7 +21,7 @@ public class ControlsMenuState extends State<ControlsMenu> {
     }
 
     @Override
-    protected ScreenDisplayer<ControlsMenu> getScreenDisplayer() {
+    protected ScreenDisplayer<ControlsMenu> getScreenDisplayer() throws IOException {
         return new ControlsMenuDisplayer(getModel());
     }
 

@@ -22,7 +22,7 @@ public class PauseMenuState extends State<PauseMenu> {
     }
 
     @Override
-    protected ScreenDisplayer<PauseMenu> getScreenDisplayer() { return new PauseMenuDisplayer(getModel()); }
+    protected ScreenDisplayer<PauseMenu> getScreenDisplayer() throws IOException { return new PauseMenuDisplayer(getModel()); }
 
     @Override
     protected boolean allowInputSpam() { return false; }

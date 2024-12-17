@@ -4,26 +4,24 @@ import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
 import projectt12g03.model.menu.CreditsMenu;
+import projectt12g03.model.menu.MainMenu;
 import projectt12g03.view.ScreenDisplayer;
+import projectt12g03.view.Sprite;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class CreditsMenuDisplayer extends ScreenDisplayer<CreditsMenu> {
-    public CreditsMenuDisplayer(CreditsMenu model) { super(model); }
+public class CreditsMenuDisplayer extends MenuDisplayer<CreditsMenu> {
+    public CreditsMenuDisplayer(CreditsMenu model) throws IOException { super(model); }
 
-    public void draw(GUI gui, long frameCount) throws IOException {
-        gui.clear();
-        gui.refresh();
+    @Override
+    protected Map<Integer, Sprite> createBackGroundMap() throws IOException {
+        Map<Integer, Sprite> backGroundMap = new HashMap<>();
+        backGroundMap.put(0, new Sprite("sprites/menu/background1.png"));
+        backGroundMap.put(1, new Sprite("sprites/menu/background2.png"));
+        backGroundMap.put(2, new Sprite("sprites/menu/background3.png"));
+        return backGroundMap;
     }
-
-    public void drawNames(GUI gui) {
-        gui.drawText(new Vector(2, 7), "filipe lopes : ", new TextColor.RGB(255, 255, 255) );
-        gui.drawText(new Vector(20, 7), "UP202306564", new TextColor.RGB(9, 59, 96));
-        gui.drawText(new Vector(2, 10), "francisco tomaz : ", new TextColor.RGB(255, 255, 255));
-        gui.drawText(new Vector(20, 10), "UP202309456", new TextColor.RGB(9, 59, 96));
-        gui.drawText(new Vector(2, 13), "joao quental : ", new TextColor.RGB(255, 255, 255));
-        gui.drawText(new Vector(20, 13), "UP202307755", new TextColor.RGB(9, 59, 96));
-    }
-
 }

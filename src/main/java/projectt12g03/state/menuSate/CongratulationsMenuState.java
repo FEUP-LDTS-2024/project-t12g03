@@ -21,7 +21,7 @@ public class CongratulationsMenuState extends State<CongratulationsMenu> {
     }
 
     @Override
-    protected ScreenDisplayer<CongratulationsMenu> getScreenDisplayer() {
+    protected ScreenDisplayer<CongratulationsMenu> getScreenDisplayer() throws IOException {
         return new CongratulationsMenuDisplayer(getModel());
     }
 

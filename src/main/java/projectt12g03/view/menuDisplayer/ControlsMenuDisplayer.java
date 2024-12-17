@@ -4,28 +4,27 @@ import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
 import projectt12g03.model.menu.ControlsMenu;
+import projectt12g03.model.menu.CreditsMenu;
+import projectt12g03.model.menu.MainMenu;
 import projectt12g03.view.ScreenDisplayer;
+import projectt12g03.view.Sprite;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ControlsMenuDisplayer extends ScreenDisplayer<ControlsMenu> {
+public class ControlsMenuDisplayer extends MenuDisplayer<ControlsMenu> {
 
 
-    public ControlsMenuDisplayer(ControlsMenu model) { super(model); }
+    public ControlsMenuDisplayer(ControlsMenu model) throws IOException { super(model); }
 
     @Override
-    public void draw(GUI gui, long frameCount) throws IOException {
-        gui.clear();
-        gui.refresh();
+    protected Map<Integer, Sprite> createBackGroundMap() throws IOException {
+        Map<Integer, Sprite> backGroundMap = new HashMap<>();
+        backGroundMap.put(0, new Sprite("sprites/menu/background1.png"));
+        backGroundMap.put(1, new Sprite("sprites/menu/background2.png"));
+        backGroundMap.put(2, new Sprite("sprites/menu/background3.png"));
+        return backGroundMap;
     }
-
-    //probably a bit hard coded might had something different in the future (map?)
-    private void drawControls(GUI gui) {
-        gui.drawText(new Vector(3, 8), "WASD / ARROW KEYS - ", new TextColor.RGB(255, 255, 255));
-        gui.drawText(new Vector(23, 8), "MOVE PLAYER", new TextColor.RGB(9, 59, 96));
-        gui.drawText(new Vector(15, 11), "SPACE - ", new TextColor.RGB(255, 255, 255));
-        gui.drawText(new Vector(23, 11), "ATTACK", new TextColor.RGB(9, 59, 96));
-    }
-
 }
