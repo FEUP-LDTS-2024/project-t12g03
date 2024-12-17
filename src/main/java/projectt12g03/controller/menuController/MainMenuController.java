@@ -13,27 +13,9 @@ import projectt12g03.state.menuSate.CreditsMenuState;
 
 import java.io.IOException;
 
-public class MainMenuController extends Controller<MainMenu> {
-    public MainMenuController(MainMenu menu) {
-        super(menu);
-    }
+public class MainMenuController extends MenuController<MainMenu> {
 
-    @Override
-    public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
-        switch (action) {
-            case UP:
-                getModel().moveUp();
-                break;
-            case DOWN:
-                getModel().moveDown();
-                break;
-            case SELECT:
-                if (getModel().getCurrentEntry().equals("start")) game.setState(new GameState(new RoomManager()));
-                else if(getModel().getCurrentEntry().equals("controls")) game.setState(new ControlsMenuState(new ControlsMenu()));
-                //else if(getModel().getCurrentEntry().equals("credits")) game.setState(new CreditsMenuState(new CreditsMenu()));
-                else if (getModel().getCurrentEntry().equals("exit")) game.popState();
-                break;
-        }
+    public MainMenuController(MainMenu menu, EntriesController entriesController) {
+        super(menu, entriesController);
     }
-
 }

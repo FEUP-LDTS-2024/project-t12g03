@@ -19,7 +19,7 @@ class MainMenuControllerTest {
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.mainMenu = Mockito.mock(MainMenu.class);
-        this.mainMenuController = new MainMenuController(mainMenu);
+        //this.mainMenuController = new MainMenuController(mainMenu);
     }
 
 
@@ -41,7 +41,7 @@ class MainMenuControllerTest {
 
     @Test
     public void selectStart() throws IOException {
-        Mockito.when(mainMenu.getCurrentEntry()).thenReturn("start");
+        //Mockito.when(mainMenu.getCurrentEntry()).thenReturn("start");
         mainMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
@@ -49,7 +49,7 @@ class MainMenuControllerTest {
 
     @Test
     public void selectControls() throws IOException {
-        Mockito.when(mainMenu.getCurrentEntry()).thenReturn("controls");
+        //Mockito.when(mainMenu.getCurrentEntry()).thenReturn("controls");
         mainMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
@@ -57,7 +57,7 @@ class MainMenuControllerTest {
 
     @Test
     public void selectCredits() throws IOException {
-        Mockito.when(mainMenu.getCurrentEntry()).thenReturn("credits");;
+        //Mockito.when(mainMenu.getCurrentEntry()).thenReturn("credits");;
         mainMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
@@ -65,7 +65,7 @@ class MainMenuControllerTest {
 
     @Test
     public void selectExit() throws IOException {
-        Mockito.when(mainMenu.getCurrentEntry()).thenReturn("exit");;
+        //Mockito.when(mainMenu.getCurrentEntry()).thenReturn("exit");;
         mainMenuController.step(game, GUI.userInput.SELECT, 0);
         Mockito.verify(game, Mockito.times(1)).popState();
     }

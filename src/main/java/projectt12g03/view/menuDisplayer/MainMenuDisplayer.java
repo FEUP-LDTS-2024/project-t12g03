@@ -24,6 +24,7 @@ public class MainMenuDisplayer extends ScreenDisplayer<MainMenu> {
     public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         int entry = getModel().getCurrentEntryNumber();
+        System.out.println(entry);
         Sprite image = backGroundMap.get(entry);
         image.draw(gui, 0, 0);
         gui.refresh();

@@ -14,11 +14,6 @@ public class CreditsMenuDisplayer extends ScreenDisplayer<CreditsMenu> {
 
     public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
-        gui.drawText(new Vector(16, 2),
-                "CREDITS",
-                new TextColor.RGB(24, 112, 96));
-        drawNames(gui);
-        drawEntries( gui, getModel().getEntries());
         gui.refresh();
     }
 
@@ -31,16 +26,4 @@ public class CreditsMenuDisplayer extends ScreenDisplayer<CreditsMenu> {
         gui.drawText(new Vector(20, 13), "UP202307755", new TextColor.RGB(9, 59, 96));
     }
 
-    private void drawEntries(GUI gui, List<String> entries) {
-        for (String entry : entries) {
-            Vector position = getModel().getEntryPosition(entry);
-            gui.drawText(
-                    position,
-                    entry,
-                    getModel().getCurrentEntry().equals(entry) ?
-                            new TextColor.RGB(24, 112, 96) :
-                            new TextColor.RGB(9, 59, 50)
-            );
-        }
-    }
 }

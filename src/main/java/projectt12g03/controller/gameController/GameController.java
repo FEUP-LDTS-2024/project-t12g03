@@ -39,7 +39,7 @@ public class GameController extends Controller<RoomManager> {
         }
 
         if (action == PAUSE)
-            game.setState(new PauseMenuState(new PauseMenu(getModel().getRoom())));
+            game.setState(new PauseMenuState(new PauseMenu()));
         else {
             monsterController.step(game, action, time);
             playerController.step(game, action, time);

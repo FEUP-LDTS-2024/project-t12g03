@@ -16,24 +16,6 @@ public class PauseMenuDisplayer extends ScreenDisplayer<PauseMenu> {
     @Override
     public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
-        gui.drawText(new Vector(15, 3),
-                "PAUSE MENU",
-                new TextColor.RGB(24, 112, 96));
-        drawEntries( gui, getModel().getEntries());
         gui.refresh();
     }
-
-    private void drawEntries(GUI gui, List<String> entries) {
-        for (String entry : entries) {
-            Vector position = getModel().getEntryPosition(entry);
-            gui.drawText(
-                    position,
-                    entry,
-                    getModel().getCurrentEntry().equals(entry) ?
-                            new TextColor.RGB(24, 112, 96) :
-                            new TextColor.RGB(9, 59, 50)
-            );
-        }
-    }
-
 }

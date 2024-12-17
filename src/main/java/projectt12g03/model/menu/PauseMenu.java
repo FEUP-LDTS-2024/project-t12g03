@@ -1,10 +1,8 @@
 package projectt12g03.model.menu;
 
-import projectt12g03.model.game.room.Room;
 import java.util.*;
 
 import static projectt12g03.model.menu.Menu.Type.*;
-import static projectt12g03.model.menu.Menu.Type.EXIT;
 
 public class PauseMenu extends Menu{
 

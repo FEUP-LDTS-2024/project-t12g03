@@ -17,11 +17,6 @@ public class ControlsMenuDisplayer extends ScreenDisplayer<ControlsMenu> {
     @Override
     public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
-        gui.drawText(new Vector(16, 2),
-                "CONTROLS",
-                new TextColor.RGB(24, 112, 96));
-        drawControls(gui);  //controls arent entries so we need to draw separately
-        drawEntries(gui, getModel().getEntries());
         gui.refresh();
     }
 
@@ -33,16 +28,4 @@ public class ControlsMenuDisplayer extends ScreenDisplayer<ControlsMenu> {
         gui.drawText(new Vector(23, 11), "ATTACK", new TextColor.RGB(9, 59, 96));
     }
 
-    private void drawEntries(GUI gui, List<String> entries) {
-        for (String entry : entries) {
-            Vector position = getModel().getEntryPosition(entry);
-            gui.drawText(
-                    position,
-                    entry,
-                    getModel().getCurrentEntry().equals(entry) ?
-                            new TextColor.RGB(24, 112, 96) :
-                            new TextColor.RGB(9, 59, 50)
-            );
-        }
-    }
 }
