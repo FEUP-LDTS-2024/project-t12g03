@@ -20,9 +20,8 @@ public class PauseMenuDisplayer extends MenuDisplayer<PauseMenu> {
     @Override
     protected Map<Integer, Sprite> createBackGroundMap() throws IOException {
         Map<Integer, Sprite> backGroundMap = new HashMap<>();
-        backGroundMap.put(0, new Sprite("sprites/menu/background1.png"));
-        backGroundMap.put(1, new Sprite("sprites/menu/background2.png"));
-        backGroundMap.put(2, new Sprite("sprites/menu/background3.png"));
+        backGroundMap.put(0, new Sprite("sprites/menu/pausedMenu/pausedmenu1.png"));
+        backGroundMap.put(1, new Sprite("sprites/menu/pausedMenu/pausedmenu2.png"));
         return backGroundMap;
     }
 }

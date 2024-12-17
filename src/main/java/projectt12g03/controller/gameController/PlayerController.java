@@ -117,6 +117,7 @@ public class PlayerController extends Controller<RoomManager> {
         }
         else {
             game.popState();
+            System.out.println((int) (((System.currentTimeMillis() - getModel().getPlayer().getTime()) / 1000) % 60) + ":" + (int) (((System.currentTimeMillis() - getModel().getPlayer().getTime()) / 1000) / 60));
             game.setState(new CongratulationsMenuState(new CongratulationsMenu()));
         }
     }

@@ -26,6 +26,8 @@ public class Player extends Movable implements Weapon {
     private int isAttacking;
     private int effectDuration;
 
+    private long time;
+
 
     public Player(int x, int y, Room room) {
         super(x, y, room);
@@ -40,6 +42,7 @@ public class Player extends Movable implements Weapon {
         this.effectDuration = 0;
         this.immunity = 0;
         this.energy = 800;
+        this.time = System.currentTimeMillis();
     }
 
     public void walk() {
@@ -175,5 +178,7 @@ public class Player extends Movable implements Weapon {
             default -> throw new IllegalArgumentException("Direction for Spear not Found");
         };
     }
+
+    public long getTime() { return time; }
 }
 
