@@ -21,7 +21,7 @@ public class HudController extends Controller<RoomManager> {
         Inventory inventory = getModel().getPlayer().getInventory();
         Player player = getModel().getPlayer();
 
-        if (player.getEnergy() < 800) player.increaseEnergy();
+        if (player.getEnergy() < 800) player.increaseEnergy(1);
 
         switch (action) {
             case ONE:
