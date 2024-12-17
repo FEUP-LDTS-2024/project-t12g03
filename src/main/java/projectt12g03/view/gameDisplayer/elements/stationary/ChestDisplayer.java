@@ -19,17 +19,6 @@ public class ChestDisplayer implements ElementDisplayer<Chest> {
         potionDisplayer = new PotionDisplayer();
     }
 
-    public void draw(Chest chest, GUI gui) {
-        if (!chest.isOpened())
-            sprite.draw(gui, chest.getPosition().getX(), chest.getPosition().getY());
-        else {
-            Potion potion = chest.getPotion();
-            if (potion != null) {
-                potionDisplayer.draw(potion, chest.getPosition(), gui);
-            }
-        }
-    }
-
     @Override
     public void draw(Chest chest, GUI gui, long frameCount) {
         if (!chest.isOpened())
@@ -37,7 +26,8 @@ public class ChestDisplayer implements ElementDisplayer<Chest> {
         else {
             Potion potion = chest.getPotion();
             if (potion != null) {
-                potionDisplayer.draw(potion, chest.getPosition(), gui);
+                potionDisplayer.setDisplacement(chest.getPosition());
+                potionDisplayer.draw(potion, gui, frameCount);
             }
         }
     }

@@ -45,6 +45,7 @@ public class PlayerDisplayer extends MovableDisplayer implements ElementDisplaye
         spearDisplayer = new SpearDisplayer();
     }
 
+    @Override
     public void draw(Player player, GUI gui, long frameCount) {
         Sprite[][] sprites;
         sprites = playerMap.get(player.getState());

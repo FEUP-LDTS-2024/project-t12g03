@@ -28,7 +28,6 @@ public class MonsterDisplayer extends MovableDisplayer implements ElementDisplay
         });
     }
 
-
     @Override
     public void draw(Monster model, GUI gui, long frameCount) {
         Sprite[][] sprites;

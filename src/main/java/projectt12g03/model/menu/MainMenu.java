@@ -13,8 +13,8 @@ public class MainMenu extends Menu {
 
         entries.put(0, START);
         entries.put(1, CONTROLS);
-        //entries.put(2, CREDITS);
-        entries.put(2, EXIT);
+        entries.put(2, CREDITS);
+        entries.put(3, EXIT);
 
         return entries;
     }

@@ -22,10 +22,6 @@ public class PotionDisplayer implements ElementDisplayer<Potion> {
         potionMap.put("immunity", new Sprite("sprites/elements/potions/potion_immunity.png"));
     }
 
-    public void draw(Potion potion, Vector position,GUI gui) {
-        potionMap.get(potion.getEffect()).draw(gui, position.getX(), position.getY());
-    }
-
     @Override
     public void draw(Potion potion, GUI gui, long frameCount) {
         potionMap.get(potion.getEffect()).draw(gui, displacement.getX(), displacement.getY());
