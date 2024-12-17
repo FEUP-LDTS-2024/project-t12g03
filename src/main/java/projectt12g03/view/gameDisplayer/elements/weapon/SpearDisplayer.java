@@ -1,6 +1,8 @@
 package projectt12g03.view.gameDisplayer.elements.weapon;
 
+import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
+import projectt12g03.model.Vector;
 import projectt12g03.view.Sprite;
 import projectt12g03.model.game.elements.movable.player.Player;
 
@@ -28,10 +30,10 @@ public class SpearDisplayer {
 
     private int[] getDisplacements(String direction) {
         return switch (direction) {
-            case "UP" -> new int[]{0,0};
+            case "UP" -> new int[]{0,2};
             case "DOWN" -> new int[]{0,32};
-            case "LEFT" -> new int[]{-16,16};
-            case "RIGHT" -> new int[]{16,16};
+            case "LEFT" -> new int[]{-15,16};
+            case "RIGHT" -> new int[]{15,16};
             default -> new int[]{};
         };
     }
