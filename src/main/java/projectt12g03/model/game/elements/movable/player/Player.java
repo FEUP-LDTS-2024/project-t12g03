@@ -11,7 +11,7 @@ import java.awt.*;
 public class Player extends Movable implements Weapon {
     private final Inventory inventory;
     private final int SPEED_BOOST = 2;
-    private final int WALK_SPEED = 2;
+    private final int WALK_SPEED = 3;
     private final int SPRINT_SPEED = 5;
     private final int HEALTH = 4;
     private final int ATTACKDELAY = 6;
@@ -48,6 +48,7 @@ public class Player extends Movable implements Weapon {
     }
 
     public void sprint() {
+        System.out.println(isSprinting);
         if (isSprinting) {
             walk();
         }

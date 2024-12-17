@@ -47,7 +47,7 @@ public class MonsterController extends Controller<RoomManager> {
         };
     }
 
-    private void executeDirection(Monster monster, String direction) {
+    private void executeDirection(Monster monster, String direction) {  //change so it looks better
         switch (direction) {
             case "UP":
                 if (monster.canMove(monster.moveUp())) monster.setPosition(monster.moveUp());
