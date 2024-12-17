@@ -1,7 +1,7 @@
 package projectt12g03.view.gameDisplayer.hud.hudComponents;
 
 import projectt12g03.gui.GUI;
-import projectt12g03.model.Sprite;
+import projectt12g03.view.Sprite;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.stationary.Potion;
 import projectt12g03.model.game.inventory.Inventory;

@@ -1,8 +1,7 @@
 package projectt12g03.view.gameDisplayer.elements.movable;
 
 import projectt12g03.gui.GUI;
-import projectt12g03.model.Sprite;
-import projectt12g03.model.game.elements.movable.Movable;
+import projectt12g03.view.Sprite;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 import projectt12g03.view.gameDisplayer.elements.weapon.SpearDisplayer;

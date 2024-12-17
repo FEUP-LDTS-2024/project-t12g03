@@ -42,6 +42,7 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     @Override
     public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
+
         drawElements(gui, getModel().getRoom().getFloors(), floorDisplayer, frameCount);
         drawElements(gui, getModel().getRoom().getWalls(), wallDisplayer, frameCount);
         drawElement(gui, getModel().getRoom().getChest(), chestDisplayer, frameCount);
@@ -49,7 +50,9 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         drawElements(gui, getModel().getRoom().getMonsters(), monsterDisplayer, frameCount);
         drawElement(gui, getModel().getPlayer(), playerDisplayer, frameCount);
         drawElements(gui, getModel().getRoom().getLasers(), laserDisplayer, frameCount);
+
         hudDisplayer.draw(getModel().getPlayer(), gui, frameCount);
+
         gui.refresh();
     }
 

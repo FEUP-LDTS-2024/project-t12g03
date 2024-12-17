@@ -1,6 +1,6 @@
 package projectt12g03.view.gameDisplayer.elements.movable;
 
-import projectt12g03.model.Sprite;
+import projectt12g03.view.Sprite;
 
 public abstract class MovableDisplayer {
     public Sprite[] getSpriteSequence(String direction, Sprite[][] sprites) {

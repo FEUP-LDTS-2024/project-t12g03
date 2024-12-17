@@ -1,14 +1,12 @@
 package projectt12g03.view.gameDisplayer.elements.stationary;
 
-import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.Sprite;
+import projectt12g03.view.Sprite;
 import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.elements.stationary.Potion;
 import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 
 import java.io.IOException;
-import java.util.Map;
 
 public class ChestDisplayer implements ElementDisplayer<Chest> {
     private final Sprite sprite;

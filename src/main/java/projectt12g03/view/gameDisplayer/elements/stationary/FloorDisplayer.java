@@ -1,14 +1,11 @@
 package projectt12g03.view.gameDisplayer.elements.stationary;
 
-import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.Sprite;
+import projectt12g03.view.Sprite;
 import projectt12g03.model.game.elements.stationary.Floor;
-import projectt12g03.model.game.elements.stationary.Wall;
 import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class FloorDisplayer implements ElementDisplayer<Floor> {
