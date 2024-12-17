@@ -2,14 +2,16 @@ package projectt12g03.view.gameDisplayer.elements.movable;
 
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
+import projectt12g03.model.game.elements.movable.Movable;
 import projectt12g03.model.game.elements.movable.player.Player;
+import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 import projectt12g03.view.gameDisplayer.elements.weapon.SpearDisplayer;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayerDisplayer {
+public class PlayerDisplayer extends MovableDisplayer implements ElementDisplayer<Player> {
     private final Map<String, Sprite[][]> playerMap;
 
     private final SpearDisplayer spearDisplayer;
@@ -66,13 +68,4 @@ public class PlayerDisplayer {
 
     }
 
-    public Sprite[] getSpriteSequence(String direction, Sprite[][] sprites) {
-        return switch (direction) {
-            case "UP" -> sprites[0];
-            case "DOWN" -> sprites[1];
-            case "LEFT" -> sprites[2];
-            case "RIGHT" -> sprites[3];
-            default -> sprites[4];
-        };
-    }
 }

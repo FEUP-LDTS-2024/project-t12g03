@@ -12,7 +12,7 @@ import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 
-class ControlsMenuStateTest {
+class ControlsCongratulationsMenuStateTest {
     private Game game;
     private LanternaGui gui;
     private ControlsMenuState state;

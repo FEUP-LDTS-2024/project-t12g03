@@ -3,10 +3,11 @@ package projectt12g03.view.gameDisplayer.elements.stationary;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Sprite;
 import projectt12g03.model.game.elements.stationary.Key;
+import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 
 import java.io.IOException;
 
-public class KeyDisplayer {
+public class KeyDisplayer implements ElementDisplayer<Key> {
     private final Sprite sprite;
 
     public KeyDisplayer() throws IOException {
@@ -16,5 +17,10 @@ public class KeyDisplayer {
     public void draw(Key key, GUI gui) {
         if (key != null)
             sprite.draw(gui, key.getPosition().getX(), key.getPosition().getY());
+    }
+
+    @Override
+    public void draw(Key key, GUI gui, long frameCount) {
+        sprite.draw(gui, key.getPosition().getX(), key.getPosition().getY());
     }
 }

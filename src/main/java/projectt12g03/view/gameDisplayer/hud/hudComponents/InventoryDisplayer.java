@@ -24,11 +24,12 @@ public class InventoryDisplayer {
         potionDisplayer = new PotionDisplayer();
     }
 
-    public void draw(Inventory inventory, GUI gui) {
+    public void draw(Inventory inventory, GUI gui, long framecount) {
         for (int i = 0; i < 4; i++) {
             sprite[inventory.isSelected(i) ? 1 : 0].draw(gui, 91 + (i * SPACING), 258);
             Potion potion = inventory.getPotion(i);
-            if (potion != null) potionDisplayer.draw(potion, new Vector(98 + (i * SPACING), 264), gui);
+            potionDisplayer.setDisplacement(new Vector(98 + (i * SPACING), 264));
+            if (potion != null) potionDisplayer.draw(potion,gui,framecount);
         }
     }
 }
