@@ -1,9 +1,7 @@
 package projectt12g03.view.gameDisplayer;
 
-import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.Element;
-import projectt12g03.model.game.elements.stationary.Door;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
@@ -60,8 +58,8 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         displayer.draw(element, gui, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementDisplayer<T> viewer, long frameCount) {
+    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementDisplayer<T> displayer, long frameCount) {
         for (T element: elements)
-            drawElement(gui, element, viewer, frameCount);
+            drawElement(gui, element, displayer, frameCount);
     }
 }

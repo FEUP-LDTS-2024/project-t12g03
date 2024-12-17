@@ -15,7 +15,7 @@ public class Player extends Movable implements Weapon {
     private final int SPRINT_SPEED = 5;
     private final int HEALTH = 4;
     private final int ATTACKDELAY = 6;
-    private final int IMMUNITY = 30;
+    private final int IMMUNITY = 15;
 
     private Rectangle spear;
     private String lastEffect;
