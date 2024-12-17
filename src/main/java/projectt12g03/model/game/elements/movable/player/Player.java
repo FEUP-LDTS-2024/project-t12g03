@@ -48,7 +48,6 @@ public class Player extends Movable implements Weapon {
     }
 
     public void sprint() {
-        System.out.println(isSprinting);
         if (isSprinting) {
             walk();
         }
@@ -150,7 +149,7 @@ public class Player extends Movable implements Weapon {
     }
 
     @Override
-    public boolean canMove(Vector position) { return !room.checkCollisionsForPlayer(position) && isAttacking == 0; }
+    public boolean canMove(Vector position) { return !room.checkCollisionsForPlayer(position); }
 
     @Override
     public Rectangle setWeaponHitbox() {

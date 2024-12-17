@@ -51,27 +51,18 @@ public class MonsterController extends Controller<RoomManager> {
         switch (direction) {
             case "UP":
                 if (monster.canMove(monster.moveUp())) monster.setPosition(monster.moveUp());
-                monster.setDirection("UP");
-                monster.setState("WALKING");
                 break;
             case "DOWN":
                 if (monster.canMove(monster.moveDown())) monster.setPosition(monster.moveDown());
-                monster.setDirection("DOWN");
-                monster.setState("WALKING");
                 break;
             case "RIGHT":
                 if (monster.canMove(monster.moveRight())) monster.setPosition(monster.moveRight());
-                monster.setDirection("RIGHT");
-                monster.setState("WALKING");
                 break;
             case "LEFT":
                 if (monster.canMove(monster.moveLeft())) monster.setPosition(monster.moveLeft());
-                monster.setDirection("LEFT");
-                monster.setState("WALKING");
-                break;
-            case "IDLE":
-                monster.setState("IDLE");
                 break;
         }
+        monster.setDirection(!direction.equals("IDLE") ? direction : monster.getDirection());
+        monster.setState(!direction.equals("IDLE") ? "WALKING" : direction);
     }
 }
