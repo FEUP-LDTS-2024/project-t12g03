@@ -25,7 +25,7 @@ public class MonsterController extends Controller<RoomManager> {
 
             if (directions.isEmpty()) {
                 String randomDirection = getRandomDirection(rand);
-                int repeatCount = randomDirection.equals("IDLE") ? 32 : 16;
+                int repeatCount = randomDirection.equals("IDLE") ? 24 : 16;
                 for (int i = 0; i < repeatCount; i++) {
                     directions.add(randomDirection);
                 }
@@ -38,13 +38,13 @@ public class MonsterController extends Controller<RoomManager> {
     }
 
     private String getRandomDirection(SecureRandom rand) {
-        switch (rand.nextInt(5)) {
-            case 0: return "UP";
-            case 1: return "DOWN";
-            case 2: return "RIGHT";
-            case 3: return "LEFT";
-            default: return "IDLE";
-        }
+        return switch (rand.nextInt(5)) {
+            case 0 -> "UP";
+            case 1 -> "DOWN";
+            case 2 -> "RIGHT";
+            case 3 -> "LEFT";
+            default -> "IDLE";
+        };
     }
 
     private void executeDirection(Monster monster, String direction) {
