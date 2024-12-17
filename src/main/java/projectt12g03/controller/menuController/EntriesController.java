@@ -13,9 +13,6 @@ import projectt12g03.state.menuSate.ControlsMenuState;
 import projectt12g03.state.menuSate.CreditsMenuState;
 
 import java.io.IOException;
-import java.util.Objects;
-
-import static projectt12g03.gui.GUI.userInput.*;
 
 public class EntriesController extends Controller<Menu> {
 
@@ -26,7 +23,7 @@ public class EntriesController extends Controller<Menu> {
     @Override
     public void step(Game game, GUI.userInput action, long frameCount) throws IOException {
         switch (getModel().getCurrentEntry()) {
-            case START:
+            case START, RESTART:
                 game.setState(new GameState(new RoomManager()));
                 break;
             case CONTROLS:

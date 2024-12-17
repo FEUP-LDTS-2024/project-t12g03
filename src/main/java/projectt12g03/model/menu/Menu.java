@@ -4,7 +4,7 @@ package projectt12g03.model.menu;
 import java.util.*;
 
 public abstract class Menu {
-    public enum Type { START, CONTROLS, CREDITS, EXIT, GO_BACK, RESUME }
+    public enum Type { START, CONTROLS, CREDITS, EXIT, GO_BACK, RESUME, RESTART}
 
     private final Map<Integer, Type> entries;
     private int currentEntry = 0;

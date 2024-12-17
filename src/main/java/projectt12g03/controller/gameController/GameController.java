@@ -5,7 +5,10 @@ import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.room.RoomManager;
+import projectt12g03.model.menu.GameOverMenu;
+import projectt12g03.model.menu.Menu;
 import projectt12g03.model.menu.PauseMenu;
+import projectt12g03.state.menuSate.GameOverMenuState;
 import projectt12g03.state.menuSate.PauseMenuState;
 import projectt12g03.model.game.elements.movable.player.Player;
 
@@ -47,6 +50,9 @@ public class GameController extends Controller<RoomManager> {
             hudController.step(game, action, time);
         }
 
-        if (player.getHealth() == 0) game.popState();
+        if (player.getHealth() == 0) {
+            game.popState();
+            game.setState(new GameOverMenuState(new GameOverMenu()));
+        }
     }
 }
