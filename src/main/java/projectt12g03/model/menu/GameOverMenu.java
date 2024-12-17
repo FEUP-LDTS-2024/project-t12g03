@@ -22,5 +22,5 @@ public class GameOverMenu extends Menu {
         return entries;
     }
 
-    public void getType() { return type; }
+    public int getType() { return type; }
 }
