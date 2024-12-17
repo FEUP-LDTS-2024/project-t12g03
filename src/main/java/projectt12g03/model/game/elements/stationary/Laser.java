@@ -31,8 +31,8 @@ public class Laser extends Element {
     public boolean isPointingLeft() { return isPoitingLeft; }
 
     private void setLaserBeamHitbox() {
-        if (direction.equals("LEFT")) laserBeamHitbox = new Rectangle(-1, 5, 1, 6);
-        else laserBeamHitbox = new Rectangle(16, 5, 1, 6);
+        if (direction.equals("LEFT")) laserBeamHitbox = new Rectangle(-1, 5, 4, 6);
+        else laserBeamHitbox = new Rectangle(16, 5, 4, 6);
     }
 
     public String getDirection() {return direction;}

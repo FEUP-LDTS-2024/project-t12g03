@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 public class Game {
-    public static final int FPS = 15;
+    public static final int FPS = 10;
     public static final int terminalWidth = 320;
     public static final int terminalHeight = 288;
     private static final String windowName = "SPEAR BOY";
@@ -60,7 +60,8 @@ public class Game {
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;
 
-            try { if (sleepTime > 0) Thread.sleep(sleepTime); }
+            try { if (sleepTime > 0) Thread.sleep(sleepTime);
+            else System.out.println(sleepTime);}
             catch (InterruptedException e) { }
             frameCount++;
         }
