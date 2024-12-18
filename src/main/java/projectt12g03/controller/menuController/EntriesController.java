@@ -23,7 +23,11 @@ public class EntriesController extends Controller<Menu> {
     @Override
     public void step(Game game, GUI.userInput action, long frameCount) throws IOException {
         switch (getModel().getCurrentEntry()) {
-            case START, RESTART:
+            case START:
+                game.setState(new GameState(new RoomManager()));
+                break;
+            case RESTART:
+                game.popState();
                 game.setState(new GameState(new RoomManager()));
                 break;
             case CONTROLS:

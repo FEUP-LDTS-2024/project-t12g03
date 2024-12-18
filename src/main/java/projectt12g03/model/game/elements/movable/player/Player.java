@@ -75,31 +75,29 @@ public class Player extends Movable implements Weapon {
     }
 
     public void consume(Potion potion) {
-        if (effectDuration == 0) {
-            effectDuration = potion.getDuration();
-            switch (potion.getEffect()) {
-                case "speed":
-                    setSpeedBoost(SPEED_BOOST);
-                    lastEffect = "speed";
-                    break;
-                case "immunity":
-                    setImmunity(potion.getDuration());
-                    lastEffect = "immunity";
-                case "heal":
-                    if (getHealth() < 4) {
-                        increaseHealth();
-                        lastEffect = "heal";
-                    }
-                    break;
-                case "energy":
-                    if (getEnergy() < 800) {
-                        increaseEnergy(200);
-                        lastEffect = "energy";
-                    }
-                    break;
-                default:
-                    lastEffect = "HERE SO IT DOESNT STOP RUNNING"; //remove after all effects added
-            }
+        effectDuration = potion.getDuration();
+        switch (potion.getEffect()) {
+            case "speed":
+                setSpeedBoost(SPEED_BOOST);
+                lastEffect = "speed";
+                break;
+            case "immunity":
+                setImmunity(potion.getDuration());
+                lastEffect = "immunity";
+            case "heal":
+                if (getHealth() < 4) {
+                    increaseHealth();
+                    lastEffect = "heal";
+                }
+                break;
+            case "energy":
+                if (getEnergy() < 800) {
+                    increaseEnergy(200);
+                    lastEffect = "energy";
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Potion effect not Found");
         }
     }
 

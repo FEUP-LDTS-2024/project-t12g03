@@ -3,6 +3,7 @@ package projectt12g03.model.game.room;
 import projectt12g03.model.Vector;
 
 import projectt12g03.model.game.elements.Element;
+import projectt12g03.model.game.elements.movable.Movable;
 import projectt12g03.model.game.elements.stationary.Laser;
 import projectt12g03.model.game.elements.movable.hostile.Monster;
 import projectt12g03.model.game.elements.movable.player.Player;
@@ -31,7 +32,7 @@ public class Room {
         this.height = height;
     }
 
-    private boolean checkCollision(Element a, Element b, Vector position) {
+    private boolean checkCollision(Movable a, Element b, Vector position) {
         int aHitboxX = position.getX() + a.getHitbox().x;
         int aHitboxY = position.getY() + a.getHitbox().y;
         int aHitboxWidth = a.getHitbox().width;
@@ -90,7 +91,7 @@ public class Room {
 
     public void checkAttackCollision() {
         for (Monster monster : monsters) {
-            if(checkCollisionForDamage(monster, player.getSpear(), player.getPosition())) {
+            if(checkCollisionForLaserDamage(monster, player.getSpear(), player.getPosition())) {
                 monster.reduceHealth();
                 if (monster.getHealth() <= 0) {
                     monsters.remove(monster);
@@ -100,7 +101,7 @@ public class Room {
         }
     }
 
-    private boolean checkPlayerCollision(Element a, Vector position) {
+    private boolean checkPlayerCollision(Movable a, Vector position) {
         if(checkCollision(a, player, position)) {
             if(player.getImmunity() == 0) {
                 player.reduceHealth();
@@ -111,15 +112,16 @@ public class Room {
         return false;
     }
 
-    private boolean checkMonsterCollision(Element a, Vector position) {
+    private boolean checkMonsterCollision(Movable a, Vector position) {
         for (Monster monster : monsters) {
-            if (checkCollision(a, monster, position) && (monster != a))
-                return true;
+            if (monster != a) {
+                if (checkCollision(a, monster, position)) return true;
+            }
         }
         return false;
     }
 
-    private boolean checkLaserCollision(Element a, Vector position) {
+    private boolean checkLaserCollision(Movable a, Vector position) {
         for (Laser laser : lasers) {
             if (checkCollision(a, laser, position))
                 return true;
@@ -127,7 +129,7 @@ public class Room {
         return false;
     }
 
-    private boolean checkWallCollision(Element a, Vector position) {
+    private boolean checkWallCollision(Movable a, Vector position) {
         for (Wall wall : walls) {
             if (checkCollision(a, wall, position))
                 return true;
@@ -135,19 +137,19 @@ public class Room {
         return false;
     }
 
-    private boolean checkKeyCollision(Element a, Vector position) {
+    private boolean checkKeyCollision(Movable a, Vector position) {
         if (key == null) return false;
 
         return checkCollision(a, key, position);
     }
 
-    private boolean checkChestCollision(Element a, Vector position) {
+    private boolean checkChestCollision(Movable a, Vector position) {
         return checkCollision(a, chest, position);
     }
 
     private boolean checkCollisionsForLaser(Laser laser, int displacement) {
         Vector laserBeamPosition = new Vector (displacement, laser.getPosition().getY());
-        if(checkCollisionForDamage(player, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+        if(checkCollisionForLaserDamage(player, laser.getLaserBeamHitbox(), laserBeamPosition)) {
             if (player.getImmunity() == 0) {
                 player.reduceHealth();
                 player.setImmunity();
@@ -156,20 +158,20 @@ public class Room {
         }
 
         for (Wall wall : walls) {
-            if(checkCollisionForDamage(wall, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+            if(checkCollisionForLaserDamage(wall, laser.getLaserBeamHitbox(), laserBeamPosition)) {
                 return true;
             }
         }
 
         for (Monster monster : monsters) {
-            if(checkCollisionForDamage(monster, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+            if(checkCollisionForLaserDamage(monster, laser.getLaserBeamHitbox(), laserBeamPosition)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean checkCollisionForDamage(Element b, Rectangle hitbox, Vector position) {
+    private boolean checkCollisionForLaserDamage(Element b, Rectangle hitbox, Vector position) {
         int aHitboxX = position.getX() + hitbox.x;
         int aHitboxY = position.getY() + hitbox.y;
         int aHitboxWidth = hitbox.width;
@@ -186,7 +188,7 @@ public class Room {
         return collisionX && collisionY;
     }
 
-    public boolean isAtTransition(Element a, Vector position) {
+    public boolean isAtTransition(Movable a, Vector position) {
         for (Door door : doors) {
             if (checkCollision(a, door, position))
                 return true;

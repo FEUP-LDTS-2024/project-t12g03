@@ -1,6 +1,7 @@
 package projectt12g03.view.menuDisplayer;
 
 import projectt12g03.gui.GUI;
+import projectt12g03.model.menu.GameOverMenu;
 import projectt12g03.model.menu.Menu;
 import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.Sprite;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public abstract class MenuDisplayer<T extends Menu> extends ScreenDisplayer<T> {
-    private final Map<Integer, Sprite> backGroundMap;
+    public final Map<Integer, Sprite> backGroundMap;
 
     public MenuDisplayer(T model) throws IOException {
         super(model);

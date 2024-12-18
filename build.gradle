@@ -31,3 +31,12 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+run {
+    jvmArgs = [
+            "-XX:+UseParallelGC",     // Use parallel garbage collector
+            "-XX:ParallelGCThreads=4", // Set the number of threads for GC
+            "-Xms1024m",              // Set minimum heap size
+            "-Xmx4096m"               // Set maximum heap size
+    ]
+}
