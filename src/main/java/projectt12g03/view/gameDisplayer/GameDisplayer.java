@@ -47,9 +47,9 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         drawElements(gui, getModel().getRoom().getWalls(), wallDisplayer, frameCount);
         drawElement(gui, getModel().getRoom().getChest(), chestDisplayer, frameCount);
         drawElement(gui, getModel().getRoom().getKey(), keyDisplayer, frameCount);
+        drawElements(gui, getModel().getRoom().getLasers(), laserDisplayer, frameCount);
         drawElements(gui, getModel().getRoom().getMonsters(), monsterDisplayer, frameCount);
         drawElement(gui, getModel().getPlayer(), playerDisplayer, frameCount);
-        drawElements(gui, getModel().getRoom().getLasers(), laserDisplayer, frameCount);
 
         hudDisplayer.draw(getModel().getPlayer(), gui, frameCount);
 
