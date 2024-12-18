@@ -2,17 +2,15 @@ package projectt12g03.controller.gameController;
 
 import projectt12g03.Game;
 import projectt12g03.controller.Controller;
-import projectt12g03.gui.GUI;
 import projectt12g03.gui.LanternaGui;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.RoomManager;
-import projectt12g03.model.menu.CongratulationsMenu;
+import projectt12g03.model.menu.VictoryMenu;
 import projectt12g03.model.menu.GameOverMenu;
-import projectt12g03.state.menuSate.CongratulationsMenuState;
+import projectt12g03.state.menuSate.VictoryMenuState;
 import projectt12g03.state.menuSate.GameOverMenuState;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
@@ -111,14 +109,13 @@ public class PlayerController extends Controller<RoomManager> {
     }
 
     private void chooseScreen(Game game) throws IOException {
+        game.popState();
+
         if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
-            game.popState();
             game.setState(new GameOverMenuState(new GameOverMenu("LIVED_KILLED")));
         }
         else {
-            game.popState();
-            System.out.println((int) (((System.currentTimeMillis() - getModel().getPlayer().getTime()) / 1000) % 60) + ":" + (int) (((System.currentTimeMillis() - getModel().getPlayer().getTime()) / 1000) / 60));
-            game.setState(new CongratulationsMenuState(new CongratulationsMenu()));
+            game.setState(new VictoryMenuState(new VictoryMenu()));
         }
     }
 }
