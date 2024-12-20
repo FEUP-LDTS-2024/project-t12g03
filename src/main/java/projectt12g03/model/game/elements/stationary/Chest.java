@@ -1,7 +1,6 @@
 package projectt12g03.model.game.elements.stationary;
 
 import projectt12g03.model.game.elements.Element;
-import projectt12g03.model.game.elements.stationary.potion.Potion;
 
 public class Chest extends Element {
     private boolean unlockable = false;

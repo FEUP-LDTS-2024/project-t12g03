@@ -1,6 +1,6 @@
 package projectt12g03.model.game.inventory;
 
-import projectt12g03.model.game.elements.stationary.potion.Potion;
+import projectt12g03.model.game.elements.stationary.Potion;
 
 import java.util.ArrayList;
 import java.util.List;

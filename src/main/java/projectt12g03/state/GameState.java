@@ -13,7 +13,7 @@ public class GameState extends State<RoomManager> {
     public GameState(RoomManager model) throws IOException { super(model); }
 
     @Override
-    protected Controller<RoomManager> getController() {
+    protected Controller<RoomManager> getController() throws IOException {
         return new GameController(getModel(), new PlayerController(getModel()), new MonsterController(getModel()), new LaserController(getModel()), new HudController(getModel()));
     }
 

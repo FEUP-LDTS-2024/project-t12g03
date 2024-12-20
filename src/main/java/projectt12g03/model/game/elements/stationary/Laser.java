@@ -49,7 +49,7 @@ public class Laser extends Element {
 
     public void reduceResting(){this.resting--;}
 
-    public void reduceActive(){this.active--;}
+    public void reduceActive() {this.active--;}
 
     public void changeMode(String name) {
         if(Objects.equals(name, "ACTIVE")) setActive(ACTIVE_TIME);

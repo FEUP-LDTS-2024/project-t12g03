@@ -38,7 +38,9 @@ public class EntriesController extends Controller<Menu> {
                 break;
             case EXIT:
                 game.popState();
-                if (getModel() instanceof PauseMenu) game.popState();
+                if (getModel() instanceof PauseMenu) {
+                    game.popState();
+                }
                 break;
             case GO_BACK, RESUME:
                 game.popState();

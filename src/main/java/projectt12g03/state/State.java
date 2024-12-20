@@ -18,7 +18,7 @@ public abstract class State<T> {
         this.screenDisplayer = getScreenDisplayer();
     }
 
-    protected abstract Controller<T> getController();
+    protected abstract Controller<T> getController() throws IOException;
     protected abstract ScreenDisplayer<T> getScreenDisplayer() throws IOException;
     protected abstract boolean allowInputSpam();
 

@@ -20,14 +20,17 @@ public class GameController extends Controller<RoomManager> {
     private final MonsterController monsterController;
     private final LaserController laserController;
     private final HudController hudController;
+    private final GameOverMenuState gameOverMenuState;  //helps with tests
 
-    public GameController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController, HudController hudController) {
+    public GameController(RoomManager roomManager, PlayerController playerController, MonsterController monsterController, LaserController laserController, HudController hudController) throws IOException {
         super(roomManager);
 
         this.playerController = playerController;
         this.monsterController = monsterController;
         this.laserController = laserController;
         this.hudController = hudController;
+
+        this.gameOverMenuState = new GameOverMenuState(new GameOverMenu());
     }
 
     @Override
@@ -36,33 +39,35 @@ public class GameController extends Controller<RoomManager> {
         Player player = getModel().getPlayer();
         Chest chest = getModel().getRoom().getChest();
 
-        if (chest.getPotion() != null && chest.isOpened()) {
-            if (chest.getPotion().getImmunity() > 0)
-                chest.getPotion().reduceImmunity();
+        if (action == PAUSE) {
+            game.setState(new PauseMenuState(new PauseMenu()));
         }
 
-        if (action == PAUSE)
-            game.setState(new PauseMenuState(new PauseMenu()));
-
         else {
+            if (chest.getPotion() != null && chest.isOpened() && chest.getPotion().getImmunity() > 0) {
+                chest.getPotion().reduceImmunity();
+            }
+
             monsterController.step(game, action, time);
             playerController.step(game, action, time);
             laserController.step(game,action,time);
-
             hudController.step(game, action, time);
-        }
 
-        if (player.getHealth() == 0) {
-            game.popState();
-            String type;
+            if (player.getHealth() == 0) {
+                game.popState();
 
-            if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
-                type = "DIED_KILLED";
+                if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
+                    gameOverMenuState.getModel().setType("DIED_KILLED");
+                }
+                else {
+                    gameOverMenuState.getModel().setType("DIED_!KILLED");
+                }
+                game.setState(gameOverMenuState);
             }
-            else {
-                type = "DIED_!KILLED";
-            }
-            game.setState(new GameOverMenuState(new GameOverMenu(type)));
         }
+    }
+
+    public GameOverMenuState getGameOverMenuState() {   //for tests
+        return gameOverMenuState;
     }
 }

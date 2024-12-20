@@ -2,7 +2,7 @@ package projectt12g03.model.game.elements.movable.player;
 
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Movable;
-import projectt12g03.model.game.elements.stationary.potion.Potion;
+import projectt12g03.model.game.elements.stationary.Potion;
 import projectt12g03.model.game.inventory.Inventory;
 import projectt12g03.model.game.room.Room;
 

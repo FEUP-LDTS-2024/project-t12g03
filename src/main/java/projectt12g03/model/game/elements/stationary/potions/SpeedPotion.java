@@ -1,4 +1,4 @@
-package projectt12g03.model.game.elements.stationary.potion;
+package projectt12g03.model.game.elements.stationary.potions;
 
 import projectt12g03.model.game.elements.movable.player.Player;
 

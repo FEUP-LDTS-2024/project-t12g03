@@ -1,7 +1,8 @@
 package projectt12g03.view.gameDisplayer.elements.stationary;
 
 import projectt12g03.gui.GUI;
-import projectt12g03.model.game.elements.stationary.potion.*;
+import projectt12g03.model.game.elements.stationary.Potion;
+import projectt12g03.model.game.elements.stationary.potions.*;
 import projectt12g03.view.Sprite;
 import projectt12g03.model.Vector;
 import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;

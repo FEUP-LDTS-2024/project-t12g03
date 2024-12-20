@@ -14,20 +14,24 @@ import projectt12g03.state.menuSate.GameOverMenuState;
 import java.io.IOException;
 
 public class PlayerController extends Controller<RoomManager> {
+    private final GameOverMenuState gameOverMenuState;  //helps with tests
     private final int KEY_DELAY = 10;
+
     private int delay;
 
-    public PlayerController(RoomManager model) { super(model); }
+    public PlayerController(RoomManager model) throws IOException {
+        super(model);
+        this.gameOverMenuState = new GameOverMenuState(new GameOverMenu());
+    }
 
     @Override
     public void step(Game game, LanternaGui.userInput action, long time) throws IOException {
         Player player = getModel().getPlayer();
         Vector nextPosition = null;
 
-        reduceCooldDowns(player);
+        updateCooldDowns(player);
 
         if (player.getIsAttacking() > 0) {  //player cant move when attacking
-            player.reduceIsAttacking();
             getModel().getRoom().checkAttackCollision();
         }
 
@@ -75,9 +79,13 @@ public class PlayerController extends Controller<RoomManager> {
         }
     }
 
-    private void reduceCooldDowns(Player player) {
+    public void updateCooldDowns(Player player) {
         if (delay > 0)
             delay--;
+
+        if (player.getIsAttacking() > 0) {
+            player.reduceIsAttacking();
+        }
 
         if (player.isSprinting()) {
             player.reduceEnergy();
@@ -92,36 +100,45 @@ public class PlayerController extends Controller<RoomManager> {
         player.updatePotionDuration();
     }
 
-    private void handlePlayerMovement(Vector nextPosition, Game game) throws IOException {
+    public void handlePlayerMovement(Vector nextPosition, Game game) throws IOException {
         if (nextPosition == null) {
             return;
         }
-
         if (getModel().getPlayer().canMove(nextPosition)) {
             getModel().getPlayer().setPosition(nextPosition);
             return;
         }
-
         if (!getModel().getRoom().isAtTransition(getModel().getPlayer(), nextPosition)) {
             return;
         }
-
         int doorNumber = getModel().getRoom().getDoorNumber(nextPosition);
         if (doorNumber != 0) {
             getModel().loadRoom(doorNumber); // Transition to the next room
-        } else {
+        }
+        else {
             chooseScreen(game); // end on a win or on a loss
         }
     }
 
-    private void chooseScreen(Game game) throws IOException {
+    public void chooseScreen(Game game) throws IOException {
         game.popState();
 
         if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
-            game.setState(new GameOverMenuState(new GameOverMenu("LIVED_KILLED")));
+            gameOverMenuState.getModel().setType("LIVED_KILLED");
+            game.setState(gameOverMenuState);
         }
         else {
             game.setState(new VictoryMenuState(new VictoryMenu()));
         }
     }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay() {
+        this.delay = KEY_DELAY;
+    }
+
+    public GameOverMenuState getGameOverMenuState() { return gameOverMenuState;}
 }
