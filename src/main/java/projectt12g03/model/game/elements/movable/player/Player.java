@@ -80,6 +80,7 @@ public class Player extends Movable implements Weapon {
             case "immunity":
                 setImmunity(potion.getDuration());
                 lastEffect = "immunity";
+                break;
             case "heal":
                 if (getHealth() < 4) {
                     increaseHealth();

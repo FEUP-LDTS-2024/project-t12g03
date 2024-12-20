@@ -6,7 +6,7 @@ import projectt12g03.gui.LanternaGui;
 import java.io.IOException;
 
 public abstract class Controller<T> {
-    private T model;
+    private final T model;
 
     public Controller(T model) {
         this.model = model;
