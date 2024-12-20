@@ -3,7 +3,7 @@ package projectt12g03.view.gameDisplayer.elements.stationary;
 import projectt12g03.gui.GUI;
 import projectt12g03.view.Sprite;
 import projectt12g03.model.game.elements.stationary.Chest;
-import projectt12g03.model.game.elements.stationary.Potion;
+import projectt12g03.model.game.elements.stationary.potion.Potion;
 import projectt12g03.view.gameDisplayer.elements.ElementDisplayer;
 
 import java.io.IOException;

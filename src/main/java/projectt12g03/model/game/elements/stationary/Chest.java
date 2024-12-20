@@ -1,6 +1,7 @@
 package projectt12g03.model.game.elements.stationary;
 
 import projectt12g03.model.game.elements.Element;
+import projectt12g03.model.game.elements.stationary.potion.Potion;
 
 public class Chest extends Element {
     private boolean unlockable = false;
@@ -9,7 +10,7 @@ public class Chest extends Element {
 
     public Chest(int x, int y) {
         super(x, y,0,0,16,16);
-        potion = new Potion(x,y);
+        this.potion = Potion.createRandomPotion(x,y);
     }
 
     public boolean isUnlockable() { return unlockable; }

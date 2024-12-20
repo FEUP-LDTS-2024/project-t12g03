@@ -1,9 +1,8 @@
 package projectt12g03.model.game.elements.movable.player;
 
-import jdk.jfr.consumer.RecordedThread;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.Movable;
-import projectt12g03.model.game.elements.stationary.Potion;
+import projectt12g03.model.game.elements.stationary.potion.Potion;
 import projectt12g03.model.game.inventory.Inventory;
 import projectt12g03.model.game.room.Room;
 
@@ -11,7 +10,6 @@ import java.awt.*;
 
 public class Player extends Movable implements Weapon {
     private final Inventory inventory;
-    private final int SPEED_BOOST = 2;
     private final int WALK_SPEED = 3;
     private final int SPRINT_SPEED = 5;
     private final int HEALTH = 4;
@@ -19,12 +17,12 @@ public class Player extends Movable implements Weapon {
     private final int IMMUNITY = 15;
 
     private Rectangle spear;
-    private String lastEffect;
     private boolean isSprinting;
     private int energy;
     private int immunity;
     private int isAttacking;
     private int effectDuration;
+    private Potion activePotion;
 
     public Player(int x, int y, Room room) {
         super(x, y, room);
@@ -51,16 +49,16 @@ public class Player extends Movable implements Weapon {
         if (isSprinting) {
             walk();
         }
-        else {
-            if (energy > 4){
-                isSprinting = true;
-                setVelocity(SPRINT_SPEED);
-                setState("RUNNING");
-            }
+        else if (energy > 6) {
+            isSprinting = true;
+            setVelocity(SPRINT_SPEED);
+            setState("RUNNING");
         }
     }
 
-    public boolean isSprinting() { return isSprinting; }
+    public boolean isSprinting() {
+        return isSprinting;
+    }
 
     public void heal() {
         if (getHealth() < 4 && energy >= 800) {
@@ -71,74 +69,80 @@ public class Player extends Movable implements Weapon {
     }
 
     public void consume(Potion potion) {
-        effectDuration = potion.getDuration();
-        switch (potion.getEffect()) {
-            case "speed":
-                setSpeedBoost(SPEED_BOOST);
-                lastEffect = "speed";
-                break;
-            case "immunity":
-                setImmunity(potion.getDuration());
-                lastEffect = "immunity";
-                break;
-            case "heal":
-                if (getHealth() < 4) {
-                    increaseHealth();
-                    lastEffect = "heal";
-                }
-                break;
-            case "energy":
-                if (getEnergy() < 800) {
-                    increaseEnergy(200);
-                    lastEffect = "energy";
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Potion effect not Found");
-        }
+        potion.applyEffect(this);
+        activePotion = potion;
     }
 
-    public void removeEffect() {
-        if (lastEffect.equals("speed")) setSpeedBoost(1);
+    public void updatePotionDuration() {
+        if (effectDuration > 0) {
+            effectDuration--;
+        }
+
+        else if (effectDuration == 0 && activePotion != null) {
+            activePotion.removeEffect(this);
+            activePotion = null;
+        }
+
     }
 
-    public void reduceEnergy() { this.energy -= 6;}
+    public void reduceEnergy() {
+        this.energy -= 6;
+        if (getEnergy() < 5)
+            walk();
+    }
 
-    public void reduceIsAttacking() { this.isAttacking--; }
+    public void reduceIsAttacking() {
+        this.isAttacking--;
+    }
 
-    public void reduceImmunity() { this.immunity--; }
-
-    public void reduceEffectDuration() {
-        this.effectDuration--;
-        if (effectDuration == 0) {
-            removeEffect();
-        }
+    public void reduceImmunity() {
+        this.immunity--;
     }
 
     public void increaseEnergy(int value) {
         if (getEnergy() + value <= 800) {
             this.energy += value;
-        }else{
+        }
+        else {
             this.energy = 800;
         }
-
     }
 
-    public int getEffectDuration() { return effectDuration;}
+    public int getEffectDuration() {
+        return effectDuration;
+    }
 
-    public int getImmunity() { return immunity; }
+    public int getImmunity() {
+        return immunity;
+    }
 
-    public int getIsAttacking() { return isAttacking; }
+    public int getIsAttacking() {
+        return isAttacking;
+    }
 
-    public Inventory getInventory() { return inventory; }
+    public Inventory getInventory() {
+        return inventory;
+    }
 
-    public int getEnergy() { return energy; }
+    public int getEnergy() {
+        return energy;
+    }
 
-    public Rectangle getSpear() { return spear; }
+    public Rectangle getSpear() {
+        return spear;
+    }
 
-    public void setImmunity(){ this.immunity = IMMUNITY; }
+    public void setImmunity() {
+        this.immunity = IMMUNITY;
+    }
 
-    public void setImmunity(int immunity) {this.immunity = immunity; };
+    public void setImmunity(int immunity) {
+        this.immunity = immunity;
+    };
+
+    public void setEffectDuration(int duration) {
+        this.effectDuration = duration;
+    }
 
     public void setRoom(Room room) {
         this.room = room;
@@ -155,13 +159,18 @@ public class Player extends Movable implements Weapon {
     }
 
     public void attack(){
-        if(isAttacking != 0) return;
+        if(isAttacking != 0) {
+            return;
+        }
+
         isAttacking = ATTACKDELAY;
         spear = setWeaponHitbox();
     }
 
     @Override
-    public boolean canMove(Vector position) { return !room.checkCollisionsForPlayer(position); }
+    public boolean canMove(Vector position) {
+        return !room.checkCollisionsForPlayer(position);
+    }
 
     @Override
     public Rectangle setWeaponHitbox() {

@@ -76,14 +76,20 @@ public class PlayerController extends Controller<RoomManager> {
     }
 
     private void reduceCooldDowns(Player player) {
-        if (delay > 0) delay--;
+        if (delay > 0)
+            delay--;
+
         if (player.isSprinting()) {
             player.reduceEnergy();
-            if (player.getEnergy() < 5) player.walk();
         }
-        if (player.getEnergy() < 800) player.increaseEnergy(2);
-        if (player.getEffectDuration() > 0) player.reduceEffectDuration();
-        if (player.getImmunity() > 0) player.reduceImmunity();
+
+        if (player.getEnergy() < 800)
+            player.increaseEnergy(2);
+
+        if (player.getImmunity() > 0)
+            player.reduceImmunity();
+
+        player.updatePotionDuration();
     }
 
     private void handlePlayerMovement(Vector nextPosition, Game game) throws IOException {

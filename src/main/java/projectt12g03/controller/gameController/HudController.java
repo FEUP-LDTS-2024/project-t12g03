@@ -4,7 +4,7 @@ import projectt12g03.Game;
 import projectt12g03.controller.Controller;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.movable.player.Player;
-import projectt12g03.model.game.elements.stationary.Potion;
+import projectt12g03.model.game.elements.stationary.potion.Potion;
 import projectt12g03.model.game.inventory.Inventory;
 import projectt12g03.model.game.room.RoomManager;
 

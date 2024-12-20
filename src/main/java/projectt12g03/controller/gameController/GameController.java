@@ -37,11 +37,13 @@ public class GameController extends Controller<RoomManager> {
         Chest chest = getModel().getRoom().getChest();
 
         if (chest.getPotion() != null && chest.isOpened()) {
-            if (chest.getPotion().getImmunity() > 0) chest.getPotion().reduceImmunity();
+            if (chest.getPotion().getImmunity() > 0)
+                chest.getPotion().reduceImmunity();
         }
 
         if (action == PAUSE)
             game.setState(new PauseMenuState(new PauseMenu()));
+
         else {
             monsterController.step(game, action, time);
             playerController.step(game, action, time);
@@ -53,6 +55,7 @@ public class GameController extends Controller<RoomManager> {
         if (player.getHealth() == 0) {
             game.popState();
             String type;
+
             if (getModel().getTotalMonsters() > getModel().getCurrentMonsters()) {
                 type = "DIED_KILLED";
             }
