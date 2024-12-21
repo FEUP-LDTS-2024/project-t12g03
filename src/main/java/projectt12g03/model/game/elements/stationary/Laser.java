@@ -19,12 +19,12 @@ public class Laser extends Element {
 
     public Laser(int x, int y, Room room, boolean isPointingLeft) {
         super(x, y,0, 0,16, 16);
+        this.isPoitingLeft = isPointingLeft;
         setActive(0);
         setResting(REST_TIME);
         setMode("RESTING");
         setLaserBeamHitbox();
         this.room = room;
-        this.isPoitingLeft = isPointingLeft;
     }
 
     public boolean isPointingLeft() { return isPoitingLeft; }
@@ -65,5 +65,11 @@ public class Laser extends Element {
         return laserBeamHitbox;
     }
 
-    public void setMode(String mode) { this.mode = mode; }
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public String getMode() {
+        return mode;
+    }
 }
