@@ -211,18 +211,11 @@ public class Room {
     public int getLaserRange(Laser laser) {
         int range = 0;
         int pos = laser.getPosition().getX();
-        if (!laser.isPointingLeft()) {
-                pos+=4;
-                while (!checkCollisionsForLaser(laser, pos)) {
-                    range++;
-                    pos+=4;
-                }
-        }else{
-                pos-=4;
-                while (!checkCollisionsForLaser(laser, pos)) {
-                    range++;
-                    pos-=4;
-                }
+        int direction = laser.isPointingLeft() ? -1 : 1;
+        pos += (4*direction);
+        while (!checkCollisionsForLaser(laser, pos)) {
+            range++;
+            pos += (4*direction);
         }
         return range;
     }
@@ -233,10 +226,6 @@ public class Room {
 
     public List<Wall> getWalls() {
         return walls;
-    }
-
-    public List<Door> getDoors() {
-        return doors;
     }
 
     public Chest getChest() {

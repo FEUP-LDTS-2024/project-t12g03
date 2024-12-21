@@ -1,6 +1,5 @@
 package projectt12g03.model.game.elements.stationary;
 
-import com.googlecode.lanterna.TerminalRectangle;
 import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.room.Room;
 
@@ -14,17 +13,18 @@ public class Laser extends Element {
     private final Room room;
 
     private Rectangle laserBeamHitbox;
-    private String direction;
+    private String mode;
     private int active;
     private int resting;
 
-    public Laser(int x, int y, Room room, boolean isPoitingLeft) {
+    public Laser(int x, int y, Room room, boolean isPointingLeft) {
         super(x, y,0, 0,16, 16);
         setActive(0);
         setResting(REST_TIME);
+        setMode("RESTING");
         setLaserBeamHitbox();
         this.room = room;
-        this.isPoitingLeft = isPoitingLeft;
+        this.isPoitingLeft = isPointingLeft;
     }
 
     public boolean isPointingLeft() { return isPoitingLeft; }
@@ -46,9 +46,15 @@ public class Laser extends Element {
 
     public void reduceActive() {this.active--;}
 
-    public void changeMode(String name) {
-        if(Objects.equals(name, "ACTIVE")) setActive(ACTIVE_TIME);
-        else if(Objects.equals(name, "RESTING")) setResting(REST_TIME);
+    public void changeMode() {
+        if(Objects.equals(mode, "ACTIVE")) {
+            setResting(REST_TIME);
+            setMode("RESTING");
+        }
+        else if(Objects.equals(mode, "RESTING")) {
+            setActive(ACTIVE_TIME);
+            setMode("ACTIVE");
+        }
     }
 
     public int getRange(){
@@ -58,4 +64,6 @@ public class Laser extends Element {
     public Rectangle getLaserBeamHitbox() {
         return laserBeamHitbox;
     }
+
+    public void setMode(String mode) { this.mode = mode; }
 }

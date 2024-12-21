@@ -140,5 +140,7 @@ public class PlayerController extends Controller<RoomManager> {
         this.delay = KEY_DELAY;
     }
 
-    public GameOverMenuState getGameOverMenuState() { return gameOverMenuState;}
+    public GameOverMenuState getGameOverMenuState() {
+        return gameOverMenuState;
+    }
 }

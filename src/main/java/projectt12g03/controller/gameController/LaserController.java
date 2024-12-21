@@ -16,15 +16,17 @@ public class LaserController extends Controller<RoomManager> {
     @Override
     public void step(Game game, GUI.userInput action, long time) throws IOException {
         for(Laser laser : getModel().getRoom().getLasers()){
-            if (laser.getActive() > 0){
+            if (laser.getActive() > 0) {
                 laser.reduceActive();
-                if (laser.getActive() == 0) laser.changeMode("RESTING");
-            }
-            else if (laser.getResting() > 0){
-                laser.reduceResting();
-                if (laser.getResting() == 0) laser.changeMode("ACTIVE");
             }
 
+            if (laser.getResting() > 0){
+                laser.reduceResting();
+            }
+
+            if (laser.getResting() == 0 && laser.getActive() == 0) {
+                laser.changeMode();
+            }
         }
     }
 }

@@ -12,9 +12,11 @@ import java.security.SecureRandom;
 import java.util.*;
 
 public class MonsterController extends Controller<RoomManager> {
+    private final Path path;
 
-    public MonsterController(RoomManager model) {
+    public MonsterController(RoomManager model, Path path) {
         super(model);
+        this.path = path;
     }
 
     @Override
@@ -22,16 +24,16 @@ public class MonsterController extends Controller<RoomManager> {
         for (Monster monster : getModel().getRoom().getMonsters()) {
 
             List<String> directions = monster.getDirections();
-            String direction = Path.findNextMoveToPlayer(monster);
+            String direction = path.findNextMoveToPlayer(monster);
 
             if (!direction.equals("IDLE")){
                repeatStep(monster,direction,0);
             }else{
                 SecureRandom rand = new SecureRandom();
-                repeatStep(monster,getRandomDirection(rand),12);
+                int numberOfDirection = rand.nextInt(5);
+                direction = getRandomDirection(numberOfDirection);
+                repeatStep(monster,direction,12);
             }
-
-
 
             direction = directions.removeFirst();
             monster.setDirections(directions);
@@ -39,8 +41,8 @@ public class MonsterController extends Controller<RoomManager> {
         }
     }
 
-    private String getRandomDirection(SecureRandom rand) {
-        return switch (rand.nextInt(5)) {
+    public String getRandomDirection(int rand) {
+        return switch (rand) {
             case 0 -> "UP";
             case 1 -> "DOWN";
             case 2 -> "RIGHT";
@@ -49,7 +51,7 @@ public class MonsterController extends Controller<RoomManager> {
         };
     }
 
-    private void executeDirection(Monster monster, String direction) {  //change so it looks better
+    public void executeDirection(Monster monster, String direction) {  //change so it looks better
         switch (direction) {
             case "UP":
                 if (monster.canMove(monster.moveUp())) monster.setPosition(monster.moveUp());

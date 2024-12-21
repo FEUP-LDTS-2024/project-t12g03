@@ -1,5 +1,6 @@
 package projectt12g03.state;
 
+import projectt12g03.controller.Path;
 import projectt12g03.controller.gameController.*;
 import projectt12g03.controller.Controller;
 import projectt12g03.model.game.room.RoomManager;
@@ -14,7 +15,7 @@ public class GameState extends State<RoomManager> {
 
     @Override
     protected Controller<RoomManager> getController() throws IOException {
-        return new GameController(getModel(), new PlayerController(getModel()), new MonsterController(getModel()), new LaserController(getModel()), new HudController(getModel()));
+        return new GameController(getModel(), new PlayerController(getModel()), new MonsterController(getModel(), new Path()), new LaserController(getModel()), new HudController(getModel()));
     }
 
     @Override

@@ -5,15 +5,15 @@ import projectt12g03.model.game.elements.movable.hostile.Monster;
 import projectt12g03.model.game.room.Room;
 
 public class Path {
-    private static final int[] DX = {0, 0, 1, -1};
+    private final int[] DX = {0, 0, 1, -1};
     private static final int[] DY = {-1, 1, 0, 0};
 
 
-    public static double distance(Vector position, Room room){
+    public double distance(Vector position, Room room){
         return Math.sqrt(Math.pow(position.getX() - room.getPlayer().getPosition().getX(),2) + Math.pow(position.getY() - room.getPlayer().getPosition().getY(),2));
     }
 
-    public static String transform(int minMove){
+    public String transform(int minMove){
         return switch (minMove){
             case 0 -> "UP";
             case 1 -> "DOWN";
@@ -24,7 +24,7 @@ public class Path {
         };
     }
 
-    public static String findNextMoveToPlayer(Monster monster){
+    public String findNextMoveToPlayer(Monster monster){
         Room room = monster.getRoom();
 
         double minScore = Integer.MAX_VALUE;
