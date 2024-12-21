@@ -120,12 +120,20 @@ public class Player extends Movable implements Weapon {
         return isAttacking;
     }
 
+    public void setIsAttacking(int value) {
+        isAttacking = value;
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
 
     public int getEnergy() {
         return energy;
+    }
+
+    public void setEnergy(int value) {
+        energy = value;
     }
 
     public Rectangle getSpear() {
@@ -182,5 +190,7 @@ public class Player extends Movable implements Weapon {
             default -> throw new IllegalArgumentException("Direction for Spear not Found");
         };
     }
+
+
 }
 
