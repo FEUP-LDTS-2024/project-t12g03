@@ -211,21 +211,18 @@ public class Room {
     public int getLaserRange(Laser laser) {
         int range = 0;
         int pos = laser.getPosition().getX();
-        switch (laser.getDirection()) {
-            case "RIGHT":
+        if (!laser.isPointingLeft()) {
                 pos+=4;
                 while (!checkCollisionsForLaser(laser, pos)) {
                     range++;
                     pos+=4;
                 }
-                break;
-            case "LEFT":
+        }else{
                 pos-=4;
                 while (!checkCollisionsForLaser(laser, pos)) {
                     range++;
                     pos-=4;
                 }
-                break;
         }
         return range;
     }

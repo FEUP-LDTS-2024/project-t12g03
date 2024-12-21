@@ -18,9 +18,8 @@ public class Laser extends Element {
     private int active;
     private int resting;
 
-    public Laser(int x, int y,String direction, Room room, boolean isPoitingLeft) {
+    public Laser(int x, int y, Room room, boolean isPoitingLeft) {
         super(x, y,0, 0,16, 16);
-        setDirection(direction);
         setActive(0);
         setResting(REST_TIME);
         setLaserBeamHitbox();
@@ -31,13 +30,9 @@ public class Laser extends Element {
     public boolean isPointingLeft() { return isPoitingLeft; }
 
     private void setLaserBeamHitbox() {
-        if (direction.equals("LEFT")) laserBeamHitbox = new Rectangle(-4, 5, 4, 6);
+        if (isPointingLeft()) laserBeamHitbox = new Rectangle(-4, 5, 4, 6);
         else laserBeamHitbox = new Rectangle(16, 5, 4, 6);
     }
-
-    public String getDirection() {return direction;}
-
-    public void setDirection(String direction) { this.direction = direction;}
 
     public int getActive() { return active;}
 
