@@ -9,7 +9,7 @@ public abstract class MovableDisplayer {
             case "DOWN" -> sprites[1];
             case "LEFT" -> sprites[2];
             case "RIGHT" -> sprites[3];
-            default -> sprites[4];
+            default -> throw new RuntimeException("Direction Not Found");
         };
     }
 }

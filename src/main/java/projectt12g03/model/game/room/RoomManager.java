@@ -3,7 +3,6 @@ package projectt12g03.model.game.room;
 
 import projectt12g03.model.game.elements.stationary.Laser;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.elements.movable.hostile.Monster;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.elements.stationary.*;

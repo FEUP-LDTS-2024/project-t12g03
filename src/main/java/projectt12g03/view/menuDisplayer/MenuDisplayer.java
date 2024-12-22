@@ -20,10 +20,12 @@ public abstract class MenuDisplayer<T extends Menu> extends ScreenDisplayer<T> {
     public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         int entry = getModel().getCurrentEntryNumber();
-        Sprite image = backGroundMap.get(entry);
+        Sprite image = getImage(entry);
         image.draw(gui, 0, 0);
         gui.refresh();
     }
+
+    public Sprite getImage(int entry) { return backGroundMap.get(entry); }
 
     protected abstract Map<Integer, Sprite> createBackGroundMap() throws IOException;
 }

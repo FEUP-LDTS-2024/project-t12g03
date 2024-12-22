@@ -16,7 +16,12 @@ public class EnergyDisplayer {
 
     public void draw(int energy, GUI gui) {
         for (int i = 0; i < energy / 200 ; i++) {
-            sprite.draw(gui, 246 + (i * SPACING), 266);
+            Sprite image = getSprite();
+            image.draw(gui, 246 + (i * SPACING), 266);
         }
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }

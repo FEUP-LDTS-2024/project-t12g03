@@ -37,7 +37,7 @@ public class Sprite {
         }
     }
 
-    public void draw(GUI gui, double x, double y) {
+    public void draw(GUI gui, int x, int y) {
         for (int dx = 0; dx < width; dx++) {
             for (int dy = 0; dy < height; dy++) {
                 if (colorCache[dx][dy] != null) {

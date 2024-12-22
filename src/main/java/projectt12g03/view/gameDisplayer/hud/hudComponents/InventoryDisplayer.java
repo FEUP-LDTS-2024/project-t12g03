@@ -14,7 +14,7 @@ public class InventoryDisplayer {
 
     private final Sprite[] sprite;
 
-    private final PotionDisplayer potionDisplayer;
+    private PotionDisplayer potionDisplayer;
 
     public InventoryDisplayer() throws IOException {
         sprite = new Sprite[] { new Sprite("sprites/hud/inventory/inventory_slot_unselected.png"),
@@ -26,10 +26,22 @@ public class InventoryDisplayer {
 
     public void draw(Inventory inventory, GUI gui, long framecount) {
         for (int i = 0; i < 4; i++) {
-            sprite[inventory.isSelected(i) ? 1 : 0].draw(gui, 91 + (i * SPACING), 258);
+            Sprite image = getSprite(inventory, i);
+
+            image.draw(gui, 91 + (i * SPACING), 258);
             Potion potion = inventory.getPotion(i);
             potionDisplayer.setDisplacement(new Vector(98 + (i * SPACING), 264));
-            if (potion != null) potionDisplayer.draw(potion,gui,framecount);
+            if (potion != null) {
+                potionDisplayer.draw(potion, gui, framecount);
+            }
         }
+    }
+
+    public Sprite getSprite(Inventory inventory, int i) {
+        return sprite[inventory.isSelected(i) ? 1 : 0];
+    }
+
+    public void setPotionDisplayer(PotionDisplayer potionDisplayer) {
+        this.potionDisplayer = potionDisplayer;
     }
 }

@@ -3,6 +3,7 @@ package projectt12g03.view.gameDisplayer;
 import com.googlecode.lanterna.TextColor;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.game.elements.Element;
+import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.elements.stationary.Door;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.ScreenDisplayer;
@@ -26,17 +27,17 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
     private final FloorDisplayer floorDisplayer;
     private final HudDisplayer hudDisplayer;
 
-    public GameDisplayer(RoomManager model) throws IOException {
+    public GameDisplayer(RoomManager model, GameDisplayerHub gameDisplayerHub) {
         super(model);
 
-        playerDisplayer = new PlayerDisplayer();
-        wallDisplayer = new WallDisplayer();
-        monsterDisplayer = new MonsterDisplayer();
-        laserDisplayer = new LaserDisplayer();
-        chestDisplayer = new ChestDisplayer();
-        keyDisplayer = new KeyDisplayer();
-        floorDisplayer = new FloorDisplayer();
-        hudDisplayer = new HudDisplayer();
+        playerDisplayer = gameDisplayerHub.getPlayerDisplayer();
+        wallDisplayer = gameDisplayerHub.getWallDisplayer();
+        monsterDisplayer = gameDisplayerHub.getMonsterDisplayer();
+        laserDisplayer = gameDisplayerHub.getLaserDisplayer();
+        chestDisplayer = gameDisplayerHub.getChestDisplayer();
+        keyDisplayer = gameDisplayerHub.getKeyDisplayer();
+        floorDisplayer = gameDisplayerHub.getFloorDisplayer();
+        hudDisplayer = gameDisplayerHub.getHudDisplayer();
     }
 
     @Override
@@ -56,11 +57,11 @@ public class GameDisplayer extends ScreenDisplayer<RoomManager> {
         gui.refresh();
     }
 
-    private <T extends Element> void drawElement(GUI gui, T element, ElementDisplayer<T> displayer, long frameCount) {
+    public <T extends Element> void drawElement(GUI gui, T element, ElementDisplayer<T> displayer, long frameCount) {
         displayer.draw(element, gui, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementDisplayer<T> displayer, long frameCount) {
+    public <T extends Element> void drawElements(GUI gui, List<T> elements, ElementDisplayer<T> displayer, long frameCount) {
         for (T element: elements)
             drawElement(gui, element, displayer, frameCount);
     }

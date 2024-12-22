@@ -25,8 +25,13 @@ public class PotionDisplayer implements ElementDisplayer<Potion> {
 
     @Override
     public void draw(Potion potion, GUI gui, long frameCount) {
-        potionMap.get(potion.getEffectStrategy().getClass()).draw(gui, displacement.getX(), displacement.getY());
+        Sprite sprite = getSprite(potion);
+        sprite.draw(gui, displacement.getX(), displacement.getY());
     }
 
     public void setDisplacement(Vector displacement) { this.displacement = displacement; }
+
+    public Sprite getSprite(Potion potion) {
+        return potionMap.get(potion.getEffectStrategy().getClass());
+    }
 }

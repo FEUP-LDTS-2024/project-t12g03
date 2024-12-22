@@ -43,4 +43,7 @@ public class MonsterDisplayer extends MovableDisplayer implements ElementDisplay
         }
     }
 
+    public Map<String, Sprite[][]> getMonsterMap() {
+        return monsterMap;
+    }
 }

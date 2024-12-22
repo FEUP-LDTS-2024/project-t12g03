@@ -41,5 +41,5 @@ public class Potion extends Element {
 
     public int getImmunity() { return immunity; }
 
-    public void reduceImmunity(){ immunity--; }
+    public void reduceImmunity() { immunity--; }
 }

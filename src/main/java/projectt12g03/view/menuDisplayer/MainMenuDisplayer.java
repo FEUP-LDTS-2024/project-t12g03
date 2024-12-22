@@ -24,5 +24,4 @@ public class MainMenuDisplayer extends MenuDisplayer<MainMenu> {
         backGroundMap.put(3, new Sprite("sprites/menu/mainMenu/mainmenu4.png"));
         return backGroundMap;
     }
-
 }

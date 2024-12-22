@@ -13,7 +13,7 @@ import java.util.Map;
 public class PlayerDisplayer extends MovableDisplayer implements ElementDisplayer<Player> {
     private final Map<String, Sprite[][]> playerMap;
 
-    private final SpearDisplayer spearDisplayer;
+    private SpearDisplayer spearDisplayer;
 
     public PlayerDisplayer() throws IOException {
         playerMap = new HashMap<>();
@@ -68,4 +68,11 @@ public class PlayerDisplayer extends MovableDisplayer implements ElementDisplaye
 
     }
 
+    public void setSpearDisplayer(SpearDisplayer spearDisplayer) {
+        this.spearDisplayer = spearDisplayer;
+    }
+
+    public Map<String, Sprite[][]> getPlayerMap() {
+        return playerMap;
+    }
 }

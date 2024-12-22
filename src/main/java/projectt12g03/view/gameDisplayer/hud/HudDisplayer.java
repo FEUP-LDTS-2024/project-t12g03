@@ -16,12 +16,12 @@ public class HudDisplayer {
     private final EnergyDisplayer energyDisplayer;
     private final HealthDisplayer healthDisplayer;
 
-    public HudDisplayer() throws IOException {
+    public HudDisplayer(HudDisplayerHub hudDisplayerHub) throws IOException {
         sprite = new Sprite("sprites/hud/full_hud.png");
 
-        inventoryDisplayer = new InventoryDisplayer();
-        energyDisplayer = new EnergyDisplayer();
-        healthDisplayer = new HealthDisplayer();
+        inventoryDisplayer = hudDisplayerHub.getInventoryDisplayer();
+        energyDisplayer = hudDisplayerHub.getEnergyDisplayer();
+        healthDisplayer = hudDisplayerHub.getHealthDisplayer();
     }
 
     public void draw(Player player, GUI gui, long framecount) {
@@ -30,5 +30,9 @@ public class HudDisplayer {
         inventoryDisplayer.draw(player.getInventory(), gui, framecount);
         energyDisplayer.draw(player.getEnergy(), gui);
         healthDisplayer.draw(player.getHealth(), gui);
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }

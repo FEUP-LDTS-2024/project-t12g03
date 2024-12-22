@@ -29,7 +29,7 @@ public class PlayerController extends Controller<RoomManager> {
         Player player = getModel().getPlayer();
         Vector nextPosition = null;
 
-        updateCooldDowns(player);
+        updateCoolDowns(player);
 
         if (player.getIsAttacking() > 0) {  //player cant move when attacking
             getModel().getRoom().checkAttackCollision();
@@ -79,7 +79,7 @@ public class PlayerController extends Controller<RoomManager> {
         }
     }
 
-    public void updateCooldDowns(Player player) {
+    public void updateCoolDowns(Player player) {
         if (delay > 0)
             delay--;
 

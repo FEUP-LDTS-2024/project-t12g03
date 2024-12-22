@@ -16,6 +16,12 @@ public class WallDisplayer implements ElementDisplayer<Wall> {
 
     @Override
     public void draw(Wall wall, GUI gui, long frameCount) {
-        sprite.draw(gui, wall.getPosition().getX(), wall.getPosition().getY());
+        Sprite image = getSprite();
+
+        image.draw(gui, wall.getPosition().getX(), wall.getPosition().getY());
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }

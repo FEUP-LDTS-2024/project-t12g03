@@ -22,6 +22,13 @@ public class FloorDisplayer implements ElementDisplayer<Floor> {
 
     @Override
     public void draw(Floor floor, GUI gui, long frameCount) {
-        sprite.get(floor.getType()).draw(gui, floor.getPosition().getX(), floor.getPosition().getY());
+        Sprite image = sprite.get(floor.getType());
+        if (image != null) {
+            image.draw(gui, floor.getPosition().getX(), floor.getPosition().getY());
+        }
+    }
+
+    public Map<Character, Sprite> getSpriteMap() {
+        return sprite;
     }
 }

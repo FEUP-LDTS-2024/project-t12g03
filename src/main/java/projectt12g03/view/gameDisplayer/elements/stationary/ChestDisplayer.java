@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ChestDisplayer implements ElementDisplayer<Chest> {
     private final Sprite sprite;
 
-    private final PotionDisplayer potionDisplayer;
+    private PotionDisplayer potionDisplayer;
 
     public ChestDisplayer() throws IOException {
         this.sprite = new Sprite("sprites/elements/chest/chest.png");
@@ -21,8 +21,10 @@ public class ChestDisplayer implements ElementDisplayer<Chest> {
 
     @Override
     public void draw(Chest chest, GUI gui, long frameCount) {
-        if (!chest.isOpened())
-            sprite.draw(gui, chest.getPosition().getX(), chest.getPosition().getY());
+        if (!chest.isOpened()) {
+            Sprite image = getSprite();
+            image.draw(gui, chest.getPosition().getX(), chest.getPosition().getY());
+        }
         else {
             Potion potion = chest.getPotion();
             if (potion != null) {
@@ -30,5 +32,13 @@ public class ChestDisplayer implements ElementDisplayer<Chest> {
                 potionDisplayer.draw(potion, gui, frameCount);
             }
         }
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void setPotionDisplayer(PotionDisplayer potionDisplayer) {
+        this.potionDisplayer = potionDisplayer;
     }
 }

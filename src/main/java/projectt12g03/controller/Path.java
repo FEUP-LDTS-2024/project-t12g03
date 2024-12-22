@@ -6,7 +6,7 @@ import projectt12g03.model.game.room.Room;
 
 public class Path {
     private final int[] DX = {0, 0, 1, -1};
-    private static final int[] DY = {-1, 1, 0, 0};
+    private final int[] DY = {-1, 1, 0, 0};
 
 
     public double distance(Vector position, Room room){

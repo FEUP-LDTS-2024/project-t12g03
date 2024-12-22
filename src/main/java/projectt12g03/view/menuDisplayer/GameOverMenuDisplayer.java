@@ -13,6 +13,7 @@ public class GameOverMenuDisplayer extends MenuDisplayer<GameOverMenu> {
 
     public GameOverMenuDisplayer(GameOverMenu model) throws IOException {
         super(model);
+
         layers = new HashMap<>();
         layers.put("LIVED_KILLED", new Sprite("sprites/menu/gameoverMenu/ends_kills_gameovermenu.png"));
         layers.put("DIED_KILLED", new Sprite("sprites/menu/gameoverMenu/killed_kills_gameovermenu.png"));
@@ -23,10 +24,13 @@ public class GameOverMenuDisplayer extends MenuDisplayer<GameOverMenu> {
     public void draw(GUI gui, long framecount) throws IOException {
         gui.clear();
         int entry = getModel().getCurrentEntryNumber();
-        Sprite image = backGroundMap.get(entry);
-        Sprite layer = layers.get(getModel().getType());
-        image.draw(gui, 0, 0);
+
+        Sprite layer = getLayer(getModel().getType());
+        Sprite image = getImage(entry);
+
+        image.draw(gui,0,0);
         layer.draw(gui, 0,0);
+
         gui.refresh();
     }
 
@@ -36,5 +40,9 @@ public class GameOverMenuDisplayer extends MenuDisplayer<GameOverMenu> {
         backGroundMap.put(0, new Sprite("sprites/menu/gameoverMenu/gameovermenu1.png"));
         backGroundMap.put(1, new Sprite("sprites/menu/gameoverMenu/gameovermenu2.png"));
         return backGroundMap;
+    }
+
+    public Sprite getLayer(String type) {
+        return layers.get(type);
     }
 }

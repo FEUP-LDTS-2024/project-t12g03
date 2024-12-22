@@ -6,6 +6,7 @@ import projectt12g03.controller.Controller;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.view.gameDisplayer.GameDisplayer;
 import projectt12g03.view.ScreenDisplayer;
+import projectt12g03.view.gameDisplayer.GameDisplayerHub;
 
 import java.io.IOException;
 
@@ -20,7 +21,7 @@ public class GameState extends State<RoomManager> {
 
     @Override
     protected ScreenDisplayer<RoomManager> getScreenDisplayer() throws IOException {
-        return new GameDisplayer(getModel());
+        return new GameDisplayer(getModel(), new GameDisplayerHub());
     }
 
     @Override

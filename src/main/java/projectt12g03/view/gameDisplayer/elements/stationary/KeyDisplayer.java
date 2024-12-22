@@ -16,6 +16,14 @@ public class KeyDisplayer implements ElementDisplayer<Key> {
 
     @Override
     public void draw(Key key, GUI gui, long frameCount) {
-        if (key != null) sprite.draw(gui, key.getPosition().getX(), key.getPosition().getY());
+        Sprite image = getSprite();
+
+        if (key != null) {
+            image.draw(gui, key.getPosition().getX(), key.getPosition().getY());
+        }
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }
