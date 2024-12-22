@@ -1,48 +1,101 @@
 package projectt12g03.controller;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.movable.hostile.Monster;
+import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.Room;
 
-public class Path {
-    private final int[] DX = {0, 0, 1, -1};
-    private static final int[] DY = {-1, 1, 0, 0};
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
+class PathTest {
+    private Path path;
+    private Monster monster;
+    private Room room;
+    private Player player;
 
-    public double distance(Vector position, Room room){
-        return Math.sqrt(Math.pow(position.getX() - room.getPlayer().getPosition().getX(),2) + Math.pow(position.getY() - room.getPlayer().getPosition().getY(),2));
+    @BeforeEach
+    void setup() {
+        path = new Path();
+        monster = mock(Monster.class);
+        room = mock(Room.class);
+        player = mock(Player.class);
+
+        when(monster.getRoom()).thenReturn(room);
+        when(room.getPlayer()).thenReturn(player);
     }
 
-    public String transform(int minMove){
-        return switch (minMove){
-            case 0 -> "UP";
-            case 1 -> "DOWN";
-            case 2 -> "RIGHT";
-            case 3 -> "LEFT";
-            case 4 -> "IDLE";
-            default -> throw new IllegalStateException("Unexpected value: " + minMove);
-        };
+    @Test
+    void testDistance() {
+        when(player.getPosition()).thenReturn(new Vector(10, 10));
+        Vector position = new Vector(14, 14);
+
+        double result = path.distance(position, room);
+
+        assertEquals(5.656, result, 0.001);
     }
 
-    public String findNextMoveToPlayer(Monster monster){
-        Room room = monster.getRoom();
+    @Test
+    void testTransform() {
+        assertEquals("UP", path.transform(0), "Transform 0 should map to UP.");
+        assertEquals("DOWN", path.transform(1), "Transform 1 should map to DOWN.");
+        assertEquals("RIGHT", path.transform(2), "Transform 2 should map to RIGHT.");
+        assertEquals("LEFT", path.transform(3), "Transform 3 should map to LEFT.");
+        assertEquals("IDLE", path.transform(4), "Transform 4 should map to IDLE.");
 
-        double minScore = Integer.MAX_VALUE;
-        int minMove = 4;
+        assertThrows(IllegalStateException.class, () -> path.transform(5));
+    }
 
-        for (int i = 0; i < 4; i++) {
-            int newX = monster.getPosition().getX() + DX[i];
-            int newY = monster.getPosition().getY() + DY[i];
-            Vector neighbor = new Vector(newX, newY);
-            double distance = distance(neighbor, room);
-            if(distance > 16*3) return "IDLE";
-            if (distance < minScore && monster.canMove(neighbor)){
-                minMove = i;
-                minScore = distance;
-            }
-        }
+    @Test
+    void nextMoveToPlayerIsIdleDueToDistance() {
+        when(monster.getPosition()).thenReturn(new Vector(0, 0));
+        when(player.getPosition()).thenReturn(new Vector(100, 100));
 
-        return transform(minMove);
+        //distance will be greater than the 48 allowed
 
+        String result = path.findNextMoveToPlayer(monster);
+
+        assertEquals("IDLE", result);
+    }
+
+    @Test
+    void nextMoveToPlayerIsValid() {
+        when(monster.getPosition()).thenReturn(new Vector(3, 5));
+        when(player.getPosition()).thenReturn(new Vector(6, 5));
+        when(monster.canMove(any(Vector.class))).thenReturn(true);
+
+        String result = path.findNextMoveToPlayer(monster);
+
+        assertEquals("RIGHT", result);
+    }
+
+    @Test
+    void nextMoveToPlayerIsIdleDueToObstacle() {
+        when(monster.getPosition()).thenReturn(new Vector(5, 3));
+        when(player.getPosition()).thenReturn(new Vector(5, 5));
+
+        when(monster.canMove(new Vector(5, 2))).thenReturn(false); // UP
+        when(monster.canMove(new Vector(5, 4))).thenReturn(true);  // DOWN
+        when(monster.canMove(new Vector(6, 3))).thenReturn(false); // RIGHT
+        when(monster.canMove(new Vector(4, 3))).thenReturn(false); // LEFT
+
+        String result = path.findNextMoveToPlayer(monster);
+
+        assertEquals("DOWN", result);
+    }
+
+    @Test
+    void nextMoveToPlayerIsIdleNoValidMoves() {
+        when(monster.getPosition()).thenReturn(new Vector(5, 5));
+        when(player.getPosition()).thenReturn(new Vector(6, 5));
+
+        when(monster.canMove(any(Vector.class))).thenReturn(false);
+
+        String result = path.findNextMoveToPlayer(monster);
+
+        assertEquals("IDLE", result);
     }
 }
