@@ -1,14 +1,11 @@
-package projectt12g03.state.menuSate;
+package projectt12g03.state.menuState;
 
 import projectt12g03.controller.Controller;
-import projectt12g03.controller.menuController.ControlsMenuController;
 import projectt12g03.controller.menuController.EntriesController;
 import projectt12g03.controller.menuController.GameOverMenuController;
-import projectt12g03.model.menu.ControlsMenu;
 import projectt12g03.model.menu.GameOverMenu;
 import projectt12g03.state.State;
 import projectt12g03.view.ScreenDisplayer;
-import projectt12g03.view.menuDisplayer.ControlsMenuDisplayer;
 import projectt12g03.view.menuDisplayer.GameOverMenuDisplayer;
 
 import java.io.IOException;

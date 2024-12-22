@@ -8,8 +8,8 @@ import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.VictoryMenu;
 import projectt12g03.model.menu.GameOverMenu;
-import projectt12g03.state.menuSate.VictoryMenuState;
-import projectt12g03.state.menuSate.GameOverMenuState;
+import projectt12g03.state.menuState.VictoryMenuState;
+import projectt12g03.state.menuState.GameOverMenuState;
 
 import java.io.IOException;
 
