@@ -1,4 +1,4 @@
-package projectt12g03.state.menuSate;
+package projectt12g03.state.menuState;
 
 import projectt12g03.controller.Controller;
 import projectt12g03.controller.menuController.VictoryMenuController;

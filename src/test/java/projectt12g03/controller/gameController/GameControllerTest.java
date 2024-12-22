@@ -10,8 +10,8 @@ import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.elements.stationary.Potion;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
-import projectt12g03.state.menuSate.GameOverMenuState;
-import projectt12g03.state.menuSate.PauseMenuState;
+import projectt12g03.state.menuState.GameOverMenuState;
+import projectt12g03.state.menuState.PauseMenuState;
 
 import java.io.IOException;
 

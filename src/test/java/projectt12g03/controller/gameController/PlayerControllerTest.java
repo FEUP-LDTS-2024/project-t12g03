@@ -6,13 +6,11 @@ import org.mockito.Mockito;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
 import projectt12g03.model.Vector;
-import projectt12g03.model.game.elements.movable.Movable;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.room.Room;
 import projectt12g03.model.game.room.RoomManager;
-import projectt12g03.model.menu.GameOverMenu;
-import projectt12g03.state.menuSate.GameOverMenuState;
-import projectt12g03.state.menuSate.VictoryMenuState;
+import projectt12g03.state.menuState.GameOverMenuState;
+import projectt12g03.state.menuState.VictoryMenuState;
 
 import java.io.IOException;
 

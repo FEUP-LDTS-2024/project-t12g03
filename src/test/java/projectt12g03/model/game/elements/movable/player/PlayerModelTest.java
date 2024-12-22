@@ -290,4 +290,10 @@ class PlayerModelTest {
         assertEquals(0, newPosition.getY());
     }
 
+    @Test
+    void testSetPosition(){
+        Vector newPosition = new Vector(123,321);
+        player.setPosition(newPosition);
+        assertEquals(newPosition,player.getPosition());
+    }
 }

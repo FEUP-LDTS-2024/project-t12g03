@@ -7,8 +7,8 @@ import projectt12g03.model.game.elements.stationary.Chest;
 import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.model.menu.GameOverMenu;
 import projectt12g03.model.menu.PauseMenu;
-import projectt12g03.state.menuSate.GameOverMenuState;
-import projectt12g03.state.menuSate.PauseMenuState;
+import projectt12g03.state.menuState.GameOverMenuState;
+import projectt12g03.state.menuState.PauseMenuState;
 import projectt12g03.model.game.elements.movable.player.Player;
 
 import java.io.IOException;
