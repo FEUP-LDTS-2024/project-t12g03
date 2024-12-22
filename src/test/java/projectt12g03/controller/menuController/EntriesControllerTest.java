@@ -5,18 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import projectt12g03.Game;
 import projectt12g03.gui.GUI;
-import projectt12g03.model.menu.ControlsMenu;
-import projectt12g03.model.menu.CreditsMenu;
 import projectt12g03.model.menu.Menu;
 import projectt12g03.model.menu.PauseMenu;
-import projectt12g03.model.game.room.RoomManager;
 import projectt12g03.state.GameState;
-import projectt12g03.state.menuSate.ControlsMenuState;
-import projectt12g03.state.menuSate.CreditsMenuState;
+import projectt12g03.state.menuState.ControlsMenuState;
+import projectt12g03.state.menuState.CreditsMenuState;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class EntriesControllerTest {
