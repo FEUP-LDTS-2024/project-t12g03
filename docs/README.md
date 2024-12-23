@@ -92,7 +92,7 @@ This is used for the player, ground tiles, walls, door tiles, monsters, chests, 
 inventory. All The player's movement and attack animations change according to the player's current direction. The sprint action also speeds up the normal
 walking animation.
  
-- **Interactive UI** - The player can interact with his inventory by choosing a inventory slot or consuming an item in the chosen inventory slot.
+- **Interactive UI** - The player can interact with his inventory by choosing an inventory slot or consuming an item in the chosen inventory slot.
   
 - **Health and Stamina** - Player has both a health amount and a stamina amount. The health decreases when the player touches an enemy or a laser beam and
 increases when a player uses the heal action or consumes a health potion. The stamina decreases over time when the player is sprinting or fully when the player uses the heal action
@@ -119,7 +119,8 @@ immunity: player cannot suffer damage for 20 seconds). The effect os chosen rand
 
 ## UML
 
-- link to the UML -> https://app.diagrams.net/#G1l_B10UmdP_35a8UbPl2Cqac4dvn6Fc5V#%7B"pageId"%3A"WZpBClgXFTaMb16Gkz9H"%7D
+- **link for the UML:** 
+  - https://app.diagrams.net/#G1l_B10UmdP_35a8UbPl2Cqac4dvn6Fc5V#%7B"pageId"%3A"WZpBClgXFTaMb16Gkz9H"%7D
 
 
 - [UML](UMLSpearBoy.drawio.png)
