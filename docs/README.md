@@ -117,6 +117,11 @@ immunity: player cannot suffer damage for 20 seconds). The effect os chosen rand
 
 ## UML
 
+- [UML](UMLSpearBoy.drawio.png)
+<p align="center">
+    <img src="UMLSpearBoy.drawio.png" alt="">
+</p>
+
 ## DESIGN
 
 ### Model-View-Controller
