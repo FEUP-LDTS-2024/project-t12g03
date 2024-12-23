@@ -86,12 +86,20 @@ public class Room {
             else return true;
         }
 
-        return checkCollisionWithWall(player, position) || checkCollisionWithLaserWall(player, position) || checkDamageToPlayer(position) || isAtTransition(player, position);
+        return checkCollisionWithWall(player, position) ||
+                    checkCollisionWithLaserWall(player, position) ||
+                        checkDamageToPlayer(position) ||
+                            isAtTransition(player, position);
     }
 
     public boolean checkCollisionsForMonster(Monster monster, Vector position) {
-        return checkCollisionWithWall(monster, position) || checkCollisionWithMonster(monster, position) || isAtTransition(monster, position) ||
-                checkCollisionWithKey(monster, position) || checkCollisionWithChest(monster, position) || checkCollisionWithLaserWall(monster, position) || checkCollisionWithPlayer(monster, position);
+        return checkCollisionWithWall(monster, position) ||
+                    checkCollisionWithMonster(monster, position) ||
+                        isAtTransition(monster, position) ||
+                            checkCollisionWithKey(monster, position) ||
+                                checkCollisionWithChest(monster, position) ||
+                                    checkCollisionWithLaserWall(monster, position) ||
+                                        checkCollisionWithPlayer(monster, position);
     }
 
     boolean checkDamageToPlayer(Vector position) {

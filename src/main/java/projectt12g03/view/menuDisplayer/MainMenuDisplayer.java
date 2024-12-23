@@ -1,9 +1,7 @@
 package projectt12g03.view.menuDisplayer;
 
-import projectt12g03.gui.GUI;
 import projectt12g03.view.Sprite;
 import projectt12g03.model.menu.MainMenu;
-import projectt12g03.view.ScreenDisplayer;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -54,16 +54,24 @@ public class MonsterController extends Controller<RoomManager> {
     public void executeDirection(Monster monster, String direction) {  //change so it looks better
         switch (direction) {
             case "UP":
-                if (monster.canMove(monster.moveUp())) monster.setPosition(monster.moveUp());
+                if (monster.canMove(monster.moveUp())) {
+                    monster.setPosition(monster.moveUp());
+                }
                 break;
             case "DOWN":
-                if (monster.canMove(monster.moveDown())) monster.setPosition(monster.moveDown());
+                if (monster.canMove(monster.moveDown())) {
+                    monster.setPosition(monster.moveDown());
+                }
                 break;
             case "RIGHT":
-                if (monster.canMove(monster.moveRight())) monster.setPosition(monster.moveRight());
+                if (monster.canMove(monster.moveRight())) {
+                    monster.setPosition(monster.moveRight());
+                }
                 break;
             case "LEFT":
-                if (monster.canMove(monster.moveLeft())) monster.setPosition(monster.moveLeft());
+                if (monster.canMove(monster.moveLeft())) {
+                    monster.setPosition(monster.moveLeft());
+                }
                 break;
         }
         monster.setDirection(!direction.equals("IDLE") ? direction : monster.getDirection());

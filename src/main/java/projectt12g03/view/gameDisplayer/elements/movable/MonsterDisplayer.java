@@ -31,6 +31,7 @@ public class MonsterDisplayer extends MovableDisplayer implements ElementDisplay
     public void draw(Monster model, GUI gui, long frameCount) {
         Sprite[][] sprites;
         sprites = movableMap.get(model.getState());
+
         int walkingCycle = (int) (frameCount % 10) / 5;
 
         Sprite[] spriteSequence = getSpriteSequence(model.getDirection(), sprites);

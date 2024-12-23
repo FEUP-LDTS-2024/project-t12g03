@@ -15,7 +15,9 @@ public class Door extends Element {
         setDoorNumber(prevRoom);
     }
 
-    public int getNumber() { return this.doorNumber; }
+    public int getNumber() {
+        return this.doorNumber;
+    }
 
     public Rectangle getDoorHitbox() {
         return switch (direction) {

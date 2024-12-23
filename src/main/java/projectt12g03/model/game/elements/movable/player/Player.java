@@ -146,7 +146,7 @@ public class Player extends Movable implements Weapon {
 
     public void setImmunity(int immunity) {
         this.immunity = immunity;
-    };
+    }
 
     public void setEffectDuration(int duration) {
         this.effectDuration = duration;

@@ -20,31 +20,53 @@ public abstract class Movable extends Element {
         setHitbox(new Rectangle(2,18,12,14));
     }
 
-    public int getVelocity() { return velocity; }
+    public int getVelocity() {
+        return velocity;
+    }
 
     public void setVelocity(int v) {
         this.velocity = v;
     }
 
-    public int getHealth() { return  health; }
+    public int getHealth() {
+        return  health;
+    }
 
-    public String getDirection() { return direction; }
+    public String getDirection() {
+        return direction;
+    }
 
-    public String getState() { return state; }
+    public String getState() {
+        return state;
+    }
 
-    public Room getRoom() { return room; }
+    public Room getRoom() {
+        return room;
+    }
 
-    public void setDirection(String direction) { this.direction = direction; }
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
 
-    public void setState(String state) { this.state = state; }
+    public void setState(String state) {
+        this.state = state;
+    }
 
-    public void setHealth(int h){ this.health = h; }
+    public void setHealth(int h){
+        this.health = h;
+    }
 
-    public void setSpeedBoost(int speedBoost) { this.speed_boost = speedBoost; }
+    public void setSpeedBoost(int speedBoost) {
+        this.speed_boost = speedBoost;
+    }
 
-    public void reduceHealth() { this.health--; }
+    public void reduceHealth() {
+        this.health--;
+    }
 
-    public void increaseHealth(){ this.health++; }
+    public void increaseHealth(){
+        this.health++;
+    }
 
     public Vector moveUp() {
         return new Vector(getPosition().getX(), getPosition().getY() - (velocity * speed_boost));

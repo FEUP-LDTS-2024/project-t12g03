@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Monster extends Movable {
-    private int WALK_SPEED = 1;
-    private int HEALTH = 1;
+    private final int WALK_SPEED = 1;
+    private final int HEALTH = 1;
     private List<String> directions;
 
     public Monster(int x, int y, Room room) {
@@ -19,12 +19,16 @@ public class Monster extends Movable {
         setDirection("DOWN");
         setState("IDLE");
         setSpeedBoost(1);
-        directions = new ArrayList<>();;
+        directions = new ArrayList<>();
     }
 
-    public void setDirections(List<String> directions) { this.directions = directions; }
+    public void setDirections(List<String> directions) {
+        this.directions = directions;
+    }
 
-    public List<String> getDirections() { return directions; }
+    public List<String> getDirections() {
+        return directions;
+    }
 
     @Override
     public boolean canMove(Vector position) {
@@ -33,7 +37,9 @@ public class Monster extends Movable {
 
     @Override
     public boolean equals(Object o){
-        if (!(o instanceof Monster)){return false;}
+        if (!(o instanceof Monster)) {
+            return false;
+        }
         return ((Monster) o).getPosition().equals(this.getPosition());
     }
 }

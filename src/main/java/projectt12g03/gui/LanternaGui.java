@@ -99,8 +99,9 @@ public class LanternaGui implements GUI {
 
     @Override
     public userInput getNextUserInput() {
-        if (keyPressed == null)
+        if (keyPressed == null) {
             return userInput.NONE;
+        }
 
         int keyCode = keyPressed.getKeyCode();
         keyPressed = priorityKey;
@@ -124,8 +125,9 @@ public class LanternaGui implements GUI {
     }
 
     public void setKeySpam(boolean keySpam) {
-        if (!keySpam)
+        if (!keySpam) {
             priorityKey = null;
+        }
         this.keySpam = keySpam;
     }
 

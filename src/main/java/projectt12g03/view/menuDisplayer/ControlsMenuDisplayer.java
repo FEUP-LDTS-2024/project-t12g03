@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class ControlsMenuDisplayer extends MenuDisplayer<ControlsMenu> {
 
-
     public ControlsMenuDisplayer(ControlsMenu model) throws IOException { super(model); }
 
     @Override

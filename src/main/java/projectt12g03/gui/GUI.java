@@ -1,13 +1,12 @@
 package projectt12g03.gui;
 
 import com.googlecode.lanterna.TextColor;
-import projectt12g03.model.Vector;
 
 import java.io.IOException;
 
 public interface GUI {
 
-    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK, HEAL, SPRINT, ONE, TWO, THREE, FOUR};
+    enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK, HEAL, SPRINT, ONE, TWO, THREE, FOUR}
 
     userInput getNextUserInput() throws IOException;
 

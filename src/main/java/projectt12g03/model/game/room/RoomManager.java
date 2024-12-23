@@ -67,8 +67,9 @@ public class RoomManager {
         room.setMonsters(createMonsters(room));
         room.setLasers(createLasers(room));
 
-        if (roomCode == STARTING_ROOM) room.setPlayer(createPlayer());
-
+        if (roomCode == STARTING_ROOM) {
+            room.setPlayer(createPlayer());
+        }
 
         roomsMap.put(roomCode, room);
 
@@ -77,8 +78,9 @@ public class RoomManager {
 
     protected List<String> readLines(BufferedReader br) throws IOException {
         List<String> lines = new ArrayList<>();
-        for (String line; (line = br.readLine()) != null; )
+        for (String line; (line = br.readLine()) != null; ) {
             lines.add(line);
+        }
         return lines;
     }
 
@@ -88,12 +90,17 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (isDigit(line.charAt(x)) && (line.charAt(x) - '0' == 0)) floors.add(new Floor(x * 16, y * 16, 'e'));
+                if (isDigit(line.charAt(x)) && (line.charAt(x) - '0' == 0)) {
+                    floors.add(new Floor(x * 16, y * 16, 'e'));
+                }
 
                 else if (line.charAt(x) == ' ' || line.charAt(x) == 'C' || line.charAt(x) == 'K' ||
-                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x)) ||
-                        line.charAt(x) == 'U' || line.charAt(x) == 'l' || line.charAt(x) == 'R' || line.charAt(x) == 'D')
+                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x)) ||                            //clutered but types of normal floors
+                        line.charAt(x) == 'U' || line.charAt(x) == 'l' || line.charAt(x) == 'R' ||
+                        line.charAt(x) == 'D') {
+
                     floors.add(new Floor(x * 16, y * 16, 'd'));
+                }
             }
         }
 
@@ -105,8 +112,11 @@ public class RoomManager {
 
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '#') walls.add(new Wall(x*16, y*16));
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == '#') {
+                    walls.add(new Wall(x * 16, y * 16));
+                }
+            }
         }
 
         return walls;
@@ -118,8 +128,8 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'U' || line.charAt(x) == 'D' || line.charAt(x) == 'R'
-                        || line.charAt(x) == 'l' || isDigit(line.charAt(x))) {
+                if (line.charAt(x) == 'U' || line.charAt(x) == 'D' || line.charAt(x) == 'R' || line.charAt(x) == 'l' || isDigit(line.charAt(x))) {
+
                     doors.add(new Door(x*16, y*16, line.charAt(x), roomCode));
                 }
             }
@@ -185,14 +195,20 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'L') lasers.add(new Laser(x*16, y*16, room, false));
-                if (line.charAt(x) == 'J') lasers.add(new Laser(x*16, y*16, room, true ));
+                if (line.charAt(x) == 'L') {
+                    lasers.add(new Laser(x * 16, y * 16, room, false));
+                }
+                if (line.charAt(x) == 'J') {
+                    lasers.add(new Laser(x * 16, y * 16, room, true));
+                }
             }
         }
         return lasers;
     }
 
-    public Room getRoom() { return room; }
+    public Room getRoom() {
+        return room;
+    }
 
     public Player getPlayer() {
         return player;

@@ -47,6 +47,7 @@ public class PlayerDisplayer extends MovableDisplayer implements ElementDisplaye
     public void draw(Player player, GUI gui, long frameCount) {
         Sprite[][] sprites;
         sprites = movableMap.get(player.getState());
+
         int walkingCycle = (int) (frameCount % 6) / 3;
         int sprintCyle = (int) (frameCount % 2);
 
@@ -54,14 +55,18 @@ public class PlayerDisplayer extends MovableDisplayer implements ElementDisplaye
 
         switch (player.getState()) {
             case "WALKING" ->
-                    spriteSequence[walkingCycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+                spriteSequence[walkingCycle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+
             case "RUNNING" ->
-                    spriteSequence[sprintCyle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+                spriteSequence[sprintCyle].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+
             case "ATTACKING" -> {
                 spearDisplayer.draw(player, gui);
                 spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
             }
-            default -> spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
+
+            default ->
+                spriteSequence[0].draw(gui, player.getPosition().getX(), player.getPosition().getY());
         }
 
     }

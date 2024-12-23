@@ -23,6 +23,7 @@ public class GameOverMenuDisplayer extends MenuDisplayer<GameOverMenu> {
     @Override
     public void draw(GUI gui, long framecount) throws IOException {
         gui.clear();
+
         int entry = getModel().getCurrentEntryNumber();
 
         Sprite layer = getLayer(getModel().getType());

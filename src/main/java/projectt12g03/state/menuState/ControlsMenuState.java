@@ -11,6 +11,7 @@ import projectt12g03.view.ScreenDisplayer;
 import java.io.IOException;
 
 public class ControlsMenuState extends State<ControlsMenu> {
+
     public ControlsMenuState(ControlsMenu model) throws IOException {
         super(model);
     }

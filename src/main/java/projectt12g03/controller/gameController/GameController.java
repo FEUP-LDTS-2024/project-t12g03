@@ -67,7 +67,7 @@ public class GameController extends Controller<RoomManager> {
         }
     }
 
-    public GameOverMenuState getGameOverMenuState() {   //for tests
+    public GameOverMenuState getGameOverMenuState() {
         return gameOverMenuState;
     }
 }

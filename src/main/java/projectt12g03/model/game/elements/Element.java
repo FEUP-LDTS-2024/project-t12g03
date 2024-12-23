@@ -12,7 +12,9 @@ public abstract class Element extends Rectangle {
         this.position = new Vector(x, y);
     }
 
-    public Rectangle getHitbox() { return hitbox; }
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
 
     public Vector getPosition() {
         return this.position;

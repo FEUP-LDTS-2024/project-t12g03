@@ -1,16 +1,10 @@
 package projectt12g03.view.menuDisplayer;
 
-import com.googlecode.lanterna.TextColor;
-import projectt12g03.gui.GUI;
-import projectt12g03.model.Vector;
-import projectt12g03.model.menu.MainMenu;
 import projectt12g03.model.menu.PauseMenu;
-import projectt12g03.view.ScreenDisplayer;
 import projectt12g03.view.Sprite;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PauseMenuDisplayer extends MenuDisplayer<PauseMenu> {

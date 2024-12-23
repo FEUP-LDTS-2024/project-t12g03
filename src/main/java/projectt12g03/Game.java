@@ -15,7 +15,7 @@ public class Game {
     public static final int terminalWidth = 320;
     public static final int terminalHeight = 288;
     private static final String windowName = "SPEAR BOY";
-    private final Stack<State> stateStack;
+    private final Stack<State<?>> stateStack;
     private final LanternaGui gui;
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
@@ -23,11 +23,11 @@ public class Game {
         this.stateStack = new Stack<>();
         stateStack.push(new MainMenuState(new MainMenu()));
     }
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, InterruptedException {
         new Game().start();
     }
 
-    public void setState(State state) {
+    public void setState(State<?> state) {
         this.stateStack.push(state);
     }
 
@@ -37,7 +37,7 @@ public class Game {
         }
     }
 
-    public State getCurrentState() {
+    public State<?> getCurrentState() {
         if (!stateStack.isEmpty()){
             return stateStack.peek();
         }
@@ -48,7 +48,7 @@ public class Game {
         gui.setKeySpam(keySpam);
     }
 
-    private void start() throws IOException, URISyntaxException, FontFormatException {
+    private void start() throws IOException, URISyntaxException, FontFormatException, InterruptedException {
         long frameTime = 1000 / FPS, frameCount = 0;
 
         gui.createScreen();
@@ -61,8 +61,10 @@ public class Game {
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;
 
-            try { if (sleepTime > 0) Thread.sleep(sleepTime); }
-            catch (InterruptedException e) { }
+            if (sleepTime > 0) {
+                Thread.sleep(sleepTime);
+            }
+
             frameCount++;
         }
 

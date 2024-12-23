@@ -13,5 +13,7 @@ public class Floor  extends Element {
         setHitbox(new Rectangle(0,0,16,16));
     }
 
-    public char getType() { return type; }
+    public char getType() {
+        return type;
+    }
 }

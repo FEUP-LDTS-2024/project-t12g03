@@ -39,9 +39,15 @@ public class Potion extends Element {
         return new Potion(x, y, effects.get(randomEffect));
     }
 
-    public PotionEffectStrategy getEffectStrategy() { return effectStrategy; }
+    public PotionEffectStrategy getEffectStrategy() {
+        return effectStrategy;
+    }
 
-    public int getImmunity() { return immunity; }
+    public int getImmunity() {
+        return immunity;
+    }
 
-    public void reduceImmunity() { immunity--; }
+    public void reduceImmunity() {
+        immunity--;
+    }
 }

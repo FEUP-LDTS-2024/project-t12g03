@@ -29,8 +29,10 @@ public class InventoryDisplayer {
             Sprite image = getSprite(inventory, i);
 
             image.draw(gui, 91 + (i * SPACING), 258);
+
             Potion potion = inventory.getPotion(i);
             potionDisplayer.setDisplacement(new Vector(98 + (i * SPACING), 264));
+
             if (potion != null) {
                 potionDisplayer.draw(potion, gui, framecount);
             }

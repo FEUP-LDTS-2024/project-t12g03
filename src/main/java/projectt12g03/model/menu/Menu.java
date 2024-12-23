@@ -15,25 +15,27 @@ public abstract class Menu {
 
     public void moveUp() {
         currentEntry--;
-        if (currentEntry < 0)
+        if (currentEntry < 0) {
             currentEntry = getNumberEntries() - 1;
+        }
     }
 
     public void moveDown() {
         currentEntry++;
-        if (currentEntry > getNumberEntries() - 1)
+        if (currentEntry > getNumberEntries() - 1) {
             currentEntry = 0;
+        }
     }
 
     public int getCurrentEntryNumber() {
         return currentEntry;
     }
 
-    protected abstract Map<Integer, Type> createEntries();
-
     public Type getCurrentEntry() {
         return entries.get(currentEntry);
     }
 
     public int getNumberEntries() { return entries.size(); }
+
+    protected abstract Map<Integer, Type> createEntries();
 }

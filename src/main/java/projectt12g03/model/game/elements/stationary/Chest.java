@@ -15,15 +15,25 @@ public class Chest extends Element {
         setHitbox(new Rectangle(0,0,16,16));
     }
 
-    public boolean isUnlockable() { return unlockable; }
-    public boolean isOpened() { return opened; }
+    public boolean isUnlockable() {
+        return unlockable;
+    }
+    public boolean isOpened() {
+        return opened;
+    }
 
-    public void foundKey() { unlockable = true; }
-    public void open() { opened = true; }
+    public void foundKey() {
+        unlockable = true;
+    }
+    public void open() {
+        opened = true;
+    }
 
     public Potion getPotion() {
         return potion;
     }
 
-    public void setPotion(Potion potion) { this.potion = potion; }
+    public void setPotion(Potion potion) {
+        this.potion = potion;
+    }
 }

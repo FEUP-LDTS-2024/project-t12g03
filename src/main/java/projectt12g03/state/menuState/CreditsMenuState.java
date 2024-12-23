@@ -12,6 +12,7 @@ import projectt12g03.view.menuDisplayer.CreditsMenuDisplayer;
 import java.io.IOException;
 
 public class CreditsMenuState extends State<CreditsMenu> {
+
     public CreditsMenuState(CreditsMenu model) throws IOException {
         super(model);
     }

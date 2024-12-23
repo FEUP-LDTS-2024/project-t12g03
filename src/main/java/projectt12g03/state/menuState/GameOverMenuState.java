@@ -11,6 +11,7 @@ import projectt12g03.view.menuDisplayer.GameOverMenuDisplayer;
 import java.io.IOException;
 
 public class GameOverMenuState extends State<GameOverMenu> {
+
     public GameOverMenuState(GameOverMenu model) throws IOException {
         super(model);
     }

@@ -35,17 +35,29 @@ public class Laser extends Element {
         else laserBeamHitbox = new Rectangle(16, 5, 4, 6);
     }
 
-    public int getActive() { return active;}
+    public int getActive() {
+        return active;
+    }
 
-    public void setActive(int active) { this.active = active;}
+    public void setActive(int active) {
+        this.active = active;
+    }
 
-    public int getResting() { return resting;}
+    public int getResting() {
+        return resting;
+    }
 
-    public void setResting(int resting) { this.resting = resting;}
+    public void setResting(int resting) {
+        this.resting = resting;
+    }
 
-    public void reduceResting(){this.resting--;}
+    public void reduceResting(){
+        this.resting--;
+    }
 
-    public void reduceActive() {this.active--;}
+    public void reduceActive() {
+        this.active--;
+    }
 
     public void changeMode() {
         if(Objects.equals(mode, "ACTIVE")) {

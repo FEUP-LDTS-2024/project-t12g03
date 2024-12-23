@@ -35,7 +35,9 @@ public class Path {
             int newY = monster.getPosition().getY() + DY[i];
             Vector neighbor = new Vector(newX, newY);
             double distance = distance(neighbor, room);
-            if(distance > 16*3) return "IDLE";
+            if(distance > 16*3) {
+                return "IDLE";
+            }
             if (distance < minScore && monster.canMove(neighbor)){
                 minMove = i;
                 minScore = distance;

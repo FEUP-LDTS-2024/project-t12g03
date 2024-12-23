@@ -1,7 +1,6 @@
 package projectt12g03.view;
 
 import projectt12g03.gui.GUI;
-import projectt12g03.gui.LanternaGui;
 
 import java.io.IOException;
 

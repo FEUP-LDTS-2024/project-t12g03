@@ -11,6 +11,7 @@ import projectt12g03.view.menuDisplayer.VictoryMenuDisplayer;
 import java.io.IOException;
 
 public class VictoryMenuState extends State<VictoryMenu> {
+
     public VictoryMenuState(VictoryMenu model) throws IOException {
         super(model);
     }
