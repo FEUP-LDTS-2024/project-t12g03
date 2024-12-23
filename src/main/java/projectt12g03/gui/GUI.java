@@ -9,10 +9,7 @@ public interface GUI {
 
     enum userInput {UP, RIGHT, DOWN, LEFT, NONE, PAUSE, SELECT, ATTACK, HEAL, SPRINT, ONE, TWO, THREE, FOUR};
 
-
     userInput getNextUserInput() throws IOException;
-
-    void drawText(Vector position, String text, TextColor color);
 
     void drawPixel(double x, double y, TextColor color);
 

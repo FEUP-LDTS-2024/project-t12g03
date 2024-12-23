@@ -4,6 +4,8 @@ import projectt12g03.model.Vector;
 import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.room.Room;
 
+import java.awt.*;
+
 public abstract class Movable extends Element {
     public Room room;
     private int velocity;
@@ -13,8 +15,9 @@ public abstract class Movable extends Element {
     private String state;
 
     public Movable(int x, int y, Room room) {
-        super(x,y,2,18,12,14);
+        super(x,y);
         this.room = room;
+        setHitbox(new Rectangle(2,18,12,14));
     }
 
     public int getVelocity() { return velocity; }

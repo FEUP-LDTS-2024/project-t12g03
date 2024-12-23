@@ -1,6 +1,5 @@
 package projectt12g03.gui;
 
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -8,7 +7,6 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import projectt12g03.model.Vector;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -17,10 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -77,7 +72,7 @@ public class LanternaGui implements GUI {
 
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
             URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
-            File fontFile = new File(resource.toURI());
+            File fontFile = new File(Objects.requireNonNull(resource).toURI());
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -140,13 +135,6 @@ public class LanternaGui implements GUI {
         if (!keySpam)
             priorityKey = null;
         this.keySpam = keySpam;
-    }
-
-    @Override
-    public void drawText(Vector position, String text, TextColor color) {
-        TextGraphics tg = screen.newTextGraphics();
-        tg.setForegroundColor(color);
-        tg.putString(position.getX(), position.getY(), text);
     }
 
     @Override

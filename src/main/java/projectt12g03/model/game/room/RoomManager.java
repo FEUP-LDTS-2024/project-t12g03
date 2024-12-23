@@ -12,10 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Character.isDigit;
 
@@ -45,12 +42,13 @@ public class RoomManager {
 
         if(!roomsMap.containsKey(roomCode)) {
             URL resource = RoomManager.class.getResource("/rooms/room" + roomCode + ".lvl");
-            BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+            BufferedReader br = new BufferedReader(new FileReader(Objects.requireNonNull(resource).getFile()));
 
             this.lines = readLines(br);
             this.room = createRoom();
             room.setPlayer(player);
         }
+
         else {
             this.room = roomsMap.get(roomCode);
         }
@@ -69,7 +67,7 @@ public class RoomManager {
         room.setMonsters(createMonsters(room));
         room.setLasers(createLasers(room));
 
-        if (roomCode == 1) room.setPlayer(createPlayer());
+        if (roomCode == STARTING_ROOM) room.setPlayer(createPlayer());
 
 
         roomsMap.put(roomCode, room);
@@ -77,14 +75,14 @@ public class RoomManager {
         return room;
     }
 
-    private List<String> readLines(BufferedReader br) throws IOException {
+    protected List<String> readLines(BufferedReader br) throws IOException {
         List<String> lines = new ArrayList<>();
         for (String line; (line = br.readLine()) != null; )
             lines.add(line);
         return lines;
     }
 
-    private List<Floor> createFloors() {
+    protected List<Floor> createFloors() {
         List<Floor> floors = new ArrayList<>();
 
         for (int y = 0; y < lines.size(); y++) {
@@ -93,7 +91,8 @@ public class RoomManager {
                 if (isDigit(line.charAt(x)) && (line.charAt(x) - '0' == 0)) floors.add(new Floor(x * 16, y * 16, 'e'));
 
                 else if (line.charAt(x) == ' ' || line.charAt(x) == 'C' || line.charAt(x) == 'K' ||
-                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x)))
+                        line.charAt(x) == 'M' || line.charAt(x) == 'P' || isDigit(line.charAt(x)) ||
+                        line.charAt(x) == 'U' || line.charAt(x) == 'l' || line.charAt(x) == 'R' || line.charAt(x) == 'D')
                     floors.add(new Floor(x * 16, y * 16, 'd'));
             }
         }
@@ -119,47 +118,13 @@ public class RoomManager {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (isDigit(line.charAt(x))) {
-                    int n = line.charAt(x) - '0';
-                    int[] constructorValues = checkDoorPosition(x,y);
-                    doors.add(new Door(x*16, y*16, constructorValues[0], constructorValues[1], constructorValues[2], constructorValues[3], n));
+                if (line.charAt(x) == 'U' || line.charAt(x) == 'D' || line.charAt(x) == 'R'
+                        || line.charAt(x) == 'l' || isDigit(line.charAt(x))) {
+                    doors.add(new Door(x*16, y*16, line.charAt(x), roomCode));
                 }
             }
         }
         return doors;
-    }
-
-    protected int[] checkDoorPosition(int x, int y) {    //hard coded change when better solution found
-        int dx;
-        int dy;
-        int width;
-        int height;
-
-        if (y == 0) {
-            dx = 0;
-            dy = 0;
-            width = 16;
-            height = 1;
-        }
-        else if (y == 15) {
-            dx = 0;
-            dy = 15;
-            width = 16;
-            height = 1;
-        }
-        else if (x == 0) {
-            dx = 0;
-            dy = 0;
-            width = 1;
-            height = 16;
-        }
-        else {
-            dx = 15;
-            dy = 0;
-            width = 1;
-            height = 16;
-        }
-        return new int[]{dx, dy, width, height};
     }
 
     protected Chest createChest() {

@@ -8,9 +8,8 @@ public abstract class Element extends Rectangle {
     private Vector position;
     private Rectangle hitbox;
 
-    public Element(int x, int y, int dx, int dy, int width, int height) {
+    public Element(int x, int y) {
         this.position = new Vector(x, y);
-        hitbox = new Rectangle(dx, dy, width, height);
     }
 
     public Rectangle getHitbox() { return hitbox; }
@@ -23,4 +22,7 @@ public abstract class Element extends Rectangle {
         this.position = position;
     }
 
+    public void setHitbox(Rectangle hitbox) {
+        this.hitbox = hitbox;
+    }
 }

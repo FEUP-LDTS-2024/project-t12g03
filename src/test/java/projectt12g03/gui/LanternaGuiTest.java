@@ -207,22 +207,10 @@ class LanternaGuiTest {
         keySpamField.setAccessible(true);
 
         gui.setKeySpam(true);
-        assertTrue((boolean) keySpamField.get(gui)); // Ensure keySpam is enabled
+        assertTrue((boolean) keySpamField.get(gui));
 
         gui.setKeySpam(false);
-        assertFalse((boolean) keySpamField.get(gui)); // Ensure keySpam is disabled
-    }
-
-    @Test
-    void testDrawText() {
-        Vector position = new Vector(5, 10);
-        String text = "Hello World";
-        TextColor color = TextColor.ANSI.BLUE;
-
-        gui.drawText(position, text, color);
-
-        verify(mockGraphics).setForegroundColor(color);
-        verify(mockGraphics).putString(position.getX(), position.getY(), text);
+        assertFalse((boolean) keySpamField.get(gui));
     }
 
     @Test

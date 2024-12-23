@@ -18,12 +18,13 @@ public class Laser extends Element {
     private int resting;
 
     public Laser(int x, int y, Room room, boolean isPointingLeft) {
-        super(x, y,0, 0,16, 16);
+        super(x, y);
         this.isPoitingLeft = isPointingLeft;
         setActive(0);
         setResting(REST_TIME);
         setMode("RESTING");
         setLaserBeamHitbox();
+        setHitbox(new Rectangle(0, 0,16, 16));
         this.room = room;
     }
 

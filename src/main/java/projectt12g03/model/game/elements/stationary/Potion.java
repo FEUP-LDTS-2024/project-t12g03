@@ -4,6 +4,7 @@ import projectt12g03.model.game.elements.Element;
 import projectt12g03.model.game.elements.movable.player.Player;
 import projectt12g03.model.game.elements.stationary.potions.*;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -14,8 +15,9 @@ public class Potion extends Element {
     private int immunity = 15;
 
     public Potion(int x, int y, PotionEffectStrategy effectStrategy) {
-        super(x,y, 1,7,14,9);
+        super(x,y);
         this.effectStrategy = effectStrategy;
+        setHitbox(new Rectangle(1,7,14,9));
     }
 
     public void applyEffect(Player player) {
