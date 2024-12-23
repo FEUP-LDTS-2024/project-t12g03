@@ -30,6 +30,8 @@ journey mark the end of his story?
   - [Strategy Pattern](#Strategy-Pattern)
 - [Code Smells](#code-smells)
 - [Testing](#testing)
+  - [Coverage Testing](#unit-coverage)
+  - [Pitest](#pitest-coverage)
 - [Self Evaluation](#SELF-EVALUATION)
 
 
@@ -270,8 +272,27 @@ the next move each iteration. Making the game smoother but generating bugs like 
 
 ## TESTING
 
+### Unit Coverage
+
+  - Method Coverage = 97%
+  - Line Coverage = 95%
+  - Branch Coverage = 94%
 
 
+<p align="center">
+    <img src="intelij_coverage.png" alt="">
+</p>
+
+### Pitest Coverage
+
+  - Line Coverage = 96%
+  - Mutation Coverage = 82%
+  - Test Strength = 84%
+
+
+<p align="center">
+    <img src="pitest_coverage.png" alt="">
+</p>
 
 ## SELF-EVALUATION
   - Filipe Lopes: 33.3%
