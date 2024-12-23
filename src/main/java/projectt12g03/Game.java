@@ -48,9 +48,10 @@ public class Game {
         gui.setKeySpam(keySpam);
     }
 
-    private void start() throws IOException {
+    private void start() throws IOException, URISyntaxException, FontFormatException {
         long frameTime = 1000 / FPS, frameCount = 0;
 
+        gui.createScreen();
 
         while(getCurrentState() != null) {
             long startTime = System.currentTimeMillis();

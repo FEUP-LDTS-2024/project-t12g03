@@ -10,17 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MonsterDisplayer extends MovableDisplayer implements ElementDisplayer<Monster> {
-    private final Map<String, Sprite[][]> monsterMap;
 
     public MonsterDisplayer() throws IOException {
-        monsterMap = new HashMap<>();
-        monsterMap.put("IDLE", new Sprite[][]{
+        movableMap = new HashMap<>();
+        movableMap.put("IDLE", new Sprite[][]{
                 {new Sprite("sprites/elements/monster/up/monster_idle_up.png")},
                 {new Sprite("sprites/elements/monster/down/monster_idle_down.png")},
                 {new Sprite("sprites/elements/monster/left/monster_idle_left.png")},
                 {new Sprite("sprites/elements/monster/right/monster_idle_right.png")}
         });
-        monsterMap.put("WALKING", new Sprite[][] {
+        movableMap.put("WALKING", new Sprite[][] {
                 { new Sprite("sprites/elements/monster/up/monster_walk_up1.png"), new Sprite("sprites/elements/monster/up/monster_walk_up2.png") },
                 { new Sprite("sprites/elements/monster/down/monster_walk_down1.png"), new Sprite("sprites/elements/monster/down/monster_walk_down2.png") },
                 { new Sprite("sprites/elements/monster/left/monster_walk_left1.png"), new Sprite("sprites/elements/monster/left/monster_walk_left2.png") },
@@ -31,7 +30,7 @@ public class MonsterDisplayer extends MovableDisplayer implements ElementDisplay
     @Override
     public void draw(Monster model, GUI gui, long frameCount) {
         Sprite[][] sprites;
-        sprites = monsterMap.get(model.getState());
+        sprites = movableMap.get(model.getState());
         int walkingCycle = (int) (frameCount % 10) / 5;
 
         Sprite[] spriteSequence = getSpriteSequence(model.getDirection(), sprites);
@@ -44,6 +43,6 @@ public class MonsterDisplayer extends MovableDisplayer implements ElementDisplay
     }
 
     public Map<String, Sprite[][]> getMonsterMap() {
-        return monsterMap;
+        return movableMap;
     }
 }

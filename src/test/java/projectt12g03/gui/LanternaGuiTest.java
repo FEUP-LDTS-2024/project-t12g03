@@ -26,7 +26,7 @@ class LanternaGuiTest {
         mockScreen = mock(TerminalScreen.class);
         mockGraphics = mock(TextGraphics.class);
 
-        gui = spy(new LanternaGui(80, 24, "Test Title"));
+        gui = new LanternaGui(80, 24, "Test Title");
         gui.setScreen(mockScreen);
 
         when(mockScreen.newTextGraphics()).thenReturn(mockGraphics);

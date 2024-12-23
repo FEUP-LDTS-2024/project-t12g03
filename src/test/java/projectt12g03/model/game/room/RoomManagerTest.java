@@ -43,4 +43,9 @@ public class RoomManagerTest {
     void testGetCurrentMonsters() {
         assertEquals(5, roomManager.getCurrentMonsters());
     }
+
+    @Test
+    void testGetPlayer() {
+        assertNotNull(roomManager.getPlayer());
+    }
 }

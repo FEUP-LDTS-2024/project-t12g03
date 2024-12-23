@@ -11,31 +11,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerDisplayer extends MovableDisplayer implements ElementDisplayer<Player> {
-    private final Map<String, Sprite[][]> playerMap;
-
     private SpearDisplayer spearDisplayer;
 
     public PlayerDisplayer() throws IOException {
-        playerMap = new HashMap<>();
-        playerMap.put("IDLE", new Sprite[][]{
+        movableMap = new HashMap<>();
+        movableMap.put("IDLE", new Sprite[][]{
                 {new Sprite("sprites/elements/hero/up/hero_idle_up.png")},
                 {new Sprite("sprites/elements/hero/down/hero_idle_down.png")},
                 {new Sprite("sprites/elements/hero/left/hero_idle_left.png")},
                 {new Sprite("sprites/elements/hero/right/hero_idle_right.png")}
         });
-        playerMap.put("WALKING", new Sprite[][] {
+        movableMap.put("WALKING", new Sprite[][] {
                 { new Sprite("sprites/elements/hero/up/hero_walk_up1.png"), new Sprite("sprites/elements/hero/up/hero_walk_up2.png") },
                 { new Sprite("sprites/elements/hero/down/hero_walk_down1.png"), new Sprite("sprites/elements/hero/down/hero_walk_down2.png") },
                 { new Sprite("sprites/elements/hero/left/hero_walk_left1.png"), new Sprite("sprites/elements/hero/left/hero_walk_left2.png") },
                 { new Sprite("sprites/elements/hero/right/hero_walk_right1.png"), new Sprite("sprites/elements/hero/right/hero_walk_right2.png")}
         });
-        playerMap.put("RUNNING", new Sprite[][] {
+        movableMap.put("RUNNING", new Sprite[][] {
                 { new Sprite("sprites/elements/hero/up/hero_walk_up1.png"), new Sprite("sprites/elements/hero/up/hero_walk_up2.png") },
                 { new Sprite("sprites/elements/hero/down/hero_walk_down1.png"), new Sprite("sprites/elements/hero/down/hero_walk_down2.png") },
                 { new Sprite("sprites/elements/hero/left/hero_walk_left1.png"), new Sprite("sprites/elements/hero/left/hero_walk_left2.png") },
                 { new Sprite("sprites/elements/hero/right/hero_walk_right1.png"), new Sprite("sprites/elements/hero/right/hero_walk_right2.png")}
         });
-        playerMap.put("ATTACKING", new Sprite[][]{
+        movableMap.put("ATTACKING", new Sprite[][]{
                 {new Sprite("sprites/elements/hero/up/hero_attacking_up.png")},
                 {new Sprite("sprites/elements/hero/down/hero_attacking_down.png")},
                 {new Sprite("sprites/elements/hero/left/hero_attacking_left.png")},
@@ -48,7 +46,7 @@ public class PlayerDisplayer extends MovableDisplayer implements ElementDisplaye
     @Override
     public void draw(Player player, GUI gui, long frameCount) {
         Sprite[][] sprites;
-        sprites = playerMap.get(player.getState());
+        sprites = movableMap.get(player.getState());
         int walkingCycle = (int) (frameCount % 6) / 3;
         int sprintCyle = (int) (frameCount % 2);
 
@@ -73,6 +71,6 @@ public class PlayerDisplayer extends MovableDisplayer implements ElementDisplaye
     }
 
     public Map<String, Sprite[][]> getPlayerMap() {
-        return playerMap;
+        return movableMap;
     }
 }

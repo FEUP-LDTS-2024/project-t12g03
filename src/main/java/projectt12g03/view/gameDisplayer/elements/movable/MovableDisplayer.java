@@ -2,7 +2,11 @@ package projectt12g03.view.gameDisplayer.elements.movable;
 
 import projectt12g03.view.Sprite;
 
+import java.util.Map;
+
 public abstract class MovableDisplayer {
+    public Map<String, Sprite[][]> movableMap;
+
     public Sprite[] getSpriteSequence(String direction, Sprite[][] sprites) {
         return switch (direction) {
             case "UP" -> sprites[0];

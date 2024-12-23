@@ -5,14 +5,15 @@ plugins {
 }
 
 group = 'projectt12g03'
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 repositories {
     mavenCentral()
 }
 
 pitest {
-    junit5PluginVersion = '1.0.0'
+    junit5PluginVersion = '1.2.0'
+    pitestVersion = '1.15.0'
 }
 
 application {

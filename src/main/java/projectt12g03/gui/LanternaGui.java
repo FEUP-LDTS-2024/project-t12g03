@@ -24,6 +24,7 @@ public class LanternaGui implements GUI {
     private final KeyAdapter keyAdapter;
     private final TerminalSize terminalSize;
 
+    private DefaultTerminalFactory terminal;
     private TerminalScreen screen;
 
     private KeyEvent keyPressed;
@@ -38,36 +39,27 @@ public class LanternaGui implements GUI {
         this.priorityKey = null;
         this.keySpam = false;
         this.keyAdapter = createKeyAdapter();
-        this.screen = createScreen();
+        this.terminal = new DefaultTerminalFactory();
+        this.screen = null;
     }
 
-    private TerminalScreen createScreen() throws URISyntaxException, IOException, FontFormatException {
-        DefaultTerminalFactory terminal = createTerminal();
-        createFrame(terminal);
-
-        screen.setCursorPosition(null);
-        screen.startScreen();
-        screen.doResizeIfNecessary();
-
-        return screen;
-    }
-
-    private DefaultTerminalFactory createTerminal() throws URISyntaxException, IOException, FontFormatException {
+    public void createScreen() throws URISyntaxException, IOException, FontFormatException {
         AWTTerminalFontConfiguration fontConfig = loadFont();
-        DefaultTerminalFactory terminal = new DefaultTerminalFactory()
+
+        terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(terminalSize)
                 .setForceAWTOverSwing(true)
                 .setTerminalEmulatorFontConfiguration(fontConfig);
 
-        return terminal;
-    }
-
-    private void createFrame(DefaultTerminalFactory terminal) throws IOException {
         screen = terminal.createScreen();
 
         AWTTerminalFrame terminalFrame = (AWTTerminalFrame) screen.getTerminal();
         terminalFrame.getComponent(0).addKeyListener(keyAdapter);
         terminalFrame.setTitle(title);
+
+        screen.setCursorPosition(null);
+        screen.startScreen();
+        screen.doResizeIfNecessary();
     }
 
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
