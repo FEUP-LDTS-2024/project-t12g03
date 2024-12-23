@@ -14,8 +14,7 @@ import java.awt.*;
 import java.util.List;
 
 public class Room {
-    private int width;
-    private int height;
+    private final int roomCode;
 
     private Player player;
     private Chest chest;
@@ -27,12 +26,11 @@ public class Room {
     private List<Laser> lasers;
 
 
-    public Room(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public Room(int roomCode) {
+        this.roomCode = roomCode;
     }
 
-    private boolean checkCollision(Movable a, Element b, Vector position) {
+    boolean checkCollisionForElements(Movable a, Element b, Vector position) {
         int aHitboxX = position.getX() + a.getHitbox().x;
         int aHitboxY = position.getY() + a.getHitbox().y;
         int aHitboxWidth = a.getHitbox().width;
@@ -49,129 +47,7 @@ public class Room {
         return collisionX && collisionY;
     }
 
-    public boolean checkCollisionsForPlayer(Vector position) {
-        if (checkKeyCollision(player, position)) {
-            setKey(null);
-            chest.foundKey();
-            return false;
-        }
-        else if (checkChestCollision(player, position)) {
-            if (chest.isUnlockable() && !chest.isOpened()) {
-                chest.open();
-            } else if (chest.isUnlockable()) {
-                if (chest.getPotion() != null) {
-                    if (chest.getPotion().getImmunity() == 0) {
-                        if (player.getInventory().isNotFull()) {
-                            player.getInventory().addPotion(chest.getPotion());
-                            chest.setPotion(null);
-                        }
-                    }
-                }
-            }
-            else return true;
-        }
-
-        return checkWallCollision(player, position) || checkMonsterDamage(position) || isAtTransition(player, position) || checkLaserCollision(player, position);
-    }
-
-    private boolean checkMonsterDamage(Vector position) {
-        boolean monsterCollision = checkMonsterCollision(player, position);
-        if (monsterCollision && player.getImmunity() == 0) {
-            player.reduceHealth();
-            player.setImmunity();
-        }
-
-        return monsterCollision;
-    }
-
-    public boolean checkCollisionsForMonster(Monster monster, Vector position) {
-        return checkWallCollision(monster, position) || checkMonsterCollision(monster, position) || isAtTransition(monster, position) ||
-                checkKeyCollision(monster, position) || checkChestCollision(monster, position) || checkLaserCollision(monster, position) || checkPlayerCollision(monster, position);
-    }
-
-    public void checkAttackCollision() {
-        for (Monster monster : monsters) {
-            if(checkCollisionForLaserDamage(monster, player.getSpear(), player.getPosition())) {
-                monster.reduceHealth();
-                if (monster.getHealth() <= 0) {
-                    monsters.remove(monster);
-                }
-                break;
-            }
-        }
-    }
-
-    private boolean checkPlayerCollision(Movable a, Vector position) {
-        if(checkCollision(a, player, position)) {
-            if(player.getImmunity() == 0) {
-                player.reduceHealth();
-                player.setImmunity();
-            }
-            return true;
-        }
-        return false;
-    }
-
-    private boolean checkMonsterCollision(Movable a, Vector position) {
-        for (Monster monster : monsters) {
-            if (monster != a) {
-                if (checkCollision(a, monster, position)) return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkLaserCollision(Movable a, Vector position) {
-        for (Laser laser : lasers) {
-            if (checkCollision(a, laser, position))
-                return true;
-        }
-        return false;
-    }
-
-    private boolean checkWallCollision(Movable a, Vector position) {
-        for (Wall wall : walls) {
-            if (checkCollision(a, wall, position))
-                return true;
-        }
-        return false;
-    }
-
-    private boolean checkKeyCollision(Movable a, Vector position) {
-        if (key == null) return false;
-
-        return checkCollision(a, key, position);
-    }
-
-    private boolean checkChestCollision(Movable a, Vector position) {
-        return checkCollision(a, chest, position);
-    }
-
-    private boolean checkCollisionsForLaser(Laser laser, int displacement) {
-        Vector laserBeamPosition = new Vector (displacement, laser.getPosition().getY());
-        if(checkCollisionForLaserDamage(player, laser.getLaserBeamHitbox(), laserBeamPosition)) {
-            if (player.getImmunity() == 0) {
-                player.reduceHealth();
-                player.setImmunity();
-            }
-            return true;
-        }
-
-        for (Wall wall : walls) {
-            if(checkCollisionForLaserDamage(wall, laser.getLaserBeamHitbox(), laserBeamPosition)) {
-                return true;
-            }
-        }
-
-        for (Monster monster : monsters) {
-            if(checkCollisionForLaserDamage(monster, laser.getLaserBeamHitbox(), laserBeamPosition)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkCollisionForLaserDamage(Element b, Rectangle hitbox, Vector position) {
+    boolean checkCollisionForDamage(Element b, Rectangle hitbox, Vector position) { //needed because damaging elements have 2 hitboxs
         int aHitboxX = position.getX() + hitbox.x;
         int aHitboxY = position.getY() + hitbox.y;
         int aHitboxWidth = hitbox.width;
@@ -188,9 +64,133 @@ public class Room {
         return collisionX && collisionY;
     }
 
+    public boolean checkCollisionsForPlayer(Vector position) {
+        if (checkCollisionWithKey(player, position)) {
+            setKey(null);
+            chest.foundKey();
+            return false;
+        }
+
+        else if (checkCollisionWithChest(player, position)) {
+            if (chest.isUnlockable() && !chest.isOpened()) {
+                chest.open();
+            }
+
+            else if (chest.isOpened()) {
+                if (chest.getPotion() != null && chest.getPotion().getImmunity() == 0 && player.getInventory().isNotFull()) {
+                    player.getInventory().addPotion(chest.getPotion());
+                    chest.setPotion(null);
+                }
+            }
+
+            else return true;
+        }
+
+        return checkCollisionWithWall(player, position) || checkCollisionWithLaserWall(player, position) || checkDamageToPlayer(position) || isAtTransition(player, position);
+    }
+
+    public boolean checkCollisionsForMonster(Monster monster, Vector position) {
+        return checkCollisionWithWall(monster, position) || checkCollisionWithMonster(monster, position) || isAtTransition(monster, position) ||
+                checkCollisionWithKey(monster, position) || checkCollisionWithChest(monster, position) || checkCollisionWithLaserWall(monster, position) || checkCollisionWithPlayer(monster, position);
+    }
+
+    boolean checkDamageToPlayer(Vector position) {
+        boolean monsterCollision = checkCollisionWithMonster(player, position);
+
+        if (monsterCollision && player.getImmunity() == 0) {
+            player.reduceHealth();
+            player.setImmunity();
+        }
+
+        return monsterCollision;
+    }
+
+    boolean checkCollisionWithPlayer(Movable a, Vector position) {
+        if(checkCollisionForElements(a, player, position)) {
+            if(player.getImmunity() == 0) {
+                player.reduceHealth();
+                player.setImmunity();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public void checkDamageToMonster() {
+        for (Monster monster : monsters) {
+            if(checkCollisionForDamage(monster, player.getSpear(), player.getPosition())) {
+                monster.reduceHealth();
+                if (monster.getHealth() == 0) {
+                    monsters.remove(monster);
+                }
+                break;
+            }
+        }
+    }
+
+    boolean checkCollisionWithMonster(Movable a, Vector position) {
+        for (Monster monster : monsters) {
+            if (checkCollisionForElements(a, monster, position) && (monster != a)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean checkCollisionWithLaserWall(Movable a, Vector position) {
+        for (Laser laser : lasers) {
+            if (checkCollisionForElements(a, laser, position))
+                return true;
+        }
+        return false;
+    }
+
+    boolean checkCollisionWithWall(Movable a, Vector position) {
+        for (Wall wall : walls) {
+            if (checkCollisionForElements(a, wall, position))
+                return true;
+        }
+        return false;
+    }
+
+    boolean checkCollisionWithKey(Movable a, Vector position) {
+        if (key == null) return false;
+
+        return checkCollisionForElements(a, key, position);
+    }
+
+    boolean checkCollisionWithChest(Movable a, Vector position) {
+        return checkCollisionForElements(a, chest, position);
+    }
+
+    boolean checkCollisionsForLaserBeam(Laser laser, int displacement) {
+        Vector laserBeamPosition = new Vector (displacement, laser.getPosition().getY());
+        if(checkCollisionForDamage(player, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+            if (player.getImmunity() == 0) {
+                player.reduceHealth();
+                player.setImmunity();
+            }
+            return true;
+        }
+
+        for (Wall wall : walls) {
+            if(checkCollisionForDamage(wall, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+                return true;
+            }
+        }
+
+        for (Monster monster : monsters) {
+            if(checkCollisionForDamage(monster, laser.getLaserBeamHitbox(), laserBeamPosition)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean isAtTransition(Movable a, Vector position) {
         for (Door door : doors) {
-            if (checkCollision(a, door, position))
+            if (checkCollisionForElements(a, door, position))
                 return true;
         }
         return false;
@@ -198,14 +198,10 @@ public class Room {
 
     public int getDoorNumber(Vector position) {
         for (Door door : doors) {
-            if (checkCollision(player, door, position))
+            if (checkCollisionForElements(player, door, position))
                 return door.getNumber();
         }
-        return 0;
-    }
-
-    public List<Floor> getFloors() {
-        return floors;
+        return -1;
     }
 
     public int getLaserRange(Laser laser) {
@@ -213,11 +209,15 @@ public class Room {
         int pos = laser.getPosition().getX();
         int direction = laser.isPointingLeft() ? -1 : 1;
         pos += (4*direction);
-        while (!checkCollisionsForLaser(laser, pos)) {
+        while (!checkCollisionsForLaserBeam(laser, pos)) {
             range++;
             pos += (4*direction);
         }
         return range;
+    }
+
+    public List<Floor> getFloors() {
+        return floors;
     }
 
     public Player getPlayer() {
@@ -240,12 +240,12 @@ public class Room {
         return monsters;
     }
 
-    public int getWidth() {
-        return width;
+    public List<Laser> getLasers() {
+        return lasers;
     }
 
-    public int getHeight() {
-        return height;
+    public int getRoomCode() {
+        return roomCode;
     }
 
     public void setPlayer(Player player) {
@@ -281,17 +281,5 @@ public class Room {
 
     public void setLasers(List<Laser> lasers) {
         this.lasers = lasers;
-    }
-
-    public List<Laser> getLasers() {
-        return lasers;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 }

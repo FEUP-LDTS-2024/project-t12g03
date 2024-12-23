@@ -237,7 +237,7 @@ class LanternaGuiTest {
     }
 
     @Test
-    void testClear() throws Exception {
+    void testClear() {
         gui.clear();
         verify(mockScreen).clear();
     }

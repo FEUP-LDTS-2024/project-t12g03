@@ -32,7 +32,7 @@ public class PlayerController extends Controller<RoomManager> {
         updateCoolDowns(player);
 
         if (player.getIsAttacking() > 0) {  //player cant move when attacking
-            getModel().getRoom().checkAttackCollision();
+            getModel().getRoom().checkDamageToMonster();
         }
 
         else {

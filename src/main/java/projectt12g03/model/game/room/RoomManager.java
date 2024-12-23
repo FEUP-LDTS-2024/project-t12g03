@@ -20,12 +20,13 @@ import java.util.Map;
 import static java.lang.Character.isDigit;
 
 public class RoomManager {
+    private final int STARTING_ROOM = 1;
     private final Player player;
     private final Map<Integer, Room> roomsMap;
 
     private List<String> lines;
     private Room room;
-    private Integer roomCode = 1;
+    private Integer roomCode;
     private int totalMonsters;
 
     public RoomManager() throws IOException {
@@ -33,7 +34,7 @@ public class RoomManager {
         this.roomsMap = new HashMap<>();
         this.totalMonsters = 0;
 
-        loadRoom(roomCode);
+        loadRoom(STARTING_ROOM);
     }
 
     public void loadRoom(Integer roomCode) throws IOException {
@@ -54,13 +55,11 @@ public class RoomManager {
             this.room = roomsMap.get(roomCode);
         }
 
-        room.setHeight(getHeight());
-        room.setWidth(getWidth());
         player.setRoom(room);
     }
 
     public Room createRoom() {
-        Room room = new Room(getWidth(), getHeight());
+        Room room = new Room(roomCode);
 
         room.setFloors(createFloors());
         room.setWalls(createWalls());
@@ -84,12 +83,6 @@ public class RoomManager {
             lines.add(line);
         return lines;
     }
-
-    protected int getWidth() {
-        return lines.getFirst().length() * 16;
-    }
-
-    protected int getHeight() { return lines.size() * 16; }
 
     private List<Floor> createFloors() {
         List<Floor> floors = new ArrayList<>();

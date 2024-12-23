@@ -13,6 +13,6 @@ public class ImmunityPotion implements PotionEffectStrategy {
 
     @Override
     public void removeEffect(Player player) {
-
+        // No persistent effect to remove
     }
 }

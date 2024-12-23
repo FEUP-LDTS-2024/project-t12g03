@@ -44,14 +44,14 @@ class PlayerControllerTest {
 
         playerController.step(game, GUI.userInput.NONE, 0);
 
-        verify(room, times(1)).checkAttackCollision();
+        verify(room, times(1)).checkDamageToMonster();
     }
 
     @Test
     public void stepPlayerIsNotAttacking() throws IOException {
         playerController.step(game, GUI.userInput.NONE, 0);
 
-        verify(room, times(0)).checkAttackCollision();
+        verify(room, times(0)).checkDamageToMonster();
     }
 
     @Test
